@@ -1,0 +1,29 @@
+Sheet Metal Client Hub Design Document
+
+Document Title: Design Document
+Date: 5 May 2025
+Prepared by: Laurie Moffat
+Course: PDSWD7 PDA in Software Development Level 7, Fife College, Semester 1, 2024/25
+
+1. Introduction
+This Design Document outlines the system architecture and specifications for the Sheet Metal Client Hub, a Python-based desktop application for automating cost calculations for sheet metal parts. It follows the Project Charter and Development Plan in the Waterfall SDLC, providing detailed designs for the Tkinter GUI, cost calculation logic, and file I/O, to be implemented in the Development phase.
+
+2. System Overview
+The application will feature:
+- A Tkinter GUI with screens for login, part input, cost output, and settings.
+- Cost calculations for 10 work centres (cutting, bending, welding, deburring, assembly, inspection, surface treatment, machining, forming, fastening).
+- Support for material thicknesses (1, 1.2, 1.5, 2, 2.5, 3 mm), lay-flat dimensions (50-3000 mm length, 50-1500 mm width), and bends (0-20).
+- File I/O for user credentials (data/users.txt), global rates (data/rates_global.txt), and output results (data/output.txt).
+
+3. Diagrams (To Be Added)
+- Gantt Chart: Project timeline (in progress, docs/diagrams/Gantt Chart.png).
+- Wireframes: Login, Part Input, Output, Settings screens.
+- UML Diagrams: Use case, sequence, class, DFD, ERD (to be developed in Visual Paradigm).
+
+4. Next Steps
+- Complete Visual Paradigm diagrams by 20 May 2025.
+- Finalize system architecture and data dictionary during the Design phase (11 April – 25 April 2025).
+
+---
+
+This document was refined with assistance from Grok, an AI tool developed by xAI, under the author’s direction.
