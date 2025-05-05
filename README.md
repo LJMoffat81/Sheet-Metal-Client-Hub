@@ -60,8 +60,8 @@ The repository is organized as follows:
   - `output.txt`: Stores calculation results
 - **`docs/`**: Documentation and diagrams
   - `diagrams/`: Visual Paradigm PNGs (e.g., Gantt chart, wireframes, UML diagrams)
-  - `Project_Proposal_Sheet_Metal_Client_Hub_Rev1.pdf`
-  - `Sheet_Metal_Client_Hub_Development_Plan.docx`
+  - `Sheet_Metal_Client_Hub_Project_Proposal.pdf`
+  - `Sheet_Metal_Client_Hub_Development_Plan.pdf`
   - `Sheet_Metal_Client_Hub_Project_Charter.pdf`
   - `Sheet_Metal_Client_Hub_Design_Document.docx`
   - `Sheet_Metal_Client_Hub_Test_Plan.docx`
@@ -77,8 +77,8 @@ The repository is organized as follows:
 
 Key project documents are located in the `docs/` folder:
 
-- **[Project Proposal](docs/Project_Proposal_Sheet_Metal_Client_Hub_Rev1.pdf)**: Outlines project objectives and justification.
-- **[Development Plan](docs/Sheet_Metal_Client_Hub_Development_Plan.docx)**: Details the Waterfall SDLC timeline and tasks.
+- **[Project Proposal](docs/Sheet_Metal_Client_Hub_Project_Proposal.pdf)**: Outlines project objectives and justification.
+- **[Development Plan](docs/Sheet_Metal_Client_Hub_Development_Plan.pdf)**: Details the Waterfall SDLC timeline and tasks.
 - **[Project Charter](docs/Sheet_Metal_Client_Hub_Project_Charter.pdf)**: Defines scope, stakeholders, and deliverables.
 - **[Design Document](docs/Sheet_Metal_Client_Hub_Design_Document.docx)**: Includes wireframes, UML diagrams, and data dictionary.
 - **[Test Plan](docs/Sheet_Metal_Client_Hub_Test_Plan.docx)**: Outlines testing strategy.
