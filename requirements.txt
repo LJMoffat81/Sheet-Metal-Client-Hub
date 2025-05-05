@@ -1,0 +1,3 @@
+# Dependencies for Sheet Metal Client Hub
+
+Tkinter is included with Python 3.9, no additional packages required
