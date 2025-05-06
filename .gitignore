@@ -20,3 +20,4 @@ data/rates_*.txt
 # Temporary files
 *.tmp
 *.bak
+verify_repo.sh
