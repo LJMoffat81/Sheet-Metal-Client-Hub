@@ -21,3 +21,4 @@ data/rates_*.txt
 *.tmp
 *.bak
 verify_repo.sh
+verify_repo.sh
