@@ -9,7 +9,6 @@ venv/
 env/
 
 # Sensitive data
-data/rates_*.txt
 *.log
 
 # IDE files
@@ -20,6 +19,4 @@ data/rates_*.txt
 # Temporary files
 *.tmp
 *.bak
-verify_repo.sh
-verify_repo.sh
 verify_repo.sh
