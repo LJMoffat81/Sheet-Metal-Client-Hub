@@ -1,0 +1,10 @@
+steel_rate:5.0
+aluminum_rate:7.0
+labour_rate:20.0
+laser_cutting:25.0
+bending:15.0
+welding:30.0
+painting:10.0
+assembly:12.0
+inspection:8.0
+packaging:5.0
