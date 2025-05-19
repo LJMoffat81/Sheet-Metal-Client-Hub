@@ -20,3 +20,4 @@ env/
 *.tmp
 *.bak
 verify_repo.sh
+__pycache__/
