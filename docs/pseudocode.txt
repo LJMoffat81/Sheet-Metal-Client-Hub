@@ -1,0 +1,96 @@
+```
+# Pseudocode for Sheet Metal Client Hub
+# Covers FR1-FR7: Login, Part Input, Cost Calculation, Output, Quote Generation, Rate Management
+
+# FR1: Login (User and Admin)
+FUNCTION Login
+    WHILE NOT ValidCredentials(username, password) DO
+        INPUT username, password
+        IF ValidateCredentials(username, password) THEN
+            Display "Login successful"
+            IF IsAdmin(username) THEN
+                RETURN "Admin"
+            ELSE
+                RETURN "User"
+            ENDIF
+        ELSE
+            Display "Invalid credentials, please try again"
+        ENDIF
+    ENDWHILE
+END
+
+# FR2: Part Input (User)
+FUNCTION EnterPartSpecs
+    WHILE NOT ValidPartSpecs(thickness, length, width, quantity) DO
+        INPUT part_id, revision, material, thickness, length, width, quantity
+        IF ValidatePartSpecs(thickness, length, width, quantity) THEN
+            SavePartSpecs(part_id, revision, material, thickness, length, width, quantity)
+            RETURN TRUE
+        ELSE
+            Display "Invalid part specifications, please try again"
+        ENDIF
+    ENDWHILE
+END
+
+# FR3-FR4: Cost Calculation (User)
+FUNCTION CalculateCost(part_id, revision, material, thickness, length, width, quantity)
+    LOAD rates FROM rates_global.txt
+    SET material_rate = GetRate(material, rates)
+    SET labour_rate = GetRate("labour_rate", rates)
+    SET process_rates = GetProcessRates(rates) # e.g., laser_cutting, bending
+    SET total_cost = 0
+    SET volume = thickness * length * width
+    SET material_cost = volume * material_rate * quantity
+    SET labour_cost = volume * labour_rate * quantity
+    SET process_cost = CalculateProcessCost(process_rates, quantity)
+    SET total_cost = material_cost + labour_cost + process_cost
+    RETURN total_cost
+END
+
+# FR5: Store Output (User)
+FUNCTION StoreOutput(part_id, revision, material, thickness, length, width, quantity, total_cost)
+    SET timestamp = GetCurrentDate()
+    WRITE TO output.txt: part_id, revision, material, thickness, length, width, quantity, total_cost, timestamp
+    Display "Cost calculation saved successfully"
+END
+
+# FR7: Generate Quote (User)
+FUNCTION GenerateQuote(part_id, total_cost, customer_name, profit_margin)
+    SET quote_number = GenerateUniqueQuoteNumber()
+    SET quote_total = total_cost * (1 + profit_margin / 100)
+    SET timestamp = GetCurrentDate()
+    WRITE TO quotes.txt: quote_number, customer_name, quote_total, profit_margin, timestamp, part_id
+    Display "Quote generated successfully"
+END
+
+# FR6: Update Rates (Admin)
+FUNCTION UpdateRates
+    INPUT rate_key, rate_value
+    LOAD rates FROM rates_global.txt
+    SET rates[rate_key] = rate_value
+    SAVE rates TO rates_global.txt
+    Display "Rates updated successfully"
+END
+
+# Main Program
+FUNCTION Main
+    SET role = Login()
+    IF role = "User" THEN
+        EnterPartSpecs()
+        SET total_cost = CalculateCost(part_id, revision, material, thickness, length, width, quantity)
+        StoreOutput(part_id, revision, material, thickness, length, width, quantity, total_cost)
+        INPUT customer_name, profit_margin
+        GenerateQuote(part_id, total_cost, customer_name, profit_margin)
+    ELSE IF role = "Admin" THEN
+        UpdateRates()
+        # Optionally access User features
+        IF AdminChoosesUserFeatures THEN
+            EnterPartSpecs()
+            SET total_cost = CalculateCost(part_id, revision, material, thickness, length, width, quantity)
+            StoreOutput(part_id, revision, material, thickness, length, width, quantity, total_cost)
+            INPUT customer_name, profit_margin
+            GenerateQuote(part_id, total_cost, customer_name, profit_margin)
+        ENDIF
+    ENDIF
+END
+```
