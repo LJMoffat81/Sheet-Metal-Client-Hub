@@ -185,3 +185,119 @@ Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 2.0, Len
 Output: Calculated cost: £2500000000.0, Expected: £2500000000.0
 Pass/Fail: Pass
 --------------------------------------------------
+Timestamp: 2025-05-20 19:29:13
+Test Case: FR1: Clear login fields
+Input: None
+Output: Username and password fields cleared
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:34:12
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:41:34
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: EE23232323, Revision: A2, Material: aluminum, Thickness: 2, Length: 577, Width: 345, Quantity: 5, Top-Level Assembly: , Weldment: Yes, Cutting Method: Laser Cutting, Cutting Complexity: 2
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 19:41:55
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: PART-2323, Revision: A2, Material: aluminum, Thickness: 2, Length: 577, Width: 345, Quantity: 5, Top-Level Assembly: , Weldment: Yes, Cutting Method: Laser Cutting, Cutting Complexity: 2
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 19:42:03
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: PART-5555, Revision: A2, Material: aluminum, Thickness: 2, Length: 577, Width: 345, Quantity: 5, Top-Level Assembly: , Weldment: Yes, Cutting Method: Laser Cutting, Cutting Complexity: 2
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 19:42:25
+Test Case: FR3-FR4-FR5: Cost calculation and output storage
+Input: Part Type: Single Part, Part ID: PART-5555A, Revision: A2, Material: aluminum, Thickness: 2, Length: 577, Width: 345, Quantity: 5, Top-Level Assembly: , Weldment: Yes, Cutting Method: Laser Cutting, Cutting Complexity: 2
+Output: Cost calculated: £53747800.0
+Saved to output.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:43:01
+Test Case: FR7: Generate quote
+Input: Customer Name: General Motors, Profit Margin: 20%
+Output: Quote generated and saved to quotes.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:43:30
+Test Case: Help Guide Accessed
+Input: None
+Output: Help guide displayed
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:44:18
+Test Case: FR2: Add sub-part
+Input: None
+Output: Added SUBPART-1 to listbox
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:44:21
+Test Case: FR2: Add sub-part
+Input: None
+Output: Added SUBPART-2 to listbox
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:45:08
+Test Case: FR3-FR4-FR5: Cost calculation and output storage
+Input: Part Type: Assembly, Part ID: PART-6666B, Revision: A5, Material: aluminum, Thickness: 3, Length: 600, Width: 300, Quantity: 30, Top-Level Assembly: ASSY-5454A, Weldment: Yes, Cutting Method: Laser Cutting, Cutting Complexity: 5
+Output: Cost calculated: £874800000.0
+Saved to output.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:45:30
+Test Case: FR7: Generate quote
+Input: Customer Name: Hello Fresh, Profit Margin: 10%
+Output: Quote generated and saved to quotes.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:48:51
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 20:03:06
+Test Case: FR6: Update rate
+Input: Rate Key: stainless_rate, Rate Value: 1
+Output: Rate 'stainless_rate' updated to 1.0 in rates_global.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 20:03:40
+Test Case: FR6: Update rate
+Input: Rate Key: aluminium_rate, Rate Value: 0.9
+Output: Rate 'aluminium_rate' updated to 0.9 in rates_global.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 20:04:56
+Test Case: FR6: Update rate
+Input: Rate Key: steel_rate, Rate Value: 0.8
+Output: Rate 'steel_rate' updated to 0.8 in rates_global.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 21:04:46
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 21:25:24
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 21:38:24
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
