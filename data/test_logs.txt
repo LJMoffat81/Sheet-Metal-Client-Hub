@@ -1,0 +1,538 @@
+Timestamp: 2025-05-20 11:32:59
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 11:34:18
+Test Case: FR3-FR4-FR5: Cost calculation and output storage
+Input: Part ID: 54321, Revision: 99, Material: steel, Thickness: 2.5, Length: 500, Width: 250, Quantity: 2
+Output: Cost calculated: £15625228.0
+Saved to output.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 11:40:36
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 13:12:59
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 13:14:29
+Test Case: Help Guide Accessed
+Input: None
+Output: Help guide displayed
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 13:31:47
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 13:31:56
+Test Case: Help Guide Accessed
+Input: None
+Output: Help guide displayed
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 13:44:31
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 13:56:29
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 14:04:34
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 14:48:39
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 14:50:05
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 15:38:54
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 16:18:59
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 17:00:25
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 18:36:49
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 18:37:27
+Test Case: FR2: Add sub-part
+Input: None
+Output: Added SUBPART-1 to listbox
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 18:37:30
+Test Case: FR2: Add sub-part
+Input: None
+Output: Added SUBPART-2 to listbox
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 18:37:35
+Test Case: FR2: Remove sub-part
+Input: None
+Output: No sub-part selected
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 18:37:36
+Test Case: FR2: Remove sub-part
+Input: Index: (1,)
+Output: Sub-part removed
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 18:37:38
+Test Case: FR2: Remove sub-part
+Input: Index: (0,)
+Output: Sub-part removed
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 18:38:48
+Test Case: FR3-FR4: Assembly cost calculation
+Input: Assembly with 2 sub-parts, 2 assembly components
+Output: AssertionError: 500024.0 != 790149.0 within 2 places (290125.0 difference)
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 18:38:48
+Test Case: FR3-FR4: Invalid material
+Input: Part ID: PART-123, Revision: Rev A1, Material: copper, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 2000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 18:38:48
+Test Case: FR3-FR4: Invalid thickness
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 4.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 5000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 18:38:48
+Test Case: FR3-FR4: Valid steel cost calculation
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: Calculated cost: £2500000000.0, Expected: £2500000000.0
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 18:41:14
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:11:07
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:11:50
+Test Case: FR3-FR4: Assembly cost calculation
+Input: Assembly with 2 sub-parts, 2 assembly components
+Output: AssertionError: 500024.0 != 790149.0 within 2 places (290125.0 difference)
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 19:11:50
+Test Case: FR3-FR4: Invalid material
+Input: Part ID: PART-123, Revision: Rev A1, Material: copper, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 2000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 19:11:50
+Test Case: FR3-FR4: Invalid thickness
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 4.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 5000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 19:11:50
+Test Case: FR3-FR4: Valid steel cost calculation
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: Calculated cost: £2500000000.0, Expected: £2500000000.0
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:29:13
+Test Case: FR1: Clear login fields
+Input: None
+Output: Username and password fields cleared
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:34:12
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:41:34
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: EE23232323, Revision: A2, Material: aluminum, Thickness: 2, Length: 577, Width: 345, Quantity: 5, Top-Level Assembly: , Weldment: Yes, Cutting Method: Laser Cutting, Cutting Complexity: 2
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 19:41:55
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: PART-2323, Revision: A2, Material: aluminum, Thickness: 2, Length: 577, Width: 345, Quantity: 5, Top-Level Assembly: , Weldment: Yes, Cutting Method: Laser Cutting, Cutting Complexity: 2
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 19:42:03
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: PART-5555, Revision: A2, Material: aluminum, Thickness: 2, Length: 577, Width: 345, Quantity: 5, Top-Level Assembly: , Weldment: Yes, Cutting Method: Laser Cutting, Cutting Complexity: 2
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 19:42:25
+Test Case: FR3-FR4-FR5: Cost calculation and output storage
+Input: Part Type: Single Part, Part ID: PART-5555A, Revision: A2, Material: aluminum, Thickness: 2, Length: 577, Width: 345, Quantity: 5, Top-Level Assembly: , Weldment: Yes, Cutting Method: Laser Cutting, Cutting Complexity: 2
+Output: Cost calculated: £53747800.0
+Saved to output.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:43:01
+Test Case: FR7: Generate quote
+Input: Customer Name: General Motors, Profit Margin: 20%
+Output: Quote generated and saved to quotes.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:43:30
+Test Case: Help Guide Accessed
+Input: None
+Output: Help guide displayed
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:44:18
+Test Case: FR2: Add sub-part
+Input: None
+Output: Added SUBPART-1 to listbox
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:44:21
+Test Case: FR2: Add sub-part
+Input: None
+Output: Added SUBPART-2 to listbox
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:45:08
+Test Case: FR3-FR4-FR5: Cost calculation and output storage
+Input: Part Type: Assembly, Part ID: PART-6666B, Revision: A5, Material: aluminum, Thickness: 3, Length: 600, Width: 300, Quantity: 30, Top-Level Assembly: ASSY-5454A, Weldment: Yes, Cutting Method: Laser Cutting, Cutting Complexity: 5
+Output: Cost calculated: £874800000.0
+Saved to output.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:45:30
+Test Case: FR7: Generate quote
+Input: Customer Name: Hello Fresh, Profit Margin: 10%
+Output: Quote generated and saved to quotes.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:48:51
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 20:03:06
+Test Case: FR6: Update rate
+Input: Rate Key: stainless_rate, Rate Value: 1
+Output: Rate 'stainless_rate' updated to 1.0 in rates_global.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 20:03:40
+Test Case: FR6: Update rate
+Input: Rate Key: aluminium_rate, Rate Value: 0.9
+Output: Rate 'aluminium_rate' updated to 0.9 in rates_global.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 20:04:56
+Test Case: FR6: Update rate
+Input: Rate Key: steel_rate, Rate Value: 0.8
+Output: Rate 'steel_rate' updated to 0.8 in rates_global.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 21:04:46
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 21:25:24
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 21:38:24
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 21:52:11
+Test Case: FR3-FR4: Assembly cost calculation
+Input: Assembly with 2 sub-parts, 2 assembly components
+Output: AssertionError: 500024.0 != 790149.0 within 2 places (290125.0 difference)
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 21:52:11
+Test Case: FR3-FR4: Invalid material
+Input: Part ID: PART-123, Revision: Rev A1, Material: copper, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 2000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 21:52:11
+Test Case: FR3-FR4: Invalid thickness
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 4.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 5000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 21:52:11
+Test Case: FR3-FR4: Valid steel cost calculation
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: Calculated cost: £2500000000.0, Expected: £2500000000.0
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 22:07:14
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 22:09:27
+Test Case: FR2: Part input with empty fields
+Input: Part Type: Single Part, Part ID: , Revision: , Material: steel, Thickness: 1.0, Length: , Width: , Quantity: 1, Sub-Parts: ['No parts available'], Top-Level Assembly: N/A, Weldment: No, Cutting Method: None, Cutting Complexity: 1, Work Centres: ['Cutting', 'Bending', 'Welding', 'Finishing', 'Inspection']
+Output: All required fields must be filled
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:09:33
+Test Case: FR2: Part input with empty fields
+Input: Part Type: Single Part, Part ID: , Revision: , Material: steel, Thickness: 1.0, Length: , Width: , Quantity: 1, Sub-Parts: ['No parts available'], Top-Level Assembly: N/A, Weldment: No, Cutting Method: None, Cutting Complexity: 1, Work Centres: ['Cutting', 'Bending', 'Welding', 'Finishing', 'Inspection']
+Output: All required fields must be filled
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:37:11
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 22:41:52
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 22:42:18
+Test Case: FR3-FR4: Assembly cost calculation
+Input: Assembly with 2 sub-parts, 2 assembly components
+Output: AssertionError: 500024.0 != 790149.0 within 2 places (290125.0 difference)
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:42:18
+Test Case: FR3-FR4: Invalid material
+Input: Part ID: PART-123, Revision: Rev A1, Material: copper, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 2000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:42:18
+Test Case: FR3-FR4: Invalid thickness
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 4.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 5000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:42:18
+Test Case: FR3-FR4: Valid steel cost calculation
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: Calculated cost: £2500000000.0, Expected: £2500000000.0
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 22:46:08
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 22:48:09
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: Part-1234A, Revision: A2, Material: steel, Thickness: 1.2, Lay-Flat: 500x200, Quantity: 1, Sub-Parts: ['PEM-001'], Weldment: Yes, Top-Level Assembly: N/A
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:48:15
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: Part-1234A, Revision: A2, Material: steel, Thickness: 1.2, Lay-Flat: 500x200, Quantity: 1, Sub-Parts: ['PEM-001'], Weldment: Yes, Top-Level Assembly: N/A
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:48:22
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: Part-5234A, Revision: A2, Material: steel, Thickness: 1.2, Lay-Flat: 500x200, Quantity: 1, Sub-Parts: [], Weldment: Yes, Top-Level Assembly: N/A
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:48:37
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: Part-52A, Revision: A2, Material: steel, Thickness: 1.2, Lay-Flat: 500x200, Quantity: 1, Sub-Parts: [], Weldment: Yes, Top-Level Assembly: N/A
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:48:43
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: Part-52333333, Revision: A2, Material: steel, Thickness: 1.2, Lay-Flat: 500x200, Quantity: 1, Sub-Parts: [], Weldment: Yes, Top-Level Assembly: N/A
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:48:49
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: Part-52333333A, Revision: A2, Material: steel, Thickness: 1.2, Lay-Flat: 500x200, Quantity: 1, Sub-Parts: [], Weldment: Yes, Top-Level Assembly: N/A
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:48:59
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: Part-52333333A, Revision: A2, Material: steel, Thickness: 1.2, Lay-Flat: 500x200, Quantity: 1, Sub-Parts: [], Weldment: Yes, Top-Level Assembly: N/A
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:49:04
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: Part-A52333333A, Revision: A2, Material: steel, Thickness: 1.2, Lay-Flat: 500x200, Quantity: 1, Sub-Parts: [], Weldment: Yes, Top-Level Assembly: N/A
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:49:07
+Test Case: FR2: Invalid part ID
+Input: Part Type: Single Part, Part ID: Part-A52333333, Revision: A2, Material: steel, Thickness: 1.2, Lay-Flat: 500x200, Quantity: 1, Sub-Parts: [], Weldment: Yes, Top-Level Assembly: N/A
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 22:49:18
+Test Case: FR3-FR4-FR5: Cost calculation and output storage
+Input: Part Type: Single Part, Part ID: PART-A52333333, Revision: A2, Material: steel, Thickness: 1.2, Lay-Flat: 500x200, Quantity: 1, Sub-Parts: [], Weldment: Yes, Top-Level Assembly: N/A
+Output: Cost calculated: £2496000.0
+Saved to output.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 22:49:53
+Test Case: FR7: Generate quote
+Input: Customer Name: Coca-Cola, Profit Margin: 50%
+Output: Quote generated and saved to quotes.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 22:58:10
+Test Case: FR2: Part input with empty fields
+Input: Part Type: Single Part, Part ID: , Revision: , Material: steel, Thickness: 1.0, Lay-Flat: , Quantity: 1, Sub-Parts: [], Weldment: No, Top-Level Assembly: N/A
+Output: Part ID and Revision are required
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 23:01:54
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 23:05:42
+Test Case: FR2: Part input with empty fields
+Input: Part Type: Single Part, Part ID: , Revision: , Material: mild steel, Thickness: 1.0, Lay-Flat: , Quantity: 1, Sub-Parts: ['PART-TEST123', 'FAS-001: Screw M3', 'PEM-001: PEM Insert M3'], Weldment: No, Top-Level Assembly: N/A, Work Centres: ['Cutting', 'Bending', 'Welding', 'Assembly', 'Inspection', 'Grinding', 'Drilling', 'Coating']
+Output: Part ID and Revision are required
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 23:06:09
+Test Case: FR2: Part input with empty fields
+Input: Part Type: Single Part, Part ID: , Revision: , Material: mild steel, Thickness: 1.0, Lay-Flat: , Quantity: 1, Sub-Parts: ['PART-TEST123', 'FAS-001: Screw M3', 'PEM-001: PEM Insert M3'], Weldment: No, Top-Level Assembly: N/A, Work Centres: ['Cutting', 'Bending', 'Welding', 'Assembly', 'Inspection', 'Grinding', 'Drilling', 'Coating']
+Output: Part ID and Revision are required
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 23:06:29
+Test Case: FR3-FR4: Assembly cost calculation
+Input: Assembly with 2 sub-parts, 2 assembly components
+Output: AssertionError: 500024.0 != 790149.0 within 2 places (290125.0 difference)
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 23:06:29
+Test Case: FR3-FR4: Invalid material
+Input: Part ID: PART-123, Revision: Rev A1, Material: copper, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 2000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 23:06:29
+Test Case: FR3-FR4: Invalid thickness
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 4.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 5000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 23:06:29
+Test Case: FR3-FR4: Valid steel cost calculation
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: Calculated cost: £2500000000.0, Expected: £2500000000.0
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 23:10:38
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 23:22:00
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 23:33:52
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 23:37:50
+Test Case: FR2: Invalid part ID
+Input: Part Type: Assembly, Part ID: ASSY-55555A, Revision: A6, Material: N/A, Thickness: 0.0, Length: 0, Width: 0, Quantity: 10, Sub-Parts: ['FAS-001: Screw M3', 'FAS-002: Bolt M5', 'PEM-001: PEM Insert M3', 'FAS-003: Nut M3', 'PART-TEST123'], Weldment: No, Top-Level Assembly: ASSY-55555A, Work Centres: ['Assembly', 'Inspection']
+Output: Part ID must be PART-[5-15 alphanumeric]
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 23:38:10
+Test Case: FR2: Invalid sub-part
+Input: Part Type: Assembly, Part ID: PART-55555A, Revision: A6, Material: N/A, Thickness: 0.0, Length: 0, Width: 0, Quantity: 10, Sub-Parts: ['FAS-001: Screw M3', 'FAS-002: Bolt M5', 'PEM-001: PEM Insert M3', 'FAS-003: Nut M3', 'PART-TEST123'], Weldment: No, Top-Level Assembly: PART-55555A, Work Centres: ['Assembly', 'Inspection']
+Output: Sub-part FAS-001: Screw M3 does not exist in the system
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 23:38:23
+Test Case: FR2: Invalid sub-part
+Input: Part Type: Assembly, Part ID: PART-55555A, Revision: A6, Material: N/A, Thickness: 0.0, Length: 0, Width: 0, Quantity: 10, Sub-Parts: ['FAS-001: Screw M3', 'FAS-002: Bolt M5', 'PEM-001: PEM Insert M3', 'FAS-003: Nut M3', 'PART-TEST123'], Weldment: No, Top-Level Assembly: PART-55555A, Work Centres: ['Assembly', 'Inspection']
+Output: Sub-part FAS-001: Screw M3 does not exist in the system
+Pass/Fail: Fail
+--------------------------------------------------

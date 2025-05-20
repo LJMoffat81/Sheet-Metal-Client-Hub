@@ -1,5 +1,5 @@
 steel_rate:0.8
-aluminum_rate:7.0
+aluminium_rate:0.9
 stainless_rate:1.0
 labour_rate:20.0
 laser_cutting:25.0
@@ -9,4 +9,4 @@ painting:10.0
 assembly:12.0
 inspection:8.0
 packaging:5.0
-aluminium_rate:0.9
+
