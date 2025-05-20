@@ -89,3 +89,99 @@ Input: Username: admin, Password: [hidden]
 Output: Login successful as Admin
 Pass/Fail: Pass
 --------------------------------------------------
+Timestamp: 2025-05-20 18:36:49
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 18:37:27
+Test Case: FR2: Add sub-part
+Input: None
+Output: Added SUBPART-1 to listbox
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 18:37:30
+Test Case: FR2: Add sub-part
+Input: None
+Output: Added SUBPART-2 to listbox
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 18:37:35
+Test Case: FR2: Remove sub-part
+Input: None
+Output: No sub-part selected
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 18:37:36
+Test Case: FR2: Remove sub-part
+Input: Index: (1,)
+Output: Sub-part removed
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 18:37:38
+Test Case: FR2: Remove sub-part
+Input: Index: (0,)
+Output: Sub-part removed
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 18:38:48
+Test Case: FR3-FR4: Assembly cost calculation
+Input: Assembly with 2 sub-parts, 2 assembly components
+Output: AssertionError: 500024.0 != 790149.0 within 2 places (290125.0 difference)
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 18:38:48
+Test Case: FR3-FR4: Invalid material
+Input: Part ID: PART-123, Revision: Rev A1, Material: copper, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 2000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 18:38:48
+Test Case: FR3-FR4: Invalid thickness
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 4.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 5000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 18:38:48
+Test Case: FR3-FR4: Valid steel cost calculation
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: Calculated cost: £2500000000.0, Expected: £2500000000.0
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 18:41:14
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:11:07
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 19:11:50
+Test Case: FR3-FR4: Assembly cost calculation
+Input: Assembly with 2 sub-parts, 2 assembly components
+Output: AssertionError: 500024.0 != 790149.0 within 2 places (290125.0 difference)
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 19:11:50
+Test Case: FR3-FR4: Invalid material
+Input: Part ID: PART-123, Revision: Rev A1, Material: copper, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 2000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 19:11:50
+Test Case: FR3-FR4: Invalid thickness
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 4.0, Length: 1000, Width: 500, Quantity: 100
+Output: AssertionError: 5000000000.0 != 0.0
+Pass/Fail: Fail
+--------------------------------------------------
+Timestamp: 2025-05-20 19:11:50
+Test Case: FR3-FR4: Valid steel cost calculation
+Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100
+Output: Calculated cost: £2500000000.0, Expected: £2500000000.0
+Pass/Fail: Pass
+--------------------------------------------------

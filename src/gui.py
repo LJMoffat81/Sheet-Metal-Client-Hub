@@ -9,6 +9,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import os
+import re
 from file_handler import validate_credentials, load_rates, save_output, save_quote, update_rates
 from calculator import calculate_cost
 from logger import log_test_result
@@ -30,21 +31,16 @@ class SheetMetalClientHub:
         
         Logic:
             1. Stores the root window.
-            2. Sets the window title, size to half the screen, and minimum size.
+            2. Sets the window title and fixed size to 600x600 pixels.
             3. Sets a custom laser icon.
             4. Initializes role as None (set after login).
             5. Displays the login screen.
         """
         self.root = root
         self.root.title("Sheet Metal Client Hub")
-        # Set window size to half the screen
-        screen_width = self.root.winfo_screenwidth()
-        screen_height = self.root.winfo_screenheight()
-        window_width = screen_width // 2
-        window_height = screen_height // 2
-        self.root.geometry(f"{window_width}x{window_height}")
-        self.root.resizable(True, True)  # Allow resizing
-        self.root.minsize(400, 400)  # Set minimum size to fit content
+        self.root.geometry("600x600")
+        self.root.resizable(False, False)  # Prevent resizing
+        self.root.minsize(400, 400)  # Set minimum size as fallback
         # Set custom laser icon
         try:
             icon_path = os.path.join(BASE_DIR, 'docs/images/laser_gear.ico')
@@ -198,58 +194,131 @@ class SheetMetalClientHub:
         Logic:
             1. Clears existing widgets.
             2. Creates main content frame and footer.
-            3. Adds fields for part ID, revision, material, thickness, length, width, quantity.
-            4. Adds a button to calculate cost.
+            3. Adds fields for part type, ID, revision, material, thickness, length, width, quantity.
+            4. Adds assembly-specific fields (sub-parts listbox, top-level assembly, weldment indicator).
+            5. Adds cutting inputs (method, complexity) for FR2.1.
+            6. Adds button to calculate cost.
         """
         self.clear_screen()
         # Main content
         main_frame = tk.Frame(self.root)
         main_frame.place(relx=0.5, rely=0.5, anchor="center")
         tk.Label(main_frame, text="Part Input", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
-        tk.Label(main_frame, text="Part ID:", font=("Arial", 12)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
+        
+        # Part Type
+        tk.Label(main_frame, text="Part Type:", font=("Arial", 12)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
+        self.part_type_var = tk.StringVar(value="Single Part")
+        tk.OptionMenu(main_frame, self.part_type_var, "Single Part", "Assembly").grid(row=1, column=1, padx=10, pady=5)
+        
+        # Standard fields
+        tk.Label(main_frame, text="Part ID:", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
         self.part_id_entry = tk.Entry(main_frame, font=("Arial", 12))
-        self.part_id_entry.grid(row=1, column=1, padx=10, pady=5)
-        tk.Label(main_frame, text="Revision:", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
+        self.part_id_entry.grid(row=2, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Revision:", font=("Arial", 12)).grid(row=3, column=0, padx=10, pady=5, sticky="e")
         self.revision_entry = tk.Entry(main_frame, font=("Arial", 12))
-        self.revision_entry.grid(row=2, column=1, padx=10, pady=5)
-        tk.Label(main_frame, text="Material:", font=("Arial", 12)).grid(row=3, column=0, padx=10, pady=5, sticky="e")
+        self.revision_entry.grid(row=3, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Material:", font=("Arial", 12)).grid(row=4, column=0, padx=10, pady=5, sticky="e")
         self.material_var = tk.StringVar(value="steel")
-        tk.OptionMenu(main_frame, self.material_var, "steel", "aluminum").grid(row=3, column=1, padx=10, pady=5)
-        tk.Label(main_frame, text="Thickness (mm):", font=("Arial", 12)).grid(row=4, column=0, padx=10, pady=5, sticky="e")
+        tk.OptionMenu(main_frame, self.material_var, "steel", "aluminum").grid(row=4, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Thickness (mm):", font=("Arial", 12)).grid(row=5, column=0, padx=10, pady=5, sticky="e")
         self.thickness_entry = tk.Entry(main_frame, font=("Arial", 12))
-        self.thickness_entry.grid(row=4, column=1, padx=10, pady=5)
-        tk.Label(main_frame, text="Length (mm):", font=("Arial", 12)).grid(row=5, column=0, padx=10, pady=5, sticky="e")
+        self.thickness_entry.grid(row=5, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Length (mm):", font=("Arial", 12)).grid(row=6, column=0, padx=10, pady=5, sticky="e")
         self.length_entry = tk.Entry(main_frame, font=("Arial", 12))
-        self.length_entry.grid(row=5, column=1, padx=10, pady=5)
-        tk.Label(main_frame, text="Width (mm):", font=("Arial", 12)).grid(row=6, column=0, padx=10, pady=5, sticky="e")
+        self.length_entry.grid(row=6, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Width (mm):", font=("Arial", 12)).grid(row=7, column=0, padx=10, pady=5, sticky="e")
         self.width_entry = tk.Entry(main_frame, font=("Arial", 12))
-        self.width_entry.grid(row=6, column=1, padx=10, pady=5)
-        tk.Label(main_frame, text="Quantity:", font=("Arial", 12)).grid(row=7, column=0, padx=10, pady=5, sticky="e")
+        self.width_entry.grid(row=7, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Quantity:", font=("Arial", 12)).grid(row=8, column=0, padx=10, pady=5, sticky="e")
         self.quantity_entry = tk.Entry(main_frame, font=("Arial", 12))
-        self.quantity_entry.grid(row=7, column=1, padx=10, pady=5)
-        tk.Button(main_frame, text="Calculate Cost", command=self.calculate_and_save, font=("Arial", 12)).grid(row=8, column=0, columnspan=2, pady=10)
+        self.quantity_entry.grid(row=8, column=1, padx=10, pady=5)
+        
+        # Assembly-specific fields
+        self.sub_parts_frame = tk.Frame(main_frame)
+        tk.Label(self.sub_parts_frame, text="Sub-Parts:", font=("Arial", 12)).pack()
+        self.sub_parts_listbox = tk.Listbox(self.sub_parts_frame, height=5, width=30)
+        self.sub_parts_listbox.pack()
+        tk.Button(self.sub_parts_frame, text="Add Sub-Part", command=self.add_sub_part, font=("Arial", 12)).pack()
+        tk.Button(self.sub_parts_frame, text="Remove Sub-Part", command=self.remove_sub_part, font=("Arial", 12)).pack()
+        self.sub_parts_frame.grid(row=9, column=0, columnspan=2, pady=5)
+        
+        tk.Label(main_frame, text="Top-Level Assembly:", font=("Arial", 12)).grid(row=10, column=0, padx=10, pady=5, sticky="e")
+        self.top_level_assembly_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.top_level_assembly_entry.grid(row=10, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Weldment Indicator:", font=("Arial", 12)).grid(row=11, column=0, padx=10, pady=5, sticky="e")
+        self.weldment_var = tk.StringVar(value="No")
+        tk.OptionMenu(main_frame, self.weldment_var, "Yes", "No").grid(row=11, column=1, padx=10, pady=5)
+        
+        # Cutting inputs (FR2.1)
+        tk.Label(main_frame, text="Cutting Method:", font=("Arial", 12)).grid(row=12, column=0, padx=10, pady=5, sticky="e")
+        self.cutting_method_var = tk.StringVar(value="None")
+        tk.OptionMenu(main_frame, self.cutting_method_var, "Laser Cutting", "Turret Press Punching", "None").grid(row=12, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Cutting Complexity:", font=("Arial", 12)).grid(row=13, column=0, padx=10, pady=5, sticky="e")
+        self.cutting_complexity_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.cutting_complexity_entry.grid(row=13, column=1, padx=10, pady=5)
+        
+        tk.Button(main_frame, text="Calculate Cost", command=self.calculate_and_save, font=("Arial", 12)).grid(row=14, column=0, columnspan=2, pady=10)
         
         # Footer
         footer = tk.Frame(self.root)
         footer.pack(side=tk.BOTTOM, fill=tk.X)
         self.create_footer(footer)
 
+    def add_sub_part(self):
+        """
+        Placeholder to add a sub-part to the assembly (FR2).
+        Logic:
+            1. Adds a dummy sub-part to the listbox.
+            2. Logs test result.
+        """
+        sub_part_id = f"SUBPART-{len(self.sub_parts_listbox.get(0, tk.END)) + 1}"
+        self.sub_parts_listbox.insert(tk.END, sub_part_id)
+        messagebox.showinfo("Add Sub-Part", f"Added {sub_part_id} (details TBD)")
+        log_test_result(
+            test_case="FR2: Add sub-part",
+            input_data="None",
+            output=f"Added {sub_part_id} to listbox",
+            pass_fail="Pass"
+        )
+
+    def remove_sub_part(self):
+        """
+        Remove a selected sub-part from the assembly (FR2).
+        Logic:
+            1. Removes the selected sub-part from the listbox.
+            2. Shows error if no selection.
+            3. Logs test result.
+        """
+        selected = self.sub_parts_listbox.curselection()
+        if selected:
+            self.sub_parts_listbox.delete(selected)
+            log_test_result(
+                test_case="FR2: Remove sub-part",
+                input_data=f"Index: {selected}",
+                output="Sub-part removed",
+                pass_fail="Pass"
+            )
+        else:
+            messagebox.showerror("Error", "Select a sub-part to remove")
+            log_test_result(
+                test_case="FR2: Remove sub-part",
+                input_data="None",
+                output="No sub-part selected",
+                pass_fail="Fail"
+            )
+
     def calculate_and_save(self):
         """
         Calculate cost and save output based on part specifications (FR2, FR3, FR4, FR5).
         
         Logic:
-            1. Retrieves part specifications from entry fields.
-            2. Validates inputs (non-empty, correct types, ranges).
-            3. Loads rates from rates_global.txt.
-            4. Calls calculate_cost to compute total cost.
-            5. Saves result to output.txt using save_output.
-            6. Logs test result to test_logs.txt using logger.
-            7. Shows success message with cost.
-            8. Navigates to quote screen.
-            9. Shows and logs error messages for invalid inputs or failures.
+            1. Retrieves part specifications including cutting inputs.
+            2. Validates inputs.
+            3. Loads rates and calculates cost.
+            4. Saves result and navigates to quote screen.
         """
         try:
+            part_type = self.part_type_var.get()
             part_id = self.part_id_entry.get().strip()
             revision = self.revision_entry.get().strip()
             material = self.material_var.get().lower()
@@ -257,10 +326,18 @@ class SheetMetalClientHub:
             length = self.length_entry.get().strip()
             width = self.width_entry.get().strip()
             quantity = self.quantity_entry.get().strip()
-            input_data = f"Part ID: {part_id}, Revision: {revision}, Material: {material}, Thickness: {thickness}, Length: {length}, Width: {width}, Quantity: {quantity}"
+            top_level_assembly = self.top_level_assembly_entry.get().strip()
+            weldment_indicator = self.weldment_var.get()
+            cutting_method = self.cutting_method_var.get()
+            cutting_complexity = self.cutting_complexity_entry.get().strip()
+            
+            input_data = (f"Part Type: {part_type}, Part ID: {part_id}, Revision: {revision}, Material: {material}, "
+                          f"Thickness: {thickness}, Length: {length}, Width: {width}, Quantity: {quantity}, "
+                          f"Top-Level Assembly: {top_level_assembly}, Weldment: {weldment_indicator}, "
+                          f"Cutting Method: {cutting_method}, Cutting Complexity: {cutting_complexity}")
 
             if not all([part_id, revision, material, thickness, length, width, quantity]):
-                output = "All fields must be filled"
+                output = "All required fields must be filled"
                 messagebox.showerror("Error", output)
                 log_test_result(
                     test_case="FR2: Part input with empty fields",
@@ -274,7 +351,18 @@ class SheetMetalClientHub:
             length = float(length)
             width = float(width)
             quantity = int(quantity)
+            cutting_complexity = float(cutting_complexity) if cutting_method != "None" and cutting_complexity else 0.0
 
+            if not re.match(r"^PART-[A-Za-z0-9]{5,15}$", part_id):
+                output = "Part ID must be PART-[5-15 alphanumeric]"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR2: Invalid part ID",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
             if material not in ['steel', 'aluminum']:
                 output = "Material must be 'steel' or 'aluminum'"
                 messagebox.showerror("Error", output)
@@ -325,6 +413,32 @@ class SheetMetalClientHub:
                     pass_fail="Fail"
                 )
                 return
+            if cutting_method != "None" and not (1 <= cutting_complexity <= 10):
+                output = "Cutting complexity must be between 1 and 10"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR2.1: Invalid cutting complexity",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+
+            part_specs = {
+                'part_type': part_type,
+                'part_id': part_id,
+                'revision': revision,
+                'material': material,
+                'thickness': thickness,
+                'length': length,
+                'width': width,
+                'quantity': quantity,
+                'top_level_assembly': top_level_assembly,
+                'weldment_indicator': weldment_indicator,
+                'cutting_method': cutting_method,
+                'cutting_complexity': cutting_complexity,
+                'sub_parts': [self.sub_parts_listbox.get(i) for i in range(self.sub_parts_listbox.size())]
+            }
 
             rates = load_rates()
             if not rates:
@@ -338,7 +452,7 @@ class SheetMetalClientHub:
                 )
                 return
 
-            total_cost = calculate_cost(part_id, revision, material, thickness, length, width, quantity, rates)
+            total_cost = calculate_cost(part_specs, rates)
             if total_cost == 0.0:
                 output = "Cost calculation failed, check inputs or rates"
                 messagebox.showerror("Error", output)
@@ -361,7 +475,7 @@ class SheetMetalClientHub:
             )
             self.create_quote_screen(part_id, total_cost)
         except ValueError:
-            output = "Invalid input: Thickness, length, width, and quantity must be numeric"
+            output = "Invalid input: Thickness, length, width, quantity, and cutting complexity must be numeric"
             messagebox.showerror("Error", output)
             log_test_result(
                 test_case="FR2: Invalid numeric input",

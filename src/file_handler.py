@@ -79,7 +79,7 @@ def load_rates():
             print(f"Warning: {rates_file} not found, creating with default rates")
             os.makedirs(DATA_DIR, exist_ok=True)
             with open(rates_file, 'w') as f:
-                f.write("steel_rate:5.0\naluminum_rate:7.0\nlabour_rate:20.0\nlaser_cutting:25.0\nbending:15.0\nwelding:30.0\npainting:10.0\nassembly:12.0\ninspection:8.0\npackaging:5.0\n")
+                f.write("steel_rate:5.0\naluminum_rate:7.0\nlabour_rate:20.0\nlaser_cutting:25.0\nbending:15.0\nwelding:30.0\npainting:10.0\nassembly:12.0\ninspection:8.0\npackaging:5.0\nturret_press:20.0\n")
         with open(rates_file, 'r') as f:
             for line in f:
                 if not line.strip():
@@ -113,12 +113,14 @@ def save_output(part_id, revision, material, thickness, length, width, quantity,
         total_cost (float): Calculated cost in GBP.
     
     Logic:
-        1. Generates current timestamp (YYYY-MM-DD).
-        2. Ensures data/ directory exists.
-        3. Opens output.txt in append mode using absolute path.
-        4. Writes a comma-separated line with part details, cost, and timestamp.
-        5. Handles errors by logging them to prevent crashes.
+        1. Checks for duplicate part_id.
+        2. Generates timestamp.
+        3. Writes details to output.txt.
+        4. Handles errors.
     """
+    if check_duplicate_part_id(part_id):
+        print(f"Error: Part ID {part_id} already exists in output.txt")
+        return
     output_file = os.path.join(DATA_DIR, 'output.txt')
     timestamp = datetime.now().strftime('%Y-%m-%d')
     try:
@@ -210,3 +212,30 @@ def update_rates(rate_key, rate_value):
         print(f"Error: Permission denied writing to {rates_file}")
     except Exception as e:
         print(f"Error updating rates: {e}")
+
+def check_duplicate_part_id(part_id):
+    """
+    Check if a part ID already exists in output.txt using linear search (FR2, J5RE47).
+    
+    Parameters:
+        part_id (str): Part identifier to check.
+    
+    Returns:
+        bool: True if part_id exists, False otherwise.
+    
+    Logic:
+        1. Opens output.txt and searches line by line.
+        2. Returns True if part_id matches the first field.
+        3. Handles errors gracefully.
+    """
+    output_file = os.path.join(DATA_DIR, 'output.txt')
+    try:
+        if os.path.exists(output_file):
+            with open(output_file, 'r') as f:
+                for line in f:
+                    if line.strip() and part_id == line.strip().split(',')[0]:
+                        return True
+        return False
+    except Exception as e:
+        print(f"Error checking duplicate part ID: {e}")
+        return False

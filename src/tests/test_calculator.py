@@ -29,7 +29,8 @@ class TestCalculator(unittest.TestCase):
             'painting': 10.0,
             'assembly': 12.0,
             'inspection': 8.0,
-            'packaging': 5.0
+            'packaging': 5.0,
+            'turret_press': 20.0
         }
 
     def test_calculate_cost_valid_steel(self):
@@ -44,8 +45,20 @@ class TestCalculator(unittest.TestCase):
         """
         input_data = "Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100"
         try:
-            cost = calculate_cost("PART-123", "Rev A1", "steel", 2.0, 1000, 500, 100, self.rates)
-            expected = (2.0 * 1000 * 500 * 5.0 * 100) + (2.0 * 1000 * 500 * 20.0 * 100) + (25.0 + 15.0 + 30.0 + 10.0 + 12.0 + 8.0 + 5.0) * 100
+            part_specs = {
+                'part_type': 'Single Part',
+                'part_id': 'PART-123',
+                'revision': 'Rev A1',
+                'material': 'steel',
+                'thickness': 2.0,
+                'length': 1000,
+                'width': 500,
+                'quantity': 100,
+                'cutting_method': 'None',
+                'cutting_complexity': 0
+            }
+            cost = calculate_cost(part_specs, self.rates)
+            expected = (2.0 * 1000 * 500 * 5.0 * 100) + (2.0 * 1000 * 500 * 20.0 * 100)
             self.assertAlmostEqual(cost, expected, places=2)
             log_test_result(
                 test_case="FR3-FR4: Valid steel cost calculation",
@@ -73,7 +86,19 @@ class TestCalculator(unittest.TestCase):
         """
         input_data = "Part ID: PART-123, Revision: Rev A1, Material: copper, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100"
         try:
-            cost = calculate_cost("PART-123", "Rev A1", "copper", 2.0, 1000, 500, 100, self.rates)
+            part_specs = {
+                'part_type': 'Single Part',
+                'part_id': 'PART-123',
+                'revision': 'Rev A1',
+                'material': 'copper',
+                'thickness': 2.0,
+                'length': 1000,
+                'width': 500,
+                'quantity': 100,
+                'cutting_method': 'None',
+                'cutting_complexity': 0
+            }
+            cost = calculate_cost(part_specs, self.rates)
             self.assertEqual(cost, 0.0)
             log_test_result(
                 test_case="FR3-FR4: Invalid material",
@@ -101,7 +126,19 @@ class TestCalculator(unittest.TestCase):
         """
         input_data = "Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 4.0, Length: 1000, Width: 500, Quantity: 100"
         try:
-            cost = calculate_cost("PART-123", "Rev A1", "steel", 4.0, 1000, 500, 100, self.rates)
+            part_specs = {
+                'part_type': 'Single Part',
+                'part_id': 'PART-123',
+                'revision': 'Rev A1',
+                'material': 'steel',
+                'thickness': 4.0,
+                'length': 1000,
+                'width': 500,
+                'quantity': 100,
+                'cutting_method': 'None',
+                'cutting_complexity': 0
+            }
+            cost = calculate_cost(part_specs, self.rates)
             self.assertEqual(cost, 0.0)
             log_test_result(
                 test_case="FR3-FR4: Invalid thickness",
@@ -112,6 +149,51 @@ class TestCalculator(unittest.TestCase):
         except AssertionError as e:
             log_test_result(
                 test_case="FR3-FR4: Invalid thickness",
+                input_data=input_data,
+                output=f"AssertionError: {e}",
+                pass_fail="Fail"
+            )
+            raise
+
+    def test_calculate_cost_assembly(self):
+        """
+        Test calculate_cost with an assembly containing sub-parts (FR3-FR4).
+        
+        Logic:
+            1. Defines an assembly with two sub-parts.
+            2. Calculates expected cost.
+            3. Asserts calculated cost matches expected.
+            4. Logs test result.
+        """
+        input_data = "Assembly with 2 sub-parts, 2 assembly components"
+        part_specs = {
+            'part_type': 'Assembly',
+            'material': 'steel',
+            'thickness': 2.0,
+            'length': 100,
+            'width': 50,
+            'quantity': 1,
+            'sub_parts': [
+                {'part_type': 'Single Part', 'material': 'steel', 'thickness': 2.0, 'length': 100, 'width': 50, 'quantity': 1, 'cutting_method': 'None', 'cutting_complexity': 0},
+                {'part_type': 'Single Part', 'material': 'aluminum', 'thickness': 1.0, 'length': 200, 'width': 100, 'quantity': 1, 'cutting_method': 'Laser Cutting', 'cutting_complexity': 5}
+            ],
+            'assembly_components': 2
+        }
+        try:
+            cost = calculate_cost(part_specs, self.rates)
+            expected = ((2.0 * 100 * 50 * 5.0 + 2.0 * 100 * 50 * 20.0) +  # First sub-part
+                        (1.0 * 200 * 100 * 7.0 + 1.0 * 200 * 100 * 20.0 + 25.0 * 5) +  # Second sub-part
+                        (12.0 * 2))  # Assembly cost
+            self.assertAlmostEqual(cost, expected, places=2)
+            log_test_result(
+                test_case="FR3-FR4: Assembly cost calculation",
+                input_data=input_data,
+                output=f"Calculated cost: £{cost}, Expected: £{expected}",
+                pass_fail="Pass"
+            )
+        except AssertionError as e:
+            log_test_result(
+                test_case="FR3-FR4: Assembly cost calculation",
                 input_data=input_data,
                 output=f"AssertionError: {e}",
                 pass_fail="Fail"
