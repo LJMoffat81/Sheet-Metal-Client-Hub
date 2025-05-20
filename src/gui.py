@@ -14,7 +14,7 @@ from file_handler import validate_credentials, load_rates, save_output, save_quo
 from calculator import calculate_cost
 from logger import log_test_result
 
-# Get the absolute path to the repository root for icon
+# Get the absolute path to the repository root
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def load_existing_parts():
@@ -35,6 +35,25 @@ def load_existing_parts():
         return []
     except Exception as e:
         print(f"Error loading parts: {e}")
+        return []
+
+def load_parts_catalogue():
+    """
+    Load fasteners and PEM inserts from parts_catalogue.txt.
+    Returns a list of tuples (item_id, description, price).
+    """
+    catalogue = []
+    try:
+        with open(os.path.join(BASE_DIR, 'parts_catalogue.txt'), 'r') as f:
+            for line in f:
+                if line.strip():
+                    item_id, description, price = line.strip().split(',')
+                    catalogue.append((item_id, description, float(price)))
+        return catalogue
+    except FileNotFoundError:
+        return []
+    except Exception as e:
+        print(f"Error loading parts catalogue: {e}")
         return []
 
 class SheetMetalClientHub:
@@ -96,7 +115,7 @@ class SheetMetalClientHub:
         guide = (
             "Sheet Metal Client Hub - User Guide\n\n"
             "1. Login: Enter username and password (e.g., laurie:moffat123).\n"
-            "2. Part Input: Enter part details and select WorkCentre operations.\n"
+            "2. Part Input: Enter part or assembly details, select fasteners/inserts or sub-parts.\n"
             "3. Quote: Generate a quote with customer name and profit margin.\n"
             "4. Admin: Update rates (e.g., steel_rate) if admin.\n"
             "For support, contact [support email]."
@@ -212,10 +231,54 @@ class SheetMetalClientHub:
             1. If "Other" is selected, enable the custom quantity entry.
             2. Otherwise, disable it.
         """
-        if self.quantity_var.get() == "Other":
+        if hasattr(self, 'custom_quantity_entry') and self.quantity_var.get() == "Other":
             self.custom_quantity_entry.config(state='normal')
-        else:
+        elif hasattr(self, 'custom_quantity_entry'):
             self.custom_quantity_entry.config(state='disabled')
+
+    def update_part_input_fields(self, *args):
+        """
+        Show or hide fields based on part type selection.
+        Logic:
+            - Assembly: Show Part ID, Revision, Quantity, Sub-Parts.
+            - Single Part: Show Part ID, Revision, Material, Thickness, Lay-Flat, Weldment, Fasteners/Inserts.
+        """
+        part_type = self.part_type_var.get()
+        
+        # Hide all fields initially
+        for widget in [self.part_id_label, self.part_id_entry,
+                       self.revision_label, self.revision_entry,
+                       self.material_label, self.material_option,
+                       self.thickness_label, self.thickness_option,
+                       self.lay_flat_label, self.lay_flat_entry,
+                       self.quantity_label, self.quantity_option, self.custom_quantity_entry,
+                       self.sub_parts_label, self.sub_parts_listbox,
+                       self.weldment_label, self.weldment_option]:
+            widget.grid_remove()
+        
+        # Show common fields
+        self.part_id_label.grid(row=1, column=0, padx=5, pady=5, sticky="e")
+        self.part_id_entry.grid(row=1, column=1, padx=5, pady=5)
+        self.revision_label.grid(row=2, column=0, padx=5, pady=5, sticky="e")
+        self.revision_entry.grid(row=2, column=1, padx=5, pady=5)
+        
+        if part_type == "Assembly":
+            self.quantity_label.grid(row=3, column=0, padx=5, pady=5, sticky="e")
+            self.quantity_option.grid(row=3, column=1, padx=5, pady=5, sticky="w")
+            self.custom_quantity_entry.grid(row=3, column=1, padx=5, pady=5, sticky="e")
+            self.sub_parts_label.grid(row=4, column=0, padx=5, pady=5, sticky="e")
+            self.sub_parts_listbox.grid(row=4, column=1, padx=5, pady=5)
+        else:  # Single Part
+            self.material_label.grid(row=3, column=0, padx=5, pady=5, sticky="e")
+            self.material_option.grid(row=3, column=1, padx=5, pady=5, sticky="w")
+            self.thickness_label.grid(row=4, column=0, padx=5, pady=5, sticky="e")
+            self.thickness_option.grid(row=4, column=1, padx=5, pady=5, sticky="w")
+            self.lay_flat_label.grid(row=5, column=0, padx=5, pady=5, sticky="e")
+            self.lay_flat_entry.grid(row=5, column=1, padx=5, pady=5)
+            self.weldment_label.grid(row=6, column=0, padx=5, pady=5, sticky="e")
+            self.weldment_option.grid(row=6, column=1, padx=5, pady=5, sticky="w")
+            self.sub_parts_label.grid(row=7, column=0, padx=5, pady=5, sticky="e")
+            self.sub_parts_listbox.grid(row=7, column=1, padx=5, pady=5)
 
     def create_part_input_screen(self):
         """
@@ -224,10 +287,9 @@ class SheetMetalClientHub:
         Logic:
             1. Clears existing widgets.
             2. Creates main content frame with a vertical split (left: part inputs, right: BOM route card).
-            3. Left side: Fields for part type, ID, revision, material, thickness, length, width, quantity, sub-parts, weldment indicator.
-            4. Right side: BOM route card with 5 operations (Op 10–Op 50), each with a WorkCentre dropdown.
-            5. Adds a central vertical line to separate sides.
-            6. Adds button to calculate cost and footer.
+            3. Left side: Conditional fields based on part type (Assembly or Single Part).
+            4. Right side: BOM route card (hidden for now).
+            5. Adds a central vertical line and footer.
         """
         self.clear_screen()
         main_frame = tk.Frame(self.root)
@@ -241,85 +303,48 @@ class SheetMetalClientHub:
         # Part Type
         tk.Label(left_frame, text="Part Type:", font=("Arial", 12)).grid(row=1, column=0, padx=5, pady=5, sticky="e")
         self.part_type_var = tk.StringVar(value="Single Part")
+        self.part_type_var.trace("w", self.update_part_input_fields)
         tk.OptionMenu(left_frame, self.part_type_var, "Single Part", "Assembly").grid(row=1, column=1, padx=5, pady=5, sticky="w")
 
-        # Part ID
-        tk.Label(left_frame, text="Part ID:", font=("Arial", 12)).grid(row=2, column=0, padx=5, pady=5, sticky="e")
+        # Initialize all fields (will be shown/hidden by update_part_input_fields)
+        self.part_id_label = tk.Label(left_frame, text="Part ID:", font=("Arial", 12))
         self.part_id_entry = tk.Entry(left_frame, font=("Arial", 12))
-        self.part_id_entry.grid(row=2, column=1, padx=5, pady=5)
-
-        # Revision
-        tk.Label(left_frame, text="Revision:", font=("Arial", 12)).grid(row=3, column=0, padx=5, pady=5, sticky="e")
+        self.revision_label = tk.Label(left_frame, text="Revision:", font=("Arial", 12))
         self.revision_entry = tk.Entry(left_frame, font=("Arial", 12))
-        self.revision_entry.grid(row=3, column=1, padx=5, pady=5)
-
-        # Material
-        tk.Label(left_frame, text="Material:", font=("Arial", 12)).grid(row=4, column=0, padx=5, pady=5, sticky="e")
+        self.material_label = tk.Label(left_frame, text="Material:", font=("Arial", 12))
         self.material_var = tk.StringVar(value="steel")
-        tk.OptionMenu(left_frame, self.material_var, "steel", "aluminum").grid(row=4, column=1, padx=5, pady=5, sticky="w")
-
-        # Thickness
-        tk.Label(left_frame, text="Thickness (mm):", font=("Arial", 12)).grid(row=5, column=0, padx=5, pady=5, sticky="e")
+        self.material_option = tk.OptionMenu(left_frame, self.material_var, "steel", "aluminum")
+        self.thickness_label = tk.Label(left_frame, text="Thickness (mm):", font=("Arial", 12))
         self.thickness_var = tk.StringVar(value="1.0")
-        tk.OptionMenu(left_frame, self.thickness_var, "1.0", "1.2", "1.5", "2.0", "2.5", "3.0").grid(row=5, column=1, padx=5, pady=5, sticky="w")
-
-        # Length
-        tk.Label(left_frame, text="Length (mm):", font=("Arial", 12)).grid(row=6, column=0, padx=5, pady=5, sticky="e")
-        self.length_entry = tk.Entry(left_frame, font=("Arial", 12))
-        self.length_entry.grid(row=6, column=1, padx=5, pady=5)
-
-        # Width
-        tk.Label(left_frame, text="Width (mm):", font=("Arial", 12)).grid(row=7, column=0, padx=5, pady=5, sticky="e")
-        self.width_entry = tk.Entry(left_frame, font=("Arial", 12))
-        self.width_entry.grid(row=7, column=1, padx=5, pady=5)
-
-        # Quantity
-        tk.Label(left_frame, text="Quantity:", font=("Arial", 12)).grid(row=8, column=0, padx=5, pady=5, sticky="e")
+        self.thickness_option = tk.OptionMenu(left_frame, self.thickness_var, "1.0", "1.2", "1.5", "2.0", "2.5", "3.0")
+        self.lay_flat_label = tk.Label(left_frame, text="Lay-Flat (LxW mm):", font=("Arial", 12))
+        self.lay_flat_entry = tk.Entry(left_frame, font=("Arial", 12))
+        self.quantity_label = tk.Label(left_frame, text="Quantity:", font=("Arial", 12))
         self.quantity_var = tk.StringVar(value="1")
         self.quantity_var.trace("w", lambda *args: self.update_quantity_entry_state())
-        tk.OptionMenu(left_frame, self.quantity_var, "1", "5", "10", "20", "50", "100", "Other").grid(row=8, column=1, padx=5, pady=5, sticky="w")
+        self.quantity_option = tk.OptionMenu(left_frame, self.quantity_var, "1", "5", "10", "20", "50", "100", "Other")
         self.custom_quantity_entry = tk.Entry(left_frame, font=("Arial", 12), state='disabled')
-        self.custom_quantity_entry.grid(row=8, column=1, padx=5, pady=5, sticky="e")
-
-        # Sub-Parts (Dropdown as Listbox for multiple selection)
-        tk.Label(left_frame, text="Sub-Parts:", font=("Arial", 12)).grid(row=9, column=0, padx=5, pady=5, sticky="e")
+        self.sub_parts_label = tk.Label(left_frame, text="Sub-Parts/Fasteners:", font=("Arial", 12))
         self.sub_parts_listbox = tk.Listbox(left_frame, selectmode='multiple', height=5, width=30, font=("Arial", 12))
-        self.sub_parts_listbox.grid(row=9, column=1, padx=5, pady=5)
-        existing_parts = load_existing_parts()
-        if existing_parts:
-            for part_id in existing_parts:
-                self.sub_parts_listbox.insert(tk.END, part_id)
-        else:
-            self.sub_parts_listbox.insert(tk.END, "No parts available")
-
-        # Weldment Indicator
-        tk.Label(left_frame, text="Weldment Indicator:", font=("Arial", 12)).grid(row=10, column=0, padx=5, pady=5, sticky="e")
+        self.weldment_label = tk.Label(left_frame, text="Weldment Indicator:", font=("Arial", 12))
         self.weldment_var = tk.StringVar(value="No")
-        tk.OptionMenu(left_frame, self.weldment_var, "Yes", "No").grid(row=10, column=1, padx=5, pady=5, sticky="w")
+        self.weldment_option = tk.OptionMenu(left_frame, self.weldment_var, "Yes", "No")
+
+        # Populate sub-parts listbox based on part type
+        self.update_part_input_fields()
+        self.part_type_var.set("Single Part")  # Trigger initial update
+        self.update_sub_parts_listbox()
 
         # Central vertical line
         separator = tk.Canvas(main_frame, width=2, bg="black")
         separator.pack(side=tk.LEFT, fill=tk.Y)
 
-        # Right side: BOM route card (WorkCentre operations)
+        # Right side: BOM route card (hidden for now)
         right_frame = tk.Frame(main_frame, width=500)
         right_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=10, pady=10)
         tk.Label(right_frame, text="BOM Route Card", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
 
-        # WorkCentre options
-        work_centres = [
-            "Cutting", "Bending", "Welding", "Assembly", "Finishing",
-            "Drilling", "Punching", "Grinding", "Coating", "Inspection"
-        ]
-        self.work_centre_vars = []
-        for i in range(5):  # Operations Op 10 to Op 50
-            op_label = f"Op {(i+1)*10}:"
-            tk.Label(right_frame, text=op_label, font=("Arial", 12)).grid(row=i+1, column=0, padx=5, pady=5, sticky="e")
-            var = tk.StringVar(value="None")
-            tk.OptionMenu(right_frame, var, "None", *work_centres).grid(row=i+1, column=1, padx=5, pady=5, sticky="w")
-            self.work_centre_vars.append(var)
-
-        # Calculate Cost button (centered at bottom)
+        # Calculate Cost button
         tk.Button(main_frame, text="Calculate Cost", command=self.calculate_and_save, font=("Arial", 12)).pack(pady=10)
 
         # Footer
@@ -327,53 +352,58 @@ class SheetMetalClientHub:
         footer.pack(side=tk.BOTTOM, fill=tk.X)
         self.create_footer(footer)
 
-    def add_sub_part(self):
+    def update_sub_parts_listbox(self):
         """
-        Deprecated: Replaced by sub-parts dropdown.
+        Update the sub-parts listbox based on part type.
+        - Assembly: Load existing parts from output.txt.
+        - Single Part: Load fasteners/inserts from parts_catalogue.txt.
         """
-        pass
-
-    def remove_sub_part(self):
-        """
-        Deprecated: Replaced by sub-parts dropdown.
-        """
-        pass
+        self.sub_parts_listbox.delete(0, tk.END)
+        if self.part_type_var.get() == "Assembly":
+            existing_parts = load_existing_parts()
+            if existing_parts:
+                for part_id in existing_parts:
+                    self.sub_parts_listbox.insert(tk.END, part_id)
+            else:
+                self.sub_parts_listbox.insert(tk.END, "No parts available")
+        else:  # Single Part
+            catalogue = load_parts_catalogue()
+            if catalogue:
+                for item_id, description, _ in catalogue:
+                    self.sub_parts_listbox.insert(tk.END, f"{item_id}: {description}")
+            else:
+                self.sub_parts_listbox.insert(tk.END, "No catalogue items available")
 
     def calculate_and_save(self):
         """
         Calculate cost and save output based on part specifications (FR2, FR3, FR4, FR5).
         
         Logic:
-            1. Retrieves part specifications including sub-parts and WorkCentre operations.
+            1. Retrieves part specifications based on part type.
             2. Validates inputs.
-            3. Loads rates and calculates cost.
+            3. Calculates cost including catalogue items for single parts.
             4. Saves result and navigates to quote screen.
         """
         try:
             part_type = self.part_type_var.get()
             part_id = self.part_id_entry.get().strip()
             revision = self.revision_entry.get().strip()
-            material = self.material_var.get().lower()
-            thickness = self.thickness_var.get()  # Dropdown value as string
-            length = self.length_entry.get().strip()
-            width = self.width_entry.get().strip()
-            quantity = self.quantity_var.get()
+            material = self.material_var.get().lower() if part_type == "Single Part" else "N/A"
+            thickness = self.thickness_var.get() if part_type == "Single Part" else "0.0"
+            lay_flat = self.lay_flat_entry.get().strip() if part_type == "Single Part" else "0x0"
+            quantity = self.quantity_var.get() if part_type == "Assembly" else "1"
             if quantity == "Other":
                 quantity = self.custom_quantity_entry.get().strip()
-            sub_parts = [self.sub_parts_listbox.get(i) for i in self.sub_parts_listbox.curselection()]
+            sub_parts = [self.sub_parts_listbox.get(i).split(':')[0] if ':' in self.sub_parts_listbox.get(i) else self.sub_parts_listbox.get(i) for i in self.sub_parts_listbox.curselection()]
+            weldment_indicator = self.weldment_var.get() if part_type == "Single Part" else "No"
             top_level_assembly = "N/A" if part_type == "Single Part" else part_id
-            weldment_indicator = self.weldment_var.get()
-            cutting_method = self.cutting_method_var.get() if hasattr(self, 'cutting_method_var') else "None"
-            cutting_complexity = self.cutting_complexity_var.get() if hasattr(self, 'cutting_complexity_var') else "1"
-            work_centres = [var.get() for var in self.work_centre_vars if var.get() != "None"]
 
             input_data = (f"Part Type: {part_type}, Part ID: {part_id}, Revision: {revision}, Material: {material}, "
-                          f"Thickness: {thickness}, Length: {length}, Width: {width}, Quantity: {quantity}, "
-                          f"Sub-Parts: {sub_parts}, Top-Level Assembly: {top_level_assembly}, Weldment: {weldment_indicator}, "
-                          f"Cutting Method: {cutting_method}, Cutting Complexity: {cutting_complexity}, Work Centres: {work_centres}")
+                          f"Thickness: {thickness}, Lay-Flat: {lay_flat}, Quantity: {quantity}, Sub-Parts: {sub_parts}, "
+                          f"Weldment: {weldment_indicator}, Top-Level Assembly: {top_level_assembly}")
 
-            if not all([part_id, revision, material, thickness, length, width, quantity]):
-                output = "All required fields must be filled"
+            if not all([part_id, revision]):
+                output = "Part ID and Revision are required"
                 messagebox.showerror("Error", output)
                 log_test_result(
                     test_case="FR2: Part input with empty fields",
@@ -383,33 +413,56 @@ class SheetMetalClientHub:
                 )
                 return
 
-            if part_type == "Assembly" and not sub_parts:
-                output = "At least one sub-part must be selected for an assembly"
-                messagebox.showerror("Error", output)
-                log_test_result(
-                    test_case="FR2: Assembly with no sub-parts",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
+            if part_type == "Assembly":
+                if not quantity:
+                    output = "Quantity is required for assemblies"
+                    messagebox.showerror("Error", output)
+                    log_test_result(
+                        test_case="FR2: Assembly with no quantity",
+                        input_data=input_data,
+                        output=output,
+                        pass_fail="Fail"
+                    )
+                    return
+                if not sub_parts:
+                    output = "At least one sub-part must be selected for an assembly"
+                    messagebox.showerror("Error", output)
+                    log_test_result(
+                        test_case="FR2: Assembly with no sub-parts",
+                        input_data=input_data,
+                        output=output,
+                        pass_fail="Fail"
+                    )
+                    return
+            else:  # Single Part
+                if not all([material, thickness, lay_flat]):
+                    output = "Material, Thickness, and Lay-Flat are required for single parts"
+                    messagebox.showerror("Error", output)
+                    log_test_result(
+                        test_case="FR2: Single part with empty fields",
+                        input_data=input_data,
+                        output=output,
+                        pass_fail="Fail"
+                    )
+                    return
 
-            if not work_centres:
-                output = "At least one WorkCentre operation must be selected"
-                messagebox.showerror("Error", output)
-                log_test_result(
-                    test_case="FR2: No WorkCentre operations selected",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
+            thickness = float(thickness) if part_type == "Single Part" else 0.0
+            quantity = int(quantity) if part_type == "Assembly" else 1
 
-            thickness = float(thickness)
-            length = float(length)
-            width = float(width)
-            quantity = int(quantity)
-            cutting_complexity = float(cutting_complexity) if cutting_method != "None" else 0.0
+            if part_type == "Single Part":
+                if not re.match(r"^\d+x\d+$", lay_flat):
+                    output = "Lay-Flat must be in format 'lengthxwidth' (e.g., 1000x500)"
+                    messagebox.showerror("Error", output)
+                    log_test_result(
+                        test_case="FR2: Invalid lay-flat format",
+                        input_data=input_data,
+                        output=output,
+                        pass_fail="Fail"
+                    )
+                    return
+                length, width = map(int, lay_flat.split('x'))
+            else:
+                length, width = 0, 0
 
             if not re.match(r"^PART-[A-Za-z0-9]{5,15}$", part_id):
                 output = "Part ID must be PART-[5-15 alphanumeric]"
@@ -421,47 +474,48 @@ class SheetMetalClientHub:
                     pass_fail="Fail"
                 )
                 return
-            if material not in ['steel', 'aluminum']:
-                output = "Material must be 'steel' or 'aluminum'"
-                messagebox.showerror("Error", output)
-                log_test_result(
-                    test_case="FR2: Invalid material",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-            if not (1.0 <= thickness <= 3.0):
-                output = "Thickness must be between 1.0 and 3.0 mm"
-                messagebox.showerror("Error", output)
-                log_test_result(
-                    test_case="FR2: Invalid thickness",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-            if not (50 <= length <= 3000):
-                output = "Length must be between 50 and 3000 mm"
-                messagebox.showerror("Error", output)
-                log_test_result(
-                    test_case="FR2: Invalid length",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-            if not (50 <= width <= 1500):
-                output = "Width must be between 50 and 1500 mm"
-                messagebox.showerror("Error", output)
-                log_test_result(
-                    test_case="FR2: Invalid width",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-            if quantity <= 0:
+            if part_type == "Single Part":
+                if material not in ['steel', 'aluminum']:
+                    output = "Material must be 'steel' or 'aluminum'"
+                    messagebox.showerror("Error", output)
+                    log_test_result(
+                        test_case="FR2: Invalid material",
+                        input_data=input_data,
+                        output=output,
+                        pass_fail="Fail"
+                    )
+                    return
+                if not (1.0 <= thickness <= 3.0):
+                    output = "Thickness must be between 1.0 and 3.0 mm"
+                    messagebox.showerror("Error", output)
+                    log_test_result(
+                        test_case="FR2: Invalid thickness",
+                        input_data=input_data,
+                        output=output,
+                        pass_fail="Fail"
+                    )
+                    return
+                if not (50 <= length <= 3000):
+                    output = "Lay-Flat length must be between 50 and 3000 mm"
+                    messagebox.showerror("Error", output)
+                    log_test_result(
+                        test_case="FR2: Invalid lay-flat length",
+                        input_data=input_data,
+                        output=output,
+                        pass_fail="Fail"
+                    )
+                    return
+                if not (50 <= width <= 1500):
+                    output = "Lay-Flat width must be between 50 and 1500 mm"
+                    messagebox.showerror("Error", output)
+                    log_test_result(
+                        test_case="FR2: Invalid lay-flat width",
+                        input_data=input_data,
+                        output=output,
+                        pass_fail="Fail"
+                    )
+                    return
+            if part_type == "Assembly" and quantity <= 0:
                 output = "Quantity must be a positive integer"
                 messagebox.showerror("Error", output)
                 log_test_result(
@@ -471,27 +525,28 @@ class SheetMetalClientHub:
                     pass_fail="Fail"
                 )
                 return
-            if cutting_method != "None" and not (1 <= cutting_complexity <= 10):
-                output = "Cutting complexity must be between 1 and 10"
-                messagebox.showerror("Error", output)
-                log_test_result(
-                    test_case="FR2.1: Invalid cutting complexity",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-            for sub_part in sub_parts:
-                if sub_part not in load_existing_parts():
-                    output = f"Sub-part {sub_part} does not exist in the system"
-                    messagebox.showerror("Error", output)
-                    log_test_result(
-                        test_case="FR2: Invalid sub-part",
-                        input_data=input_data,
-                        output=output,
-                        pass_fail="Fail"
-                    )
-                    return
+            if part_type == "Assembly":
+                for sub_part in sub_parts:
+                    if sub_part not in load_existing_parts():
+                        output = f"Sub-part {sub_part} does not exist in the system"
+                        messagebox.showerror("Error", output)
+                        log_test_result(
+                            test_case="FR2: Invalid sub-part",
+                            input_data=input_data,
+                            output=output,
+                            pass_fail="Fail"
+                        )
+                        return
+
+            # Calculate catalogue cost for single parts
+            catalogue_cost = 0.0
+            if part_type == "Single Part":
+                catalogue = load_parts_catalogue()
+                for item_id in sub_parts:
+                    for cat_id, _, price in catalogue:
+                        if item_id == cat_id:
+                            catalogue_cost += price
+                            break
 
             part_specs = {
                 'part_type': part_type,
@@ -505,9 +560,7 @@ class SheetMetalClientHub:
                 'sub_parts': sub_parts,
                 'top_level_assembly': top_level_assembly,
                 'weldment_indicator': weldment_indicator,
-                'cutting_method': cutting_method,
-                'cutting_complexity': cutting_complexity,
-                'work_centres': work_centres
+                'catalogue_cost': catalogue_cost
             }
 
             rates = load_rates()
@@ -545,7 +598,7 @@ class SheetMetalClientHub:
             )
             self.create_quote_screen(part_id, total_cost)
         except ValueError:
-            output = "Invalid input: Length, width, quantity, and cutting complexity must be numeric"
+            output = "Invalid input: Lay-Flat, quantity must be valid"
             messagebox.showerror("Error", output)
             log_test_result(
                 test_case="FR2: Invalid numeric input",
