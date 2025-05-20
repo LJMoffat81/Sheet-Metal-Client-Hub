@@ -1,15 +1,20 @@
 # gui.py
 # Purpose: Implements the graphical user interface (GUI) using Tkinter for the Sheet Metal Client Hub.
 # Supports FR1 (Login), FR2 (Part Input), FR6 (Update Rates), FR7 (Generate Quote).
-# Provides screens for login, part input, quote generation, and admin rate updates.
+# Provides screens for login, part input, quote generation, and admin rate updates with a consistent footer.
 # Integrates with calculator.py for cost calculations and file_handler.py for file operations.
-# Uses messagebox for user feedback (success/error messages).
+# Uses messagebox for user feedback and logger.py for automatic test result logging.
 # Designed for Python 3.9 with Tkinter, supporting 10 work centres, GBP, and mm units.
 
 import tkinter as tk
 from tkinter import messagebox
+import os
 from file_handler import validate_credentials, load_rates, save_output, save_quote, update_rates
 from calculator import calculate_cost
+from logger import log_test_result
+
+# Get the absolute path to the repository root for icon
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 class SheetMetalClientHub:
     """
@@ -25,14 +30,68 @@ class SheetMetalClientHub:
         
         Logic:
             1. Stores the root window.
-            2. Sets the window title.
-            3. Initializes role as None (set after login).
-            4. Displays the login screen.
+            2. Sets the window title, size to half the screen, and minimum size.
+            3. Sets a custom laser icon.
+            4. Initializes role as None (set after login).
+            5. Displays the login screen.
         """
         self.root = root
         self.root.title("Sheet Metal Client Hub")
+        # Set window size to half the screen
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        window_width = screen_width // 2
+        window_height = screen_height // 2
+        self.root.geometry(f"{window_width}x{window_height}")
+        self.root.resizable(True, True)  # Allow resizing
+        self.root.minsize(400, 400)  # Set minimum size to fit content
+        # Set custom laser icon
+        try:
+            icon_path = os.path.join(BASE_DIR, 'docs/images/laser_gear.ico')
+            self.root.iconbitmap(icon_path)
+        except tk.TclError:
+            print("Warning: Could not load laser_gear.ico, using default icon")
         self.role = None
         self.create_login_screen()
+
+    def create_footer(self, frame):
+        """
+        Create the footer for all screens with version and help button.
+        
+        Parameters:
+            frame (tk.Frame): The footer frame to populate.
+        
+        Logic:
+            1. Adds version label on the left.
+            2. Adds help button on the right that opens a guide.
+        """
+        frame.configure(bg="lightgrey")
+        tk.Label(frame, text="Version 1.0", font=("Arial", 10), bg="lightgrey").pack(side=tk.LEFT, padx=10, pady=5)
+        tk.Button(frame, text="Help", command=self.show_help, font=("Arial", 10), bg="lightgrey").pack(side=tk.RIGHT, padx=10, pady=5)
+
+    def show_help(self):
+        """
+        Display a help guide for the application.
+        
+        Logic:
+            1. Shows a messagebox with a placeholder guide.
+            2. Logs the help action to test_logs.txt.
+        """
+        guide = (
+            "Sheet Metal Client Hub - User Guide\n\n"
+            "1. Login: Enter username and password (e.g., laurie:moffat123).\n"
+            "2. Part Input: Enter part details (material, thickness, etc.) and calculate cost.\n"
+            "3. Quote: Generate a quote with customer name and profit margin.\n"
+            "4. Admin: Update rates (e.g., steel_rate) if admin.\n"
+            "For support, contact [support email]."
+        )
+        messagebox.showinfo("Help - Sheet Metal Client Hub", guide)
+        log_test_result(
+            test_case="Help Guide Accessed",
+            input_data="None",
+            output="Help guide displayed",
+            pass_fail="Pass"
+        )
 
     def create_login_screen(self):
         """
@@ -40,17 +99,48 @@ class SheetMetalClientHub:
         
         Logic:
             1. Clears existing widgets.
-            2. Adds username and password entry fields.
-            3. Adds a login button that calls the login method.
+            2. Creates main content frame and footer.
+            3. Adds title, username/password fields, login/clear buttons in main frame.
+            4. Sets focus on username field and binds Enter key to login.
         """
         self.clear_screen()
-        tk.Label(self.root, text="Username:").pack()
-        self.username_entry = tk.Entry(self.root)
-        self.username_entry.pack()
-        tk.Label(self.root, text="Password:").pack()
-        self.password_entry = tk.Entry(self.root, show="*")
-        self.password_entry.pack()
-        tk.Button(self.root, text="Login", command=self.login).pack()
+        # Main content
+        main_frame = tk.Frame(self.root)
+        main_frame.place(relx=0.5, rely=0.5, anchor="center")
+        tk.Label(main_frame, text="Login", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
+        tk.Label(main_frame, text="Username:", font=("Arial", 12)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
+        self.username_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.username_entry.grid(row=1, column=1, padx=10, pady=5)
+        self.username_entry.focus_set()
+        tk.Label(main_frame, text="Password:", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
+        self.password_entry = tk.Entry(main_frame, show="*", font=("Arial", 12))
+        self.password_entry.grid(row=2, column=1, padx=10, pady=5)
+        tk.Button(main_frame, text="Login", command=self.login, font=("Arial", 12)).grid(row=3, column=0, pady=10)
+        tk.Button(main_frame, text="Clear", command=self.clear_login_fields, font=("Arial", 12)).grid(row=3, column=1, pady=10)
+        self.root.bind('<Return>', lambda event: self.login())
+        
+        # Footer
+        footer = tk.Frame(self.root)
+        footer.pack(side=tk.BOTTOM, fill=tk.X)
+        self.create_footer(footer)
+
+    def clear_login_fields(self):
+        """
+        Clear username and password entry fields.
+        
+        Logic:
+            1. Deletes all text in username and password entries.
+            2. Sets focus back to username field.
+        """
+        self.username_entry.delete(0, tk.END)
+        self.password_entry.delete(0, tk.END)
+        self.username_entry.focus_set()
+        log_test_result(
+            test_case="FR1: Clear login fields",
+            input_data="None",
+            output="Username and password fields cleared",
+            pass_fail="Pass"
+        )
 
     def login(self):
         """
@@ -58,22 +148,48 @@ class SheetMetalClientHub:
         
         Logic:
             1. Gets username and password from entry fields.
-            2. Calls validate_credentials to check against users.txt.
-            3. If valid, sets role ("Admin" for username "admin", else "User").
-            4. Shows success message and navigates to part input (User) or admin screen.
-            5. If invalid, shows error message and keeps login screen.
+            2. Validates inputs (non-empty).
+            3. Calls validate_credentials to check against users.txt.
+            4. Sets role ("Admin" for username "admin", else "User").
+            5. Logs test result to test_logs.txt using logger.
+            6. Shows success message and navigates to appropriate screen.
+            7. Shows and logs error message for invalid inputs or credentials.
         """
-        username = self.username_entry.get()
-        password = self.password_entry.get()
+        username = self.username_entry.get().strip()
+        password = self.password_entry.get().strip()
+        if not username or not password:
+            output = "Username and password cannot be empty"
+            messagebox.showerror("Error", output)
+            log_test_result(
+                test_case="FR1: Login with empty fields",
+                input_data=f"Username: {username}, Password: {password}",
+                output=output,
+                pass_fail="Fail"
+            )
+            return
         if validate_credentials(username, password):
             self.role = "Admin" if username == "admin" else "User"
-            messagebox.showinfo("Success", "Login successful")
+            output = f"Login successful as {self.role}"
+            messagebox.showinfo("Success", output)
+            log_test_result(
+                test_case=f"FR1: Valid {self.role} login",
+                input_data=f"Username: {username}, Password: [hidden]",
+                output=output,
+                pass_fail="Pass"
+            )
             if self.role == "User":
                 self.create_part_input_screen()
             else:
                 self.create_admin_screen()
         else:
-            messagebox.showerror("Error", "Invalid credentials, please try again")
+            output = "Invalid username or password"
+            messagebox.showerror("Error", output)
+            log_test_result(
+                test_case="FR1: Invalid login",
+                input_data=f"Username: {username}, Password: [hidden]",
+                output=output,
+                pass_fail="Fail"
+            )
 
     def create_part_input_screen(self):
         """
@@ -81,32 +197,42 @@ class SheetMetalClientHub:
         
         Logic:
             1. Clears existing widgets.
-            2. Adds entry fields for part ID, revision, material, thickness, length, width, quantity.
-            3. Adds a button to calculate cost, calling calculate_and_save.
+            2. Creates main content frame and footer.
+            3. Adds fields for part ID, revision, material, thickness, length, width, quantity.
+            4. Adds a button to calculate cost.
         """
         self.clear_screen()
-        tk.Label(self.root, text="Part ID:").pack()
-        self.part_id_entry = tk.Entry(self.root)
-        self.part_id_entry.pack()
-        tk.Label(self.root, text="Revision:").pack()
-        self.revision_entry = tk.Entry(self.root)
-        self.revision_entry.pack()
-        tk.Label(self.root, text="Material (steel/aluminum):").pack()
-        self.material_entry = tk.Entry(self.root)
-        self.material_entry.pack()
-        tk.Label(self.root, text="Thickness (mm):").pack()
-        self.thickness_entry = tk.Entry(self.root)
-        self.thickness_entry.pack()
-        tk.Label(self.root, text="Length (mm):").pack()
-        self.length_entry = tk.Entry(self.root)
-        self.length_entry.pack()
-        tk.Label(self.root, text="Width (mm):").pack()
-        self.width_entry = tk.Entry(self.root)
-        self.width_entry.pack()
-        tk.Label(self.root, text="Quantity:").pack()
-        self.quantity_entry = tk.Entry(self.root)
-        self.quantity_entry.pack()
-        tk.Button(self.root, text="Calculate Cost", command=self.calculate_and_save).pack()
+        # Main content
+        main_frame = tk.Frame(self.root)
+        main_frame.place(relx=0.5, rely=0.5, anchor="center")
+        tk.Label(main_frame, text="Part Input", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
+        tk.Label(main_frame, text="Part ID:", font=("Arial", 12)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
+        self.part_id_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.part_id_entry.grid(row=1, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Revision:", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
+        self.revision_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.revision_entry.grid(row=2, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Material:", font=("Arial", 12)).grid(row=3, column=0, padx=10, pady=5, sticky="e")
+        self.material_var = tk.StringVar(value="steel")
+        tk.OptionMenu(main_frame, self.material_var, "steel", "aluminum").grid(row=3, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Thickness (mm):", font=("Arial", 12)).grid(row=4, column=0, padx=10, pady=5, sticky="e")
+        self.thickness_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.thickness_entry.grid(row=4, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Length (mm):", font=("Arial", 12)).grid(row=5, column=0, padx=10, pady=5, sticky="e")
+        self.length_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.length_entry.grid(row=5, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Width (mm):", font=("Arial", 12)).grid(row=6, column=0, padx=10, pady=5, sticky="e")
+        self.width_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.width_entry.grid(row=6, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Quantity:", font=("Arial", 12)).grid(row=7, column=0, padx=10, pady=5, sticky="e")
+        self.quantity_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.quantity_entry.grid(row=7, column=1, padx=10, pady=5)
+        tk.Button(main_frame, text="Calculate Cost", command=self.calculate_and_save, font=("Arial", 12)).grid(row=8, column=0, columnspan=2, pady=10)
+        
+        # Footer
+        footer = tk.Frame(self.root)
+        footer.pack(side=tk.BOTTOM, fill=tk.X)
+        self.create_footer(footer)
 
     def calculate_and_save(self):
         """
@@ -114,34 +240,144 @@ class SheetMetalClientHub:
         
         Logic:
             1. Retrieves part specifications from entry fields.
-            2. Validates inputs (numeric values, thickness 1-3 mm).
+            2. Validates inputs (non-empty, correct types, ranges).
             3. Loads rates from rates_global.txt.
             4. Calls calculate_cost to compute total cost.
             5. Saves result to output.txt using save_output.
-            6. Shows success message with cost.
-            7. Navigates to quote screen.
-            8. Handles errors (e.g., invalid inputs) with error messages.
+            6. Logs test result to test_logs.txt using logger.
+            7. Shows success message with cost.
+            8. Navigates to quote screen.
+            9. Shows and logs error messages for invalid inputs or failures.
         """
         try:
-            part_id = self.part_id_entry.get()
-            revision = self.revision_entry.get()
-            material = self.material_entry.get().lower()
-            thickness = float(self.thickness_entry.get())
-            length = float(self.length_entry.get())
-            width = float(self.width_entry.get())
-            quantity = int(self.quantity_entry.get())
+            part_id = self.part_id_entry.get().strip()
+            revision = self.revision_entry.get().strip()
+            material = self.material_var.get().lower()
+            thickness = self.thickness_entry.get().strip()
+            length = self.length_entry.get().strip()
+            width = self.width_entry.get().strip()
+            quantity = self.quantity_entry.get().strip()
+            input_data = f"Part ID: {part_id}, Revision: {revision}, Material: {material}, Thickness: {thickness}, Length: {length}, Width: {width}, Quantity: {quantity}"
 
-            if thickness < 1 or thickness > 3 or length <= 0 or width <= 0 or quantity <= 0:
-                messagebox.showerror("Error", "Invalid part specifications: thickness must be 1-3 mm, others positive")
+            if not all([part_id, revision, material, thickness, length, width, quantity]):
+                output = "All fields must be filled"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR2: Part input with empty fields",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+
+            thickness = float(thickness)
+            length = float(length)
+            width = float(width)
+            quantity = int(quantity)
+
+            if material not in ['steel', 'aluminum']:
+                output = "Material must be 'steel' or 'aluminum'"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR2: Invalid material",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+            if not (1 <= thickness <= 3):
+                output = "Thickness must be between 1 and 3 mm"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR2: Invalid thickness",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+            if not (50 <= length <= 3000):
+                output = "Length must be between 50 and 3000 mm"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR2: Invalid length",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+            if not (50 <= width <= 1500):
+                output = "Width must be between 50 and 1500 mm"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR2: Invalid width",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+            if quantity <= 0:
+                output = "Quantity must be a positive integer"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR2: Invalid quantity",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
                 return
 
             rates = load_rates()
+            if not rates:
+                output = "Failed to load rates from rates_global.txt"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR3: Cost calculation with missing rates",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+
             total_cost = calculate_cost(part_id, revision, material, thickness, length, width, quantity, rates)
+            if total_cost == 0.0:
+                output = "Cost calculation failed, check inputs or rates"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR3-FR4: Cost calculation failure",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+
             save_output(part_id, revision, material, thickness, length, width, quantity, total_cost)
-            messagebox.showinfo("Success", f"Cost calculated: £{total_cost}\nSaved to output.txt")
+            output = f"Cost calculated: £{total_cost}\nSaved to output.txt"
+            messagebox.showinfo("Success", output)
+            log_test_result(
+                test_case="FR3-FR4-FR5: Cost calculation and output storage",
+                input_data=input_data,
+                output=output,
+                pass_fail="Pass"
+            )
             self.create_quote_screen(part_id, total_cost)
         except ValueError:
-            messagebox.showerror("Error", "Invalid input: please enter numeric values for thickness, length, width, quantity")
+            output = "Invalid input: Thickness, length, width, and quantity must be numeric"
+            messagebox.showerror("Error", output)
+            log_test_result(
+                test_case="FR2: Invalid numeric input",
+                input_data=input_data,
+                output=output,
+                pass_fail="Fail"
+            )
+        except Exception as e:
+            output = f"Unexpected error: {e}"
+            messagebox.showerror("Error", output)
+            log_test_result(
+                test_case="FR2-FR3-FR4: Unexpected error",
+                input_data=input_data,
+                output=output,
+                pass_fail="Fail"
+            )
 
     def create_quote_screen(self, part_id, total_cost):
         """
@@ -153,42 +389,95 @@ class SheetMetalClientHub:
         
         Logic:
             1. Clears existing widgets.
-            2. Adds entry fields for customer name and profit margin.
-            3. Adds a button to generate the quote, calling generate_quote.
+            2. Creates main content frame and footer.
+            3. Adds fields for customer name and profit margin, and generate quote button.
         """
         self.clear_screen()
-        tk.Label(self.root, text="Customer Name:").pack()
-        self.customer_entry = tk.Entry(self.root)
-        self.customer_entry.pack()
-        tk.Label(self.root, text="Profit Margin (%):").pack()
-        self.margin_entry = tk.Entry(self.root)
-        self.margin_entry.pack()
-        tk.Button(self.root, text="Generate Quote", command=lambda: self.generate_quote(part_id, total_cost)).pack()
+        # Main content
+        main_frame = tk.Frame(self.root)
+        main_frame.place(relx=0.5, rely=0.5, anchor="center")
+        tk.Label(main_frame, text="Generate Quote", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
+        tk.Label(main_frame, text="Customer Name:", font=("Arial", 12)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
+        self.customer_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.customer_entry.grid(row=1, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Profit Margin (%):", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
+        self.margin_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.margin_entry.grid(row=2, column=1, padx=10, pady=5)
+        tk.Button(main_frame, text="Generate Quote", command=lambda: self.generate_quote(part_id, total_cost), font=("Arial", 12)).grid(row=3, column=0, columnspan=2, pady=10)
+        
+        # Footer
+        footer = tk.Frame(self.root)
+        footer.pack(side=tk.BOTTOM, fill=tk.X)
+        self.create_footer(footer)
 
     def generate_quote(self, part_id, total_cost):
         """
         Generate and save a quote (FR7).
         
-        Parameters:
-            part_id (str): Part identifier.
-            total_cost (float): Calculated cost.
-        
         Logic:
             1. Retrieves customer name and profit margin from entry fields.
-            2. Validates profit margin as numeric.
+            2. Validates inputs (non-empty customer name, numeric non-negative margin).
             3. Calls save_quote to generate and save the quote to quotes.txt.
-            4. Shows success message.
-            5. Returns to part input screen.
-            6. Handles errors with error messages.
+            4. Logs test result to test_logs.txt using logger.
+            5. Shows success message.
+            6. Returns to part input screen.
         """
         try:
-            customer_name = self.customer_entry.get()
-            profit_margin = float(self.margin_entry.get())
+            customer_name = self.customer_entry.get().strip()
+            profit_margin = self.margin_entry.get().strip()
+            input_data = f"Customer Name: {customer_name}, Profit Margin: {profit_margin}%"
+            
+            if not customer_name:
+                output = "Customer name cannot be empty"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR7: Quote with empty customer name",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+            
+            profit_margin = float(profit_margin)
+            if profit_margin < 0:
+                output = "Profit margin cannot be negative"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR7: Quote with negative margin",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+
             save_quote(part_id, total_cost, customer_name, profit_margin)
-            messagebox.showinfo("Success", "Quote generated and saved to quotes.txt")
+            output = "Quote generated and saved to quotes.txt"
+            messagebox.showinfo("Success", output)
+            log_test_result(
+                test_case="FR7: Generate quote",
+                input_data=input_data,
+                output=output,
+                pass_fail="Pass"
+            )
             self.create_part_input_screen()
         except ValueError:
-            messagebox.showerror("Error", "Invalid profit margin: please enter a numeric value")
+            output = "Invalid profit margin: please enter a numeric value"
+            messagebox.showerror("Error", output)
+            log_test_result(
+                test_case="FR7: Quote with invalid margin",
+                input_data=input_data,
+                output=output,
+                pass_fail="Fail"
+            )
+        except Exception as e:
+            output = f"Unexpected error: {e}"
+            messagebox.showerror("Error", output)
+            log_test_result(
+                test_case="FR7: Unexpected error",
+                input_data=input_data,
+                output=output,
+                pass_fail="Fail"
+            )
 
     def create_admin_screen(self):
         """
@@ -196,19 +485,27 @@ class SheetMetalClientHub:
         
         Logic:
             1. Clears existing widgets.
-            2. Adds entry fields for rate key (e.g., steel_rate) and value (GBP).
-            3. Adds a button to update the rate, calling update_rate.
-            4. Adds a button to access user features (part input).
+            2. Creates main content frame and footer.
+            3. Adds fields for rate key and value, update rate button, and user features button.
         """
         self.clear_screen()
-        tk.Label(self.root, text="Rate Key (e.g., steel_rate):").pack()
-        self.rate_key_entry = tk.Entry(self.root)
-        self.rate_key_entry.pack()
-        tk.Label(self.root, text="Rate Value (GBP):").pack()
-        self.rate_value_entry = tk.Entry(self.root)
-        self.rate_value_entry.pack()
-        tk.Button(self.root, text="Update Rate", command=self.update_rate).pack()
-        tk.Button(self.root, text="User Features", command=self.create_part_input_screen).pack()
+        # Main content
+        main_frame = tk.Frame(self.root)
+        main_frame.place(relx=0.5, rely=0.5, anchor="center")
+        tk.Label(main_frame, text="Admin Settings", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
+        tk.Label(main_frame, text="Rate Key (e.g., steel_rate):", font=("Arial", 12)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
+        self.rate_key_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.rate_key_entry.grid(row=1, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Rate Value (GBP):", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
+        self.rate_value_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.rate_value_entry.grid(row=2, column=1, padx=10, pady=5)
+        tk.Button(main_frame, text="Update Rate", command=self.update_rate, font=("Arial", 12)).grid(row=3, column=0, pady=10)
+        tk.Button(main_frame, text="User Features", command=self.create_part_input_screen, font=("Arial", 12)).grid(row=3, column=1, pady=10)
+        
+        # Footer
+        footer = tk.Frame(self.root)
+        footer.pack(side=tk.BOTTOM, fill=tk.X)
+        self.create_footer(footer)
 
     def update_rate(self):
         """
@@ -216,18 +513,66 @@ class SheetMetalClientHub:
         
         Logic:
             1. Retrieves rate key and value from entry fields.
-            2. Validates value as numeric.
+            2. Validates inputs (non-empty key, numeric non-negative value).
             3. Calls update_rates to save the new rate.
-            4. Shows success message.
-            5. Handles errors with error messages.
+            4. Logs test result to test_logs.txt using logger.
+            5. Shows success message.
         """
         try:
-            rate_key = self.rate_key_entry.get()
-            rate_value = float(self.rate_value_entry.get())
+            rate_key = self.rate_key_entry.get().strip()
+            rate_value = self.rate_value_entry.get().strip()
+            input_data = f"Rate Key: {rate_key}, Rate Value: {rate_value}"
+            
+            if not rate_key:
+                output = "Rate key cannot be empty"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR6: Update rate with empty key",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+            
+            rate_value = float(rate_value)
+            if rate_value < 0:
+                output = "Rate value cannot be negative"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR6: Update rate with negative value",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+            
             update_rates(rate_key, rate_value)
-            messagebox.showinfo("Success", "Rates updated in rates_global.txt")
+            output = f"Rate '{rate_key}' updated to {rate_value} in rates_global.txt"
+            messagebox.showinfo("Success", output)
+            log_test_result(
+                test_case="FR6: Update rate",
+                input_data=input_data,
+                output=output,
+                pass_fail="Pass"
+            )
         except ValueError:
-            messagebox.showerror("Error", "Invalid rate value: please enter a numeric value")
+            output = "Invalid rate value: please enter a numeric value"
+            messagebox.showerror("Error", output)
+            log_test_result(
+                test_case="FR6: Update rate with invalid value",
+                input_data=input_data,
+                output=output,
+                pass_fail="Fail"
+            )
+        except Exception as e:
+            output = f"Unexpected error: {e}"
+            messagebox.showerror("Error", output)
+            log_test_result(
+                test_case="FR6: Unexpected error",
+                input_data=input_data,
+                output=output,
+                pass_fail="Fail"
+            )
 
     def clear_screen(self):
         """
@@ -241,6 +586,15 @@ class SheetMetalClientHub:
             widget.destroy()
 
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = SheetMetalClientHub(root)
-    root.mainloop()
+    try:
+        root = tk.Tk()
+        app = SheetMetalClientHub(root)
+        root.mainloop()
+    except Exception as e:
+        print(f"Error starting GUI: {e}")
+        log_test_result(
+            test_case="GUI Initialization",
+            input_data="None",
+            output=f"Error starting GUI: {e}",
+            pass_fail="Fail"
+        )

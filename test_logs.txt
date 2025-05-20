@@ -1,0 +1,91 @@
+Timestamp: 2025-05-20 11:32:59
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 11:34:18
+Test Case: FR3-FR4-FR5: Cost calculation and output storage
+Input: Part ID: 54321, Revision: 99, Material: steel, Thickness: 2.5, Length: 500, Width: 250, Quantity: 2
+Output: Cost calculated: £15625228.0
+Saved to output.txt
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 11:40:36
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 13:12:59
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 13:14:29
+Test Case: Help Guide Accessed
+Input: None
+Output: Help guide displayed
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 13:31:47
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 13:31:56
+Test Case: Help Guide Accessed
+Input: None
+Output: Help guide displayed
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 13:44:31
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 13:56:29
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 14:04:34
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 14:48:39
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 14:50:05
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 15:38:54
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 16:18:59
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 17:00:25
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------

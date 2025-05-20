@@ -8,3 +8,4 @@ painting:10.0
 assembly:12.0
 inspection:8.0
 packaging:5.0
+Stainless Steal:9.0

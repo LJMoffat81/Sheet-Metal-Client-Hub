@@ -1,3 +1,2 @@
 laurie:moffat123
-john_doe:password123
-jane_smith:securepass456
+admin:admin123
