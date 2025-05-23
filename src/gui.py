@@ -777,7 +777,7 @@ class SheetMetalClientHub:
                 log_test_result(
                     test_case="FR3-FR4: Cost calculation failure",
                     input_data=input_data,
-                    output(output,
+                    output=output,
                     pass_fail="Fail"
                 )
                 return
