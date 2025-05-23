@@ -580,3 +580,6 @@ Pass/Fail: Pass
 [2025-05-23 14:13:55] Test: Back to Login, Input: None, Output: Returned to login screen, Status: Pass
 [2025-05-23 14:14:09] Test: FR1: Valid Admin login, Input: Username: admin, Password: [hidden], Output: Login successful as Admin, Status: Pass
 [2025-05-23 14:14:23] Test: FR1: Valid Admin login, Input: Username: admin, Password: [hidden], Output: Login successful as Admin, Status: Pass
+[2025-05-23 14:17:10] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 14:27:33] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 14:42:29] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
