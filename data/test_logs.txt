@@ -536,3 +536,40 @@ Input: Part Type: Assembly, Part ID: PART-55555A, Revision: A6, Material: N/A, T
 Output: Sub-part FAS-001: Screw M3 does not exist in the system
 Pass/Fail: Fail
 --------------------------------------------------
+Timestamp: 2025-05-20 23:50:05
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 23:53:56
+Test Case: FR1: Valid User login
+Input: Username: laurie, Password: [hidden]
+Output: Login successful as User
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-20 23:57:16
+Test Case: Help Guide Accessed
+Input: None
+Output: Help guide displayed
+Pass/Fail: Pass
+--------------------------------------------------
+Timestamp: 2025-05-21 00:05:07
+Test Case: FR1: Valid Admin login
+Input: Username: admin, Password: [hidden]
+Output: Login successful as Admin
+Pass/Fail: Pass
+--------------------------------------------------
+[2025-05-21 00:08:43] Test: FR1: Valid Admin login, Input: Username: admin, Password: [hidden], Output: Login successful as Admin, Status: Pass
+[2025-05-21 00:09:26] Test: FR3-FR4: Assembly cost calculation, Input: Assembly with 2 sub-parts, 2 assembly components, Output: AssertionError: 500024.0 != 790149.0 within 2 places (290125.0 difference), Status: Fail
+[2025-05-21 00:09:26] Test: FR3-FR4: Invalid material, Input: Part ID: PART-123, Revision: Rev A1, Material: copper, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100, Output: AssertionError: 2000000000.0 != 0.0, Status: Fail
+[2025-05-21 00:09:26] Test: FR3-FR4: Invalid thickness, Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 4.0, Length: 1000, Width: 500, Quantity: 100, Output: AssertionError: 5000000000.0 != 0.0, Status: Fail
+[2025-05-21 00:09:26] Test: FR3-FR4: Valid steel cost calculation, Input: Part ID: PART-123, Revision: Rev A1, Material: steel, Thickness: 2.0, Length: 1000, Width: 500, Quantity: 100, Output: Calculated cost: £2500000000.0, Expected: £2500000000.0, Status: Pass
+[2025-05-21 00:13:45] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-21 09:53:12] Test: FR1: Invalid login, Input: Username: admin, Password: [hidden], Output: Invalid username or password, Status: Fail
+[2025-05-21 09:53:17] Test: FR1: Valid Admin login, Input: Username: admin, Password: [hidden], Output: Login successful as Admin, Status: Pass
+[2025-05-21 12:44:34] Test: FR2: Part input with empty fields, Input: Part Type: Single Part, Part ID: , Revision: , Material: mild steel, Thickness: 3.0, Length: 1000, Width: 1000, Quantity: 1, Sub-Parts: [], Weldment: Yes, Top-Level Assembly: N/A, Work Centres: ['Cutting', 'Bending', 'Welding', 'Assembly', 'Finishing', 'Drilling', 'Punching', 'Grinding', 'Coating', 'Inspection'], Output: Part ID and Revision are required, Status: Fail
+[2025-05-23 11:11:31] Test: FR1: Valid Admin login, Input: Username: admin, Password: [hidden], Output: Login successful as Admin, Status: Pass
+[2025-05-23 13:44:10] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 14:00:31] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 14:06:33] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
