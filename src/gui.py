@@ -289,71 +289,6 @@ class SheetMetalClientHub:
         elif hasattr(self, 'custom_quantity_entry'):
             self.custom_quantity_entry.config(state='disabled')
 
-    def update_part_input_fields(self, *args):
-        """
-        Show or hide fields based on part type selection.
-        Logic:
-            - Assembly: Show Part ID, Revision, Quantity, Sub-Parts dropdown.
-            - Single Part: Show Part ID, Revision, Material, Thickness, Lay-Flat Length/Width, Weldment, Fasteners/Inserts dropdown.
-            - WorkCentre operations always visible on right side.
-        """
-        part_type = self.part_type_var.get()
-        
-        # Hide all part input fields initially
-        for widget in [self.part_id_label, self.part_id_entry,
-                       self.revision_label, self.revision_entry,
-                       self.material_label, self.material_option,
-                       self.thickness_label, self.thickness_option,
-                       self.lay_flat_length_label, self.lay_flat_length_option,
-                       self.lay_flat_width_label, self.lay_flat_width_option,
-                       self.quantity_label, self.quantity_option, self.custom_quantity_entry,
-                       self.sub_parts_label, self.sub_parts_option, self.add_sub_part_button,
-                       self.clear_sub_parts_button, self.selected_sub_parts_label,
-                       self.weldment_label, self.weldment_option,
-                       self.settings_button, self.back_button, self.add_another_part_button]:
-            widget.grid_remove()
-        
-        # Show common fields (right-aligned)
-        self.part_id_label.grid(row=2, column=0, padx=(10, 2), pady=2, sticky="e")
-        self.part_id_entry.grid(row=2, column=1, padx=(2, 5), pady=2, sticky="w")
-        self.revision_label.grid(row=3, column=0, padx=(10, 2), pady=2, sticky="e")
-        self.revision_entry.grid(row=3, column=1, padx=(2, 5), pady=2, sticky="w")
-        
-        if part_type == "Assembly":
-            self.quantity_label.grid(row=4, column=0, padx=(10, 2), pady=2, sticky="e")
-            self.quantity_option.grid(row=4, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.custom_quantity_entry.grid(row=5, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.sub_parts_label.grid(row=6, column=0, padx=(10, 2), pady=2, sticky="e")
-            self.sub_parts_option.grid(row=6, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.add_sub_part_button.grid(row=7, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.clear_sub_parts_button.grid(row=8, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.selected_sub_parts_label.grid(row=9, column=0, columnspan=2, padx=(10, 5), pady=2, sticky="w")
-            self.settings_button.grid(row=10, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.back_button.grid(row=11, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.add_another_part_button.grid(row=12, column=1, padx=(2, 5), pady=2, sticky="w")
-        else:  # Single Part
-            self.material_label.grid(row=4, column=0, padx=(10, 2), pady=2, sticky="e")
-            self.material_option.grid(row=4, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.thickness_label.grid(row=5, column=0, padx=(10, 2), pady=2, sticky="e")
-            self.thickness_option.grid(row=5, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.lay_flat_length_label.grid(row=6, column=0, padx=(10, 2), pady=2, sticky="e")
-            self.lay_flat_length_option.grid(row=6, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.lay_flat_width_label.grid(row=7, column=0, padx=(10, 2), pady=2, sticky="e")
-            self.lay_flat_width_option.grid(row=7, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.weldment_label.grid(row=8, column=0, padx=(10, 2), pady=2, sticky="e")
-            self.weldment_option.grid(row=8, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.sub_parts_label.grid(row=9, column=0, padx=(10, 2), pady=2, sticky="e")
-            self.sub_parts_option.grid(row=9, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.add_sub_part_button.grid(row=10, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.clear_sub_parts_button.grid(row=11, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.selected_sub_parts_label.grid(row=12, column=0, columnspan=2, padx=(10, 5), pady=2, sticky="w")
-            self.settings_button.grid(row=13, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.back_button.grid(row=14, column=1, padx=(2, 5), pady=2, sticky="w")
-            self.add_another_part_button.grid(row=15, column=1, padx=(2, 5), pady=2, sticky="w")
-
-        # Update sub-parts dropdown content
-        self.update_sub_parts_dropdown()
-
     def update_sub_parts_dropdown(self):
         """
         Update the sub-parts dropdown based on part type.
@@ -380,6 +315,65 @@ class SheetMetalClientHub:
                     menu.add_command(label=label, command=lambda x=label: self.sub_parts_var.set(x))
             else:
                 menu.add_command(label="No catalogue items available", command=lambda: self.sub_parts_var.set("No catalogue items available"))
+
+    def update_part_input_fields(self, *args):
+        """
+        Show or hide fields based on part type selection.
+        Logic:
+            - Assembly: Show Part ID, Revision, Quantity, Sub-Parts dropdown, Clear Sub-Parts.
+            - Single Part: Show Part ID, Revision, Material, Thickness, Lay-Flat Length/Width, Weldment, Fasteners/Inserts, Clear Sub-Parts.
+            - Settings, Back, Add Another Part buttons in bottom frame.
+            - WorkCentre operations always visible on right side.
+        """
+        part_type = self.part_type_var.get()
+        
+        # Hide all part input fields initially
+        for widget in [self.part_id_label, self.part_id_entry,
+                       self.revision_label, self.revision_entry,
+                       self.material_label, self.material_option,
+                       self.thickness_label, self.thickness_option,
+                       self.lay_flat_length_label, self.lay_flat_length_option,
+                       self.lay_flat_width_label, self.lay_flat_width_option,
+                       self.quantity_label, self.quantity_option, self.custom_quantity_entry,
+                       self.sub_parts_label, self.sub_parts_option, self.add_sub_part_button,
+                       self.clear_sub_parts_button, self.selected_sub_parts_label,
+                       self.weldment_label, self.weldment_option]:
+            widget.grid_remove()
+        
+        # Show common fields (right-aligned)
+        self.part_id_label.grid(row=2, column=0, padx=(10, 2), pady=2, sticky="e")
+        self.part_id_entry.grid(row=2, column=1, padx=(2, 5), pady=2, sticky="w")
+        self.revision_label.grid(row=3, column=0, padx=(10, 2), pady=2, sticky="e")
+        self.revision_entry.grid(row=3, column=1, padx=(2, 5), pady=2, sticky="w")
+        
+        if part_type == "Assembly":
+            self.quantity_label.grid(row=4, column=0, padx=(10, 2), pady=2, sticky="e")
+            self.quantity_option.grid(row=4, column=1, padx=(2, 5), pady=2, sticky="w")
+            self.custom_quantity_entry.grid(row=5, column=1, padx=(2, 5), pady=2, sticky="w")
+            self.sub_parts_label.grid(row=6, column=0, padx=(10, 2), pady=2, sticky="e")
+            self.sub_parts_option.grid(row=6, column=1, padx=(2, 5), pady=2, sticky="w")
+            self.add_sub_part_button.grid(row=7, column=1, padx=(2, 5), pady=2, sticky="w")
+            self.clear_sub_parts_button.grid(row=8, column=1, padx=(2, 5), pady=2, sticky="w")
+            self.selected_sub_parts_label.grid(row=9, column=0, columnspan=2, padx=(10, 5), pady=2, sticky="w")
+        else:  # Single Part
+            self.material_label.grid(row=4, column=0, padx=(10, 2), pady=2, sticky="e")
+            self.material_option.grid(row=4, column=1, padx=(2, 5), pady=2, sticky="w")
+            self.thickness_label.grid(row=5, column=0, padx=(10, 2), pady=2, sticky="e")
+            self.thickness_option.grid(row=5, column=1, padx=(2, 5), pady=2, sticky="w")
+            self.lay_flat_length_label.grid(row=6, column=0, padx=(10, 2), pady=2, sticky="e")
+            self.lay_flat_length_option.grid(row=6, column=1, padx=(2, 5), pady=2, sticky="w")
+            self.lay_flat_width_label.grid(row=7, column=0, padx=(10, 2), pady=2, sticky="e")
+            self.lay_flat_width_option.grid(row=7, column=1, padx=(2, 5), pady=2, sticky="w")
+            self.weldment_label.grid(row=8, column=0, padx=(10, 2), pady=2, sticky="e")
+            self.weldment_option.grid(row=8, column=1, padx=(2, 5), pady=2, sticky="w")
+            self.sub_parts_label.grid(row=9, column=0, padx=(10, 2), pady=2, sticky="e")
+            self.sub_parts_option.grid(row=9, column=1, padx=(2, 5), pady=2, sticky="w")
+            self.add_sub_part_button.grid(row=10, column=1, padx=(2, 5), pady=2, sticky="w")
+            self.clear_sub_parts_button.grid(row=11, column=1, padx=(2, 5), pady=2, sticky="w")
+            self.selected_sub_parts_label.grid(row=12, column=0, columnspan=2, padx=(10, 5), pady=2, sticky="w")
+
+        # Update sub-parts dropdown content
+        self.update_sub_parts_dropdown()
 
     def add_sub_part(self):
         """
@@ -467,9 +461,10 @@ class SheetMetalClientHub:
         Logic:
             1. Clears existing widgets.
             2. Creates main content frame with a vertical split (left: part inputs, right: Planned Manufacture Operations).
-            3. Left side: Conditional fields, right-aligned near centerline, with navigation buttons.
+            3. Left side: Conditional fields, right-aligned near centerline.
             4. Right side: Planned Manufacture Operations with 10 operations, centered title/buttons.
-            5. Adds a centered vertical line and footer.
+            5. Bottom frame: Settings, Back, Add Another Part buttons.
+            6. Adds a centered vertical line and footer.
         """
         self.clear_screen()
         main_frame = tk.Frame(self.root)
@@ -477,7 +472,7 @@ class SheetMetalClientHub:
 
         # Left side: Part input data
         left_frame = tk.Frame(main_frame, width=500)
-        left_frame.pack(side=tk.LEFT, fill=tk.Y, padx=2, pady=2)
+        left_frame.pack(side=tk.LEFT, fill=tk.Y, padx=0, pady=0)
         tk.Label(left_frame, text="Part Input", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
 
         # Part Type
@@ -519,9 +514,9 @@ class SheetMetalClientHub:
         self.weldment_label = tk.Label(left_frame, text="Weldment Indicator:", font=("Arial", 12))
         self.weldment_var = tk.StringVar(value="No")
         self.weldment_option = tk.OptionMenu(left_frame, self.weldment_var, "Yes", "No")
-        self.settings_button = tk.Button(left_frame, text="Settings", command=self.go_to_settings, font=("Arial", 12))
-        self.back_button = tk.Button(left_frame, text="Back", command=self.go_back_to_login, font=("Arial", 12))
-        self.add_another_part_button = tk.Button(left_frame, text="Add Another Part", command=self.reset_part_input, font=("Arial", 12), state='disabled')
+        self.settings_button = tk.Button(main_frame, text="Settings", command=self.go_to_settings, font=("Arial", 12))
+        self.back_button = tk.Button(main_frame, text="Back", command=self.go_back_to_login, font=("Arial", 12))
+        self.add_another_part_button = tk.Button(main_frame, text="Add Another Part", command=self.reset_part_input, font=("Arial", 12), state='disabled')
 
         # Initialize selected sub-parts list
         self.selected_sub_parts = []
@@ -536,7 +531,7 @@ class SheetMetalClientHub:
 
         # Right side: Planned Manufacture Operations (always visible, centered)
         right_frame = tk.Frame(main_frame, width=500)
-        right_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=2, pady=2)
+        right_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=0, pady=0)
         tk.Label(right_frame, text="Planned Manufacture Operations", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, padx=10, pady=(10, 5))
 
         # WorkCentre options
@@ -557,6 +552,13 @@ class SheetMetalClientHub:
         self.calculate_cost_button.grid(row=11, column=0, columnspan=2, pady=5)
         self.submit_button = tk.Button(right_frame, text="Submit", command=lambda: self.create_quote_screen(self.last_part_id, self.last_total_cost), font=("Arial", 10), state='disabled')
         self.submit_button.grid(row=12, column=0, columnspan=2, pady=5)
+
+        # Bottom frame: Navigation buttons
+        bottom_frame = tk.Frame(main_frame)
+        bottom_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=5)
+        self.settings_button.pack(in_=bottom_frame, side=tk.LEFT, padx=10)
+        self.back_button.pack(in_=bottom_frame, side=tk.LEFT, padx=10)
+        self.add_another_part_button.pack(in_=bottom_frame, side=tk.LEFT, padx=10)
 
         # Footer
         footer = tk.Frame(self.root)
@@ -775,7 +777,7 @@ class SheetMetalClientHub:
                 log_test_result(
                     test_case="FR3-FR4: Cost calculation failure",
                     input_data=input_data,
-                    output=output,
+                    output(output,
                     pass_fail="Fail"
                 )
                 return
@@ -808,6 +810,197 @@ class SheetMetalClientHub:
             messagebox.showerror("Error", output)
             log_test_result(
                 test_case="FR2-FR3-FR4: Unexpected error",
+                input_data=input_data,
+                output=output,
+                pass_fail="Fail"
+            )
+
+    def create_quote_screen(self, part_id, total_cost):
+        """
+        Create the quote generation screen (FR7).
+        
+        Parameters:
+            part_id (str): Part identifier.
+            total_cost (float): Calculated cost from calculate_cost.
+        
+        Logic:
+            1. Clears existing widgets.
+            2. Creates main content frame and footer.
+            3. Adds fields for customer name and profit margin, and generate quote button.
+        """
+        self.clear_screen()
+        main_frame = tk.Frame(self.root)
+        main_frame.place(relx=0.5, rely=0.5, anchor="center")
+        tk.Label(main_frame, text="Generate Quote", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
+        tk.Label(main_frame, text="Customer Name:", font=("Arial", 12)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
+        self.customer_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.customer_entry.grid(row=1, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Profit Margin (%):", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
+        self.margin_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.margin_entry.grid(row=2, column=1, padx=10, pady=5)
+        tk.Button(main_frame, text="Generate Quote", command=lambda: self.generate_quote(part_id, total_cost), font=("Arial", 12)).grid(row=3, column=0, columnspan=2, pady=10)
+        
+        footer = tk.Frame(self.root)
+        footer.pack(side=tk.BOTTOM, fill=tk.X)
+        self.create_footer(footer)
+
+    def generate_quote(self, part_id, total_cost):
+        """
+        Generate and save a quote (FR7).
+        
+        Logic:
+            1. Retrieves customer name and profit margin from entry fields.
+            2. Validates inputs (non-empty customer name, numeric non-negative margin).
+            3. Calls save_quote to generate and save the quote to data/quotes.txt.
+            4. Logs test result to data/test_logs.txt using logger.
+            5. Shows success message.
+            6. Returns to part input screen.
+        """
+        try:
+            customer_name = self.customer_entry.get().strip()
+            profit_margin = self.margin_entry.get().strip()
+            input_data = f"Customer Name: {customer_name}, Profit Margin: {profit_margin}%"
+            
+            if not customer_name:
+                output = "Customer name cannot be empty"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR7: Quote with empty customer name",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+            
+            profit_margin = float(profit_margin)
+            if profit_margin < 0:
+                output = "Profit margin cannot be negative"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR7: Quote with negative margin",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+
+            save_quote(part_id, total_cost, customer_name, profit_margin)
+            output = "Quote generated and saved to data/quotes.txt"
+            messagebox.showinfo("Success", output)
+            log_test_result(
+                test_case="FR7: Generate quote",
+                input_data=input_data,
+                output=output,
+                pass_fail="Pass"
+            )
+            self.create_part_input_screen()
+        except ValueError:
+            output = "Invalid profit margin: please enter a numeric value"
+            messagebox.showerror("Error", output)
+            log_test_result(
+                test_case="FR7: Quote with invalid margin",
+                input_data=input_data,
+                output=output,
+                pass_fail="Fail"
+            )
+        except Exception as e:
+            output = f"Unexpected error: {e}"
+            messagebox.showerror("Error", output)
+            log_test_result(
+                test_case="FR7: Unexpected error",
+                input_data=input_data,
+                output=output,
+                pass_fail="Fail"
+            )
+
+    def create_admin_screen(self):
+        """
+        Create the admin screen for updating rates (FR6).
+        
+        Logic:
+            1. Clears existing widgets.
+            2. Creates main content frame and footer.
+            3. Adds fields for rate key and value, update rate button, and user features button.
+        """
+        self.clear_screen()
+        main_frame = tk.Frame(self.root)
+        main_frame.place(relx=0.5, rely=0.5, anchor="center")
+        tk.Label(main_frame, text="Admin Settings", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
+        tk.Label(main_frame, text="Rate Key (e.g., mild_steel_rate):", font=("Arial", 12)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
+        self.rate_key_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.rate_key_entry.grid(row=1, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Rate Value (GBP):", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
+        self.rate_value_entry = tk.Entry(main_frame, font=("Arial", 12))
+        self.rate_value_entry.grid(row=2, column=1, padx=10, pady=5)
+        tk.Button(main_frame, text="Update Rate", command=self.update_rate, font=("Arial", 12)).grid(row=3, column=0, pady=10)
+        tk.Button(main_frame, text="User Features", command=self.create_part_input_screen, font=("Arial", 12)).grid(row=3, column=1, pady=10)
+        
+        footer = tk.Frame(self.root)
+        footer.pack(side=tk.BOTTOM, fill=tk.X)
+        self.create_footer(footer)
+
+    def update_rate(self):
+        """
+        Update a rate in data/rates_global.txt (FR6).
+        
+        Logic:
+            1. Retrieves rate key and value from entry fields.
+            2. Validates inputs (non-empty key, numeric non-negative value).
+            3. Calls update_rates to save the new rate.
+            4. Logs test result to data/test_logs.txt using logger.
+            5. Shows success message.
+        """
+        try:
+            rate_key = self.rate_key_entry.get().strip()
+            rate_value = self.rate_value_entry.get().strip()
+            input_data = f"Rate Key: {rate_key}, Rate Value: {rate_value}"
+            
+            if not rate_key:
+                output = "Rate key cannot be empty"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR6: Update rate with empty key",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+            
+            rate_value = float(rate_value)
+            if rate_value < 0:
+                output = "Rate value cannot be negative"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR6: Update rate with negative value",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+            
+            update_rates(rate_key, rate_value)
+            output = f"Rate '{rate_key}' updated to {rate_value} in data/rates_global.txt"
+            messagebox.showinfo("Success", output)
+            log_test_result(
+                test_case="FR6: Update rate",
+                input_data=input_data,
+                output=output,
+                pass_fail="Pass"
+            )
+        except ValueError:
+            output = "Invalid rate value: please enter a numeric value"
+            messagebox.showerror("Error", output)
+            log_test_result(
+                test_case="FR6: Update rate with invalid value",
+                input_data=input_data,
+                output=output,
+                pass_fail="Fail"
+            )
+        except Exception as e:
+            output = f"Unexpected error: {e}"
+            messagebox.showerror("Error", output)
+            log_test_result(
+                test_case="FR6: Unexpected error",
                 input_data=input_data,
                 output=output,
                 pass_fail="Fail"
