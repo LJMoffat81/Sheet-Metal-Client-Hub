@@ -583,3 +583,16 @@ Pass/Fail: Pass
 [2025-05-23 14:17:10] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
 [2025-05-23 14:27:33] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
 [2025-05-23 14:42:29] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 15:12:04] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 15:42:01] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 15:43:50] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 15:44:36] Test: FR3-FR4-FR5: Cost calculation and output storage, Input: Part Type: Single Part, Part ID: PART-12345A, Revision: A1, Material: aluminium, Thickness: 1.5, Length: 1500, Width: 500, Quantity: 1, Sub-Parts: ['FAS-001: Screw M3', 'FAS-002: Bolt M5'], Weldment: Yes, Top-Level Assembly: N/A, Work Centres: ['Cutting', 'Bending', 'Welding'], Output: Cost calculated: £23512500.0
+Saved to data/output.txt, Status: Pass
+[2025-05-23 15:46:37] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 15:47:54] Test: Settings Access: Denied, Input: Non-admin user, Output: Admin access denied, Status: Fail
+[2025-05-23 15:48:31] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 15:51:29] Test: FR1: Login with empty fields, Input: Username: adminADMIN123, Password: , Output: Username and password cannot be empty, Status: Fail
+[2025-05-23 15:51:38] Test: FR1: Valid Admin login, Input: Username: admin, Password: [hidden], Output: Login successful as Admin, Status: Pass
+[2025-05-23 16:19:05] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 16:23:19] Test: FR2: Part input with empty fields, Input: Part Type: Single Part, Part ID: , Revision: , Material: mild steel, Thickness: 1.0, Length: 1000, Width: 500, Quantity: 1, Sub-Parts: [], Weldment: No, Top-Level Assembly: N/A, Work Centres: [], Output: Part ID and Revision are required, Status: Fail
+[2025-05-23 16:27:17] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
