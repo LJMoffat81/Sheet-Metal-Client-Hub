@@ -2,6 +2,7 @@ import unittest
 import sys
 import os
 import tempfile
+from unittest.mock import patch
 
 # Add src/ to Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src')))
@@ -17,12 +18,20 @@ class TestFileHandler(unittest.TestCase):
         self.quotes_file = os.path.join(self.temp_dir, 'quotes.txt')
 
         # Create test users file
-        with open(self.users_file, 'w') as f:
+        with open(self.users_file, 'w', encoding='utf-8') as f:
             f.write('laurie:moffat123\n')
 
         # Create test rates file
-        with open(self.rates_file, 'w') as f:
+        with open(self.rates_file, 'w', encoding='utf-8') as f:
             f.write('mild_steel_rate=0.10\nwelding_rate_per_mm=0.10\n')
+
+        # Mock BASE_DIR to use temp_dir
+        self.original_base_dir = file_handler.BASE_DIR
+        file_handler.BASE_DIR = self.temp_dir
+
+    def tearDown(self):
+        # Restore BASE_DIR
+        file_handler.BASE_DIR = self.original_base_dir
 
     def test_validate_credentials_valid(self):
         result = validate_credentials('laurie', 'moffat123')
@@ -39,13 +48,13 @@ class TestFileHandler(unittest.TestCase):
 
     def test_save_output(self):
         save_output('PART-12345', '1', 'mild steel', 1.0, 1000, 500, 1, 50.0)
-        with open(self.output_file, 'r') as f:
+        with open(self.output_file, 'r', encoding='utf-8') as f:
             content = f.read().strip()
         self.assertEqual(content, "PART-12345,1,mild steel,1.0,1000,500,1,50.0", "Output should be saved correctly")
 
     def test_save_quote(self):
         save_quote('PART-12345', 50.0, 'Acme', 20.0)
-        with open(self.quotes_file, 'r') as f:
+        with open(self.quotes_file, 'r', encoding='utf-8') as f:
             content = f.read().strip()
         self.assertEqual(content, "PART-12345,Acme,50.0,20.0", "Quote should be saved correctly")
 

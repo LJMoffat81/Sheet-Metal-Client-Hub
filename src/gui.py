@@ -65,23 +65,12 @@ class SheetMetalClientHub:
     def __init__(self, root):
         """
         Initialize the GUI application.
-        
-        Parameters:
-            root (tk.Tk): The Tkinter root window.
-        
-        Logic:
-            1. Stores the root window.
-            2. Sets the window title and fixed size to 1000x750 pixels.
-            3. Sets a custom laser icon.
-            4. Initializes role as None (set after login).
-            5. Displays the login screen.
         """
         self.root = root
         self.root.title("Sheet Metal Client Hub")
         self.root.geometry("1000x750")
-        self.root.resizable(False, False)  # Prevent resizing
-        self.root.minsize(400, 400)  # Set minimum size as fallback
-        # Set custom laser icon
+        self.root.resizable(False, False)
+        self.root.minsize(400, 400)
         try:
             icon_path = os.path.join(BASE_DIR, 'docs/images/laser_gear.ico')
             self.root.iconbitmap(icon_path)
@@ -98,13 +87,6 @@ class SheetMetalClientHub:
     def create_footer(self, frame):
         """
         Create the footer for all screens with version and help button.
-        
-        Parameters:
-            frame (tk.Frame): The footer frame to populate.
-        
-        Logic:
-            1. Adds version label on the left.
-            2. Adds help button on the right that opens a guide.
         """
         frame.configure(bg="lightgrey")
         tk.Label(frame, text="Version 1.0", font=("Arial", 10), bg="lightgrey").pack(side=tk.LEFT, padx=10, pady=5)
@@ -113,10 +95,6 @@ class SheetMetalClientHub:
     def show_help(self):
         """
         Display a help guide for the application.
-        
-        Logic:
-            1. Shows a messagebox with a placeholder guide.
-            2. Logs the help action to data/test_logs.txt.
         """
         guide = (
             "Sheet Metal Client Hub - User Guide\n\n"
@@ -137,12 +115,6 @@ class SheetMetalClientHub:
     def create_login_screen(self):
         """
         Create the login screen for user authentication (FR1).
-        
-        Logic:
-            1. Clears existing widgets.
-            2. Creates main content frame and footer.
-            3. Adds title, username/password fields, login/clear buttons in main frame.
-            4. Sets focus on username field and binds Enter key to login.
         """
         self.clear_screen()
         main_frame = tk.Frame(self.root)
@@ -166,10 +138,6 @@ class SheetMetalClientHub:
     def clear_login_fields(self):
         """
         Clear username and password entry fields.
-        
-        Logic:
-            1. Deletes all text in username and password entries.
-            2. Sets focus back to username field.
         """
         self.username_entry.delete(0, tk.END)
         self.password_entry.delete(0, tk.END)
@@ -184,15 +152,6 @@ class SheetMetalClientHub:
     def login(self):
         """
         Handle login button click and validate credentials (FR1).
-        
-        Logic:
-            1. Gets username and password from entry fields.
-            2. Validates inputs (non-empty).
-            3. Calls validate_credentials to check against data/users.txt.
-            4. Sets role ("Admin" for username "admin", else "User").
-            5. Logs test result to data/test_logs.txt using logger.
-            6. Shows success message and navigates to appropriate screen.
-            7. Shows and logs error message for invalid inputs or credentials.
         """
         username = self.username_entry.get().strip()
         password = self.password_entry.get().strip()
@@ -401,16 +360,16 @@ class SheetMetalClientHub:
         Return quantity options and label for the given WorkCentre.
         """
         options = {
-            "Cutting": ([100, 500, 1000, 2000, 3000], "Cutting Length (mm)"),  # mm
-            "Bending": ([1, 2, 5, 10, 20], "Number of Bends"),  # bends
-            "Welding": ([100, 500, 1000, 2000], "Weld Length (mm)"),  # mm
-            "Assembly": ([1, 2, 5, 10], "Number of Components"),  # components
-            "Finishing": ([1000, 5000, 10000, 20000], "Surface Area (mm²)"),  # mm²
-            "Drilling": ([1, 5, 10, 20], "Number of Holes"),  # holes
-            "Punching": ([1, 5, 10, 20], "Number of Punches"),  # punches
-            "Grinding": ([1000, 5000, 10000, 20000], "Surface Area (mm²)"),  # mm²
-            "Coating": ([1000, 5000, 10000, 20000], "Surface Area to be Painted (mm²)"),  # mm²
-            "Inspection": ([1, 2, 5], "Number of Inspections")  # inspections
+            "Cutting": ([100, 500, 1000, 2000, 3000], "Cutting Length (mm)"),
+            "Bending": ([1, 2, 5, 10, 20], "Number of Bends"),
+            "Welding": ([100, 500, 1000, 2000], "Weld Length (mm)"),
+            "Assembly": ([1, 2, 5, 10], "Number of Components"),
+            "Finishing": ([1000, 5000, 10000, 20000], "Surface Area (mm²)"),
+            "Drilling": ([1, 5, 10, 20], "Number of Holes"),
+            "Punching": ([1, 5, 10, 20], "Number of Punches"),
+            "Grinding": ([1000, 5000, 10000, 20000], "Surface Area (mm²)"),
+            "Coating": ([1000, 5000, 10000, 20000], "Surface Area to be Painted (mm²)"),
+            "Inspection": ([1, 2, 5], "Number of Inspections")
         }
         return options.get(work_centre, ([0], "Quantity"))
 
@@ -450,9 +409,9 @@ class SheetMetalClientHub:
         Reset all part input fields to default values.
         """
         self.part_id_entry.delete(0, tk.END)
-        self.part_id_entry.insert(0, "ASSY-")  # Default to Assembly tab
+        self.part_id_entry.insert(0, "ASSY-")
         self.revision_entry.delete(0, tk.END)
-        self.notebook.select(0)  # Assembly tab
+        self.notebook.select(0)
         self.single_material_var.set("Mild Steel")
         self.single_thickness_var.set("1.0")
         self.single_lay_flat_length_var.set("1000")
@@ -485,15 +444,6 @@ class SheetMetalClientHub:
     def create_part_input_screen(self):
         """
         Create the part input screen for entering part specifications (FR2).
-        
-        Logic:
-            1. Clears existing widgets.
-            2. Creates top frame for overarching title and image.
-            3. Creates main content frame with a vertical split (left: part inputs, right: Planned Operations).
-            4. Left side: Tabbed interface for Assembly/Single Part, right-aligned near centerline.
-            5. Right side: Planned Operations with 10 operations, quantity dropdowns, Calculate Cost/Submit/Add Another Part buttons.
-            6. Bottom frame: Settings, Back buttons.
-            7. Adds a centered vertical line and footer.
         """
         self.clear_screen()
 
@@ -507,8 +457,11 @@ class SheetMetalClientHub:
             image = Image.open(image_path).resize((32, 32), Image.LANCZOS)
             photo = ImageTk.PhotoImage(image)
             image_label = tk.Label(top_frame, image=photo)
-            image_label.image = photo  # Keep reference
+            image_label.image = photo
             image_label.pack(pady=5)
+        except FileNotFoundError:
+            print(f"Warning: laser_gear.png not found at {image_path}. Using fallback.")
+            tk.Label(top_frame, text="[Laser Gear Image]", font=("Arial", 10)).pack(pady=5)
         except Exception as e:
             print(f"Error loading laser_gear image: {e}")
             tk.Label(top_frame, text="[Laser Gear Image]", font=("Arial", 10)).pack(pady=5)
@@ -546,7 +499,7 @@ class SheetMetalClientHub:
         # Common fields
         self.part_id_label = tk.Label(input_frame, text="Part ID:", font=("Arial", 12))
         self.part_id_entry = tk.Entry(input_frame, font=("Arial", 12))
-        self.part_id_entry.insert(0, "ASSY-")  # Default to Assembly
+        self.part_id_entry.insert(0, "ASSY-")
         self.revision_label = tk.Label(input_frame, text="Revision:", font=("Arial", 12))
         self.revision_entry = tk.Entry(input_frame, font=("Arial", 12))
         self.part_id_label.grid(row=1, column=0, sticky="e", padx=(10, 2), pady=2)
@@ -642,7 +595,7 @@ class SheetMetalClientHub:
         ]
         self.work_centre_vars = []
         self.quantity_dropdowns = []
-        for i in range(10):  # Operations 10 to 100
+        for i in range(10):
             op_label = f"Operation {(i+1)*10}:"
             tk.Label(operations_frame, text=op_label, font=("Arial", 10)).grid(row=i+1, column=0, sticky="w", padx=(5, 2), pady=2)
             var = tk.StringVar(value="None")
@@ -650,7 +603,7 @@ class SheetMetalClientHub:
             dropdown.grid(row=i+1, column=1, sticky="w", padx=(2, 5), pady=2)
             self.work_centre_vars.append(var)
             qty_dropdown = tk.OptionMenu(operations_frame, self.work_centre_quantity_vars[i], "0")
-            qty_dropdown.grid_remove()  # Initially hidden
+            qty_dropdown.grid_remove()
             self.quantity_dropdowns.append(qty_dropdown)
 
         # Calculate Cost and buttons subframe
@@ -698,18 +651,90 @@ class SheetMetalClientHub:
     def calculate_and_save(self):
         """
         Calculate cost and save output based on part specifications (FR2, FR3, FR4, FR5).
-        
-        Logic:
-            1. Retrieves part specifications based on selected tab.
-            2. Validates inputs, including WorkCentre operations and quantities.
-            3. Calculates cost including catalogue items, WorkCentres, and quantities.
-            4. Saves result and enables Submit/Add Another Part buttons.
         """
         try:
             selected_tab = self.notebook.index(self.notebook.select())
             part_type = "Single Part" if selected_tab == 1 else "Assembly"
             part_id = self.part_id_entry.get().strip()
             revision = self.revision_entry.get().strip()
+
+            # Validate dimensions for single parts first
+            if selected_tab == 1:  # Single Part
+                material = self.single_material_var.get().lower()
+                thickness = self.single_thickness_var.get()
+                length = self.single_lay_flat_length_var.get()
+                width = self.single_lay_flat_width_var.get()
+                try:
+                    length = int(length)
+                    width = int(width)
+                    thickness = float(thickness)
+                    if not (50 <= length <= 3000):
+                        output = "Lay-Flat length must be between 50 and 3000 mm"
+                        messagebox.showerror("Error", output)
+                        log_test_result(
+                            test_case="FR2: Invalid lay-flat length",
+                            input_data=f"Length: {length}",
+                            output=output,
+                            pass_fail="Fail"
+                        )
+                        return
+                    if not (50 <= width <= 1500):
+                        output = "Lay-Flat width must be between 50 and 1500 mm"
+                        messagebox.showerror("Error", output)
+                        log_test_result(
+                            test_case="FR2: Invalid lay-flat width",
+                            input_data=f"Width: {width}",
+                            output=output,
+                            pass_fail="Fail"
+                        )
+                        return
+                    if not (1.0 <= thickness <= 3.0):
+                        output = "Thickness must be between 1.0 and 3.0 mm"
+                        messagebox.showerror("Error", output)
+                        log_test_result(
+                            test_case="FR2: Invalid thickness",
+                            input_data=f"Thickness: {thickness}",
+                            output=output,
+                            pass_fail="Fail"
+                        )
+                        return
+                except ValueError:
+                    output = "Invalid numeric input for dimensions or thickness"
+                    messagebox.showerror("Error", output)
+                    log_test_result(
+                        test_case="FR2: Invalid numeric input",
+                        input_data=f"Length: {length}, Width: {width}, Thickness: {thickness}",
+                        output=output,
+                        pass_fail="Fail"
+                    )
+                    return
+                weldment_indicator = self.single_weldment_var.get()
+                sub_parts = self.single_selected_sub_parts
+                quantity = "1"
+                top_level_assembly = "N/A"
+            else:  # Assembly
+                material = "N/A"
+                thickness = "0.0"
+                length = "0"
+                width = "0"
+                weldment_indicator = "No"
+                quantity = self.assembly_quantity_var.get()
+                if quantity == "Other":
+                    quantity = self.assembly_custom_quantity_entry.get().strip()
+                sub_parts = self.assembly_selected_sub_parts
+                top_level_assembly = part_id
+
+            # Validate Part ID and Revision
+            if not all([part_id, revision]):
+                output = "Part ID and Revision are required"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR2: Part input with empty fields",
+                    input_data=f"Part ID: {part_id}, Revision: {revision}",
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
 
             # Collect WorkCentre and quantity pairs
             work_centres = []
@@ -729,37 +754,16 @@ class SheetMetalClientHub:
                         return
                     work_centres.append((wc, float(qty)))
 
-            if selected_tab == 1:  # Single Part
-                material = self.single_material_var.get().lower()
-                thickness = self.single_thickness_var.get()
-                length = self.single_lay_flat_length_var.get()
-                width = self.single_lay_flat_width_var.get()
-                weldment_indicator = self.single_weldment_var.get()
-                sub_parts = self.single_selected_sub_parts
-                quantity = "1"
-                top_level_assembly = "N/A"
-            else:  # Assembly
-                material = "N/A"
-                thickness = "0.0"
-                length = "0"
-                width = "0"
-                weldment_indicator = "No"
-                quantity = self.assembly_quantity_var.get()
-                if quantity == "Other":
-                    quantity = self.assembly_custom_quantity_entry.get().strip()
-                sub_parts = self.assembly_selected_sub_parts
-                top_level_assembly = part_id
-
             input_data = (f"Part Type: {part_type}, Part ID: {part_id}, Revision: {revision}, Material: {material}, "
                           f"Thickness: {thickness}, Length: {length}, Width: {width}, Quantity: {quantity}, "
                           f"Sub-Parts: {sub_parts}, Weldment: {weldment_indicator}, Top-Level Assembly: {top_level_assembly}, "
                           f"Work Centres: {work_centres}")
 
-            if not all([part_id, revision]):
-                output = "Part ID and Revision are required"
+            if not work_centres:
+                output = "At least one WorkCentre operation must be selected"
                 messagebox.showerror("Error", output)
                 log_test_result(
-                    test_case="FR2: Part input with empty fields",
+                    test_case="FR2: No WorkCentre operations selected",
                     input_data=input_data,
                     output=output,
                     pass_fail="Fail"
@@ -787,32 +791,7 @@ class SheetMetalClientHub:
                         pass_fail="Fail"
                     )
                     return
-            else:  # Single Part
-                if not all([material, thickness, length, width]):
-                    output = "Material, Thickness, Lay-Flat Length, and Width are required for single parts"
-                    messagebox.showerror("Error", output)
-                    log_test_result(
-                        test_case="FR2: Single part with empty fields",
-                        input_data=input_data,
-                        output=output,
-                        pass_fail="Fail"
-                    )
-                    return
 
-            if not work_centres:
-                output = "At least one WorkCentre operation must be selected"
-                messagebox.showerror("Error", output)
-                log_test_result(
-                    test_case="FR2: No WorkCentre operations selected",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-
-            thickness = float(thickness) if part_type == "Single Part" else 0.0
-            length = int(length) if part_type == "Single Part" else 0
-            width = int(width) if part_type == "Single Part" else 0
             quantity = int(quantity) if part_type == "Assembly" else 1
 
             expected_prefix = "PART-" if part_type == "Single Part" else "ASSY-"
@@ -837,36 +816,6 @@ class SheetMetalClientHub:
                         pass_fail="Fail"
                     )
                     return
-                if not (1.0 <= thickness <= 3.0):
-                    output = "Thickness must be between 1.0 and 3.0 mm"
-                    messagebox.showerror("Error", output)
-                    log_test_result(
-                        test_case="FR2: Invalid thickness",
-                        input_data=input_data,
-                        output=output,
-                        pass_fail="Fail"
-                    )
-                    return
-                if not (50 <= length <= 3000):
-                    output = "Lay-Flat length must be between 50 and 3000 mm"
-                    messagebox.showerror("Error", output)
-                    log_test_result(
-                        test_case="FR2: Invalid lay-flat length",
-                        input_data=input_data,
-                        output=output,
-                        pass_fail="Fail"
-                    )
-                    return
-                if not (50 <= width <= 1500):
-                    output = "Lay-Flat width must be between 50 and 1500 mm"
-                    messagebox.showerror("Error", output)
-                    log_test_result(
-                        test_case="FR2: Invalid lay-flat width",
-                        input_data=input_data,
-                        output=output,
-                        pass_fail="Fail"
-                    )
-                    return
             if part_type == "Assembly" and quantity <= 0:
                 output = "Quantity must be a positive integer"
                 messagebox.showerror("Error", output)
@@ -878,8 +827,9 @@ class SheetMetalClientHub:
                 )
                 return
             if part_type == "Assembly":
+                existing_parts = load_existing_parts()
                 for sub_part in sub_parts:
-                    if sub_part not in load_existing_parts():
+                    if sub_part not in existing_parts:
                         output = f"Sub-part {sub_part} does not exist in the system"
                         messagebox.showerror("Error", output)
                         log_test_result(
@@ -895,7 +845,7 @@ class SheetMetalClientHub:
             if part_type == "Single Part":
                 catalogue = load_parts_catalogue()
                 for item_id in sub_parts:
-                    item_id = item_id.split(':')[0].strip()  # Extract item_id
+                    item_id = item_id.split(':')[0].strip()
                     for cat_id, _, price in catalogue:
                         if item_id == cat_id:
                             catalogue_cost += price
@@ -914,7 +864,7 @@ class SheetMetalClientHub:
                 'top_level_assembly': top_level_assembly,
                 'weldment_indicator': weldment_indicator,
                 'catalogue_cost': catalogue_cost,
-                'work_centres': work_centres  # List of (WorkCentre, quantity) tuples
+                'work_centres': work_centres
             }
 
             rates = load_rates()
@@ -976,15 +926,6 @@ class SheetMetalClientHub:
     def create_quote_screen(self, part_id, total_cost):
         """
         Create the quote generation screen (FR7).
-        
-        Parameters:
-            part_id (str): Part identifier.
-            total_cost (float): Calculated cost from calculate_cost.
-        
-        Logic:
-            1. Clears existing widgets.
-            2. Creates main content frame and footer.
-            3. Adds fields for customer name and profit margin, and generate quote button.
         """
         self.clear_screen()
         main_frame = tk.Frame(self.root)
@@ -1005,14 +946,6 @@ class SheetMetalClientHub:
     def generate_quote(self, part_id, total_cost):
         """
         Generate and save a quote (FR7).
-        
-        Logic:
-            1. Retrieves customer name and profit margin from entry fields.
-            2. Validates inputs (non-empty customer name, numeric non-negative margin).
-            3. Calls save_quote to generate and save the quote to data/quotes.txt.
-            4. Logs test result to data/test_logs.txt using logger.
-            5. Shows success message.
-            6. Returns to part input screen.
         """
         try:
             customer_name = self.customer_entry.get().strip()
@@ -1074,11 +1007,6 @@ class SheetMetalClientHub:
     def create_admin_screen(self):
         """
         Create the admin screen for updating rates (FR6).
-        
-        Logic:
-            1. Clears existing widgets.
-            2. Creates main content frame and footer.
-            3. Adds fields for rate key and value, update rate button, and user features button.
         """
         self.clear_screen()
         main_frame = tk.Frame(self.root)
@@ -1100,13 +1028,6 @@ class SheetMetalClientHub:
     def update_rate(self):
         """
         Update a rate in data/rates_global.txt (FR6).
-        
-        Logic:
-            1. Retrieves rate key and value from entry fields.
-            2. Validates inputs (non-empty key, numeric non-negative value).
-            3. Calls update_rates to save the new rate.
-            4. Logs test result to data/test_logs.txt using logger.
-            5. Shows success message.
         """
         try:
             rate_key = self.rate_key_entry.get().strip()
@@ -1167,10 +1088,6 @@ class SheetMetalClientHub:
     def clear_screen(self):
         """
         Clear all widgets from the current screen.
-        
-        Logic:
-            1. Destroys all child widgets of the root window.
-            2. Used to switch between screens (e.g., login to part input).
         """
         for widget in self.root.winfo_children():
             widget.destroy()
