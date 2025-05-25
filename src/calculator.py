@@ -33,7 +33,7 @@ def calculate_cost(part_data, rates):
             cost += material_rate * thickness * area * quantity
 
             for centre in work_centres:
-                rate_key = f"{centre.lower()}_rate_per_mm"
+                rate_key = f"{centre.lower()}_rate_per_mm" if centre in ['cutting', 'welding'] else f"{centre.lower()}_rate_per_bend"
                 rate = rates.get(rate_key)
                 if not rate:
                     logging.error(f"Missing rate for {rate_key}")
@@ -43,6 +43,8 @@ def calculate_cost(part_data, rates):
                     cost += rate * perimeter * quantity
                 elif centre == 'bending':
                     cost += rate * quantity
+                elif centre == 'welding':
+                    cost += rate * length * quantity
 
         logging.debug(f"Calculated cost: {cost} for part_data: {part_data}")
         return cost

@@ -63,7 +63,7 @@ class TestSystem(unittest.TestCase):
         self.app.part_id_entry.insert(0, 'ASSY-98765')
         self.app.part_type_var.set('Assembly')
         self.app.quantity_entry.insert(0, '10')
-        self.app.work_centres['assembly'].set(True)
+        self.app.work_centres['welding'].set(True)
         self.app.submit_part()
         self.app.show_quote_screen()
         self.app.customer_entry.insert(0, 'Beta Inc')

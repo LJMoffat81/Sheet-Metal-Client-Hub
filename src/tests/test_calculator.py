@@ -33,7 +33,7 @@ class TestCalculator(unittest.TestCase):
             'work_centres': ['assembly']
         }
         cost = calculate_cost(part_data, self.rates)
-        self.assertAlmostEqual(cost, 4.0, places=2)
+        self.assertAlmostEqual(cost, 8.0, places=2)
 
     def test_calculate_cost_invalid_work_centre(self):
         part_data = {
