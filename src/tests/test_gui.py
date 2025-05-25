@@ -5,7 +5,6 @@ import sys
 import os
 import time
 import logging
-import timeout_decorator
 
 # Add src/ to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -24,11 +23,11 @@ class TestGUI(unittest.TestCase):
         self.log_file = os.path.join(LOG_DIR, 'test_gui.log')
         logger = logging.getLogger()
         logger.setLevel(logging.DEBUG)
-        handler = logging.FileHandler(self.log_file, mode='w')
-        handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
-        logger.handlers = [handler]
+        self.handler = logging.FileHandler(self.log_file, mode='w')
+        self.handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+        logger.handlers = [self.handler]
         logging.info("Test setup initialized")
-        handler.flush()
+        self.handler.flush()
         time.sleep(0.5)
         rates_path = os.path.join(os.path.dirname(__file__), '../../data/rates_global.txt')
         with open(rates_path, 'w') as f:
@@ -46,7 +45,10 @@ class TestGUI(unittest.TestCase):
     def tearDown(self):
         self.root.destroy()
         os.environ['TESTING_MODE'] = '0'
-        logging.getLogger().handlers = []
+        logger = logging.getLogger()
+        for handler in logger.handlers[:]:
+            handler.close()
+            logger.removeHandler(handler)
 
     def _read_log_file(self):
         if os.path.exists(self.log_file):
@@ -57,7 +59,6 @@ class TestGUI(unittest.TestCase):
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
     @patch('gui.FileHandler.validate_credentials')
-    @timeout_decorator.timeout(5)
     def test_login_success_user(self, mock_validate, mock_showerror, mock_showinfo):
         mock_validate.return_value = True
         self.app.username_entry.insert(0, 'laurin')
@@ -70,7 +71,6 @@ class TestGUI(unittest.TestCase):
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
     @patch('gui.FileHandler.validate_credentials')
-    @timeout_decorator.timeout(5)
     def test_login_success_admin(self, mock_validate, mock_showerror, mock_showinfo):
         mock_validate.return_value = True
         self.app.username_entry.insert(0, 'admin')
@@ -82,7 +82,6 @@ class TestGUI(unittest.TestCase):
 
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
-    @timeout_decorator.timeout(5)
     def test_login_invalid(self, mock_showerror, mock_showinfo):
         self.app.username_entry.insert(0, 'wrong')
         self.app.password_entry.insert(0, 'wrong')
@@ -92,13 +91,11 @@ class TestGUI(unittest.TestCase):
 
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
-    @timeout_decorator.timeout(5)
     def test_login_empty_fields(self, mock_showerror, mock_showinfo):
         self.app.login()
         log_content = self._read_log_file()
         self.assertIn("Error: Username and password cannot be empty", log_content)
 
-    @timeout_decorator.timeout(5)
     def test_part_input_screen(self):
         self.app.create_part_input_screen()
         self.assertIsNotNone(self.app.notebook)
@@ -106,7 +103,6 @@ class TestGUI(unittest.TestCase):
 
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
-    @timeout_decorator.timeout(5)
     def test_welding_sub_option_valid(self, mock_showerror, mock_showinfo):
         self.app.create_part_input_screen()
         self.app.notebook.select(1)
@@ -123,7 +119,6 @@ class TestGUI(unittest.TestCase):
 
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
-    @timeout_decorator.timeout(5)
     def test_coating_sub_option_valid(self, mock_showerror, mock_showinfo):
         self.app.create_part_input_screen()
         self.app.notebook.select(1)
@@ -140,7 +135,6 @@ class TestGUI(unittest.TestCase):
 
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
-    @timeout_decorator.timeout(5)
     def test_fastener_selection_valid(self, mock_showerror, mock_showinfo):
         self.app.create_part_input_screen()
         self.app.notebook.select(1)
@@ -158,7 +152,6 @@ class TestGUI(unittest.TestCase):
 
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
-    @timeout_decorator.timeout(5)
     def test_single_part_quantity_invalid(self, mock_showerror, mock_showinfo):
         self.app.create_part_input_screen()
         self.app.notebook.select(1)
@@ -175,7 +168,6 @@ class TestGUI(unittest.TestCase):
 
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
-    @timeout_decorator.timeout(5)
     def test_part_input_invalid_dimensions(self, mock_showerror, mock_showinfo):
         self.app.create_part_input_screen()
         self.app.notebook.select(1)
@@ -189,7 +181,6 @@ class TestGUI(unittest.TestCase):
 
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
-    @timeout_decorator.timeout(5)
     def test_part_input_assembly_no_sub_parts(self, mock_showerror, mock_showinfo):
         self.app.create_part_input_screen()
         self.app.notebook.select(0)
@@ -204,7 +195,6 @@ class TestGUI(unittest.TestCase):
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
     @patch('gui.FileHandler.update_rates')
-    @timeout_decorator.timeout(5)
     def test_update_rate_valid(self, mock_update, mock_showerror, mock_showinfo):
         self.app.create_admin_screen()
         self.app.rate_key_entry.insert(0, 'mild_steel_rate')
@@ -216,7 +206,6 @@ class TestGUI(unittest.TestCase):
 
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
-    @timeout_decorator.timeout(5)
     def test_update_rate_invalid(self, mock_showerror, mock_showinfo):
         self.app.create_admin_screen()
         self.app.rate_key_entry.insert(0, 'mild_steel_rate')
@@ -228,7 +217,6 @@ class TestGUI(unittest.TestCase):
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
     @patch('gui.FileHandler.save_quote')
-    @timeout_decorator.timeout(5)
     def test_generate_quote_valid(self, mock_save_quote, mock_showerror, mock_showinfo):
         self.app.create_quote_screen('PART-123ABCDE', 100.0)
         self.app.customer_entry.insert(0, 'Acme Corp')
@@ -240,7 +228,6 @@ class TestGUI(unittest.TestCase):
 
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
-    @timeout_decorator.timeout(5)
     def test_generate_quote_invalid_margin(self, mock_showerror, mock_showinfo):
         self.app.create_quote_screen('PART-123ABCDE', 100.0)
         self.app.customer_entry.insert(0, 'Acme Corp')

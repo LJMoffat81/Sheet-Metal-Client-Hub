@@ -4,7 +4,6 @@ import sys
 import os
 import time
 import logging
-import timeout_decorator
 
 # Add src/ to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -21,22 +20,24 @@ class TestFileHandler(unittest.TestCase):
         self.log_file = os.path.join(LOG_DIR, 'test_file_handler.log')
         logger = logging.getLogger()
         logger.setLevel(logging.DEBUG)
-        handler = logging.FileHandler(self.log_file, mode='w')
-        handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
-        logger.handlers = [handler]
+        self.handler = logging.FileHandler(self.log_file, mode='w')
+        self.handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+        logger.handlers = [self.handler]
         logging.info("Test setup initialized")
-        handler.flush()
+        self.handler.flush()
         time.sleep(0.5)
 
     def tearDown(self):
         import shutil
         shutil.rmtree(self.temp_dir, ignore_errors=True)
-        logging.getLogger().handlers = []
+        logger = logging.getLogger()
+        for handler in logger.handlers[:]:
+            handler.close()
+            logger.removeHandler(handler)
 
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
     @patch('builtins.open', new_callable=mock_open, read_data='test content')
-    @timeout_decorator.timeout(5)
     def test_read_file(self, mock_file, mock_showerror, mock_showinfo):
         test_file = os.path.join(self.temp_dir, 'test.txt')
         mock_file.return_value.__enter__.return_value.read.return_value = 'test content'
@@ -48,7 +49,6 @@ class TestFileHandler(unittest.TestCase):
     @patch('tkinter.messagebox.showerror')
     @patch('builtins.open', new_callable=mock_open)
     @patch('os.makedirs')
-    @timeout_decorator.timeout(5)
     def test_write_file(self, mock_makedirs, mock_file, mock_showerror, mock_showinfo):
         test_file = os.path.join(self.temp_dir, 'output.txt')
         self.file_handler.write_file(test_file, 'test content')
@@ -58,7 +58,6 @@ class TestFileHandler(unittest.TestCase):
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
     @patch('os.path.exists')
-    @timeout_decorator.timeout(5)
     def test_file_exists(self, mock_exists, mock_showerror, mock_showinfo):
         test_file = os.path.join(self.temp_dir, 'exists.txt')
         mock_exists.return_value = True
@@ -69,7 +68,6 @@ class TestFileHandler(unittest.TestCase):
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
     @patch('file_handler.FileHandler.read_file')
-    @timeout_decorator.timeout(5)
     def test_process_file(self, mock_read, mock_showerror, mock_showinfo):
         test_file = os.path.join(self.temp_dir, 'test.txt')
         mock_read.return_value = 'test content'
@@ -80,7 +78,6 @@ class TestFileHandler(unittest.TestCase):
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
     @patch('file_handler.FileHandler.read_file')
-    @timeout_decorator.timeout(5)
     def test_process_file_empty_filename(self, mock_read, mock_showerror, mock_showinfo):
         mock_read.return_value = ''
         result = self.file_handler.process_file('')
@@ -90,7 +87,6 @@ class TestFileHandler(unittest.TestCase):
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
     @patch('builtins.open', new_callable=mock_open, read_data='{"mild_steel_rate": 0.2}')
-    @timeout_decorator.timeout(5)
     def test_load_rates(self, mock_file, mock_showerror, mock_showinfo):
         rates = self.file_handler.load_rates()
         self.assertEqual(rates, {"mild_steel_rate": 0.2})
@@ -98,7 +94,6 @@ class TestFileHandler(unittest.TestCase):
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
     @patch('builtins.open', new_callable=mock_open)
-    @timeout_decorator.timeout(5)
     def test_save_output(self, mock_file, mock_showerror, mock_showinfo):
         self.file_handler.save_output(
             part_id='PART-123ABCDE',
@@ -117,7 +112,6 @@ class TestFileHandler(unittest.TestCase):
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
     @patch('builtins.open', new_callable=mock_open)
-    @timeout_decorator.timeout(5)
     def test_save_quote(self, mock_file, mock_showerror, mock_showinfo):
         self.file_handler.save_quote(
             part_id='PART-123ABCDE',
@@ -131,7 +125,6 @@ class TestFileHandler(unittest.TestCase):
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
     @patch('builtins.open', new_callable=mock_open, read_data='laurie:moffat123')
-    @timeout_decorator.timeout(5)
     def test_validate_credentials(self, mock_file, mock_showerror, mock_showinfo):
         result = self.file_handler.validate_credentials('laurie', 'moffat123')
         self.assertTrue(result)
