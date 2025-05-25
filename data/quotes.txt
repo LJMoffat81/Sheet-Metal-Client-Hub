@@ -5,3 +5,4 @@
 {"part_id": "PART-33333", "total_cost": 1134.56, "customer_name": "Baynes", "profit_margin": 12.0, "fastener_types_and_counts": []}
 {"part_id": "ASSY-44444", "total_cost": 24.4, "customer_name": "Baynes", "profit_margin": 22.0, "fastener_types_and_counts": []}
 {"part_id": "PART-123", "total_cost": 120.0, "customer_name": "Acme Corp", "profit_margin": 20.0, "fastener_types_and_counts": [["Bolts", 50]]}
+PART-123,100.0,Acme Corp,20.0,[('Bolts', 50)]

@@ -18,7 +18,9 @@ class TestGUI(unittest.TestCase):
         self.root = tk.Tk()
         self.app = SheetMetalClientHub(self.root)
         self.file_handler = FileHandler()
-        LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
+        self.data_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data')
+        os.makedirs(self.data_dir, exist_ok=True)
+        LOG_DIR = os.path.join(self.data_dir, 'log')
         os.makedirs(LOG_DIR, exist_ok=True)
         self.log_file = os.path.join(LOG_DIR, 'test_gui.log')
         logger = logging.getLogger('test_gui')
@@ -29,8 +31,9 @@ class TestGUI(unittest.TestCase):
         logger.handlers = [self.handler]
         logging.info("Test setup initialized")
         self.handler.flush()
-        time.sleep(0.5)
-        rates_path = os.path.join(os.path.dirname(__file__), '../../data/rates_global.txt')
+        time.sleep(1.0)
+        rates_path = os.path.join(self.data_dir, 'rates_global.txt')
+        logging.debug(f"Writing rates to: {rates_path}")
         with open(rates_path, 'w') as f:
             f.write('''
             {
@@ -77,6 +80,8 @@ class TestGUI(unittest.TestCase):
         self.app.username_entry.insert(0, 'laurin')
         self.app.password_entry.insert(0, 'moffat123')
         self.app.login()
+        self.handler.flush()
+        time.sleep(0.5)
         self.assertIsNotNone(self.app.notebook)
         log_content = self._read_log_file()
         self.assertIn("Success: Login successful as User", log_content)
@@ -89,6 +94,8 @@ class TestGUI(unittest.TestCase):
         self.app.username_entry.insert(0, 'admin')
         self.app.password_entry.insert(0, 'admin123')
         self.app.login()
+        self.handler.flush()
+        time.sleep(0.5)
         self.assertIsNotNone(self.app.rate_key_entry)
         log_content = self._read_log_file()
         self.assertIn("Success: Login successful as Admin", log_content)
@@ -99,6 +106,8 @@ class TestGUI(unittest.TestCase):
         self.app.username_entry.insert(0, 'wrong')
         self.app.password_entry.insert(0, 'wrong')
         self.app.login()
+        self.handler.flush()
+        time.sleep(0.5)
         log_content = self._read_log_file()
         self.assertIn("Error: Invalid username or password", log_content)
 
@@ -106,11 +115,15 @@ class TestGUI(unittest.TestCase):
     @patch('tkinter.messagebox.showerror')
     def test_login_empty_fields(self, mock_showerror, mock_showinfo):
         self.app.login()
+        self.handler.flush()
+        time.sleep(0.5)
         log_content = self._read_log_file()
         self.assertIn("Error: Username and password cannot be empty", log_content)
 
     def test_part_input_screen(self):
         self.app.create_part_input_screen()
+        self.handler.flush()
+        time.sleep(0.5)
         self.assertIsNotNone(self.app.notebook)
         self.assertEqual(self.app.notebook.winfo_exists(), 1)
 
@@ -131,6 +144,8 @@ class TestGUI(unittest.TestCase):
         self.app.work_centre_quantity_vars[0].set('100')
         self.app.work_centre_sub_option_vars[0].set('MIG')
         self.app.calculate_and_save()
+        self.handler.flush()
+        time.sleep(0.5)
         log_content = self._read_log_file()
         self.assertIn("Success: Cost calculated", log_content)
 
@@ -151,6 +166,8 @@ class TestGUI(unittest.TestCase):
         self.app.work_centre_quantity_vars[0].set('1000')
         self.app.work_centre_sub_option_vars[0].set('Painting')
         self.app.calculate_and_save()
+        self.handler.flush()
+        time.sleep(0.5)
         log_content = self._read_log_file()
         self.assertIn("Success: Cost calculated", log_content)
 
@@ -172,6 +189,8 @@ class TestGUI(unittest.TestCase):
         self.app.work_centre_vars[0].set('Cutting')
         self.app.work_centre_quantity_vars[0].set('3000')
         self.app.calculate_and_save()
+        self.handler.flush()
+        time.sleep(0.5)
         log_content = self._read_log_file()
         self.assertIn("Success: Cost calculated", log_content)
 
@@ -188,6 +207,8 @@ class TestGUI(unittest.TestCase):
         self.app.work_centre_vars[0].set('Cutting')
         self.app.work_centre_quantity_vars[0].set('100')
         self.app.calculate_and_save()
+        self.handler.flush()
+        time.sleep(0.5)
         log_content = self._read_log_file()
         self.assertIn("Error: Quantity must be a positive integer", log_content)
 
@@ -201,6 +222,8 @@ class TestGUI(unittest.TestCase):
         self.app.revision_entry.insert(0, 'A')
         self.app.single_lay_flat_length_var.set('-100')
         self.app.calculate_and_save()
+        self.handler.flush()
+        time.sleep(0.5)
         log_content = self._read_log_file()
         self.assertIn("Error: Lay-Flat length must be between 50 and 3000 mm", log_content)
 
@@ -216,6 +239,8 @@ class TestGUI(unittest.TestCase):
         self.app.work_centre_vars[0].set('Assembly')
         self.app.work_centre_quantity_vars[0].set('10')
         self.app.calculate_and_save()
+        self.handler.flush()
+        time.sleep(0.5)
         log_content = self._read_log_file()
         self.assertIn("Error: At least one sub-part must be selected for an assembly", log_content)
 
@@ -227,6 +252,8 @@ class TestGUI(unittest.TestCase):
         self.app.rate_key_entry.insert(0, 'mild_steel_rate')
         self.app.rate_value_entry.insert(0, '0.3')
         self.app.update_rate()
+        self.handler.flush()
+        time.sleep(0.5)
         mock_update.assert_called_with('mild_steel_rate', 0.3)
         log_content = self._read_log_file()
         self.assertIn("Success: Rate 'mild_steel_rate' updated to 0.3", log_content)
@@ -238,6 +265,8 @@ class TestGUI(unittest.TestCase):
         self.app.rate_key_entry.insert(0, 'mild_steel_rate')
         self.app.rate_value_entry.insert(0, 'invalid')
         self.app.update_rate()
+        self.handler.flush()
+        time.sleep(0.5)
         log_content = self._read_log_file()
         self.assertIn("Error: Invalid rate value", log_content)
 
@@ -249,6 +278,8 @@ class TestGUI(unittest.TestCase):
         self.app.customer_entry.insert(0, 'Acme Corp')
         self.app.margin_entry.insert(0, '20')
         self.app.generate_quote('PART-123ABCDE', 100.0)
+        self.handler.flush()
+        time.sleep(0.5)
         mock_save_quote.assert_called()
         log_content = self._read_log_file()
         self.assertIn("Success: Quote generated and saved to data/quotes.txt", log_content)
@@ -260,6 +291,8 @@ class TestGUI(unittest.TestCase):
         self.app.customer_entry.insert(0, 'Acme Corp')
         self.app.margin_entry.insert(0, '-10')
         self.app.generate_quote('PART-123ABCDE', 100.0)
+        self.handler.flush()
+        time.sleep(0.5)
         log_content = self._read_log_file()
         self.assertIn("Error: Profit margin cannot be negative", log_content)
 

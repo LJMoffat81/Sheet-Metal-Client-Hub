@@ -18,18 +18,21 @@ class TestSystem(unittest.TestCase):
         self.root = tk.Tk()
         self.app = SheetMetalClientHub(self.root)
         self.file_handler = FileHandler()
-        LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
+        self.data_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data')
+        os.makedirs(self.data_dir, exist_ok=True)
+        LOG_DIR = os.path.join(self.data_dir, 'log')
         os.makedirs(LOG_DIR, exist_ok=True)
         self.log_file = os.path.join(LOG_DIR, 'test_system.log')
-        logger = logging.getLogger()
+        logger = logging.getLogger('test_system')
+        logger.handlers.clear()
         logger.setLevel(logging.DEBUG)
         self.handler = logging.FileHandler(self.log_file, mode='w')
         self.handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
         logger.handlers = [self.handler]
         logging.info("Test setup initialized")
         self.handler.flush()
-        time.sleep(0.5)
-        rates_path = os.path.join(os.path.dirname(__file__), '../../data/rates_global.txt')
+        time.sleep(1.0)
+        rates_path = os.path.join(self.data_dir, 'rates_global.txt')
         with open(rates_path, 'w') as f:
             f.write('''
             {
@@ -53,14 +56,14 @@ class TestSystem(unittest.TestCase):
                 "screws_rate_per_unit": 0.09
             }
             ''')
-        output_path = os.path.join(os.path.dirname(__file__), '../../data/output.txt')
+        output_path = os.path.join(self.data_dir, 'output.txt')
         with open(output_path, 'w') as f:
             f.write('PART-12345ABCDE,A,Mild Steel,1.0,1000,500,1,50.0,[],[]\n')
 
     def tearDown(self):
         self.root.destroy()
         os.environ['TESTING_MODE'] = '0'
-        logger = logging.getLogger()
+        logger = logging.getLogger('test_system')
         for handler in logger.handlers[:]:
             handler.close()
             logger.removeHandler(handler)
@@ -83,6 +86,8 @@ class TestSystem(unittest.TestCase):
         self.app.rate_key_entry.insert(0, 'mild_steel_rate')
         self.app.rate_value_entry.insert(0, '0.3')
         self.app.update_rate()
+        self.handler.flush()
+        time.sleep(0.1)
         mock_update.assert_called_with('mild_steel_rate', 0.3)
         log_content = self._read_log_file()
         self.assertIn("Success: Rate 'mild_steel_rate' updated to 0.3", log_content)
@@ -114,6 +119,8 @@ class TestSystem(unittest.TestCase):
         self.app.customer_entry.insert(0, 'Acme Corp')
         self.app.margin_entry.insert(0, '20')
         self.app.generate_quote('PART-67890ABCDE', 50.0)
+        self.handler.flush()
+        time.sleep(0.1)
         mock_save_output.assert_called()
         mock_save_quote.assert_called()
         log_content = self._read_log_file()
@@ -147,6 +154,8 @@ class TestSystem(unittest.TestCase):
         self.app.customer_entry.insert(0, 'Acme Corp')
         self.app.margin_entry.insert(0, '20')
         self.app.generate_quote('PART-67891ABCDE', 50.0)
+        self.handler.flush()
+        time.sleep(0.1)
         mock_save_output.assert_called()
         mock_save_quote.assert_called()
         log_content = self._read_log_file()
@@ -176,6 +185,8 @@ class TestSystem(unittest.TestCase):
         self.app.customer_entry.insert(0, 'Beta Inc')
         self.app.margin_entry.insert(0, '15')
         self.app.generate_quote('ASSY-98765ABCDE', 100.0)
+        self.handler.flush()
+        time.sleep(0.1)
         mock_save_output.assert_called()
         mock_save_quote.assert_called()
         log_content = self._read_log_file()
@@ -187,6 +198,8 @@ class TestSystem(unittest.TestCase):
         self.app.username_entry.insert(0, 'wrong')
         self.app.password_entry.insert(0, 'wrong')
         self.app.login()
+        self.handler.flush()
+        time.sleep(0.1)
         log_content = self._read_log_file()
         self.assertIn("Error: Invalid username or password", log_content)
 
@@ -200,6 +213,8 @@ class TestSystem(unittest.TestCase):
         self.app.revision_entry.insert(0, 'A')
         self.app.single_thickness_var.set('-1.0')
         self.app.calculate_and_save()
+        self.handler.flush()
+        time.sleep(0.1)
         log_content = self._read_log_file()
         self.assertIn("Error: Thickness must be between 1.0 and 3.0 mm", log_content)
 
@@ -220,6 +235,8 @@ class TestSystem(unittest.TestCase):
         self.app.work_centre_vars[0].set('Cutting')
         self.app.work_centre_quantity_vars[0].set('100')
         self.app.calculate_and_save()
+        self.handler.flush()
+        time.sleep(0.1)
         log_content = self._read_log_file()
         self.assertIn("Error: Failed to load rates from data/rates_global.txt", log_content)
 
