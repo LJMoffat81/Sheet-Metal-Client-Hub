@@ -21,7 +21,8 @@ class TestGUI(unittest.TestCase):
         LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
         os.makedirs(LOG_DIR, exist_ok=True)
         self.log_file = os.path.join(LOG_DIR, 'test_gui.log')
-        logger = logging.getLogger()
+        logger = logging.getLogger('test_gui')
+        logger.handlers.clear()
         logger.setLevel(logging.DEBUG)
         self.handler = logging.FileHandler(self.log_file, mode='w')
         self.handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
@@ -57,7 +58,7 @@ class TestGUI(unittest.TestCase):
     def tearDown(self):
         self.root.destroy()
         os.environ['TESTING_MODE'] = '0'
-        logger = logging.getLogger()
+        logger = logging.getLogger('test_gui')
         for handler in logger.handlers[:]:
             handler.close()
             logger.removeHandler(handler)
