@@ -5,6 +5,7 @@ import sys
 import os
 import time
 import logging
+import uuid
 
 # Add src/ to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -24,7 +25,7 @@ class TestSystem(unittest.TestCase):
         LOG_DIR = os.path.join(self.data_dir, 'log')
         os.makedirs(LOG_DIR, exist_ok=True)
         self.log_file = os.path.join(LOG_DIR, 'test_system.log')
-        logger = logging.getLogger('test_system_unique')
+        logger = logging.getLogger(f'test_system_unique_{uuid.uuid4()}')
         logger.handlers.clear()
         logger.setLevel(logging.DEBUG)
         self.handler = logging.FileHandler(self.log_file, mode='w')
@@ -65,7 +66,7 @@ class TestSystem(unittest.TestCase):
     def tearDown(self):
         self.root.destroy()
         os.environ['TESTING_MODE'] = '0'
-        logger = logging.getLogger('test_system_unique')
+        logger = logging.getLogger(f'test_system_unique_{uuid.uuid4()}')
         for handler in logger.handlers[:]:
             handler.close()
             logger.removeHandler(handler)
@@ -93,7 +94,7 @@ class TestSystem(unittest.TestCase):
         self.app.rate_value_entry.insert(0, '0.3')
         self.app.update_rate()
         self.handler.flush()
-        time.sleep(1.0)
+        time.sleep(2.0)
         mock_update.assert_called_with('mild_steel_rate', 0.3)
         log_content = self._read_log_file()
         self.assertIn("Success: Rate 'mild_steel_rate' updated to 0.3", log_content)
@@ -126,7 +127,7 @@ class TestSystem(unittest.TestCase):
         self.app.margin_entry.insert(0, '20')
         self.app.generate_quote('PART-67890ABCDE', 50.0)
         self.handler.flush()
-        time.sleep(1.0)
+        time.sleep(2.0)
         mock_save_output.assert_called()
         mock_save_quote.assert_called()
         log_content = self._read_log_file()
@@ -161,7 +162,7 @@ class TestSystem(unittest.TestCase):
         self.app.margin_entry.insert(0, '20')
         self.app.generate_quote('PART-67891ABCDE', 50.0)
         self.handler.flush()
-        time.sleep(1.0)
+        time.sleep(2.0)
         mock_save_output.assert_called()
         mock_save_quote.assert_called()
         log_content = self._read_log_file()
@@ -192,7 +193,7 @@ class TestSystem(unittest.TestCase):
         self.app.margin_entry.insert(0, '15')
         self.app.generate_quote('ASSY-98765ABCDE', 100.0)
         self.handler.flush()
-        time.sleep(1.0)
+        time.sleep(2.0)
         mock_save_output.assert_called()
         mock_save_quote.assert_called()
         log_content = self._read_log_file()
@@ -205,7 +206,7 @@ class TestSystem(unittest.TestCase):
         self.app.password_entry.insert(0, 'wrong')
         self.app.login()
         self.handler.flush()
-        time.sleep(1.0)
+        time.sleep(2.0)
         log_content = self._read_log_file()
         self.assertIn("Error: Invalid username or password", log_content)
 
@@ -220,7 +221,7 @@ class TestSystem(unittest.TestCase):
         self.app.single_thickness_var.set('-1.0')
         self.app.calculate_and_save()
         self.handler.flush()
-        time.sleep(1.0)
+        time.sleep(2.0)
         log_content = self._read_log_file()
         self.assertIn("Error: Thickness must be between 1.0 and 3.0 mm", log_content)
 
@@ -242,7 +243,7 @@ class TestSystem(unittest.TestCase):
         self.app.work_centre_quantity_vars[0].set('100')
         self.app.calculate_and_save()
         self.handler.flush()
-        time.sleep(1.0)
+        time.sleep(2.0)
         log_content = self._read_log_file()
         self.assertIn("Error: Failed to load rates from data/rates_global.txt", log_content)
 
