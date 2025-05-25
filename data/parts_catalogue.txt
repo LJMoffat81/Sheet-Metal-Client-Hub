@@ -1,1 +1,3 @@
-FAS-001:Screw M3:0.50
+FAS-001,Screw M3,0.50
+FAS-002,Nut M4,0.30
+PEM-001,PEM Insert,0.75

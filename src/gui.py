@@ -40,8 +40,16 @@ def load_parts_catalogue():
         with open(os.path.join(BASE_DIR, 'data/parts_catalogue.txt'), 'r') as f:
             for line in f:
                 if line.strip():
-                    item_id, description, price = line.strip().split(',')
-                    catalogue.append((item_id, description, float(price)))
+                    try:
+                        parts = line.strip().split(',')
+                        if len(parts) != 3:
+                            print(f"Skipping malformed line in parts_catalogue.txt: {line.strip()}")
+                            continue
+                        item_id, description, price = parts
+                        catalogue.append((item_id, description, float(price)))
+                    except ValueError as e:
+                        print(f"Error parsing line in parts_catalogue.txt: {line.strip()} - {e}")
+                        continue
         return catalogue
     except FileNotFoundError:
         return []
