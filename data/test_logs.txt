@@ -662,3 +662,11 @@ Saved to data/output.txt, Status: Pass
 [2025-05-25 11:04:49] Test: FR2: Invalid lay-flat length, Input: Length: 4000, Output: Lay-Flat length must be between 50 and 3000 mm, Status: Fail
 [2025-05-25 11:04:49] Test: FR6: Update rate with negative value, Input: Rate Key: mild_steel_rate, Rate Value: -0.1, Output: Rate value cannot be negative, Status: Fail
 [2025-05-25 11:04:52] Test: FR6: Update rate, Input: Rate Key: mild_steel_rate, Rate Value: 0.15, Output: Rate 'mild_steel_rate' updated to 0.15 in data/rates_global.txt, Status: Pass
+[2025-05-25 11:12:09] Test: FR7: Quote with negative margin, Input: Customer Name: Acme, Profit Margin: -10%, Output: Profit margin cannot be negative, Status: Fail
+[2025-05-25 11:12:11] Test: FR7: Generate quote, Input: Customer Name: Acme, Profit Margin: 20%, Output: Quote generated and saved to data/quotes.txt, Status: Pass
+[2025-05-25 11:12:11] Test: FR1: Login with empty fields, Input: Username: , Password: , Output: Username and password cannot be empty, Status: Fail
+[2025-05-25 11:12:11] Test: FR1: Invalid login, Input: Username: laurie, Password: [hidden], Output: Invalid username or password, Status: Fail
+[2025-05-25 11:12:13] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-25 11:12:13] Test: FR2: Invalid lay-flat length, Input: Length: 4000, Output: Lay-Flat length must be between 50 and 3000 mm, Status: Fail
+[2025-05-25 11:12:14] Test: FR6: Update rate with negative value, Input: Rate Key: mild_steel_rate, Rate Value: -0.1, Output: Rate value cannot be negative, Status: Fail
+[2025-05-25 11:12:15] Test: FR6: Update rate, Input: Rate Key: mild_steel_rate, Rate Value: 0.15, Output: Rate 'mild_steel_rate' updated to 0.15 in data/rates_global.txt, Status: Pass

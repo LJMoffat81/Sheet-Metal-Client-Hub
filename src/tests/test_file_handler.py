@@ -10,12 +10,16 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 from file_handler import validate_credentials, load_rates, save_output, save_quote, update_rates, BASE_DIR
 
 class TestFileHandler(unittest.TestCase):
-    def setUp(self):
+    @patch('file_handler.BASE_DIR')
+    def setUp(self, mock_base_dir):
         self.temp_dir = tempfile.mkdtemp()
         self.users_file = os.path.join(self.temp_dir, 'users.txt')
         self.rates_file = os.path.join(self.temp_dir, 'rates_global.txt')
         self.output_file = os.path.join(self.temp_dir, 'output.txt')
         self.quotes_file = os.path.join(self.temp_dir, 'quotes.txt')
+
+        # Set BASE_DIR to temp_dir
+        mock_base_dir.return_value = self.temp_dir
 
         # Create test users file
         with open(self.users_file, 'w', encoding='utf-8') as f:
@@ -25,13 +29,7 @@ class TestFileHandler(unittest.TestCase):
         with open(self.rates_file, 'w', encoding='utf-8') as f:
             f.write('mild_steel_rate=0.10\nwelding_rate_per_mm=0.10\n')
 
-        # Mock BASE_DIR to use temp_dir
-        self.original_base_dir = BASE_DIR
-        with patch('file_handler.BASE_DIR', self.temp_dir):
-            self.temp_dir_patched = True
-
     def tearDown(self):
-        # No need to restore BASE_DIR since patch is scoped to setUp
         pass
 
     def test_validate_credentials_valid(self):
