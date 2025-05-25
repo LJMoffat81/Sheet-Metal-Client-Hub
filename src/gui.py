@@ -969,7 +969,7 @@ class SheetMetalClientHub:
                         pass_fail="Fail"
                     )
                     return
-                # Map material to rate key
+                # Map material to rate key for calculator
                 material_rate_map = {
                     'mild steel': 'mild_steel_rate',
                     'aluminium': 'aluminium_rate',

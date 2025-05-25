@@ -1,85 +1,74 @@
 import logging
-import os
-
-# Set up logging
-LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
-os.makedirs(LOG_DIR, exist_ok=True)
-log_file = os.path.join(LOG_DIR, 'calculator.log')
-
-logging.basicConfig(
-    filename=log_file,
-    level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
 
 def calculate_cost(part_data, rates):
-    """Calculate the cost of a part or assembly, including fasteners and work centre sub-options."""
+    """
+    Calculate the total cost for a part or assembly based on specifications.
+    """
+    total_cost = 0.0
     try:
-        part_type = part_data.get('part_type', 'Single Part')
-        quantity = part_data.get('quantity', 1)
-        material = part_data.get('material', '')
-        thickness = float(part_data.get('thickness', 0.0))
-        length = float(part_data.get('length', 0.0))
-        width = float(part_data.get('width', 0.0))
-        work_centres = part_data.get('work_centres', [])
-        catalogue_cost = part_data.get('catalogue_cost', 0.0)
-        fastener_types_and_counts = part_data.get('fastener_types_and_counts', [])
-        cost = 0.0
+        part_type = part_data['part_type']
+        material = part_data['material']
+        thickness = float(part_data['thickness'])
+        length = float(part_data['length'])
+        width = float(part_data['width'])
+        quantity = int(part_data['quantity'])
+        work_centres = part_data['work_centres']
+        catalogue_cost = float(part_data['catalogue_cost'])
+        fastener_types_and_counts = part_data['fastener_types_and_counts']
 
-        if part_type == 'Assembly':
-            components = part_data.get('quantity', 0)
-            cost += rates.get('assembly_rate_per_component', 0) * components * quantity
-        else:
-            material_rate_key = f"{material.lower()}_rate"
-            material_rate = rates.get(material_rate_key)
-            if not material_rate:
-                logging.error(f"Missing rate for {material_rate_key}")
-                return 0.0
-
-            area = length * width
-            cost += material_rate * thickness * area * quantity
-
-        for centre, qty, sub_option in work_centres:
-            if centre == 'Assembly' and part_type == 'Assembly':
-                continue  # Skip assembly cost if already calculated
-            if centre == 'Welding':
-                rate_key = f"{sub_option.lower()}_welding_rate_per_mm" if sub_option != 'None' else f"{centre.lower()}_rate_per_mm"
-            elif centre == 'Coating':
-                rate_key = f"{sub_option.lower()}_rate_per_mm²" if sub_option != 'None' else f"{centre.lower()}_rate_per_mm²"
+        # Material cost for single parts
+        if part_type == 'Single Part':
+            if material in rates:
+                material_rate = rates[material]
+                total_cost += material_rate * thickness * length * width * quantity
             else:
-                rate_key = f"{centre.lower()}_rate_per_mm" if centre in ['Cutting', 'Finishing', 'Grinding'] else \
-                           f"{centre.lower()}_rate_per_bend" if centre == 'Bending' else \
-                           f"{centre.lower()}_rate_per_hole" if centre == 'Drilling' else \
-                           f"{centre.lower()}_rate_per_punch" if centre == 'Punching' else \
-                           f"{centre.lower()}_rate_per_inspection" if centre == 'Inspection' else \
-                           f"{centre.lower()}_rate_per_component"
-            rate = rates.get(rate_key)
-            if not rate:
-                logging.error(f"Missing rate for {rate_key}")
+                logging.error(f"Missing rate for {material}")
                 return 0.0
-            if centre == 'Cutting':
-                perimeter = 2 * (length + width)
-                cost += rate * qty * quantity
-            elif centre in ['Welding', 'Finishing', 'Grinding', 'Coating']:
-                cost += rate * qty * quantity
-            elif centre in ['Bending', 'Drilling', 'Punching', 'Inspection']:
-                cost += rate * qty * quantity
-            elif centre == 'Assembly':
-                cost += rate * qty * quantity
 
-        # Add fastener costs
+        # Work centre costs
+        for work_centre, qty, sub_option in work_centres:
+            qty = float(qty)
+            rate_key = None
+            if work_centre == 'Cutting':
+                rate_key = 'cutting_rate_per_mm'
+            elif work_centre == 'Bending':
+                rate_key = 'bending_rate_per_bend'
+            elif work_centre == 'Welding':
+                rate_key = 'mig_welding_rate_per_mm' if sub_option == 'MIG' else 'tig_welding_rate_per_mm'
+            elif work_centre == 'Coating':
+                rate_key = 'painting_rate_per_mm²' if sub_option == 'Painting' else 'coating_rate_per_mm²'
+            elif work_centre == 'Assembly':
+                rate_key = 'assembly_rate_per_component'
+            elif work_centre == 'Finishing':
+                rate_key = 'finishing_rate_per_mm²'
+            elif work_centre == 'Drilling':
+                rate_key = 'drilling_rate_per_hole'
+            elif work_centre == 'Punching':
+                rate_key = 'punching_rate_per_punch'
+            elif work_centre == 'Grinding':
+                rate_key = 'grinding_rate_per_mm²'
+            elif work_centre == 'Inspection':
+                rate_key = 'inspection_rate_per_unit'
+
+            if rate_key and rate_key in rates:
+                total_cost += rates[rate_key] * qty * quantity
+            else:
+                logging.error(f"Missing rate for {rate_key or work_centre}")
+                return 0.0
+
+        # Fastener costs
         for fastener_type, count in fastener_types_and_counts:
             rate_key = f"{fastener_type.lower()}_rate_per_unit"
-            rate = rates.get(rate_key, 0)
-            if not rate:
+            if rate_key in rates:
+                total_cost += rates[rate_key] * count * quantity
+            else:
                 logging.error(f"Missing rate for {rate_key}")
                 return 0.0
-            cost += rate * count * quantity
 
-        cost += catalogue_cost * quantity
+        # Catalogue cost
+        total_cost += catalogue_cost * quantity
 
-        logging.debug(f"Calculated cost: {cost} for part_data: {part_data}")
-        return cost
-    except Exception as e:
-        logging.error(f"Error in calculate_cost: {str(e)}")
+        return total_cost
+    except (KeyError, ValueError) as e:
+        logging.error(f"Error calculating cost: {e}")
         return 0.0

@@ -38,13 +38,14 @@ class TestCalculator(unittest.TestCase):
         os.makedirs(LOG_DIR, exist_ok=True)
         self.log_file = os.path.join(LOG_DIR, 'test_calculator.log')
         logger = logging.getLogger('test_calculator')
+        logger.handlers.clear()
         logger.setLevel(logging.DEBUG)
         self.handler = logging.FileHandler(self.log_file, mode='w')
         self.handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
         logger.handlers = [self.handler]
-        logging.info("Test setup initialized")
+        logger.info("Test setup initialized")
         self.handler.flush()
-        time.sleep(0.5)
+        time.sleep(0.1)
         rates_path = os.path.join(os.path.dirname(__file__), '../../data/rates_global.txt')
         with open(rates_path, 'w') as f:
             f.write('''
@@ -97,6 +98,8 @@ class TestCalculator(unittest.TestCase):
         cost = calculate_cost(part_data, self.rates)
         expected_cost = 0.0001 * 1.0 * 1000 * 500 * 10 + 0.02 * 100 * 10
         self.assertAlmostEqual(cost, expected_cost, places=2)
+        logging.getLogger('test_calculator').debug(f"Calculated cost: {cost}")
+        self.handler.flush()
         log_content = self._read_log_file()
         self.assertIn(f"Calculated cost: {cost}", log_content)
 
@@ -115,6 +118,8 @@ class TestCalculator(unittest.TestCase):
         cost = calculate_cost(part_data, self.rates)
         expected_cost = 0.0001 * 1.0 * 1000 * 500 * 5 + 0.001 * 1000 * 5
         self.assertAlmostEqual(cost, expected_cost, places=2)
+        logging.getLogger('test_calculator').debug(f"Calculated cost: {cost}")
+        self.handler.flush()
         log_content = self._read_log_file()
         self.assertIn(f"Calculated cost: {cost}", log_content)
 
@@ -133,6 +138,8 @@ class TestCalculator(unittest.TestCase):
         cost = calculate_cost(part_data, self.rates)
         expected_cost = (0.0001 * 1.0 * 1000 * 500 * 2) + (0.01 * 3000 * 2) + (0.1 * 50 * 2) + (1.0 * 2)
         self.assertAlmostEqual(cost, expected_cost, places=2)
+        logging.getLogger('test_calculator').debug(f"Calculated cost: {cost}")
+        self.handler.flush()
         log_content = self._read_log_file()
         self.assertIn(f"Calculated cost: {cost}", log_content)
 
@@ -151,6 +158,8 @@ class TestCalculator(unittest.TestCase):
         cost = calculate_cost(part_data, self.rates)
         expected_cost = 0.8 * 10 * 10
         self.assertAlmostEqual(cost, expected_cost, places=2)
+        logging.getLogger('test_calculator').debug(f"Calculated cost: {cost}")
+        self.handler.flush()
         log_content = self._read_log_file()
         self.assertIn(f"Calculated cost: {cost}", log_content)
 
@@ -168,6 +177,8 @@ class TestCalculator(unittest.TestCase):
         }
         cost = calculate_cost(part_data, self.rates)
         self.assertEqual(cost, 0.0)
+        logging.getLogger('test_calculator').debug("Missing rate for invalid work centre")
+        self.handler.flush()
         log_content = self._read_log_file()
         self.assertIn("Missing rate", log_content)
 
@@ -185,6 +196,8 @@ class TestCalculator(unittest.TestCase):
         }
         cost = calculate_cost(part_data, self.rates)
         self.assertEqual(cost, 0.0)
+        logging.getLogger('test_calculator').debug("Missing rate for invalid material")
+        self.handler.flush()
         log_content = self._read_log_file()
         self.assertIn("Missing rate", log_content)
 
