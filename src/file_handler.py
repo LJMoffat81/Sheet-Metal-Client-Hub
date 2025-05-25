@@ -52,7 +52,7 @@ class FileHandler:
             f.write(f"{part_id},{revision},{material},{thickness},{length},{width},{quantity},{total_cost}\n")
 
     def save_quote(self, part_id, total_cost, customer_name, profit_margin):
-        """Save quote data to a JSON file."""
+        """Save quote data to a JSON file, one JSON object per line."""
         full_path = os.path.join(BASE_DIR, 'data', 'quotes.txt')
         quote_data = {
             'part_id': part_id,
@@ -61,7 +61,7 @@ class FileHandler:
             'profit_margin': profit_margin
         }
         with open(full_path, 'a') as f:
-            json.dump(quote_data, f, indent=4)
+            json.dump(quote_data, f)
             f.write('\n')
 
     def update_rates(self, rate_key, rate_value):

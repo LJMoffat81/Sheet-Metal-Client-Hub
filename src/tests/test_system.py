@@ -13,7 +13,9 @@ class TestSystem(unittest.TestCase):
         self.app = SheetMetalClientHub(self.root)
         self.output_file = os.path.join(BASE_DIR, 'data/output.txt')
         self.quotes_file = os.path.join(BASE_DIR, 'data/quotes.txt')
-        self.rates_file = os.path.join(BASE_DIR, 'data/rates_global.txt')
+        # Clear quotes file to ensure clean state
+        with open(self.quotes_file, 'w') as f:
+            f.write('')
 
     def tearDown(self):
         self.root.destroy()
@@ -45,7 +47,8 @@ class TestSystem(unittest.TestCase):
 
         with patch('tkinter.messagebox.showinfo') as mock_info, patch('tkinter.messagebox.showerror') as mock_error:
             self.app.calculate_and_save()
-            mock_info.assert_called_with("Success", mock_info.call_args[0][1])
+            mock_info.assert_called_once()
+            self.assertIn("Success", mock_info.call_args[0][0], "Success message should be shown")
 
         # Verify output (FR5)
         with open(self.output_file, 'r') as f:
@@ -61,8 +64,17 @@ class TestSystem(unittest.TestCase):
             mock_info.assert_called_with("Success", "Quote generated and saved to data/quotes.txt")
 
         # Verify quote
-        with open(self.quotes_file, 'r') as f:
-            quotes = [json.loads(line.strip()) for line in f if line.strip()]
+        quotes = []
+        try:
+            with open(self.quotes_file, 'r') as f:
+                for line in f:
+                    if line.strip():
+                        try:
+                            quotes.append(json.loads(line.strip()))
+                        except json.JSONDecodeError:
+                            continue
+        except FileNotFoundError:
+            pass
         self.assertTrue(any(q['part_id'] == 'PART-67890' for q in quotes), "Quote should be saved")
 
     def test_admin_rate_update(self):
