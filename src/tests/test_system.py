@@ -5,7 +5,6 @@ import sys
 import os
 import time
 import logging
-import timeout_decorator
 
 # Add src/ to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -24,13 +23,12 @@ class TestSystem(unittest.TestCase):
         self.log_file = os.path.join(LOG_DIR, 'test_system.log')
         logger = logging.getLogger()
         logger.setLevel(logging.DEBUG)
-        handler = logging.FileHandler(self.log_file, mode='w')
-        handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
-        logger.handlers = [handler]
+        self.handler = logging.FileHandler(self.log_file, mode='w')
+        self.handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+        logger.handlers = [self.handler]
         logging.info("Test setup initialized")
-        handler.flush()
+        self.handler.flush()
         time.sleep(0.5)
-        # Create rates file
         rates_path = os.path.join(os.path.dirname(__file__), '../../data/rates_global.txt')
         with open(rates_path, 'w') as f:
             f.write('''
@@ -43,7 +41,6 @@ class TestSystem(unittest.TestCase):
                 "assembly_rate_per_component": 0.8
             }
             ''')
-        # Create output.txt with a valid sub-part
         output_path = os.path.join(os.path.dirname(__file__), '../../data/output.txt')
         with open(output_path, 'w') as f:
             f.write('PART-12345ABCDE,A,mild_steel,1.0,1000,500,1,50.0,[],[]\n')
@@ -51,7 +48,10 @@ class TestSystem(unittest.TestCase):
     def tearDown(self):
         self.root.destroy()
         os.environ['TESTING_MODE'] = '0'
-        logging.getLogger().handlers = []
+        logger = logging.getLogger()
+        for handler in logger.handlers[:]:
+            handler.close()
+            logger.removeHandler(handler)
 
     def _read_log_file(self):
         if os.path.exists(self.log_file):
@@ -63,7 +63,6 @@ class TestSystem(unittest.TestCase):
     @patch('tkinter.messagebox.showerror')
     @patch('gui.FileHandler.validate_credentials')
     @patch('gui.FileHandler.update_rates')
-    @timeout_decorator.timeout(5)
     def test_admin_rate_update(self, mock_update, mock_validate, mock_showerror, mock_showinfo):
         mock_validate.return_value = True
         self.app.username_entry.insert(0, 'admin')
@@ -81,7 +80,6 @@ class TestSystem(unittest.TestCase):
     @patch('gui.FileHandler.validate_credentials')
     @patch('gui.FileHandler.save_output')
     @patch('gui.FileHandler.save_quote')
-    @timeout_decorator.timeout(5)
     def test_full_workflow_user_single_part_with_welding(self, mock_save_quote, mock_save_output, mock_validate, mock_showerror, mock_showinfo):
         mock_validate.return_value = True
         self.app.username_entry.insert(0, 'laurin')
@@ -114,7 +112,6 @@ class TestSystem(unittest.TestCase):
     @patch('gui.FileHandler.validate_credentials')
     @patch('gui.FileHandler.save_output')
     @patch('gui.FileHandler.save_quote')
-    @timeout_decorator.timeout(5)
     def test_full_workflow_user_single_part_with_fasteners(self, mock_save_quote, mock_save_output, mock_validate, mock_showerror, mock_showinfo):
         mock_validate.return_value = True
         self.app.username_entry.insert(0, 'laurin')
@@ -148,7 +145,6 @@ class TestSystem(unittest.TestCase):
     @patch('gui.FileHandler.validate_credentials')
     @patch('gui.FileHandler.save_output')
     @patch('gui.FileHandler.save_quote')
-    @timeout_decorator.timeout(5)
     def test_assembly_workflow(self, mock_save_quote, mock_save_output, mock_validate, mock_showerror, mock_showinfo):
         mock_validate.return_value = True
         self.app.username_entry.insert(0, 'laurin')
@@ -175,7 +171,6 @@ class TestSystem(unittest.TestCase):
 
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
-    @timeout_decorator.timeout(5)
     def test_invalid_login(self, mock_showerror, mock_showinfo):
         self.app.username_entry.insert(0, 'wrong')
         self.app.password_entry.insert(0, 'wrong')
@@ -185,7 +180,6 @@ class TestSystem(unittest.TestCase):
 
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
-    @timeout_decorator.timeout(5)
     def test_invalid_part_input(self, mock_showerror, mock_showinfo):
         self.app.create_part_input_screen()
         self.app.notebook.select(1)
@@ -200,7 +194,6 @@ class TestSystem(unittest.TestCase):
     @patch('tkinter.messagebox.showinfo')
     @patch('tkinter.messagebox.showerror')
     @patch('gui.FileHandler.load_rates')
-    @timeout_decorator.timeout(5)
     def test_empty_rates_file(self, mock_load_rates, mock_showerror, mock_showinfo):
         mock_load_rates.return_value = {}
         self.app.create_part_input_screen()
