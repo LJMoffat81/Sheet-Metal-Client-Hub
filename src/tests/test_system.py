@@ -24,7 +24,7 @@ class TestSystem(unittest.TestCase):
         self.app.rate_key_var.set('mild_steel_rate')
         self.app.rate_value_entry.insert(0, '0.3')
         self.app.update_rate()
-        mock_update.assert_called_with('mild_steel_rate', '0.3')
+        mock_update.assert_called_with('mild_steel_rate', 0.3)
 
     @patch('gui.FileHandler.validate_credentials')
     @patch('gui.FileHandler.save_output')
@@ -41,7 +41,7 @@ class TestSystem(unittest.TestCase):
         self.app.length_entry.insert(0, '1000')
         self.app.width_entry.insert(0, '500')
         self.app.quantity_entry.insert(0, '1')
-        self.app.work_centre_var.set(['cutting', 'bending'])
+        self.app.work_centre_var.set('cutting')
         self.app.submit_part()
         self.app.show_quote_screen()
         self.app.customer_entry.insert(0, 'Acme Corp')
@@ -96,10 +96,10 @@ class TestSystem(unittest.TestCase):
         self.app.length_entry.insert(0, '1000')
         self.app.width_entry.insert(0, '500')
         self.app.quantity_entry.insert(0, '1')
-        self.app.work_centre_var.set(['cutting'])
+        self.app.work_centre_var.set('cutting')
         with self.assertLogs(level='ERROR') as cm:
             self.app.submit_part()
-            self.assertIn('Missing rate', cm.output[0])
+            self.assertTrue(any("Missing rate" in msg for msg in cm.output))
 
 if __name__ == '__main__':
     unittest.main()

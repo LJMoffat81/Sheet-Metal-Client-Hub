@@ -1,0 +1,2 @@
+{"part_id": "PART-67890", "total_cost": 50.0, "customer_name": "Acme Corp", "profit_margin": 20.0}
+{"part_id": "ASSY-98765", "total_cost": 100.0, "customer_name": "Beta Inc", "profit_margin": 15.0}

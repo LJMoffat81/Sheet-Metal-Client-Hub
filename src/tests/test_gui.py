@@ -49,8 +49,9 @@ class TestGUI(unittest.TestCase):
         self.app.show_part_input_screen()
         self.app.part_type_var.set('Assembly')
         self.app.quantity_entry.insert(0, '10')
+        self.app.part_id_entry.insert(0, 'ASSY-123')
         self.app.submit_part()
-        self.assertIsNotNone(self.app.cost_display)
+        self.assertIsNotNone(self.app.quote_frame)
 
     @patch('gui.FileHandler.update_rates')
     def test_update_rate_valid(self, mock_update):
@@ -58,7 +59,7 @@ class TestGUI(unittest.TestCase):
         self.app.rate_key_var.set('mild_steel_rate')
         self.app.rate_value_entry.insert(0, '0.3')
         self.app.update_rate()
-        mock_update.assert_called_with('mild_steel_rate', '0.3')
+        mock_update.assert_called_with('mild_steel_rate', 0.3)
 
     def test_update_rate_invalid(self):
         self.app.show_rate_update_screen()
@@ -86,7 +87,7 @@ class TestGUI(unittest.TestCase):
         self.app.margin_entry.insert(0, '-10')
         with self.assertLogs(level='ERROR') as cm:
             self.app.generate_quote()
-            self.assertIn('Invalid margin', cm.output[0])
+            self.assertIn('Invalid customer or margin', cm.output[0])
 
 if __name__ == '__main__':
     unittest.main()

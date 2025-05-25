@@ -926,3 +926,71 @@
 2025-05-25 16:26:05,652 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
 2025-05-25 16:26:05,653 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
 2025-05-25 16:26:06,365 - INFO - GUI launched successfully
+2025-05-25 16:31:56,205 - DEBUG - Saving quote to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\quotes.txt
+2025-05-25 16:31:56,206 - DEBUG - Saving quote to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\quotes.txt
+2025-05-25 16:31:59,131 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:31:59,131 - DEBUG - Calculated cost: 8.0 for part_data: {'part_type': 'Assembly', 'material': 'N/A', 'thickness': 0.0, 'length': 0, 'width': 0, 'quantity': 10, 'components': 10, 'work_centres': ['assembly']}
+2025-05-25 16:31:59,132 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:31:59,133 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:31:59,134 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:31:59,134 - ERROR - Missing rate for bending_rate_per_mm
+2025-05-25 16:31:59,135 - DEBUG - Checking if file exists: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\src\tests\temp\exists.txt
+2025-05-25 16:31:59,137 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:31:59,138 - DEBUG - Processing file: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\src\tests\temp\test.txt
+2025-05-25 16:31:59,139 - DEBUG - Processing file: 
+2025-05-25 16:31:59,141 - DEBUG - Reading file: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\src\tests\temp\test.txt
+2025-05-25 16:31:59,143 - DEBUG - Saving output to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-25 16:31:59,145 - DEBUG - Saving quote to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\quotes.txt
+2025-05-25 16:31:59,147 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:31:59,147 - INFO - Credentials validated for user: laurie
+2025-05-25 16:31:59,149 - DEBUG - Writing to file: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\src\tests\temp\output.txt
+2025-05-25 16:31:59,211 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:20,622 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:20,680 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:24,400 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:27,878 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:27,945 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:27,947 - DEBUG - Calculated cost: 8.0 for part_data: {'part_type': 'Assembly', 'quantity': 10, 'work_centres': [], 'material': 'N/A', 'thickness': 0.0, 'length': 0.0, 'width': 0.0, 'components': 10}
+2025-05-25 16:32:27,947 - DEBUG - Saving output to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-25 16:32:28,014 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:45,882 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:45,948 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:51,214 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:51,216 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:53,152 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:53,160 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:53,771 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:53,780 - DEBUG - Calculated cost: 8.0 for part_data: {'part_type': 'Assembly', 'quantity': 10, 'work_centres': [], 'material': 'N/A', 'thickness': 0.0, 'length': 0.0, 'width': 0.0, 'components': 10}
+2025-05-25 16:32:53,858 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:53,927 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:53,936 - DEBUG - Calculated cost: 100300.0 for part_data: {'part_type': 'Part', 'quantity': 1, 'work_centres': ['cutting'], 'material': 'mild_steel', 'thickness': 1.0, 'length': 1000.0, 'width': 500.0}
+2025-05-25 16:32:54,011 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:55,082 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:56,713 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:56,713 - DEBUG - Calculated cost: 8.0 for part_data: {'part_type': 'Assembly', 'material': 'N/A', 'thickness': 0.0, 'length': 0, 'width': 0, 'quantity': 10, 'components': 10, 'work_centres': ['assembly']}
+2025-05-25 16:32:56,714 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:56,715 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:56,715 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:56,716 - ERROR - Missing rate for bending_rate_per_mm
+2025-05-25 16:32:56,775 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:58,142 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:58,199 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:32:59,229 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:44,819 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:44,894 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:44,896 - DEBUG - Calculated cost: 8.0 for part_data: {'part_type': 'Assembly', 'quantity': 10, 'work_centres': [], 'material': 'N/A', 'thickness': 0.0, 'length': 0.0, 'width': 0.0, 'components': 10}
+2025-05-25 16:38:44,896 - DEBUG - Saving output to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-25 16:38:44,973 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:45,710 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:45,779 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:46,434 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:46,437 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:47,085 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:47,093 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:47,583 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:47,593 - DEBUG - Calculated cost: 8.0 for part_data: {'part_type': 'Assembly', 'quantity': 10, 'work_centres': [], 'material': 'N/A', 'thickness': 0.0, 'length': 0.0, 'width': 0.0, 'components': 10}
+2025-05-25 16:38:47,673 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:47,744 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:47,753 - DEBUG - Calculated cost: 100300.0 for part_data: {'part_type': 'Part', 'quantity': 1, 'work_centres': ['cutting'], 'material': 'mild_steel', 'thickness': 1.0, 'length': 1000.0, 'width': 500.0}
+2025-05-25 16:38:47,832 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:38:48,958 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
