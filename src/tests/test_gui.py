@@ -3,6 +3,7 @@ from unittest.mock import patch
 import tkinter as tk
 import sys
 import os
+import time
 
 # Add src/ to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -25,10 +26,20 @@ class TestGUI(unittest.TestCase):
             level=logging.DEBUG,
             format='%(asctime)s - %(levelname)s - %(message)s'
         )
+        # Force initial log write
+        logging.info("Test setup initialized")
+        # Wait briefly to ensure file is created
+        time.sleep(0.1)
 
     def tearDown(self):
         self.root.destroy()
         os.environ['TESTING_MODE'] = '0'
+
+    def _read_log_file(self):
+        if os.path.exists(self.log_file):
+            with open(self.log_file, 'r') as f:
+                return f.read()
+        return ""
 
     @patch('gui.FileHandler.validate_credentials')
     def test_login_success_user(self, mock_validate):
@@ -37,9 +48,8 @@ class TestGUI(unittest.TestCase):
         self.app.password_entry.insert(0, 'moffat123')
         self.app.login()
         self.assertIsNotNone(self.app.notebook)
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Success: Login successful as User", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Success: Login successful as User", log_content)
 
     @patch('gui.FileHandler.validate_credentials')
     def test_login_success_admin(self, mock_validate):
@@ -48,23 +58,20 @@ class TestGUI(unittest.TestCase):
         self.app.password_entry.insert(0, 'admin123')
         self.app.login()
         self.assertIsNotNone(self.app.rate_key_entry)
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Success: Login successful as Admin", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Success: Login successful as Admin", log_content)
 
     def test_login_invalid(self):
         self.app.username_entry.insert(0, 'wrong')
         self.app.password_entry.insert(0, 'wrong')
         self.app.login()
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Error: Invalid username or password", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Error: Invalid username or password", log_content)
 
     def test_login_empty_fields(self):
         self.app.login()
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Error: Username and password cannot be empty", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Error: Username and password cannot be empty", log_content)
 
     def test_part_input_screen(self):
         self.app.create_part_input_screen()
@@ -82,9 +89,8 @@ class TestGUI(unittest.TestCase):
         self.app.work_centre_quantity_vars[0].set('100')
         self.app.work_centre_sub_option_vars[0].set('MIG')
         self.app.calculate_and_save()
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Success: Cost calculated", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Success: Cost calculated", log_content)
 
     def test_coating_sub_option_valid(self):
         self.app.create_part_input_screen()
@@ -97,9 +103,8 @@ class TestGUI(unittest.TestCase):
         self.app.work_centre_quantity_vars[0].set('1000')
         self.app.work_centre_sub_option_vars[0].set('Painting')
         self.app.calculate_and_save()
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Success: Cost calculated", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Success: Cost calculated", log_content)
 
     def test_fastener_selection_valid(self):
         self.app.create_part_input_screen()
@@ -113,9 +118,8 @@ class TestGUI(unittest.TestCase):
         self.app.work_centre_vars[0].set('Cutting')
         self.app.work_centre_quantity_vars[0].set('3000')
         self.app.calculate_and_save()
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Success: Cost calculated", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Success: Cost calculated", log_content)
 
     def test_single_part_quantity_invalid(self):
         self.app.create_part_input_screen()
@@ -128,9 +132,8 @@ class TestGUI(unittest.TestCase):
         self.app.work_centre_vars[0].set('Cutting')
         self.app.work_centre_quantity_vars[0].set('100')
         self.app.calculate_and_save()
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Error: Quantity must be a positive integer", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Error: Quantity must be a positive integer", log_content)
 
     def test_part_input_invalid_dimensions(self):
         self.app.create_part_input_screen()
@@ -140,9 +143,8 @@ class TestGUI(unittest.TestCase):
         self.app.revision_entry.insert(0, 'A')
         self.app.single_lay_flat_length_var.set('-100')
         self.app.calculate_and_save()
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Error: Lay-Flat length must be between 50 and 3000 mm", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Error: Lay-Flat length must be between 50 and 3000 mm", log_content)
 
     def test_part_input_assembly_no_sub_parts(self):
         self.app.create_part_input_screen()
@@ -152,9 +154,8 @@ class TestGUI(unittest.TestCase):
         self.app.revision_entry.insert(0, 'A')
         self.app.assembly_quantity_var.set('10')
         self.app.calculate_and_save()
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Error: At least one sub-part must be selected for an assembly", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Error: At least one sub-part must be selected for an assembly", log_content)
 
     @patch('gui.FileHandler.update_rates')
     def test_update_rate_valid(self, mock_update):
@@ -163,18 +164,16 @@ class TestGUI(unittest.TestCase):
         self.app.rate_value_entry.insert(0, '0.3')
         self.app.update_rate()
         mock_update.assert_called_with('mild_steel_rate', 0.3)
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Success: Rate 'mild_steel_rate' updated to 0.3", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Success: Rate 'mild_steel_rate' updated to 0.3", log_content)
 
     def test_update_rate_invalid(self):
         self.app.create_admin_screen()
         self.app.rate_key_entry.insert(0, 'mild_steel_rate')
         self.app.rate_value_entry.insert(0, 'invalid')
         self.app.update_rate()
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Error: Invalid rate value", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Error: Invalid rate value", log_content)
 
     @patch('gui.FileHandler.save_quote')
     def test_generate_quote_valid(self, mock_save_quote):
@@ -183,18 +182,16 @@ class TestGUI(unittest.TestCase):
         self.app.margin_entry.insert(0, '20')
         self.app.generate_quote('PART-123', 100.0)
         mock_save_quote.assert_called()
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Success: Quote generated and saved to data/quotes.txt", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Success: Quote generated and saved to data/quotes.txt", log_content)
 
     def test_generate_quote_invalid_margin(self):
         self.app.create_quote_screen('PART-123', 100.0)
         self.app.customer_entry.insert(0, 'Acme Corp')
         self.app.margin_entry.insert(0, '-10')
         self.app.generate_quote('PART-123', 100.0)
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Error: Profit margin cannot be negative", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Error: Profit margin cannot be negative", log_content)
 
 if __name__ == '__main__':
     unittest.main()

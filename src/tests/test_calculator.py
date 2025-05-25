@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch
 import sys
 import os
+import time
 
 # Add src/ to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -30,6 +31,14 @@ class TestCalculator(unittest.TestCase):
             level=logging.DEBUG,
             format='%(asctime)s - %(levelname)s - %(message)s'
         )
+        logging.info("Test setup initialized")
+        time.sleep(0.1)
+
+    def _read_log_file(self):
+        if os.path.exists(self.log_file):
+            with open(self.log_file, 'r') as f:
+                return f.read()
+        return ""
 
     def test_calculate_cost_single_part_with_welding(self):
         part_data = {
@@ -44,11 +53,10 @@ class TestCalculator(unittest.TestCase):
             'fastener_types_and_counts': []
         }
         cost = calculate_cost(part_data, self.rates)
-        expected_cost = 0.0001 * 1.0 * 1000 * 500 * 10 + 0.02 * 100 * 10  # Material + Welding
+        expected_cost = 0.0001 * 1.0 * 1000 * 500 * 10 + 0.02 * 100 * 10
         self.assertAlmostEqual(cost, expected_cost, places=2)
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn(f"Calculated cost: {cost}", log_content)
+        log_content = self._read_log_file()
+        self.assertIn(f"Calculated cost: {cost}", log_content)
 
     def test_calculate_cost_single_part_with_coating(self):
         part_data = {
@@ -63,11 +71,10 @@ class TestCalculator(unittest.TestCase):
             'fastener_types_and_counts': []
         }
         cost = calculate_cost(part_data, self.rates)
-        expected_cost = 0.0001 * 1.0 * 1000 * 500 * 5 + 0.001 * 1000 * 5  # Material + Coating
+        expected_cost = 0.0001 * 1.0 * 1000 * 500 * 5 + 0.001 * 1000 * 5
         self.assertAlmostEqual(cost, expected_cost, places=2)
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn(f"Calculated cost: {cost}", log_content)
+        log_content = self._read_log_file()
+        self.assertIn(f"Calculated cost: {cost}", log_content)
 
     def test_calculate_cost_single_part_with_fasteners(self):
         part_data = {
@@ -82,11 +89,10 @@ class TestCalculator(unittest.TestCase):
             'fastener_types_and_counts': [('Bolts', 50)]
         }
         cost = calculate_cost(part_data, self.rates)
-        expected_cost = (0.0001 * 1.0 * 1000 * 500 * 2) + (0.01 * 3000 * 2) + (0.1 * 50 * 2) + (1.0 * 2)  # Material + Cutting + Bolts + Catalogue
+        expected_cost = (0.0001 * 1.0 * 1000 * 500 * 2) + (0.01 * 3000 * 2) + (0.1 * 50 * 2) + (1.0 * 2)
         self.assertAlmostEqual(cost, expected_cost, places=2)
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn(f"Calculated cost: {cost}", log_content)
+        log_content = self._read_log_file()
+        self.assertIn(f"Calculated cost: {cost}", log_content)
 
     def test_calculate_cost_assembly(self):
         part_data = {
@@ -101,11 +107,10 @@ class TestCalculator(unittest.TestCase):
             'fastener_types_and_counts': []
         }
         cost = calculate_cost(part_data, self.rates)
-        expected_cost = 0.8 * 10 * 10  # Assembly components
+        expected_cost = 0.8 * 10 * 10
         self.assertAlmostEqual(cost, expected_cost, places=2)
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn(f"Calculated cost: {cost}", log_content)
+        log_content = self._read_log_file()
+        self.assertIn(f"Calculated cost: {cost}", log_content)
 
     def test_calculate_cost_invalid_work_centre(self):
         part_data = {
@@ -121,9 +126,8 @@ class TestCalculator(unittest.TestCase):
         }
         cost = calculate_cost(part_data, self.rates)
         self.assertEqual(cost, 0.0)
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Missing rate", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Missing rate", log_content)
 
     def test_calculate_cost_missing_rate(self):
         part_data = {
@@ -139,9 +143,8 @@ class TestCalculator(unittest.TestCase):
         }
         cost = calculate_cost(part_data, self.rates)
         self.assertEqual(cost, 0.0)
-        with open(self.log_file, 'r') as f:
-            log_content = f.read()
-            self.assertIn("Missing rate", log_content)
+        log_content = self._read_log_file()
+        self.assertIn("Missing rate", log_content)
 
 if __name__ == '__main__':
     unittest.main()

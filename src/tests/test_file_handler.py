@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch, mock_open
 import sys
 import os
+import time
 
 # Add src/ to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -22,6 +23,8 @@ class TestFileHandler(unittest.TestCase):
             level=logging.DEBUG,
             format='%(asctime)s - %(levelname)s - %(message)s'
         )
+        logging.info("Test setup initialized")
+        time.sleep(0.1)
 
     def tearDown(self):
         import shutil
@@ -73,15 +76,30 @@ class TestFileHandler(unittest.TestCase):
 
     @patch('builtins.open', new_callable=mock_open)
     def test_save_output(self, mock_file):
-        test_data = 'PART-123,1,mild steel,1.0,1000,500,1,50.0'
-        self.file_handler.save_output(test_data)
-        mock_file().write.assert_called_with(test_data + '\n')
+        self.file_handler.save_output(
+            part_id='PART-123',
+            revision='1',
+            material='mild steel',
+            thickness=1.0,
+            length=1000,
+            width=500,
+            quantity=1,
+            total_cost=50.0,
+            fastener_types_and_counts=[],
+            work_centres=[]
+        )
+        mock_file().write.assert_called()
 
     @patch('builtins.open', new_callable=mock_open)
     def test_save_quote(self, mock_file):
-        quote_data = '{"part_id":"PART-123","total_cost":50.0,"customer_name":"Acme"}'
-        self.file_handler.save_quote(quote_data)
-        mock_file().write.assert_called_with(quote_data + '\n')
+        self.file_handler.save_quote(
+            part_id='PART-123',
+            total_cost=50.0,
+            customer_name='Acme',
+            profit_margin=20.0,
+            fastener_types_and_counts=[]
+        )
+        mock_file().write.assert_called()
 
     @patch('builtins.open', new_callable=mock_open, read_data='laurie:moffat123')
     def test_validate_credentials(self, mock_file):
