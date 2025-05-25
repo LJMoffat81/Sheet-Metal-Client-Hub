@@ -1,90 +1,23 @@
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+class FileHandler:
+    def process_file(self, filename):
+        """Return the full path for a given filename."""
+        return os.path.join("base_dir", filename)
 
-def validate_credentials(username, password):
-    """
-    Validate user credentials against data/users.txt.
-    """
-    file_path = os.path.join(BASE_DIR, 'data/users.txt')
-    try:
-        with open(file_path, 'r') as f:
-            for line in f:
-                stored_username, stored_password = line.strip().split(':')
-                if username == stored_username and password == stored_password:
-                    return True
-    except FileNotFoundError:
-        print(f"Error: {file_path} not found")
-    except Exception as e:
-        print(f"Error validating credentials: {e}")
-    return False
+    def read_file(self, filename):
+        """Read content from a file."""
+        full_path = os.path.join("base_dir", filename)
+        with open(full_path, 'r') as f:
+            return f.read()
 
-def load_rates():
-    """
-    Load rates from data/rates_global.txt.
-    Expected format: key=value (e.g., cutting_rate_per_mm=0.05)
-    Ignores lines starting with #, empty lines, or invalid formats.
-    Returns: Dictionary of rates (key: rate name, value: float).
-    """
-    rates = {}
-    file_path = os.path.join(BASE_DIR, 'data/rates_global.txt')
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                line = line.strip()
-                if not line or line.startswith('#'):
-                    continue
-                if '=' not in line:
-                    print(f"Warning: Skipping invalid line in {file_path}: {line}")
-                    continue
-                try:
-                    key, value = line.split('=', 1)
-                    key = key.strip()
-                    value = value.strip()
-                    rates[key] = float(value)
-                except ValueError:
-                    print(f"Warning: Invalid value for {key}: {value}")
-                    continue
-    except FileNotFoundError:
-        print(f"Error: {file_path} not found")
-    except Exception as e:
-        print(f"Error loading rates: {e}")
-    return rates
+    def write_file(self, filename, content):
+        """Write content to a file."""
+        full_path = os.path.join("base_dir", filename)
+        with open(full_path, 'w') as f:
+            f.write(content)
 
-def save_output(part_id, revision, material, thickness, length, width, quantity, total_cost):
-    """
-    Save cost calculation output to data/output.txt.
-    """
-    file_path = os.path.join(BASE_DIR, 'data/output.txt')
-    try:
-        with open(file_path, 'a', encoding='utf-8') as f:
-            line = f"{part_id},{revision},{material},{thickness},{length},{width},{quantity},{total_cost}\n"
-            f.write(line)
-    except Exception as e:
-        print(f"Error saving output: {e}")
-
-def save_quote(part_id, total_cost, customer_name, profit_margin):
-    """
-    Save quote to data/quotes.txt.
-    """
-    file_path = os.path.join(BASE_DIR, 'data/quotes.txt')
-    try:
-        with open(file_path, 'a', encoding='utf-8') as f:
-            line = f"{part_id},{customer_name},{total_cost},{profit_margin}\n"
-            f.write(line)
-    except Exception as e:
-        print(f"Error saving quote: {e}")
-
-def update_rates(rate_key, rate_value):
-    """
-    Update or add a rate in data/rates_global.txt.
-    """
-    file_path = os.path.join(BASE_DIR, 'data/rates_global.txt')
-    rates = load_rates()
-    rates[rate_key] = rate_value
-    try:
-        with open(file_path, 'w', encoding='utf-8') as f:
-            for key, value in rates.items():
-                f.write(f"{key}={value}\n")
-    except Exception as e:
-        print(f"Error updating rates: {e}")
+    def file_exists(self, filename):
+        """Check if a file exists."""
+        full_path = os.path.join("base_dir", filename)
+        return os.path.exists(full_path)
