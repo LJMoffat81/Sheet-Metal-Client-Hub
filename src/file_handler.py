@@ -30,7 +30,7 @@ class FileHandler:
             return ""
 
     def write_file(self, filename, content):
-        """Write content to a file."""
+        """Write content to a file in append mode."""
         filepath = os.path.join(self.BASE_DIR, filename)
         logging.debug(f"Writing to file: {filepath}")
         try:
@@ -78,12 +78,10 @@ class FileHandler:
         filepath = os.path.join(self.BASE_DIR, 'data', 'output.txt')
         logging.debug(f"Saving output to: {filepath}")
         try:
-            # Read existing entries
             existing = set()
             if os.path.exists(filepath):
                 with open(filepath, 'r') as f:
                     existing = {line.strip() for line in f if line.strip()}
-            # Check if output_data is already present
             if output_data.strip() not in existing:
                 with open(filepath, 'a') as file:
                     file.write(output_data + '\n')
@@ -95,7 +93,6 @@ class FileHandler:
         filepath = os.path.join(self.BASE_DIR, 'data', 'quotes.txt')
         logging.debug(f"Saving quote to: {filepath}")
         try:
-            # Read existing quotes
             existing = set()
             if os.path.exists(filepath):
                 with open(filepath, 'r') as f:
@@ -103,13 +100,12 @@ class FileHandler:
                         if line.strip():
                             try:
                                 quote = json.loads(line.strip())
-                                key = (quote['part_id'], quote['customer_name'], quote['total_cost'], quote['profit_margin'])
+                                key = (quote['part_id'], quote['customer_name'], quote['total_cost'])
                                 existing.add(str(key))
                             except json.JSONDecodeError:
                                 continue
-            # Check if quote is already present
             quote = json.loads(quote_data)
-            key = (quote['part_id'], quote['customer_name'], quote['total_cost'], quote['profit_margin'])
+            key = (quote['part_id'], quote['customer_name'], quote['total_cost'])
             if str(key) not in existing:
                 with open(filepath, 'a') as file:
                     file.write(quote_data + '\n')
