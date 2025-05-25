@@ -1,0 +1,16 @@
+2025-05-25 21:59:27,627 - INFO - Test setup initialized
+2025-05-25 21:59:28,128 - INFO - Creating part input screen
+2025-05-25 21:59:28,129 - DEBUG - Clearing screen
+2025-05-25 21:59:28,134 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 21:59:28,134 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 21:59:28,134 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 21:59:28,169 - DEBUG - Creating footer
+2025-05-25 21:59:28,170 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-25 21:59:28,171 - DEBUG - Loaded 1 parts from output.txt
+2025-05-25 21:59:28,171 - DEBUG - Updating sub-parts dropdown for tab 1
+2025-05-25 21:59:28,171 - DEBUG - Loaded 4 items from parts_catalogue.txt
+2025-05-25 21:59:28,171 - INFO - Calculating and saving part specifications
+2025-05-25 21:59:28,171 - DEBUG - Show message called, TESTING_MODE: True
+2025-05-25 21:59:28,171 - ERROR - Error: Thickness must be between 1.0 and 3.0 mm
+2025-05-25 21:59:28,172 - ERROR - Error: Thickness must be between 1.0 and 3.0 mm
+2025-05-25 21:59:28,172 - INFO - Test Case: FR2: Invalid thickness, Input: Thickness: -1.0, Output: Thickness must be between 1.0 and 3.0 mm, Pass/Fail: Fail

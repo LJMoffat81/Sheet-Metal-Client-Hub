@@ -3,3 +3,4 @@ PART-123,A,Mild Steel,1.0,1000,500,10,100.0,[('Bolts', 50)],[('Cutting', 1000, '
 PART-123,A,Mild Steel,1.0,1000,500,10,100.0,[('Bolts', 50)],[('Cutting', 1000, 'None')]
 PART-123,A,Mild Steel,1.0,1000,500,10,100.0,[('Bolts', 50)],[('Cutting', 1000, 'None')]
 PART-123,A,Mild Steel,1.0,1000,500,10,100.0,[('Bolts', 50)],[('Cutting', 1000, 'None')]
+PART-123,A,Mild Steel,1.0,1000,500,10,100.0,[('Bolts', 50)],[('Cutting', 1000, 'None')]
