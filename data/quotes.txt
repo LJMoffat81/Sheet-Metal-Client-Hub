@@ -14,3 +14,9 @@ PART-12345,Acme,50.0,20.0
     "customer_name": "Laurie Test",
     "profit_margin": 50.0
 }
+{
+    "part_id": "ASSY-44444",
+    "total_cost": 0.16,
+    "customer_name": "Baynes Bakers",
+    "profit_margin": 35.0
+}
