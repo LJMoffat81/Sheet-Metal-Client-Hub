@@ -1,8 +1,8 @@
 {
-    "mild_steel_rate": 0.15,
-    "aluminium_rate": 0.20,
+    "mild_steel_rate": 0.2,
+    "aluminium_rate": 0.2,
     "stainless_steel_rate": 0.25,
-    "cutting_rate_per_mm": 0.10,
+    "cutting_rate_per_mm": 0.1,
     "bending_rate_per_bend": 0.05,
     "welding_rate_per_mm": 0.12,
     "assembly_rate_per_component": 0.08,

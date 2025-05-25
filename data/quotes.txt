@@ -20,3 +20,15 @@ PART-12345,Acme,50.0,20.0
     "customer_name": "Baynes Bakers",
     "profit_margin": 35.0
 }
+{
+    "part_id": "PART-67890",
+    "total_cost": 50.0,
+    "customer_name": "Acme Corp",
+    "profit_margin": 20.0
+}
+{
+    "part_id": "PART-67890",
+    "total_cost": 50.0,
+    "customer_name": "Acme Corp",
+    "profit_margin": 20.0
+}
