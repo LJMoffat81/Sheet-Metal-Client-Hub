@@ -659,7 +659,20 @@ class SheetMetalClientHub:
             part_id = self.part_id_entry.get().strip()
             revision = self.revision_entry.get().strip()
 
-            # Validate dimensions for single parts first
+            # Check rates file first
+            rates = self.file_handler.load_rates('rates_global.txt')
+            if not rates:
+                output = "Failed to load rates from data/rates_global.txt"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR3: Cost calculation with missing rates",
+                    input_data="None",
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+
+            # Validate dimensions for single parts
             if selected_tab == 1:  # Single Part
                 material = self.single_material_var.get().lower()
                 thickness = self.single_thickness_var.get()
@@ -793,7 +806,28 @@ class SheetMetalClientHub:
                     )
                     return
 
-            quantity = int(quantity) if part_type == "Assembly" else 1
+            try:
+                quantity = int(quantity) if part_type == "Assembly" else 1
+                if part_type == "Assembly" and quantity <= 0:
+                    output = "Quantity must be a positive integer"
+                    messagebox.showerror("Error", output)
+                    log_test_result(
+                        test_case="FR2: Invalid quantity",
+                        input_data=input_data,
+                        output=output,
+                        pass_fail="Fail"
+                    )
+                    return
+            except ValueError:
+                output = "Invalid input: Quantity must be a valid integer"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR2: Invalid numeric input",
+                    input_data=input_data,
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
 
             expected_prefix = "PART-" if part_type == "Single Part" else "ASSY-"
             if not part_id.startswith(expected_prefix) or not re.match(rf"^{expected_prefix}[A-Za-z0-9]{{5,15}}$", part_id):
@@ -817,16 +851,6 @@ class SheetMetalClientHub:
                         pass_fail="Fail"
                     )
                     return
-            if part_type == "Assembly" and quantity <= 0:
-                output = "Quantity must be a positive integer"
-                messagebox.showerror("Error", output)
-                log_test_result(
-                    test_case="FR2: Invalid quantity",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
             if part_type == "Assembly":
                 existing_parts = load_existing_parts()
                 for sub_part in sub_parts:
@@ -868,18 +892,6 @@ class SheetMetalClientHub:
                 'work_centres': work_centres
             }
 
-            rates = self.file_handler.load_rates('rates_global.txt')
-            if not rates:
-                output = "Failed to load rates from data/rates_global.txt"
-                messagebox.showerror("Error", output)
-                log_test_result(
-                    test_case="FR3: Cost calculation with missing rates",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-
             total_cost = calculate_cost(part_specs, rates)
             if total_cost == 0.0:
                 output = "Cost calculation failed, check inputs or rates"
@@ -905,15 +917,6 @@ class SheetMetalClientHub:
             self.add_another_part_button.config(state='normal')
             self.last_part_id = part_id
             self.last_total_cost = total_cost
-        except ValueError:
-            output = "Invalid input: Quantity must be valid"
-            messagebox.showerror("Error", output)
-            log_test_result(
-                test_case="FR2: Invalid numeric input",
-                input_data=input_data,
-                output=output,
-                pass_fail="Fail"
-            )
         except Exception as e:
             output = f"Unexpected error: {e}"
             messagebox.showerror("Error", output)
