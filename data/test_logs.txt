@@ -596,3 +596,23 @@ Saved to data/output.txt, Status: Pass
 [2025-05-23 16:19:05] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
 [2025-05-23 16:23:19] Test: FR2: Part input with empty fields, Input: Part Type: Single Part, Part ID: , Revision: , Material: mild steel, Thickness: 1.0, Length: 1000, Width: 500, Quantity: 1, Sub-Parts: [], Weldment: No, Top-Level Assembly: N/A, Work Centres: [], Output: Part ID and Revision are required, Status: Fail
 [2025-05-23 16:27:17] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 16:54:14] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 16:54:52] Test: Back to Login, Input: None, Output: Returned to login screen, Status: Pass
+[2025-05-23 16:55:00] Test: FR1: Clear login fields, Input: None, Output: Username and password fields cleared, Status: Pass
+[2025-05-23 16:55:12] Test: FR1: Clear login fields, Input: None, Output: Username and password fields cleared, Status: Pass
+[2025-05-23 16:55:24] Test: Help Guide Accessed, Input: None, Output: Help guide displayed, Status: Pass
+[2025-05-23 16:55:40] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 16:59:26] Test: Back to Login, Input: None, Output: Returned to login screen, Status: Pass
+[2025-05-23 16:59:38] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-23 17:15:06] Test: Help Guide Accessed, Input: None, Output: Help guide displayed, Status: Pass
+[2025-05-23 19:06:06] Test: FR2: Part input with empty fields, Input: Part Type: Assembly, Part ID: , Revision: , Material: N/A, Thickness: 0.0, Length: 0, Width: 0, Quantity: 1, Sub-Parts: [], Weldment: No, Top-Level Assembly: , Work Centres: ['Bending', 'Welding'], Output: Part ID and Revision are required, Status: Fail
+[2025-05-25 08:25:54] Test: FR2: Part input with empty fields, Input: Part Type: Assembly, Part ID: , Revision: , Material: N/A, Thickness: 0.0, Length: 0, Width: 0, Quantity: 1, Sub-Parts: [], Weldment: No, Top-Level Assembly: , Work Centres: ['Cutting'], Output: Part ID and Revision are required, Status: Fail
+[2025-05-25 08:26:26] Test: FR2: Invalid part ID, Input: Part Type: Single Part, Part ID: fffffff, Revision: eeeee, Material: mild steel, Thickness: 1.0, Length: 1000, Width: 500, Quantity: 1, Sub-Parts: ['FAS-001: Screw M3'], Weldment: Yes, Top-Level Assembly: N/A, Work Centres: ['Cutting', 'Bending'], Output: Part ID must be PART-[5-15 alphanumeric], Status: Fail
+[2025-05-25 08:26:51] Test: FR3-FR4-FR5: Cost calculation and output storage, Input: Part Type: Single Part, Part ID: PART-23567, Revision: A6, Material: mild steel, Thickness: 1.0, Length: 1000, Width: 500, Quantity: 1, Sub-Parts: ['FAS-001: Screw M3'], Weldment: Yes, Top-Level Assembly: N/A, Work Centres: ['Cutting', 'Bending'], Output: Cost calculated: £10000000.0
+Saved to data/output.txt, Status: Pass
+[2025-05-25 08:26:56] Test: Reset Part Input, Input: None, Output: All fields reset to default, Status: Pass
+[2025-05-25 08:27:43] Test: FR3-FR4-FR5: Cost calculation and output storage, Input: Part Type: Single Part, Part ID: PART-67899, Revision: A8, Material: mild steel, Thickness: 1.0, Length: 1000, Width: 500, Quantity: 1, Sub-Parts: ['PEM-001: PEM Insert M3'], Weldment: No, Top-Level Assembly: N/A, Work Centres: ['Cutting', 'Bending', 'Welding', 'Coating', 'Inspection'], Output: Cost calculated: £10000000.0
+Saved to data/output.txt, Status: Pass
+[2025-05-25 08:27:53] Test: FR7: Generate quote, Input: Customer Name: LAURIE, Profit Margin: 12%, Output: Quote generated and saved to data/quotes.txt, Status: Pass
+[2025-05-25 08:34:32] Test: Back to Login, Input: None, Output: Returned to login screen, Status: Pass
+[2025-05-25 08:34:51] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
