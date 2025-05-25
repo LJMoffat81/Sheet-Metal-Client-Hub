@@ -1,53 +1,78 @@
-# calculator.py
-# Purpose: Implements cost calculation for sheet metal parts (FR3: Calculate Cost, FR4: Display Cost).
-# Calculates total cost based on material, labour, and process rates, including work centre inputs.
-# Supports assemblies and single parts, with costs in GBP and dimensions in mm.
-# Used by gui.py to compute and display costs.
-
 def calculate_cost(part_specs, rates):
     """
-    Calculate the total cost for a part or assembly based on specifications and rates (FR3-FR4).
+    Calculate total cost for a part or assembly based on specifications and rates.
     
-    Parameters:
-        part_specs (dict): Dictionary with part specifications (e.g., part_type, material, cutting_method).
-        rates (dict): Dictionary of rates from rates_global.txt (e.g., {'steel_rate': 5.0}).
+    Args:
+        part_specs (dict): Specifications including part_type, material, thickness, length, width,
+                          quantity, sub_parts, catalogue_cost, work_centres, weldment_indicator.
+        rates (dict): Rates loaded from data/rates_global.txt (e.g., mild_steel_rate, welding_rate_per_mm).
     
     Returns:
-        float: Total cost in GBP, rounded to 2 decimal places.
-               Returns 0.0 if an error occurs.
-    
-    Logic:
-        1. For assemblies, recursively calculate sub-part costs and add assembly costs.
-        2. For single parts, compute material, labour, and work centre costs (e.g., cutting).
-        3. Handles errors by returning 0.0 and logging.
+        float: Total cost in GBP, or 0.0 if calculation fails.
     """
     try:
         total_cost = 0.0
+
+        # Material cost for single parts
+        if part_specs['part_type'] == 'Single Part':
+            material = part_specs['material'].lower()
+            thickness = float(part_specs['thickness'])
+            length = float(part_specs['length'])
+            width = float(part_specs['width'])
+            material_rate_key = f"{material}_rate"
+            if material_rate_key in rates:
+                # Calculate material cost: rate * thickness * area (length * width in mm²)
+                material_cost = rates[material_rate_key] * thickness * length * width / 1000  # Convert to GBP
+                total_cost += material_cost
+            else:
+                print(f"Error: Missing rate for {material_rate_key}")
+                return 0.0
+
+        # Catalogue cost (e.g., fasteners)
+        catalogue_cost = float(part_specs.get('catalogue_cost', 0.0))
+        total_cost += catalogue_cost
+
+        # Work centre costs
+        for work_centre, quantity in part_specs.get('work_centres', []):
+            work_centre = work_centre.lower()
+            rate_key = None
+            if work_centre == 'cutting':
+                rate_key = 'cutting_rate_per_mm'
+            elif work_centre == 'bending':
+                rate_key = 'bending_rate_per_bend'
+            elif work_centre == 'welding':
+                rate_key = 'welding_rate_per_mm'
+            elif work_centre == 'assembly':
+                rate_key = 'assembly_rate_per_component'
+            elif work_centre == 'finishing':
+                rate_key = 'finishing_rate_per_mm2'
+            elif work_centre == 'drilling':
+                rate_key = 'drilling_rate_per_hole'
+            elif work_centre == 'punching':
+                rate_key = 'punching_rate_per_punch'
+            elif work_centre == 'grinding':
+                rate_key = 'grinding_rate_per_mm2'
+            elif work_centre == 'coating':
+                rate_key = 'coating_rate_per_mm2'
+            elif work_centre == 'inspection':
+                rate_key = 'inspection_rate_per_inspection'
+
+            if rate_key and rate_key in rates:
+                # Apply default factor modifier (e.g., welding_factor_spot)
+                factor_key = f"{work_centre}_factor_standard"  # Default factor
+                factor = rates.get(factor_key, 1.0)  # Use 1.0 if factor missing
+                cost = rates[rate_key] * float(quantity) * factor
+                total_cost += cost
+            else:
+                print(f"Error: Missing rate for {rate_key}")
+                return 0.0
+
+        # Apply quantity multiplier for assemblies
         if part_specs['part_type'] == 'Assembly':
-            for sub_part in part_specs.get('sub_parts', []):
-                # Placeholder: Sub-parts need full specs in future
-                sub_specs = {
-                    'part_type': 'Single Part',
-                    'material': part_specs['material'],
-                    'thickness': part_specs['thickness'],
-                    'length': part_specs['length'],
-                    'width': part_specs['width'],
-                    'quantity': 1,
-                    'cutting_method': 'None',
-                    'cutting_complexity': 0
-                }
-                total_cost += calculate_cost(sub_specs, rates)
-            total_cost += rates.get('assembly', 0.0) * part_specs.get('assembly_components', 0)
-        else:
-            volume = part_specs['thickness'] * part_specs['length'] * part_specs['width']
-            material_cost = volume * rates.get(f"{part_specs['material']}_rate", 0.0)
-            labour_cost = volume * rates.get('labour_rate', 0.0)
-            cutting_cost = (rates.get('laser_cutting', 0.0) * part_specs.get('cutting_complexity', 0)
-                            if part_specs.get('cutting_method') == 'Laser Cutting' else
-                            rates.get('turret_press', 0.0) * part_specs.get('cutting_complexity', 0)
-                            if part_specs.get('cutting_method') == 'Turret Press Punching' else 0)
-            total_cost = material_cost + labour_cost + cutting_cost  # Add other work centres later
-        return round(total_cost * part_specs['quantity'], 2)
+            quantity = int(part_specs['quantity'])
+            total_cost *= quantity
+
+        return round(total_cost, 2)
     except Exception as e:
-        print(f"Error calculating cost: {e}")
+        print(f"Error in calculate_cost: {e}")
         return 0.0
