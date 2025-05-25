@@ -1,4 +1,3 @@
-Rates for WorkCentre calculations (GBP per unit, base rates)
 cutting_rate_per_mm=0.05
 bending_rate_per_bend=2.00
 welding_rate_per_mm=0.10
@@ -12,8 +11,6 @@ inspection_rate_per_inspection=10.00
 mild_steel_rate=0.10
 aluminium_rate=0.15
 stainless_steel_rate=0.20
-
-Factor modifiers (multipliers applied to base rates)
 cutting_factor_linear=1.0
 cutting_factor_curved=1.2
 cutting_factor_complex=1.5
