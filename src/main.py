@@ -1,43 +1,46 @@
-# main.py
-# Purpose: Entry point for the Sheet Metal Client Hub application.
-# Initializes the Tkinter GUI and starts the application.
-# Integrates all modules (gui.py, calculator.py, file_handler.py) to provide functionality for FR1-FR7.
-# Minimal code to keep the entry point clean and focused on starting the GUI.
-
-from gui import SheetMetalClientHub
-import tkinter as tk
-import logging
+import sys
 import os
+# Add the parent directory (src/) to the Python path to resolve import issues
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# Set up logging
-LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
-os.makedirs(LOG_DIR, exist_ok=True)
-log_file = os.path.join(LOG_DIR, 'main.log')
+import tkinter as tk
+import time
+from gui import SheetMetalClientHub
 
-logging.basicConfig(
-    filename=log_file,
-    level=logging.INFO,
-    format='%(asctime)s - %(message)s'
-)
+def automate_gui():
+    root = tk.Tk()
+    app = SheetMetalClientHub(root)
 
-def main():
-    """
-    Main function to start the Sheet Metal Client Hub application.
+    # Login
+    app.username_entry.insert(0, 'laurin')
+    app.password_entry.insert(0, 'moffat123')
+    app.login()
+    time.sleep(0.5)
 
-    Logic:
-        1. Creates a Tkinter root window.
-        2. Instantiates the SheetMetalClientHub GUI class.
-        3. Starts the Tkinter main event loop to display the GUI.
-    """
-    try:
-        root = tk.Tk()
-        app = SheetMetalClientHub(root)
-        logging.info("GUI launched successfully")
-        root.mainloop()
-    except Exception as e:
-        logging.error(f"Error launching GUI: {e}")
-        raise
+    # Create part input
+    app.notebook.select(1)
+    app.part_id_entry.delete(0, tk.END)
+    app.part_id_entry.insert(0, 'PART-67890ABCDE')
+    app.revision_entry.insert(0, 'A')
+    app.single_material_var.set('Mild Steel')
+    app.single_thickness_var.set('1.0')
+    app.single_lay_flat_length_var.set('1000')
+    app.single_lay_flat_width_var.set('500')
+    app.single_quantity_var.set('10')
+    app.work_centre_vars[0].set('Welding')
+    app.work_centre_quantity_vars[0].set('100')
+    app.work_centre_sub_option_vars[0].set('MIG')
+    app.calculate_and_save()
+    time.sleep(0.5)
+
+    # Generate quote
+    app.create_quote_screen('PART-67890ABCDE', 50.0)
+    app.customer_entry.insert(0, 'Acme Corp')
+    app.margin_entry.insert(0, '20')
+    app.generate_quote('PART-67890ABCDE', 50.0)
+    time.sleep(0.5)
+
+    root.destroy()
 
 if __name__ == "__main__":
-    # Entry point check to ensure main() is called only when the script is run directly
-    main()
+    automate_gui()

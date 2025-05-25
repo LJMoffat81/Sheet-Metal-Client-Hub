@@ -1,6 +1,15 @@
-import tkinter as tk
-import time
+import sys
+import os
+# Add the parent directory (src/) to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from gui import SheetMetalClientHub
+import tkinter as tk
+
+# Create the main window and run the application
+root = tk.Tk()
+app = SheetMetalClientHub(root)
+root.mainloop()
 
 def automate_gui():
     root = tk.Tk()
