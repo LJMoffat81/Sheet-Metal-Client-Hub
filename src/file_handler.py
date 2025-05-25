@@ -49,8 +49,10 @@ class FileHandler:
     def load_rates(self, filename):
         """Load rates from a JSON file."""
         try:
-            rates_path = os.path.join(self.base_dir, 'data', filename)
+            rates_path = os.path.join(self.data_dir, filename)
             logging.debug(f"Current working directory: {os.getcwd()}")
+            logging.debug(f"Base directory: {self.base_dir}")
+            logging.debug(f"Data directory: {self.data_dir}")
             logging.debug(f"Attempting to load rates from: {rates_path}")
             if not os.path.exists(rates_path):
                 logging.error(f"Rates file does not exist: {rates_path}")
