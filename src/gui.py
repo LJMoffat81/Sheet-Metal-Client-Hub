@@ -3,6 +3,7 @@ from tkinter import messagebox
 import logging
 from file_handler import FileHandler
 from calculator import calculate_cost
+from PIL import Image, ImageTk
 
 logging.basicConfig(
     filename='gui.log',
@@ -14,6 +15,11 @@ class SheetMetalGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("Sheet Metal Client Hub")
+        self.root.minsize(600, 400)  # Set minimum window size
+        try:
+            self.root.iconbitmap('data/laser_gear.ico')  # Set custom icon
+        except tk.TclError:
+            logging.warning("Failed to load laser_gear.ico")
         self.file_handler = FileHandler()
         self.rates = self.file_handler.load_rates()
         self.cost = 0.0
@@ -86,22 +92,23 @@ class SheetMetalGUI:
         self.quantity_entry.grid(row=6, column=1)
 
         tk.Label(self.part_input_frame, text="Work Centres:").grid(row=7, column=0, sticky="e")
-        self.work_centre_var = tk.StringVar()
-        work_centres = ['cutting', 'bending', 'welding']
-        self.work_centre_menu = tk.OptionMenu(self.part_input_frame, self.work_centre_var, *work_centres)
-        self.work_centre_menu.grid(row=7, column=1)
+        self.work_centres = {}
+        for i, centre in enumerate(['cutting', 'bending', 'welding']):
+            self.work_centres[centre] = tk.BooleanVar()
+            tk.Checkbutton(self.part_input_frame, text=centre, variable=self.work_centres[centre]).grid(row=7, column=i+1, sticky="w")
 
-        tk.Button(self.part_input_frame, text="Submit", command=self.submit_part).grid(row=8, column=0, columnspan=2, pady=5)
+        tk.Button(self.part_input_frame, text="Calculate Cost", command=self.submit_part).grid(row=8, column=0, columnspan=4, pady=5)
 
     def submit_part(self):
         try:
             self.part_id = self.part_id_entry.get()
             part_type = self.part_type_var.get()
             quantity = int(self.quantity_entry.get())
+            work_centres = [centre for centre, var in self.work_centres.items() if var.get()]
             self.part_data = {
                 'part_type': part_type,
                 'quantity': quantity,
-                'work_centres': [self.work_centre_var.get()] if self.work_centre_var.get() else []
+                'work_centres': work_centres
             }
 
             if part_type == "Part":

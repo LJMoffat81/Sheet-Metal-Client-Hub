@@ -50,6 +50,7 @@ class TestGUI(unittest.TestCase):
         self.app.part_type_var.set('Assembly')
         self.app.quantity_entry.insert(0, '10')
         self.app.part_id_entry.insert(0, 'ASSY-123')
+        self.app.work_centres['assembly'].set(True)
         self.app.submit_part()
         self.assertIsNotNone(self.app.quote_frame)
 
