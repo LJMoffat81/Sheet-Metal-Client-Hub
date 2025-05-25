@@ -29,14 +29,13 @@ def load_rates():
     rates = {}
     file_path = os.path.join(BASE_DIR, 'data/rates_global.txt')
     try:
-        with open(file_path, 'r') as f:
+        with open(file_path, 'r', encoding='utf-8') as f:
             for line in f:
                 line = line.strip()
-                # Skip empty lines or comments
                 if not line or line.startswith('#'):
                     continue
-                # Skip lines that don't contain '='
                 if '=' not in line:
+                    print(f"Warning: Skipping invalid line in {file_path}: {line}")
                     continue
                 try:
                     key, value = line.split('=', 1)
@@ -44,7 +43,7 @@ def load_rates():
                     value = value.strip()
                     rates[key] = float(value)
                 except ValueError:
-                    print(f"Warning: Skipping invalid line in {file_path}: {line}")
+                    print(f"Warning: Invalid value for {key}: {value}")
                     continue
     except FileNotFoundError:
         print(f"Error: {file_path} not found")
@@ -58,7 +57,7 @@ def save_output(part_id, revision, material, thickness, length, width, quantity,
     """
     file_path = os.path.join(BASE_DIR, 'data/output.txt')
     try:
-        with open(file_path, 'a') as f:
+        with open(file_path, 'a', encoding='utf-8') as f:
             line = f"{part_id},{revision},{material},{thickness},{length},{width},{quantity},{total_cost}\n"
             f.write(line)
     except Exception as e:
@@ -70,7 +69,7 @@ def save_quote(part_id, total_cost, customer_name, profit_margin):
     """
     file_path = os.path.join(BASE_DIR, 'data/quotes.txt')
     try:
-        with open(file_path, 'a') as f:
+        with open(file_path, 'a', encoding='utf-8') as f:
             line = f"{part_id},{customer_name},{total_cost},{profit_margin}\n"
             f.write(line)
     except Exception as e:
@@ -84,7 +83,7 @@ def update_rates(rate_key, rate_value):
     rates = load_rates()
     rates[rate_key] = rate_value
     try:
-        with open(file_path, 'w') as f:
+        with open(file_path, 'w', encoding='utf-8') as f:
             for key, value in rates.items():
                 f.write(f"{key}={value}\n")
     except Exception as e:
