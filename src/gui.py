@@ -659,20 +659,30 @@ class SheetMetalClientHub:
             part_id = self.part_id_entry.get().strip()
             revision = self.revision_entry.get().strip()
 
-            # Check rates file first
-            rates = self.file_handler.load_rates('rates_global.txt')
-            if not rates:
-                output = "Failed to load rates from data/rates_global.txt"
+            # Validate Part ID and Revision first
+            expected_prefix = "PART-" if part_type == "Single Part" else "ASSY-"
+            if not part_id.startswith(expected_prefix) or not re.match(rf"^{expected_prefix}[A-Za-z0-9]{{5,15}}$", part_id):
+                output = f"Part ID must be {expected_prefix}[5-15 alphanumeric]"
                 messagebox.showerror("Error", output)
                 log_test_result(
-                    test_case="FR3: Cost calculation with missing rates",
-                    input_data="None",
+                    test_case="FR2: Invalid part ID",
+                    input_data=f"Part ID: {part_id}",
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
+            if not revision:
+                output = "Revision is required"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR2: Missing revision",
+                    input_data=f"Revision: {revision}",
                     output=output,
                     pass_fail="Fail"
                 )
                 return
 
-            # Validate dimensions for single parts
+            # Validate inputs for single parts
             if selected_tab == 1:  # Single Part
                 material = self.single_material_var.get().lower()
                 thickness = self.single_thickness_var.get()
@@ -738,59 +748,14 @@ class SheetMetalClientHub:
                 sub_parts = self.assembly_selected_sub_parts
                 top_level_assembly = part_id
 
-            # Validate Part ID and Revision
-            if not all([part_id, revision]):
-                output = "Part ID and Revision are required"
-                messagebox.showerror("Error", output)
-                log_test_result(
-                    test_case="FR2: Part input with empty fields",
-                    input_data=f"Part ID: {part_id}, Revision: {revision}",
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-
-            # Collect WorkCentre and quantity pairs
-            work_centres = []
-            for i, var in enumerate(self.work_centre_vars):
-                wc = var.get()
-                if wc != "None":
-                    qty = self.work_centre_quantity_vars[i].get()
-                    if qty == "0":
-                        output = f"Quantity for {wc} in Operation {(i+1)*10} must be selected"
-                        messagebox.showerror("Error", output)
-                        log_test_result(
-                            test_case="FR2: Missing WorkCentre quantity",
-                            input_data=f"Operation {(i+1)*10}, WorkCentre: {wc}",
-                            output=output,
-                            pass_fail="Fail"
-                        )
-                        return
-                    work_centres.append((wc, float(qty)))
-
-            input_data = (f"Part Type: {part_type}, Part ID: {part_id}, Revision: {revision}, Material: {material}, "
-                          f"Thickness: {thickness}, Length: {length}, Width: {width}, Quantity: {quantity}, "
-                          f"Sub-Parts: {sub_parts}, Weldment: {weldment_indicator}, Top-Level Assembly: {top_level_assembly}, "
-                          f"Work Centres: {work_centres}")
-
-            if not work_centres:
-                output = "At least one WorkCentre operation must be selected"
-                messagebox.showerror("Error", output)
-                log_test_result(
-                    test_case="FR2: No WorkCentre operations selected",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-
+            # Validate assembly inputs
             if part_type == "Assembly":
                 if not quantity:
                     output = "Quantity is required for assemblies"
                     messagebox.showerror("Error", output)
                     log_test_result(
                         test_case="FR2: Assembly with no quantity",
-                        input_data=input_data,
+                        input_data=f"Quantity: {quantity}",
                         output=output,
                         pass_fail="Fail"
                     )
@@ -800,57 +765,89 @@ class SheetMetalClientHub:
                     messagebox.showerror("Error", output)
                     log_test_result(
                         test_case="FR2: Assembly with no sub-parts",
-                        input_data=input_data,
+                        input_data=f"Sub-Parts: {sub_parts}",
                         output=output,
                         pass_fail="Fail"
                     )
                     return
-
-            try:
-                quantity = int(quantity) if part_type == "Assembly" else 1
-                if part_type == "Assembly" and quantity <= 0:
-                    output = "Quantity must be a positive integer"
+                try:
+                    quantity = int(quantity)
+                    if quantity <= 0:
+                        output = "Quantity must be a positive integer"
+                        messagebox.showerror("Error", output)
+                        log_test_result(
+                            test_case="FR2: Invalid quantity",
+                            input_data=f"Quantity: {quantity}",
+                            output=output,
+                            pass_fail="Fail"
+                        )
+                        return
+                except ValueError:
+                    output = "Invalid input: Quantity must be a valid integer"
                     messagebox.showerror("Error", output)
                     log_test_result(
-                        test_case="FR2: Invalid quantity",
-                        input_data=input_data,
+                        test_case="FR2: Invalid numeric input",
+                        input_data=f"Quantity: {quantity}",
                         output=output,
                         pass_fail="Fail"
                     )
                     return
-            except ValueError:
-                output = "Invalid input: Quantity must be a valid integer"
+
+            # Validate WorkCentre and quantity pairs
+            work_centres = []
+            for i, var in enumerate(self.work_centre_vars):
+                wc = var.get()
+                if wc != "None":
+                    qty = self.work_centre_quantity_vars[i].get()
+                    try:
+                        qty_float = float(qty)
+                        if qty_float <= 0:
+                            output = f"Quantity for {wc} in Operation {(i+1)*10} must be positive"
+                            messagebox.showerror("Error", output)
+                            log_test_result(
+                                test_case="FR2: Invalid WorkCentre quantity",
+                                input_data=f"Operation {(i+1)*10}, WorkCentre: {wc}, Quantity: {qty}",
+                                output=output,
+                                pass_fail="Fail"
+                            )
+                            return
+                        work_centres.append((wc, qty_float))
+                    except ValueError:
+                        output = f"Invalid quantity for {wc} in Operation {(i+1)*10}: must be a number"
+                        messagebox.showerror("Error", output)
+                        log_test_result(
+                            test_case="FR2: Invalid WorkCentre quantity",
+                            input_data=f"Operation {(i+1)*10}, WorkCentre: {wc}, Quantity: {qty}",
+                            output=output,
+                            pass_fail="Fail"
+                        )
+                        return
+
+            if not work_centres:
+                output = "At least one WorkCentre operation must be selected"
                 messagebox.showerror("Error", output)
                 log_test_result(
-                    test_case="FR2: Invalid numeric input",
-                    input_data=input_data,
+                    test_case="FR2: No WorkCentre operations selected",
+                    input_data="Work Centres: None",
                     output=output,
                     pass_fail="Fail"
                 )
                 return
 
-            expected_prefix = "PART-" if part_type == "Single Part" else "ASSY-"
-            if not part_id.startswith(expected_prefix) or not re.match(rf"^{expected_prefix}[A-Za-z0-9]{{5,15}}$", part_id):
-                output = f"Part ID must be {expected_prefix}[5-15 alphanumeric]"
-                messagebox.showerror("Error", output)
-                log_test_result(
-                    test_case="FR2: Invalid part ID",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
+            # Validate material for single parts
             if part_type == "Single Part":
                 if material not in ['mild steel', 'aluminium', 'stainless steel']:
                     output = "Material must be 'Mild Steel', 'Aluminium', or 'Stainless Steel'"
                     messagebox.showerror("Error", output)
                     log_test_result(
                         test_case="FR2: Invalid material",
-                        input_data=input_data,
+                        input_data=f"Material: {material}",
                         output=output,
                         pass_fail="Fail"
                     )
                     return
+
+            # Validate sub-parts for assemblies
             if part_type == "Assembly":
                 existing_parts = load_existing_parts()
                 for sub_part in sub_parts:
@@ -859,11 +856,24 @@ class SheetMetalClientHub:
                         messagebox.showerror("Error", output)
                         log_test_result(
                             test_case="FR2: Invalid sub-part",
-                            input_data=input_data,
+                            input_data=f"Sub-Part: {sub_part}",
                             output=output,
                             pass_fail="Fail"
                         )
                         return
+
+            # Check rates file
+            rates = self.file_handler.load_rates('rates_global.txt')
+            if not rates:
+                output = "Failed to load rates from data/rates_global.txt"
+                messagebox.showerror("Error", output)
+                log_test_result(
+                    test_case="FR3: Cost calculation with missing rates",
+                    input_data="None",
+                    output=output,
+                    pass_fail="Fail"
+                )
+                return
 
             # Calculate catalogue cost for single parts
             catalogue_cost = 0.0
@@ -875,6 +885,11 @@ class SheetMetalClientHub:
                         if item_id == cat_id:
                             catalogue_cost += price
                             break
+
+            input_data = (f"Part Type: {part_type}, Part ID: {part_id}, Revision: {revision}, Material: {material}, "
+                          f"Thickness: {thickness}, Length: {length}, Width: {width}, Quantity: {quantity}, "
+                          f"Sub-Parts: {sub_parts}, Weldment: {weldment_indicator}, Top-Level Assembly: {top_level_assembly}, "
+                          f"Work Centres: {work_centres}")
 
             part_specs = {
                 'part_type': part_type,

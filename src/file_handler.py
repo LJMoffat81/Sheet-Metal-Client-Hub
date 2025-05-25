@@ -53,7 +53,11 @@ class FileHandler:
             return {}
         try:
             with open(full_path, 'r') as f:
-                return json.load(f)
+                data = f.read().strip()
+                if not data:
+                    logging.warning(f"Rates file {full_path} is empty")
+                    return {}
+                return json.loads(data)
         except json.JSONDecodeError as e:
             logging.error(f"Failed to parse JSON in {full_path}: {e}")
             return {}
