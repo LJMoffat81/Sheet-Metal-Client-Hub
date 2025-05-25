@@ -182,5 +182,47 @@ class TestSystem(unittest.TestCase):
             pass
         self.assertTrue(any(q['part_id'] == 'ASSY-98765' for q in quotes), "Quote should be saved")
 
+    def test_empty_rates_file(self):
+        """Test behavior with empty rates file (FR3-FR4)."""
+        # Clear rates file
+        with open(self.rates_file, 'w') as f:
+            f.write('')
+
+        self.app.username_entry.insert(0, 'laurie')
+        self.app.password_entry.insert(0, 'moffat123')
+        self.app.login()
+        self.app.create_part_input_screen()
+        self.app.notebook.select(1)  # Single Part tab
+        self.app.part_id_entry.delete(0, tk.END)
+        self.app.part_id_entry.insert(0, 'PART-67890')
+        self.app.revision_entry.insert(0, '1')
+        self.app.single_material_var.set('mild steel')
+        self.app.single_thickness_var.set('1.0')
+        self.app.single_lay_flat_length_var.set('1000')
+        self.app.single_lay_flat_width_var.set('500')
+        self.app.work_centre_vars[0].set('Welding')
+        self.app.work_centre_quantity_vars[0].set('500.0')
+        with patch('tkinter.messagebox.showerror') as mock_error:
+            self.app.calculate_and_save()
+            mock_error.assert_called_with("Error", "Failed to load rates from data/rates_global.txt")
+
+        # Restore rates file
+        with open(self.rates_file, 'w') as f:
+            json.dump({
+                "mild_steel_rate": 0.2,
+                "aluminium_rate": 0.2,
+                "stainless_steel_rate": 0.25,
+                "cutting_rate_per_mm": 0.1,
+                "bending_rate_per_bend": 0.05,
+                "welding_rate_per_mm": 0.12,
+                "assembly_rate_per_component": 0.08,
+                "finishing_rate_per_mm2": 0.07,
+                "drilling_rate_per_hole": 0.06,
+                "punching_rate_per_punch": 0.06,
+                "grinding_rate_per_mm2": 0.07,
+                "coating_rate_per_mm2": 0.09,
+                "inspection_rate_per_inspection": 0.04
+            }, f, indent=4)
+
 if __name__ == '__main__':
     unittest.main()
