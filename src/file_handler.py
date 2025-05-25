@@ -105,7 +105,7 @@ class FileHandler:
         """Validate user credentials."""
         # Simple hardcoded user store for testing
         users = {
-            'laurin': 'moffat123',
+            'laurie': 'moffat123',
             'admin': 'admin123'
         }
         try:
