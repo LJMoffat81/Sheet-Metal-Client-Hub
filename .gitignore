@@ -20,3 +20,4 @@ verify_repo.sh
 __pycache__/
 data/log/*.log
 data/log/*.log
+data/log/*.log
