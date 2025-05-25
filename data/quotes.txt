@@ -2,3 +2,5 @@
 {"part_id": "ASSY-98765", "total_cost": 100.0, "customer_name": "Beta Inc", "profit_margin": 15.0}
 {"part_id": "PART-67890", "total_cost": 60.0, "customer_name": "Acme Corp", "profit_margin": 20.0}
 {"part_id": "ASSY-98765", "total_cost": 114.99999999999999, "customer_name": "Beta Inc", "profit_margin": 15.0}
+{"part_id": "PART-33333", "total_cost": 1134.56, "customer_name": "Baynes", "profit_margin": 12.0, "fastener_types_and_counts": []}
+{"part_id": "ASSY-44444", "total_cost": 24.4, "customer_name": "Baynes", "profit_margin": 22.0, "fastener_types_and_counts": []}

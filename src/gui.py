@@ -6,6 +6,18 @@ from file_handler import FileHandler
 from calculator import calculate_cost
 from logger import log_test_result, log_message
 from PIL import Image, ImageTk
+import logging
+
+# Set up logging
+LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
+os.makedirs(LOG_DIR, exist_ok=True)
+log_file = os.path.join(LOG_DIR, 'gui.log')
+
+logging.basicConfig(
+    filename=log_file,
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
 # Check if running in testing mode
 TESTING_MODE = os.environ.get('TESTING_MODE', '0') == '1'
@@ -26,11 +38,13 @@ def load_existing_parts():
                     part_id = line.split(',')[0].strip()
                     if re.match(r"^(PART|ASSY)-[A-Za-z0-9]{5,15}$", part_id):
                         parts.append(part_id)
+        logging.debug(f"Loaded {len(parts)} parts from output.txt")
         return parts
     except FileNotFoundError:
+        logging.error("output.txt not found")
         return []
     except Exception as e:
-        print(f"Error loading parts: {e}")
+        logging.error(f"Error loading parts: {e}")
         return []
 
 def load_parts_catalogue():
@@ -46,18 +60,20 @@ def load_parts_catalogue():
                     try:
                         parts = line.strip().split(',')
                         if len(parts) != 3:
-                            print(f"Skipping malformed line in parts_catalogue.txt: {line.strip()}")
+                            logging.warning(f"Skipping malformed line in parts_catalogue.txt: {line.strip()}")
                             continue
                         item_id, description, price = parts
                         catalogue.append((item_id, description, float(price)))
                     except ValueError as e:
-                        print(f"Error parsing line in parts_catalogue.txt: {line.strip()} - {e}")
+                        logging.error(f"Error parsing line in parts_catalogue.txt: {line.strip()} - {e}")
                         continue
+        logging.debug(f"Loaded {len(catalogue)} items from parts_catalogue.txt")
         return catalogue
     except FileNotFoundError:
+        logging.error("parts_catalogue.txt not found")
         return []
     except Exception as e:
-        print(f"Error loading parts catalogue: {e}")
+        logging.error(f"Error loading parts catalogue: {e}")
         return []
 
 class SheetMetalClientHub:
@@ -69,6 +85,7 @@ class SheetMetalClientHub:
         """
         Initialize the GUI application.
         """
+        logging.info("Initializing SheetMetalClientHub")
         self.root = root
         self.root.title("Sheet Metal Client Hub")
         self.root.geometry("1000x750")
@@ -78,7 +95,7 @@ class SheetMetalClientHub:
             icon_path = os.path.join(BASE_DIR, 'docs/images/laser_gear.ico')
             self.root.iconbitmap(icon_path)
         except tk.TclError:
-            print("Warning: Could not load laser_gear.ico, using default icon")
+            logging.warning("Could not load laser_gear.ico, using default icon")
         self.file_handler = FileHandler()
         self.role = None
         self.single_selected_sub_parts = []
@@ -101,11 +118,13 @@ class SheetMetalClientHub:
                 messagebox.showinfo(title, message)
             elif level == 'error':
                 messagebox.showerror(title, message)
+        logging.log(logging.INFO if level == 'info' else logging.ERROR, f"{title}: {message}")
 
     def create_footer(self, frame):
         """
         Create the footer for all screens with version and help button.
         """
+        logging.debug("Creating footer")
         frame.configure(bg="lightgrey")
         tk.Label(frame, text="Version 1.0", font=("Arial", 10), bg="lightgrey").pack(side=tk.LEFT, padx=10, pady=5)
         tk.Button(frame, text="Help", command=self.show_help, font=("Arial", 10), bg="lightgrey").pack(side=tk.RIGHT, padx=10, pady=5)
@@ -114,6 +133,7 @@ class SheetMetalClientHub:
         """
         Display a help guide for the application.
         """
+        logging.info("Displaying help guide")
         guide = (
             "Sheet Metal Client Hub - User Guide\n\n"
             "1. Login: Enter username and password (e.g., laurie:moffat123).\n"
@@ -134,6 +154,7 @@ class SheetMetalClientHub:
         """
         Create the login screen for user authentication (FR1).
         """
+        logging.info("Creating login screen")
         self.clear_screen()
         main_frame = tk.Frame(self.root)
         main_frame.place(relx=0.5, rely=0.5, anchor="center")
@@ -157,6 +178,7 @@ class SheetMetalClientHub:
         """
         Clear username and password entry fields.
         """
+        logging.debug("Clearing login fields")
         self.username_entry.delete(0, tk.END)
         self.password_entry.delete(0, tk.END)
         self.username_entry.focus_set()
@@ -171,6 +193,7 @@ class SheetMetalClientHub:
         """
         Handle login button click and validate credentials (FR1).
         """
+        logging.info("Attempting login")
         username = self.username_entry.get().strip()
         password = self.password_entry.get().strip()
         if not username or not password:
@@ -212,6 +235,7 @@ class SheetMetalClientHub:
         Prompt for admin credentials in a dialog window.
         Returns True if valid, False otherwise.
         """
+        logging.info("Prompting for admin credentials")
         if TESTING_MODE:
             log_message('info', 'Bypassing admin credential prompt in testing mode')
             return True
@@ -262,12 +286,14 @@ class SheetMetalClientHub:
         dialog.bind('<Return>', lambda event: validate())
 
         self.root.wait_window(dialog)
+        logging.debug(f"Admin credential prompt result: {result['valid']}")
         return result["valid"]
 
     def update_quantity_entry_state(self):
         """
         Enable or disable the custom quantity entry based on the quantity dropdown selection.
         """
+        logging.debug("Updating quantity entry state")
         if self.assembly_quantity_var.get() == "Other":
             self.assembly_custom_quantity_entry.config(state='normal')
         else:
@@ -283,6 +309,7 @@ class SheetMetalClientHub:
         - Assembly (tab_index=0): Load existing parts from data/output.txt.
         - Single Part (tab_index=1): Load fasteners/inserts from data/parts_catalogue.txt.
         """
+        logging.debug(f"Updating sub-parts dropdown for tab {tab_index}")
         if tab_index == 1:
             var = self.single_sub_parts_var
             option = self.single_sub_parts_option
@@ -315,6 +342,7 @@ class SheetMetalClientHub:
         """
         Update the Selected Items label to include material, sub-parts, and fasteners.
         """
+        logging.debug(f"Updating selected items for tab {tab_index}")
         if tab_index == 1:  # Single Part
             material = self.single_material_var.get()
             fastener = f"{self.fastener_type_var.get()} ({self.fastener_count_var.get()})" if self.fastener_type_var.get() != "None" and int(self.fastener_count_var.get()) > 0 else ""
@@ -333,6 +361,7 @@ class SheetMetalClientHub:
         """
         Add the selected sub-part or fastener to the list of selected items.
         """
+        logging.debug(f"Adding sub-part for tab {tab_index}")
         if tab_index == 1:
             selected_item = self.single_sub_parts_var.get()
             selected_list = self.single_selected_sub_parts
@@ -355,6 +384,7 @@ class SheetMetalClientHub:
         """
         Clear all selected sub-parts or fasteners and update the display.
         """
+        logging.debug(f"Clearing sub-parts for tab {tab_index}")
         if tab_index == 1:
             self.single_selected_sub_parts = []
             self.fastener_type_var.set("None")
@@ -368,6 +398,7 @@ class SheetMetalClientHub:
         """
         Update the quantity dropdown based on the selected WorkCentre, including sub-options for Welding and Coating.
         """
+        logging.debug(f"Updating quantity dropdown for index {index}, work centre {work_centre}")
         qty_dropdown = self.quantity_dropdowns[index]
         qty_var = self.work_centre_quantity_vars[index]
         sub_option_var = self.work_centre_sub_option_vars[index]
@@ -419,6 +450,7 @@ class SheetMetalClientHub:
         """
         Navigate to admin settings screen, prompting for credentials if not admin.
         """
+        logging.info("Navigating to settings")
         if self.role == "Admin":
             self.create_admin_screen()
         elif self.prompt_admin_credentials():
@@ -437,6 +469,7 @@ class SheetMetalClientHub:
         """
         Return to the login screen and reset role.
         """
+        logging.info("Returning to login screen")
         self.role = None
         self.create_login_screen()
         log_test_result(
@@ -450,6 +483,7 @@ class SheetMetalClientHub:
         """
         Reset all part input fields to default values.
         """
+        logging.info("Resetting part input fields")
         self.part_id_entry.delete(0, tk.END)
         self.part_id_entry.insert(0, "ASSY-")
         self.revision_entry.delete(0, tk.END)
@@ -497,6 +531,7 @@ class SheetMetalClientHub:
         """
         Create the part input screen for entering part specifications (FR2).
         """
+        logging.info("Creating part input screen")
         self.clear_screen()
 
         # Top frame for title and image
@@ -512,10 +547,10 @@ class SheetMetalClientHub:
             image_label.image = photo
             image_label.pack(pady=5)
         except FileNotFoundError:
-            print(f"Warning: laser_gear.png not found at {image_path}. Using fallback.")
+            logging.warning(f"laser_gear.png not found at {image_path}. Using fallback.")
             tk.Label(top_frame, text="[Laser Gear Image]", font=("Arial", 10)).pack(pady=5)
         except Exception as e:
-            print(f"Error loading laser_gear image: {e}")
+            logging.error(f"Error loading laser_gear image: {e}")
             tk.Label(top_frame, text="[Laser Gear Image]", font=("Arial", 10)).pack(pady=5)
 
         tk.Label(top_frame, text="Manufacturing Input Screen", font=("Arial", 16, "bold")).pack(pady=5)
@@ -708,6 +743,7 @@ class SheetMetalClientHub:
         """
         Handle tab change event to update Part ID prefix and sub-parts dropdown.
         """
+        logging.debug("Tab changed")
         selected_tab = self.notebook.index(self.notebook.select())
         self.update_sub_parts_dropdown(selected_tab)
         self.part_id_entry.delete(0, tk.END)
@@ -719,6 +755,7 @@ class SheetMetalClientHub:
         """
         Calculate cost and save output based on part specifications (FR2, FR3, FR4, FR5).
         """
+        logging.info("Calculating and saving part specifications")
         try:
             selected_tab = self.notebook.index(self.notebook.select())
             part_type = "Single Part" if selected_tab == 1 else "Assembly"
@@ -1017,7 +1054,7 @@ class SheetMetalClientHub:
                 )
                 return
 
-            self.file_handler.save_output(part_id, revision, material, thickness, length, width, quantity, total_cost)
+            self.file_handler.save_output(part_id, revision, material, thickness, length, width, quantity, total_cost, fastener_types_and_counts, work_centres)
             output = f"Cost calculated: £{total_cost}\nSaved to data/output.txt"
             self.show_message("Success", output, 'info')
             log_test_result(
@@ -1053,6 +1090,7 @@ class SheetMetalClientHub:
         """
         Create the quote generation screen (FR7).
         """
+        logging.info("Creating quote screen")
         self.clear_screen()
         main_frame = tk.Frame(self.root)
         main_frame.place(relx=0.5, rely=0.5, anchor="center")
@@ -1073,6 +1111,7 @@ class SheetMetalClientHub:
         """
         Generate and save a quote (FR7).
         """
+        logging.info("Generating quote")
         try:
             customer_name = self.customer_entry.get().strip()
             profit_margin = self.margin_entry.get().strip()
@@ -1101,7 +1140,8 @@ class SheetMetalClientHub:
                 )
                 return
 
-            self.file_handler.save_quote(part_id, total_cost, customer_name, profit_margin)
+            fastener_types_and_counts = [(self.fastener_type_var.get(), int(self.fastener_count_var.get()))] if self.fastener_type_var.get() != "None" and int(self.fastener_count_var.get()) > 0 else []
+            self.file_handler.save_quote(part_id, total_cost, customer_name, profit_margin, fastener_types_and_counts)
             output = "Quote generated and saved to data/quotes.txt"
             self.show_message("Success", output, 'info')
             log_test_result(
@@ -1134,6 +1174,7 @@ class SheetMetalClientHub:
         """
         Create the admin screen for updating rates (FR6).
         """
+        logging.info("Creating admin settings screen")
         self.clear_screen()
         main_frame = tk.Frame(self.root)
         main_frame.place(relx=0.5, rely=0.5, anchor="center")
@@ -1155,6 +1196,7 @@ class SheetMetalClientHub:
         """
         Update a rate in data/rates_global.txt (FR6).
         """
+        logging.info("Updating rate")
         try:
             rate_key = self.rate_key_entry.get().strip()
             rate_value = self.rate_value_entry.get().strip()
@@ -1215,6 +1257,7 @@ class SheetMetalClientHub:
         """
         Clear all widgets from the current screen.
         """
+        logging.debug("Clearing screen")
         for widget in self.root.winfo_children():
             widget.destroy()
 
@@ -1224,7 +1267,7 @@ if __name__ == "__main__":
         app = SheetMetalClientHub(root)
         root.mainloop()
     except Exception as e:
-        print(f"Error starting GUI: {e}")
+        logging.error(f"Error starting GUI: {e}")
         log_test_result(
             test_case="GUI Initialization",
             input_data="None",

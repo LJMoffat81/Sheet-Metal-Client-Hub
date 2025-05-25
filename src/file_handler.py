@@ -3,8 +3,9 @@ import logging
 import os
 
 # Set up logging
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-log_file = os.path.join(BASE_DIR, 'data', 'log', 'file_handler.log')
+LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
+os.makedirs(LOG_DIR, exist_ok=True)
+log_file = os.path.join(LOG_DIR, 'file_handler.log')
 
 logging.basicConfig(
     filename=log_file,
@@ -76,11 +77,13 @@ class FileHandler:
             logging.error(f"Error loading rates from {filepath}: {str(e)}")
             return {}
 
-    def save_output(self, part_id, revision, material, thickness, length, width, quantity, total_cost):
-        """Save output data to output.txt, avoiding duplicates."""
+    def save_output(self, part_id, revision, material, thickness, length, width, quantity, total_cost, fastener_types_and_counts=None, work_centres=None):
+        """Save output data to output.txt, including fasteners and work centre sub-options, avoiding duplicates."""
         filepath = os.path.join(self.BASE_DIR, 'data', 'output.txt')
         logging.debug(f"Saving output to: {filepath}")
-        output_data = f"{part_id},{revision},{material},{thickness},{length},{width},{quantity},{total_cost}"
+        fastener_str = json.dumps(fastener_types_and_counts or [])
+        work_centres_str = json.dumps(work_centres or [])
+        output_data = f"{part_id},{revision},{material},{thickness},{length},{width},{quantity},{total_cost},{fastener_str},{work_centres_str}"
         try:
             existing = set()
             if os.path.exists(filepath):
@@ -92,15 +95,16 @@ class FileHandler:
         except Exception as e:
             logging.error(f"Error saving output to {filepath}: {str(e)}")
 
-    def save_quote(self, part_id, total_cost, customer_name, profit_margin):
-        """Save quote data to quotes.txt, avoiding duplicates."""
+    def save_quote(self, part_id, total_cost, customer_name, profit_margin, fastener_types_and_counts=None):
+        """Save quote data to quotes.txt, including fasteners, avoiding duplicates."""
         filepath = os.path.join(self.BASE_DIR, 'data', 'quotes.txt')
         logging.debug(f"Saving quote to: {filepath}")
         quote_data = json.dumps({
             'part_id': part_id,
             'total_cost': total_cost * (1 + profit_margin / 100),
             'customer_name': customer_name,
-            'profit_margin': profit_margin
+            'profit_margin': profit_margin,
+            'fastener_types_and_counts': fastener_types_and_counts or []
         })
         try:
             existing = set()

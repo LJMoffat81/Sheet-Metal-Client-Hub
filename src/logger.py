@@ -2,8 +2,9 @@ import logging
 import os
 
 # Set up logging to file
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-log_file = os.path.join(BASE_DIR, 'data', 'log', 'gui.log')
+LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
+os.makedirs(LOG_DIR, exist_ok=True)
+log_file = os.path.join(LOG_DIR, 'gui.log')
 
 logging.basicConfig(
     filename=log_file,

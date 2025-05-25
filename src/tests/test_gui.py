@@ -64,9 +64,73 @@ class TestGUI(unittest.TestCase):
         self.assertIsNotNone(self.app.notebook)
         self.assertEqual(self.app.notebook.winfo_exists(), 1)
 
+    def test_welding_sub_option_valid(self):
+        self.app.create_part_input_screen()
+        self.app.notebook.select(1)  # Single Part tab
+        self.app.part_id_entry.delete(0, tk.END)
+        self.app.part_id_entry.insert(0, 'PART-67890')
+        self.app.revision_entry.insert(0, 'A')
+        self.app.single_quantity_var.set('10')
+        self.app.work_centre_vars[0].set('Welding')
+        self.app.work_centre_quantity_vars[0].set('100')
+        self.app.work_centre_sub_option_vars[0].set('MIG')
+        self.app.calculate_and_save()
+        with open(self.log_file, 'r') as f:
+            log_content = f.read()
+            self.assertIn("Success: Cost calculated", log_content)
+
+    def test_coating_sub_option_valid(self):
+        self.app.create_part_input_screen()
+        self.app.notebook.select(1)  # Single Part tab
+        self.app.part_id_entry.delete(0, tk.END)
+        self.app.part_id_entry.insert(0, 'PART-67891')
+        self.app.revision_entry.insert(0, 'A')
+        self.app.single_quantity_var.set('5')
+        self.app.work_centre_vars[0].set('Coating')
+        self.app.work_centre_quantity_vars[0].set('1000')
+        self.app.work_centre_sub_option_vars[0].set('Painting')
+        self.app.calculate_and_save()
+        with open(self.log_file, 'r') as f:
+            log_content = f.read()
+            self.assertIn("Success: Cost calculated", log_content)
+
+    def test_fastener_selection_valid(self):
+        self.app.create_part_input_screen()
+        self.app.notebook.select(1)  # Single Part tab
+        self.app.part_id_entry.delete(0, tk.END)
+        self.app.part_id_entry.insert(0, 'PART-67892')
+        self.app.revision_entry.insert(0, 'A')
+        self.app.single_quantity_var.set('20')
+        self.app.fastener_type_var.set('Bolts')
+        self.app.fastener_count_var.set('50')
+        self.app.work_centre_vars[0].set('Cutting')
+        self.app.work_centre_quantity_vars[0].set('3000')
+        self.app.calculate_and_save()
+        with open(self.log_file, 'r') as f:
+            log_content = f.read()
+            self.assertIn("Success: Cost calculated", log_content)
+
+    def test_single_part_quantity_invalid(self):
+        self.app.create_part_input_screen()
+        self.app.notebook.select(1)  # Single Part tab
+        self.app.part_id_entry.delete(0, tk.END)
+        self.app.part_id_entry.insert(0, 'PART-67893')
+        self.app.revision_entry.insert(0, 'A')
+        self.app.single_quantity_var.set('Other')
+        self.app.single_custom_quantity_entry.insert(0, '-10')
+        self.app.work_centre_vars[0].set('Cutting')
+        self.app.work_centre_quantity_vars[0].set('100')
+        self.app.calculate_and_save()
+        with open(self.log_file, 'r') as f:
+            log_content = f.read()
+            self.assertIn("Error: Quantity must be a positive integer", log_content)
+
     def test_part_input_invalid_dimensions(self):
         self.app.create_part_input_screen()
         self.app.notebook.select(1)  # Single Part tab
+        self.app.part_id_entry.delete(0, tk.END)
+        self.app.part_id_entry.insert(0, 'PART-12345')
+        self.app.revision_entry.insert(0, 'A')
         self.app.single_lay_flat_length_var.set('-100')
         self.app.calculate_and_save()
         with open(self.log_file, 'r') as f:
