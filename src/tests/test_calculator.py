@@ -2,11 +2,19 @@ import unittest
 from unittest.mock import patch
 from file_handler import FileHandler
 from calculator import calculate_cost
+import logging
+import os
 
 class TestCalculator(unittest.TestCase):
     def setUp(self):
         self.file_handler = FileHandler()
         self.rates = self.file_handler.load_rates()
+        self.log_file = os.path.join('data', 'log', 'calculator.log')
+        logging.basicConfig(
+            filename=self.log_file,
+            level=logging.DEBUG,
+            format='%(asctime)s - %(levelname)s - %(message)s'
+        )
 
     def test_calculate_cost_single_part(self):
         part_data = {
@@ -21,6 +29,9 @@ class TestCalculator(unittest.TestCase):
         }
         cost = calculate_cost(part_data, self.rates)
         self.assertAlmostEqual(cost, 51.0, places=2)
+        with open(self.log_file, 'r') as f:
+            log_content = f.read()
+            self.assertIn(f"Calculated cost: {cost}", log_content)
 
     def test_calculate_cost_assembly(self):
         part_data = {
@@ -35,6 +46,9 @@ class TestCalculator(unittest.TestCase):
         }
         cost = calculate_cost(part_data, self.rates)
         self.assertAlmostEqual(cost, 8.0, places=2)
+        with open(self.log_file, 'r') as f:
+            log_content = f.read()
+            self.assertIn(f"Calculated cost: {cost}", log_content)
 
     def test_calculate_cost_invalid_work_centre(self):
         part_data = {
@@ -47,10 +61,11 @@ class TestCalculator(unittest.TestCase):
             'work_centres': [('Invalid', 100)],
             'catalogue_cost': 0.0
         }
-        with self.assertLogs(level='ERROR') as cm:
-            cost = calculate_cost(part_data, self.rates)
-            self.assertEqual(cost, 0.0)
-            self.assertTrue(any("Missing rate" in msg for msg in cm.output))
+        cost = calculate_cost(part_data, self.rates)
+        self.assertEqual(cost, 0.0)
+        with open(self.log_file, 'r') as f:
+            log_content = f.read()
+            self.assertIn("Missing rate", log_content)
 
     def test_calculate_cost_missing_rate(self):
         part_data = {
@@ -63,10 +78,11 @@ class TestCalculator(unittest.TestCase):
             'work_centres': [('Cutting', 100)],
             'catalogue_cost': 0.0
         }
-        with self.assertLogs(level='ERROR') as cm:
-            cost = calculate_cost(part_data, self.rates)
-            self.assertEqual(cost, 0.0)
-            self.assertTrue(any("Missing rate" in msg for msg in cm.output))
+        cost = calculate_cost(part_data, self.rates)
+        self.assertEqual(cost, 0.0)
+        with open(self.log_file, 'r') as f:
+            log_content = f.read()
+            self.assertIn("Missing rate", log_content)
 
 if __name__ == '__main__':
     unittest.main()

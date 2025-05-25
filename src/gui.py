@@ -4,8 +4,11 @@ import os
 import re
 from file_handler import FileHandler
 from calculator import calculate_cost
-from logger import log_test_result
+from logger import log_test_result, log_message
 from PIL import Image, ImageTk
+
+# Check if running in testing mode
+TESTING_MODE = os.environ.get('TESTING_MODE', '0') == '1'
 
 # Get the absolute path to the repository root
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -76,7 +79,7 @@ class SheetMetalClientHub:
             self.root.iconbitmap(icon_path)
         except tk.TclError:
             print("Warning: Could not load laser_gear.ico, using default icon")
-        self.file_handler = FileHandler()  # Create FileHandler instance
+        self.file_handler = FileHandler()
         self.role = None
         self.single_selected_sub_parts = []
         self.assembly_selected_sub_parts = []
@@ -84,6 +87,16 @@ class SheetMetalClientHub:
         self.last_total_cost = None
         self.work_centre_quantity_vars = [tk.StringVar(value="0") for _ in range(10)]
         self.create_login_screen()
+
+    def show_message(self, title, message, level='info'):
+        """Display message or log it based on testing mode."""
+        if TESTING_MODE:
+            log_message(level, f"{title}: {message}")
+        else:
+            if level == 'info':
+                messagebox.showinfo(title, message)
+            elif level == 'error':
+                messagebox.showerror(title, message)
 
     def create_footer(self, frame):
         """
@@ -105,7 +118,7 @@ class SheetMetalClientHub:
             "4. Admin: Update rates (e.g., mild_steel_rate) if admin.\n"
             "For support, contact [support email]."
         )
-        messagebox.showinfo("Help - Sheet Metal Client Hub", guide)
+        self.show_message("Help - Sheet Metal Client Hub", guide, 'info')
         log_test_result(
             test_case="Help Guide Accessed",
             input_data="None",
@@ -158,7 +171,7 @@ class SheetMetalClientHub:
         password = self.password_entry.get().strip()
         if not username or not password:
             output = "Username and password cannot be empty"
-            messagebox.showerror("Error", output)
+            self.show_message("Error", output, 'error')
             log_test_result(
                 test_case="FR1: Login with empty fields",
                 input_data=f"Username: {username}, Password: [hidden]",
@@ -169,7 +182,7 @@ class SheetMetalClientHub:
         if self.file_handler.validate_credentials(username, password):
             self.role = "Admin" if username == "admin" else "User"
             output = f"Login successful as {self.role}"
-            messagebox.showinfo("Success", output)
+            self.show_message("Success", output, 'info')
             log_test_result(
                 test_case=f"FR1: Valid {self.role} login",
                 input_data=f"Username: {username}, Password: [hidden]",
@@ -182,7 +195,7 @@ class SheetMetalClientHub:
                 self.create_admin_screen()
         else:
             output = "Invalid username or password"
-            messagebox.showerror("Error", output)
+            self.show_message("Error", output, 'error')
             log_test_result(
                 test_case="FR1: Invalid login",
                 input_data=f"Username: {username}, Password: [hidden]",
@@ -195,6 +208,10 @@ class SheetMetalClientHub:
         Prompt for admin credentials in a dialog window.
         Returns True if valid, False otherwise.
         """
+        if TESTING_MODE:
+            log_message('info', 'Bypassing admin credential prompt in testing mode')
+            return True
+
         dialog = Toplevel(self.root)
         dialog.title("Admin Login")
         dialog.geometry("300x200")
@@ -216,7 +233,7 @@ class SheetMetalClientHub:
             username = admin_username_entry.get().strip()
             password = admin_password_entry.get().strip()
             if not username or not password:
-                messagebox.showerror("Error", "Username and password cannot be empty", parent=dialog)
+                self.show_message("Error", "Username and password cannot be empty", 'error')
                 log_test_result(
                     test_case="Admin Credential Prompt: Empty fields",
                     input_data=f"Username: {username}, Password: [hidden]",
@@ -228,7 +245,7 @@ class SheetMetalClientHub:
                 result["valid"] = True
                 dialog.destroy()
             else:
-                messagebox.showerror("Error", "Invalid admin credentials", parent=dialog)
+                self.show_message("Error", "Invalid admin credentials", 'error')
                 log_test_result(
                     test_case="Admin Credential Prompt: Invalid credentials",
                     input_data=f"Username: {username}, Password: [hidden]",
@@ -384,7 +401,7 @@ class SheetMetalClientHub:
             self.role = "Admin"
             self.create_admin_screen()
         else:
-            messagebox.showerror("Error", "Admin access denied")
+            self.show_message("Error", "Admin access denied", 'error')
             log_test_result(
                 test_case="Settings Access: Denied",
                 input_data="Non-admin user",
@@ -671,7 +688,7 @@ class SheetMetalClientHub:
                     thickness = float(thickness)
                     if not (50 <= length <= 3000):
                         output = "Lay-Flat length must be between 50 and 3000 mm"
-                        messagebox.showerror("Error", output)
+                        self.show_message("Error", output, 'error')
                         log_test_result(
                             test_case="FR2: Invalid lay-flat length",
                             input_data=f"Length: {length}",
@@ -681,7 +698,7 @@ class SheetMetalClientHub:
                         return
                     if not (50 <= width <= 1500):
                         output = "Lay-Flat width must be between 50 and 1500 mm"
-                        messagebox.showerror("Error", output)
+                        self.show_message("Error", output, 'error')
                         log_test_result(
                             test_case="FR2: Invalid lay-flat width",
                             input_data=f"Width: {width}",
@@ -691,7 +708,7 @@ class SheetMetalClientHub:
                         return
                     if not (1.0 <= thickness <= 3.0):
                         output = "Thickness must be between 1.0 and 3.0 mm"
-                        messagebox.showerror("Error", output)
+                        self.show_message("Error", output, 'error')
                         log_test_result(
                             test_case="FR2: Invalid thickness",
                             input_data=f"Thickness: {thickness}",
@@ -701,7 +718,7 @@ class SheetMetalClientHub:
                         return
                 except ValueError:
                     output = "Invalid numeric input for dimensions or thickness"
-                    messagebox.showerror("Error", output)
+                    self.show_message("Error", output, 'error')
                     log_test_result(
                         test_case="FR2: Invalid numeric input",
                         input_data=f"Length: {length}, Width: {width}, Thickness: {thickness}",
@@ -728,7 +745,7 @@ class SheetMetalClientHub:
             # Validate Part ID and Revision
             if not all([part_id, revision]):
                 output = "Part ID and Revision are required"
-                messagebox.showerror("Error", output)
+                self.show_message("Error", output, 'error')
                 log_test_result(
                     test_case="FR2: Part input with empty fields",
                     input_data=f"Part ID: {part_id}, Revision: {revision}",
@@ -745,7 +762,7 @@ class SheetMetalClientHub:
                     qty = self.work_centre_quantity_vars[i].get()
                     if qty == "0":
                         output = f"Quantity for {wc} in Operation {(i+1)*10} must be selected"
-                        messagebox.showerror("Error", output)
+                        self.show_message("Error", output, 'error')
                         log_test_result(
                             test_case="FR2: Missing WorkCentre quantity",
                             input_data=f"Operation {(i+1)*10}, WorkCentre: {wc}",
@@ -762,7 +779,7 @@ class SheetMetalClientHub:
 
             if not work_centres:
                 output = "At least one WorkCentre operation must be selected"
-                messagebox.showerror("Error", output)
+                self.show_message("Error", output, 'error')
                 log_test_result(
                     test_case="FR2: No WorkCentre operations selected",
                     input_data=input_data,
@@ -774,7 +791,7 @@ class SheetMetalClientHub:
             if part_type == "Assembly":
                 if not quantity:
                     output = "Quantity is required for assemblies"
-                    messagebox.showerror("Error", output)
+                    self.show_message("Error", output, 'error')
                     log_test_result(
                         test_case="FR2: Assembly with no quantity",
                         input_data=input_data,
@@ -784,7 +801,7 @@ class SheetMetalClientHub:
                     return
                 if not sub_parts:
                     output = "At least one sub-part must be selected for an assembly"
-                    messagebox.showerror("Error", output)
+                    self.show_message("Error", output, 'error')
                     log_test_result(
                         test_case="FR2: Assembly with no sub-parts",
                         input_data=input_data,
@@ -798,7 +815,7 @@ class SheetMetalClientHub:
             expected_prefix = "PART-" if part_type == "Single Part" else "ASSY-"
             if not part_id.startswith(expected_prefix) or not re.match(rf"^{expected_prefix}[A-Za-z0-9]{{5,15}}$", part_id):
                 output = f"Part ID must be {expected_prefix}[5-15 alphanumeric]"
-                messagebox.showerror("Error", output)
+                self.show_message("Error", output, 'error')
                 log_test_result(
                     test_case="FR2: Invalid part ID",
                     input_data=input_data,
@@ -809,7 +826,7 @@ class SheetMetalClientHub:
             if part_type == "Single Part":
                 if material not in ['mild steel', 'aluminium', 'stainless steel']:
                     output = "Material must be 'Mild Steel', 'Aluminium', or 'Stainless Steel'"
-                    messagebox.showerror("Error", output)
+                    self.show_message("Error", output, 'error')
                     log_test_result(
                         test_case="FR2: Invalid material",
                         input_data=input_data,
@@ -819,7 +836,7 @@ class SheetMetalClientHub:
                     return
             if part_type == "Assembly" and quantity <= 0:
                 output = "Quantity must be a positive integer"
-                messagebox.showerror("Error", output)
+                self.show_message("Error", output, 'error')
                 log_test_result(
                     test_case="FR2: Invalid quantity",
                     input_data=input_data,
@@ -832,7 +849,7 @@ class SheetMetalClientHub:
                 for sub_part in sub_parts:
                     if sub_part not in existing_parts:
                         output = f"Sub-part {sub_part} does not exist in the system"
-                        messagebox.showerror("Error", output)
+                        self.show_message("Error", output, 'error')
                         log_test_result(
                             test_case="FR2: Invalid sub-part",
                             input_data=input_data,
@@ -868,10 +885,10 @@ class SheetMetalClientHub:
                 'work_centres': work_centres
             }
 
-            rates = self.file_handler.load_rates('rates_global.txt')
+            rates = self.file_handler.load_rates('data/rates_global.txt')
             if not rates:
                 output = "Failed to load rates from data/rates_global.txt"
-                messagebox.showerror("Error", output)
+                self.show_message("Error", output, 'error')
                 log_test_result(
                     test_case="FR3: Cost calculation with missing rates",
                     input_data=input_data,
@@ -883,7 +900,7 @@ class SheetMetalClientHub:
             total_cost = calculate_cost(part_specs, rates)
             if total_cost == 0.0:
                 output = "Cost calculation failed, check inputs or rates"
-                messagebox.showerror("Error", output)
+                self.show_message("Error", output, 'error')
                 log_test_result(
                     test_case="FR3-FR4: Cost calculation failure",
                     input_data=input_data,
@@ -894,7 +911,7 @@ class SheetMetalClientHub:
 
             self.file_handler.save_output(part_id, revision, material, thickness, length, width, quantity, total_cost)
             output = f"Cost calculated: £{total_cost}\nSaved to data/output.txt"
-            messagebox.showinfo("Success", output)
+            self.show_message("Success", output, 'info')
             log_test_result(
                 test_case="FR3-FR4-FR5: Cost calculation and output storage",
                 input_data=input_data,
@@ -907,7 +924,7 @@ class SheetMetalClientHub:
             self.last_total_cost = total_cost
         except ValueError:
             output = "Invalid input: Quantity must be valid"
-            messagebox.showerror("Error", output)
+            self.show_message("Error", output, 'error')
             log_test_result(
                 test_case="FR2: Invalid numeric input",
                 input_data=input_data,
@@ -916,7 +933,7 @@ class SheetMetalClientHub:
             )
         except Exception as e:
             output = f"Unexpected error: {e}"
-            messagebox.showerror("Error", output)
+            self.show_message("Error", output, 'error')
             log_test_result(
                 test_case="FR2-FR3-FR4: Unexpected error",
                 input_data=input_data,
@@ -955,7 +972,7 @@ class SheetMetalClientHub:
 
             if not customer_name:
                 output = "Customer name cannot be empty"
-                messagebox.showerror("Error", output)
+                self.show_message("Error", output, 'error')
                 log_test_result(
                     test_case="FR7: Quote with empty customer name",
                     input_data=input_data,
@@ -967,7 +984,7 @@ class SheetMetalClientHub:
             profit_margin = float(profit_margin)
             if profit_margin < 0:
                 output = "Profit margin cannot be negative"
-                messagebox.showerror("Error", output)
+                self.show_message("Error", output, 'error')
                 log_test_result(
                     test_case="FR7: Quote with negative margin",
                     input_data=input_data,
@@ -978,7 +995,7 @@ class SheetMetalClientHub:
 
             self.file_handler.save_quote(part_id, total_cost, customer_name, profit_margin)
             output = "Quote generated and saved to data/quotes.txt"
-            messagebox.showinfo("Success", output)
+            self.show_message("Success", output, 'info')
             log_test_result(
                 test_case="FR7: Generate quote",
                 input_data=input_data,
@@ -988,7 +1005,7 @@ class SheetMetalClientHub:
             self.create_part_input_screen()
         except ValueError:
             output = "Invalid profit margin: please enter a numeric value"
-            messagebox.showerror("Error", output)
+            self.show_message("Error", output, 'error')
             log_test_result(
                 test_case="FR7: Quote with invalid margin",
                 input_data=input_data,
@@ -997,7 +1014,7 @@ class SheetMetalClientHub:
             )
         except Exception as e:
             output = f"Unexpected error: {e}"
-            messagebox.showerror("Error", output)
+            self.show_message("Error", output, 'error')
             log_test_result(
                 test_case="FR7: Unexpected error",
                 input_data=input_data,
@@ -1037,7 +1054,7 @@ class SheetMetalClientHub:
 
             if not rate_key:
                 output = "Rate key cannot be empty"
-                messagebox.showerror("Error", output)
+                self.show_message("Error", output, 'error')
                 log_test_result(
                     test_case="FR6: Update rate with empty key",
                     input_data=input_data,
@@ -1049,7 +1066,7 @@ class SheetMetalClientHub:
             rate_value = float(rate_value)
             if rate_value < 0:
                 output = "Rate value cannot be negative"
-                messagebox.showerror("Error", output)
+                self.show_message("Error", output, 'error')
                 log_test_result(
                     test_case="FR6: Update rate with negative value",
                     input_data=input_data,
@@ -1060,7 +1077,7 @@ class SheetMetalClientHub:
 
             self.file_handler.update_rates(rate_key, rate_value)
             output = f"Rate '{rate_key}' updated to {rate_value} in data/rates_global.txt"
-            messagebox.showinfo("Success", output)
+            self.show_message("Success", output, 'info')
             log_test_result(
                 test_case="FR6: Update rate",
                 input_data=input_data,
@@ -1069,7 +1086,7 @@ class SheetMetalClientHub:
             )
         except ValueError:
             output = "Invalid rate value: please enter a numeric value"
-            messagebox.showerror("Error", output)
+            self.show_message("Error", output, 'error')
             log_test_result(
                 test_case="FR6: Update rate with invalid value",
                 input_data=input_data,
@@ -1078,7 +1095,7 @@ class SheetMetalClientHub:
             )
         except Exception as e:
             output = f"Unexpected error: {e}"
-            messagebox.showerror("Error", output)
+            self.show_message("Error", output, 'error')
             log_test_result(
                 test_case="FR6: Unexpected error",
                 input_data=input_data,

@@ -3,8 +3,11 @@ import logging
 import os
 
 # Set up logging
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+log_file = os.path.join(BASE_DIR, 'data', 'log', 'file_handler.log')
+
 logging.basicConfig(
-    filename='file_handler.log',
+    filename=log_file,
     level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
