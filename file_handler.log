@@ -892,3 +892,18 @@
 2025-05-25 16:17:40,085 - DEBUG - STREAM b'sRGB' 41 1
 2025-05-25 16:17:40,085 - DEBUG - STREAM b'IDAT' 54 8192
 2025-05-25 16:17:40,789 - INFO - GUI launched successfully
+2025-05-25 16:21:06,282 - DEBUG - Checking if file exists: C:\Users\Laurie\AppData\Local\Temp\tmp467uejez/missing.txt
+2025-05-25 16:21:06,283 - DEBUG - Checking if file exists: C:\Users\Laurie\AppData\Local\Temp\tmp88hww3q2/exists.txt
+2025-05-25 16:21:06,284 - DEBUG - Reading file: C:\Users\Laurie\AppData\Local\Temp\tmp6c34rwfb/test.txt
+2025-05-25 16:21:06,284 - ERROR - File not found: C:\Users\Laurie\AppData\Local\Temp\tmp6c34rwfb/test.txt
+2025-05-25 16:21:06,284 - DEBUG - Processing file: test.txt
+2025-05-25 16:21:06,287 - DEBUG - Reading file: C:\Users\Laurie\AppData\Local\Temp\tmphuxi58vr/
+2025-05-25 16:21:06,288 - DEBUG - Processing file: 
+2025-05-25 16:21:06,290 - DEBUG - Reading file: C:\Users\Laurie\AppData\Local\Temp\tmpd76gjilq/test.txt
+2025-05-25 16:21:06,292 - DEBUG - Writing to file: C:\Users\Laurie\AppData\Local\Temp\tmp1js51jbb/output.txt
+2025-05-25 16:21:07,713 - INFO - GUI launched successfully
+2025-05-25 16:21:27,453 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:21:27,453 - INFO - Credentials validated for user: laurie
+2025-05-25 16:21:29,350 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:21:29,350 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:21:29,350 - DEBUG - STREAM b'IDAT' 54 8192

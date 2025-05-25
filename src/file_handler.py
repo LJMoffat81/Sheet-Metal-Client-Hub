@@ -1,128 +1,153 @@
-import os
 import json
 import logging
+import os
 
 # Set up logging
-logging.basicConfig(filename='file_handler.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-
-# Define BASE_DIR as the project root
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+logging.basicConfig(
+    filename='file_handler.log',
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
 class FileHandler:
-    def process_file(self, filename):
-        """Return the full path for a given filename."""
-        return os.path.join(BASE_DIR, 'data', filename)
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    def __init__(self):
+        pass
 
     def read_file(self, filename):
         """Read content from a file."""
-        full_path = os.path.join(BASE_DIR, 'data', filename)
-        logging.debug(f"Reading file: {full_path}")
+        filepath = os.path.join(self.BASE_DIR, filename)
+        logging.debug(f"Reading file: {filepath}")
         try:
-            with open(full_path, 'r') as f:
-                return f.read()
+            with open(filepath, 'r') as file:
+                return file.read()
         except FileNotFoundError:
-            logging.warning(f"File not found: {full_path}")
+            logging.error(f"File not found: {filepath}")
             return ""
         except Exception as e:
-            logging.error(f"Error reading file {full_path}: {e}")
-            raise
+            logging.error(f"Error reading file {filepath}: {str(e)}")
+            return ""
 
     def write_file(self, filename, content):
         """Write content to a file."""
-        full_path = os.path.join(BASE_DIR, 'data', filename)
-        logging.debug(f"Writing to file: {full_path}")
+        filepath = os.path.join(self.BASE_DIR, filename)
+        logging.debug(f"Writing to file: {filepath}")
         try:
-            with open(full_path, 'w') as f:
-                f.write(content)
+            os.makedirs(os.path.dirname(filepath), exist_ok=True)
+            with open(filepath, 'a') as file:
+                file.write(content + '\n')
         except Exception as e:
-            logging.error(f"Error writing to file {full_path}: {e}")
-            raise
+            logging.error(f"Error writing to file {filepath}: {str(e)}")
 
     def file_exists(self, filename):
         """Check if a file exists."""
-        full_path = os.path.join(BASE_DIR, 'data', filename)
-        logging.debug(f"Checking if file exists: {full_path}")
-        return os.path.exists(full_path)
+        filepath = os.path.join(self.BASE_DIR, filename)
+        logging.debug(f"Checking if file exists: {filepath}")
+        return os.path.exists(filepath)
 
-    def load_rates(self, rates_file):
-        """Load rates from a JSON file."""
-        full_path = os.path.join(BASE_DIR, 'data', rates_file)
-        logging.debug(f"Loading rates from: {full_path}")
-        if not os.path.exists(full_path) or os.path.getsize(full_path) == 0:
-            logging.warning(f"Rates file {full_path} is empty or missing")
-            return {}
+    def process_file(self, filename):
+        """Process file content."""
+        content = self.read_file(filename)
+        logging.debug(f"Processing file: {filename}")
+        return content.upper() if content else ""
+
+    def load_rates(self):
+        """Load rates from rates_global.txt."""
+        filepath = os.path.join(self.BASE_DIR, 'data', 'rates_global.txt')
+        logging.debug(f"Loading rates from: {filepath}")
         try:
-            with open(full_path, 'r') as f:
-                data = f.read().strip()
-                if not data:
-                    logging.warning(f"Rates file {full_path} is empty")
+            with open(filepath, 'r') as file:
+                content = file.read().strip()
+                if not content:
+                    logging.warning(f"Rates file {filepath} is empty or missing")
                     return {}
-                return json.loads(data)
+                return json.loads(content)
+        except FileNotFoundError:
+            logging.warning(f"Rates file not found: {filepath}")
+            return {}
         except json.JSONDecodeError as e:
-            logging.error(f"Failed to parse JSON in {full_path}: {e}")
+            logging.error(f"Error decoding JSON from {filepath}: {str(e)}")
             return {}
         except Exception as e:
-            logging.error(f"Error loading rates from {full_path}: {e}")
-            raise
+            logging.error(f"Error loading rates from {filepath}: {str(e)}")
+            return {}
+
+    def save_output(self, output_data):
+        """Save output data to output.txt, avoiding duplicates."""
+        filepath = os.path.join(self.BASE_DIR, 'data', 'output.txt')
+        logging.debug(f"Saving output to: {filepath}")
+        try:
+            # Read existing entries
+            existing = set()
+            if os.path.exists(filepath):
+                with open(filepath, 'r') as f:
+                    existing = {line.strip() for line in f if line.strip()}
+            # Check if output_data is already present
+            if output_data.strip() not in existing:
+                with open(filepath, 'a') as file:
+                    file.write(output_data + '\n')
+        except Exception as e:
+            logging.error(f"Error saving output to {filepath}: {str(e)}")
+
+    def save_quote(self, quote_data):
+        """Save quote data to quotes.txt, avoiding duplicates."""
+        filepath = os.path.join(self.BASE_DIR, 'data', 'quotes.txt')
+        logging.debug(f"Saving quote to: {filepath}")
+        try:
+            # Read existing quotes
+            existing = set()
+            if os.path.exists(filepath):
+                with open(filepath, 'r') as f:
+                    for line in f:
+                        if line.strip():
+                            try:
+                                quote = json.loads(line.strip())
+                                key = (quote['part_id'], quote['customer_name'], quote['total_cost'], quote['profit_margin'])
+                                existing.add(str(key))
+                            except json.JSONDecodeError:
+                                continue
+            # Check if quote is already present
+            quote = json.loads(quote_data)
+            key = (quote['part_id'], quote['customer_name'], quote['total_cost'], quote['profit_margin'])
+            if str(key) not in existing:
+                with open(filepath, 'a') as file:
+                    file.write(quote_data + '\n')
+        except json.JSONDecodeError as e:
+            logging.error(f"Error decoding quote JSON: {str(e)}")
+        except Exception as e:
+            logging.error(f"Error saving quote to {filepath}: {str(e)}")
 
     def validate_credentials(self, username, password):
-        """Validate user credentials."""
-        credentials_file = os.path.join(BASE_DIR, 'data', 'users.txt')
-        logging.debug(f"Validating credentials against: {credentials_file}")
-        if os.path.exists(credentials_file):
-            try:
-                with open(credentials_file, 'r') as f:
-                    for line in f:
-                        stored_user, stored_pass = line.strip().split(':')
-                        if username == stored_user and password == stored_pass:
+        """Validate user credentials against users.txt."""
+        filepath = os.path.join(self.BASE_DIR, 'data', 'users.txt')
+        logging.debug(f"Validating credentials against: {filepath}")
+        try:
+            with open(filepath, 'r') as file:
+                for line in file:
+                    if line.strip():
+                        stored_username, stored_password = line.strip().split(':')
+                        if username == stored_username and password == stored_password:
                             logging.info(f"Credentials validated for user: {username}")
                             return True
-            except Exception as e:
-                logging.error(f"Error validating credentials: {e}")
-                return False
-        logging.warning(f"Invalid credentials for user: {username}")
-        return False
-
-    def save_output(self, part_id, revision, material, thickness, length, width, quantity, total_cost):
-        """Save output data to a file."""
-        full_path = os.path.join(BASE_DIR, 'data', 'output.txt')
-        logging.debug(f"Saving output to: {full_path}")
-        try:
-            with open(full_path, 'a') as f:
-                f.write(f"{part_id},{revision},{material},{thickness},{length},{width},{quantity},{total_cost}\n")
+            logging.warning(f"Invalid credentials for user: {username}")
+            return False
+        except FileNotFoundError:
+            logging.error(f"Users file not found: {filepath}")
+            return False
         except Exception as e:
-            logging.error(f"Error saving output to {full_path}: {e}")
-            raise
+            logging.error(f"Error validating credentials: {str(e)}")
+            return False
 
-    def save_quote(self, part_id, total_cost, customer_name, profit_margin):
-        """Save quote data to a JSON file, one JSON object per line."""
-        full_path = os.path.join(BASE_DIR, 'data', 'quotes.txt')
-        quote_data = {
-            'part_id': part_id,
-            'total_cost': total_cost,
-            'customer_name': customer_name,
-            'profit_margin': profit_margin
-        }
-        logging.debug(f"Saving quote to: {full_path}")
+    def update_rates(self, key, value):
+        """Update a rate in rates_global.txt."""
+        filepath = os.path.join(self.BASE_DIR, 'data', 'rates_global.txt')
+        logging.debug(f"Updating rates in: {filepath}")
         try:
-            with open(full_path, 'a') as f:
-                json.dump(quote_data, f)
-                f.write('\n')
+            rates = self.load_rates()
+            rates[key] = float(value)
+            with open(filepath, 'w') as file:
+                json.dump(rates, file, indent=4)
+            logging.info(f"Updated rate {key} to {value}")
         except Exception as e:
-            logging.error(f"Error saving quote to {full_path}: {e}")
-            raise
-
-    def update_rates(self, rate_key, rate_value):
-        """Update rates in a JSON file."""
-        rates_file = 'rates_global.txt'
-        full_path = os.path.join(BASE_DIR, 'data', rates_file)
-        logging.debug(f"Updating rates in: {full_path}")
-        rates = self.load_rates(rates_file)
-        rates[rate_key] = rate_value
-        try:
-            with open(full_path, 'w') as f:
-                json.dump(rates, f, indent=4)
-            logging.info(f"Updated rate {rate_key} to {rate_value}")
-        except Exception as e:
-            logging.error(f"Failed to update rates: {e}")
-            raise
+            logging.error(f"Error updating rates in {filepath}: {str(e)}")
