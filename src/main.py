@@ -1,46 +1,40 @@
 import sys
 import os
-# Add the parent directory (src/) to the Python path to resolve import issues
+import tkinter as tk
+import logging
+
+# Add the parent directory (src/) to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import tkinter as tk
-import time
-from gui import SheetMetalClientHub
+# Set up logging
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LOG_DIR = os.path.join(BASE_DIR, 'data', 'log')
+os.makedirs(LOG_DIR, exist_ok=True)
+logging.basicConfig(
+    filename=os.path.join(LOG_DIR, 'main.log'),
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
-def automate_gui():
-    root = tk.Tk()
-    app = SheetMetalClientHub(root)
+try:
+    from gui import SheetMetalClientHub
+except ImportError as e:
+    logging.error(f"Failed to import SheetMetalClientHub: {e}")
+    print(f"Error: Failed to import SheetMetalClientHub: {e}")
+    sys.exit(1)
 
-    # Login
-    app.username_entry.insert(0, 'laurin')
-    app.password_entry.insert(0, 'moffat123')
-    app.login()
-    time.sleep(0.5)
-
-    # Create part input
-    app.notebook.select(1)
-    app.part_id_entry.delete(0, tk.END)
-    app.part_id_entry.insert(0, 'PART-67890ABCDE')
-    app.revision_entry.insert(0, 'A')
-    app.single_material_var.set('Mild Steel')
-    app.single_thickness_var.set('1.0')
-    app.single_lay_flat_length_var.set('1000')
-    app.single_lay_flat_width_var.set('500')
-    app.single_quantity_var.set('10')
-    app.work_centre_vars[0].set('Welding')
-    app.work_centre_quantity_vars[0].set('100')
-    app.work_centre_sub_option_vars[0].set('MIG')
-    app.calculate_and_save()
-    time.sleep(0.5)
-
-    # Generate quote
-    app.create_quote_screen('PART-67890ABCDE', 50.0)
-    app.customer_entry.insert(0, 'Acme Corp')
-    app.margin_entry.insert(0, '20')
-    app.generate_quote('PART-67890ABCDE', 50.0)
-    time.sleep(0.5)
-
-    root.destroy()
+def main():
+    """Launch the Sheet Metal Client Hub GUI."""
+    logging.info("Starting Sheet Metal Client Hub application")
+    try:
+        root = tk.Tk()
+        app = SheetMetalClientHub(root)
+        root.mainloop()
+        logging.info("Application closed successfully")
+    except Exception as e:
+        logging.error(f"Error launching GUI: {e}")
+        print(f"Error launching GUI: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
-    automate_gui()
+    main()
