@@ -52,9 +52,9 @@ class FileHandler:
         logging.debug(f"Processing file: {filename}")
         return content.upper() if content else ""
 
-    def load_rates(self):
+    def load_rates(self, filename='data/rates_global.txt'):
         """Load rates from rates_global.txt."""
-        filepath = os.path.join(self.BASE_DIR, 'data', 'rates_global.txt')
+        filepath = os.path.join(self.BASE_DIR, filename)
         logging.debug(f"Loading rates from: {filepath}")
         try:
             with open(filepath, 'r') as file:
@@ -73,25 +73,32 @@ class FileHandler:
             logging.error(f"Error loading rates from {filepath}: {str(e)}")
             return {}
 
-    def save_output(self, output_data):
+    def save_output(self, part_id, revision, material, thickness, length, width, quantity, total_cost):
         """Save output data to output.txt, avoiding duplicates."""
         filepath = os.path.join(self.BASE_DIR, 'data', 'output.txt')
         logging.debug(f"Saving output to: {filepath}")
+        output_data = f"{part_id},{revision},{material},{thickness},{length},{width},{quantity},{total_cost}"
         try:
             existing = set()
             if os.path.exists(filepath):
                 with open(filepath, 'r') as f:
                     existing = {line.strip() for line in f if line.strip()}
-            if output_data.strip() not in existing:
+            if output_data not in existing:
                 with open(filepath, 'a') as file:
                     file.write(output_data + '\n')
         except Exception as e:
             logging.error(f"Error saving output to {filepath}: {str(e)}")
 
-    def save_quote(self, quote_data):
+    def save_quote(self, part_id, total_cost, customer_name, profit_margin):
         """Save quote data to quotes.txt, avoiding duplicates."""
         filepath = os.path.join(self.BASE_DIR, 'data', 'quotes.txt')
         logging.debug(f"Saving quote to: {filepath}")
+        quote_data = json.dumps({
+            'part_id': part_id,
+            'total_cost': total_cost * (1 + profit_margin / 100),
+            'customer_name': customer_name,
+            'profit_margin': profit_margin
+        })
         try:
             existing = set()
             if os.path.exists(filepath):

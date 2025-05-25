@@ -994,3 +994,101 @@
 2025-05-25 16:38:47,753 - DEBUG - Calculated cost: 100300.0 for part_data: {'part_type': 'Part', 'quantity': 1, 'work_centres': ['cutting'], 'material': 'mild_steel', 'thickness': 1.0, 'length': 1000.0, 'width': 500.0}
 2025-05-25 16:38:47,832 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
 2025-05-25 16:38:48,958 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:43,785 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:43,785 - DEBUG - Calculated cost: 8.0 for part_data: {'part_type': 'Assembly', 'material': 'N/A', 'thickness': 0.0, 'length': 0, 'width': 0, 'quantity': 10, 'components': 10, 'work_centres': ['assembly']}
+2025-05-25 16:56:43,785 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:43,786 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:43,787 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:43,787 - DEBUG - Calculated cost: 100300.05 for part_data: {'part_type': 'Part', 'material': 'mild_steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': ['cutting', 'bending']}
+2025-05-25 16:56:43,788 - DEBUG - Checking if file exists: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\src\tests\temp\exists.txt
+2025-05-25 16:56:43,790 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:43,791 - DEBUG - Processing file: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\src\tests\temp\test.txt
+2025-05-25 16:56:43,792 - DEBUG - Processing file: 
+2025-05-25 16:56:43,794 - DEBUG - Reading file: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\src\tests\temp\test.txt
+2025-05-25 16:56:43,796 - DEBUG - Saving output to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-25 16:56:43,797 - DEBUG - Saving quote to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\quotes.txt
+2025-05-25 16:56:43,799 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:56:43,799 - INFO - Credentials validated for user: laurie
+2025-05-25 16:56:43,801 - DEBUG - Writing to file: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\src\tests\temp\output.txt
+2025-05-25 16:56:43,868 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:43,868 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:46,283 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:46,283 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:46,346 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:46,346 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:46,875 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:46,875 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:47,661 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:47,661 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:47,736 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:47,736 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:47,739 - DEBUG - Calculated cost: 8.0 for part_data: {'part_type': 'Assembly', 'quantity': 10, 'work_centres': ['welding'], 'material': 'N/A', 'thickness': 0.0, 'length': 0.0, 'width': 0.0, 'components': 10}
+2025-05-25 16:56:47,739 - DEBUG - Saving output to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-25 16:56:47,809 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:47,809 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:48,330 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:48,331 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:48,401 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:48,401 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:48,888 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:48,888 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:48,890 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:49,391 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:49,392 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:49,399 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:50,131 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:50,131 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:50,140 - DEBUG - Calculated cost: 8.0 for part_data: {'part_type': 'Assembly', 'quantity': 10, 'work_centres': ['welding'], 'material': 'N/A', 'thickness': 0.0, 'length': 0.0, 'width': 0.0, 'components': 10}
+2025-05-25 16:56:50,216 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:50,217 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:50,288 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:50,288 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:50,299 - DEBUG - Calculated cost: 100300.05 for part_data: {'part_type': 'Part', 'quantity': 1, 'work_centres': ['cutting', 'bending'], 'material': 'mild_steel', 'thickness': 1.0, 'length': 1000.0, 'width': 500.0}
+2025-05-25 16:56:50,377 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:50,377 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:50,924 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:50,924 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:52,258 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:52,259 - DEBUG - Calculated cost: 8.0 for part_data: {'part_type': 'Assembly', 'material': 'N/A', 'thickness': 0.0, 'length': 0, 'width': 0, 'quantity': 10, 'components': 10, 'work_centres': ['assembly']}
+2025-05-25 16:56:52,259 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:52,260 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:52,260 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:52,261 - DEBUG - Calculated cost: 100300.05 for part_data: {'part_type': 'Part', 'material': 'mild_steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': ['cutting', 'bending']}
+2025-05-25 16:56:52,330 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:52,330 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:53,477 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:53,477 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:53,537 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:53,537 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:54,384 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:54,384 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:55,531 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:55,531 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:55,606 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:55,606 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:55,609 - DEBUG - Calculated cost: 8.0 for part_data: {'part_type': 'Assembly', 'quantity': 10, 'work_centres': ['welding'], 'material': 'N/A', 'thickness': 0.0, 'length': 0.0, 'width': 0.0, 'components': 10}
+2025-05-25 16:56:55,609 - DEBUG - Saving output to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-25 16:56:55,679 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:55,679 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:56,255 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:56,255 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:56,324 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:56,324 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:57,156 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:57,156 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:57,158 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:57,614 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:57,614 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:57,623 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:58,208 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:58,208 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:58,220 - DEBUG - Calculated cost: 8.0 for part_data: {'part_type': 'Assembly', 'quantity': 10, 'work_centres': ['welding'], 'material': 'N/A', 'thickness': 0.0, 'length': 0.0, 'width': 0.0, 'components': 10}
+2025-05-25 16:56:58,298 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:58,298 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:58,370 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:58,370 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:58,379 - DEBUG - Calculated cost: 100300.05 for part_data: {'part_type': 'Part', 'quantity': 1, 'work_centres': ['cutting', 'bending'], 'material': 'mild_steel', 'thickness': 1.0, 'length': 1000.0, 'width': 500.0}
+2025-05-25 16:56:58,460 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:58,460 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:56:58,984 - WARNING - Failed to load laser_gear.ico
+2025-05-25 16:56:58,984 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt

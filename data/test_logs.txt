@@ -926,3 +926,4 @@ Saved to data/output.txt, Status: Pass
 [2025-05-25 15:11:15] Test: FR3-FR4-FR5: Cost calculation and output storage, Input: Part Type: Single Part, Part ID: PART-67890, Revision: 1, Material: mild steel, Thickness: 1.0, Length: 1000, Width: 500, Quantity: 1, Sub-Parts: ['FAS-001: Screw M3'], Weldment: No, Top-Level Assembly: N/A, Work Centres: [('Welding', 500.0)], Output: Cost calculated: £160.5
 Saved to data/output.txt, Status: Pass
 [2025-05-25 15:11:15] Test: FR7: Generate quote, Input: Customer Name: Acme Corp, Profit Margin: 20%, Output: Quote generated and saved to data/quotes.txt, Status: Pass
+[2025-05-25 17:03:33] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
