@@ -13,6 +13,7 @@ class TestSystem(unittest.TestCase):
         self.app = SheetMetalClientHub(self.root)
         self.output_file = os.path.join(BASE_DIR, 'data/output.txt')
         self.quotes_file = os.path.join(BASE_DIR, 'data/quotes.txt')
+        self.rates_file = os.path.join(BASE_DIR, 'data/rates_global.txt')
         # Clear quotes file to ensure clean state
         with open(self.quotes_file, 'w') as f:
             f.write('')
