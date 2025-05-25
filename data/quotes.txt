@@ -1,1 +1,0 @@
-{"part_id": "PART-67890", "total_cost": 50.0, "customer_name": "Acme Corp", "profit_margin": 20.0}

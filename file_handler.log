@@ -695,3 +695,200 @@
 2025-05-25 16:14:45,168 - DEBUG - STREAM b'sRGB' 41 1
 2025-05-25 16:14:45,169 - DEBUG - STREAM b'IDAT' 54 8192
 2025-05-25 16:14:45,903 - INFO - GUI launched successfully
+2025-05-25 16:17:21,908 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:21,908 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:21,909 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:21,910 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:21,912 - DEBUG - Checking if file exists: C:\Users\Laurie\AppData\Local\Temp\tmp8iiurusd/missing.txt
+2025-05-25 16:17:21,913 - DEBUG - Checking if file exists: C:\Users\Laurie\AppData\Local\Temp\tmpk6l3lgr6/exists.txt
+2025-05-25 16:17:21,917 - DEBUG - Reading file: C:\Users\Laurie\AppData\Local\Temp\tmp1jllu0dg/test.txt
+2025-05-25 16:17:21,919 - DEBUG - Writing to file: C:\Users\Laurie\AppData\Local\Temp\tmpo4d1r3f2/output.txt
+2025-05-25 16:17:22,127 - DEBUG - Saving quote to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\quotes.txt
+2025-05-25 16:17:22,142 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:22,143 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:22,143 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:22,423 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:22,423 - WARNING - Invalid credentials for user: laurie
+2025-05-25 16:17:22,501 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:22,501 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:22,506 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:22,506 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:22,506 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:22,702 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:22,703 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:23,842 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:23,843 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:23,843 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:23,969 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:23,969 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:23,969 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:24,001 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:24,001 - DEBUG - Saving output to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-25 16:17:24,169 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:24,169 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:24,629 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:24,629 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:24,629 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:24,763 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:24,764 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:24,764 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:24,963 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:24,963 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:24,963 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:25,152 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:25,153 - INFO - Credentials validated for user: admin
+2025-05-25 16:17:25,671 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:25,671 - INFO - Credentials validated for user: admin
+2025-05-25 16:17:26,132 - DEBUG - Updating rates in: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:26,132 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:26,133 - INFO - Updated rate mild_steel_rate to 0.2
+2025-05-25 16:17:26,212 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:26,212 - INFO - Credentials validated for user: admin
+2025-05-25 16:17:26,642 - DEBUG - Updating rates in: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:26,642 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:26,643 - INFO - Updated rate mild_steel_rate to 0.2
+2025-05-25 16:17:26,723 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:26,724 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:27,173 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:27,173 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:27,173 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:27,299 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:27,299 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:27,299 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:27,330 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:27,331 - DEBUG - Saving output to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-25 16:17:27,433 - DEBUG - Saving quote to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\quotes.txt
+2025-05-25 16:17:27,438 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:27,438 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:27,438 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:27,654 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:27,655 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:28,260 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:28,260 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:28,260 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:28,385 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:28,385 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:28,385 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:28,416 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:28,416 - WARNING - Rates file C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt is empty or missing
+2025-05-25 16:17:28,583 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:28,583 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:29,332 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:29,332 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:29,332 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:29,458 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:29,458 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:29,458 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:29,489 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:29,491 - DEBUG - Saving output to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-25 16:17:29,595 - DEBUG - Saving quote to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\quotes.txt
+2025-05-25 16:17:29,600 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:29,600 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:29,600 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:29,851 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:29,851 - WARNING - Invalid credentials for user: laurie
+2025-05-25 16:17:29,941 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:29,941 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:30,472 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:30,472 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:30,473 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:30,599 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:30,599 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:30,600 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:31,289 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:31,289 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:31,290 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:31,290 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:31,498 - DEBUG - Saving quote to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\quotes.txt
+2025-05-25 16:17:31,514 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:31,514 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:31,514 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:31,797 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:31,797 - WARNING - Invalid credentials for user: laurie
+2025-05-25 16:17:31,876 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:31,876 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:31,884 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:31,884 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:31,884 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:32,080 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:32,081 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:32,925 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:32,925 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:32,925 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:33,049 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:33,050 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:33,050 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:33,080 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:33,081 - DEBUG - Saving output to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-25 16:17:33,265 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:33,265 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:33,937 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:33,937 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:33,937 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:34,069 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:34,069 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:34,069 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:34,297 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:34,298 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:34,298 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:34,499 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:34,500 - INFO - Credentials validated for user: admin
+2025-05-25 16:17:35,287 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:35,287 - INFO - Credentials validated for user: admin
+2025-05-25 16:17:35,920 - DEBUG - Updating rates in: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:35,920 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:35,920 - INFO - Updated rate mild_steel_rate to 0.2
+2025-05-25 16:17:36,073 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:36,074 - INFO - Credentials validated for user: admin
+2025-05-25 16:17:36,617 - DEBUG - Updating rates in: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:36,617 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:36,618 - INFO - Updated rate mild_steel_rate to 0.2
+2025-05-25 16:17:36,699 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:36,699 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:37,102 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:37,102 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:37,102 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:37,229 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:37,229 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:37,229 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:37,263 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:37,263 - DEBUG - Saving output to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-25 16:17:37,365 - DEBUG - Saving quote to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\quotes.txt
+2025-05-25 16:17:37,369 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:37,369 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:37,369 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:37,569 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:37,569 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:38,032 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:38,032 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:38,032 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:38,159 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:38,159 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:38,159 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:38,190 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:38,190 - WARNING - Rates file C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt is empty or missing
+2025-05-25 16:17:38,359 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:38,360 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:38,903 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:38,903 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:38,903 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:39,029 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:39,029 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:39,029 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:39,060 - DEBUG - Loading rates from: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\rates_global.txt
+2025-05-25 16:17:39,061 - DEBUG - Saving output to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-25 16:17:39,164 - DEBUG - Saving quote to: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\quotes.txt
+2025-05-25 16:17:39,169 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:39,169 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:39,169 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:39,396 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:39,396 - WARNING - Invalid credentials for user: laurie
+2025-05-25 16:17:39,486 - DEBUG - Validating credentials against: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.txt
+2025-05-25 16:17:39,487 - INFO - Credentials validated for user: laurie
+2025-05-25 16:17:39,959 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:39,959 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:39,959 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:40,085 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-25 16:17:40,085 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-25 16:17:40,085 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-25 16:17:40,789 - INFO - GUI launched successfully
