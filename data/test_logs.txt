@@ -638,3 +638,6 @@ Saved to data/output.txt, Status: Pass
 [2025-05-25 10:24:55] Test: FR1: Invalid login, Input: Username: laurie, Password: [hidden], Output: Invalid username or password, Status: Fail
 [2025-05-25 10:25:00] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
 [2025-05-25 10:25:23] Test: FR3-FR4: Cost calculation failure, Input: Part Type: Single Part, Part ID: PART-33333, Revision: s4, Material: mild steel, Thickness: 1.0, Length: 1000, Width: 500, Quantity: 1, Sub-Parts: ['FAS-001: Screw M3'], Weldment: No, Top-Level Assembly: N/A, Work Centres: [('Welding', 500.0)], Output: Cost calculation failed, check inputs or rates, Status: Fail
+[2025-05-25 10:28:56] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-25 10:29:59] Test: FR3-FR4-FR5: Cost calculation and output storage, Input: Part Type: Single Part, Part ID: PART-987654, Revision: s4, Material: aluminium, Thickness: 1.0, Length: 1000, Width: 500, Quantity: 1, Sub-Parts: ['PEM-002: PEM Insert M4', 'FAS-002: Bolt M5'], Weldment: No, Top-Level Assembly: N/A, Work Centres: [('Cutting', 500.0), ('Bending', 2.0)], Output: Cost calculated: £75000.0
+Saved to data/output.txt, Status: Pass
