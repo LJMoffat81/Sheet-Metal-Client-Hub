@@ -6,19 +6,28 @@
 
 from gui import SheetMetalClientHub
 import tkinter as tk
+import logging
+
+# Set up logging
+logging.basicConfig(filename='main_output.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 def main():
     """
     Main function to start the Sheet Metal Client Hub application.
-    
+
     Logic:
         1. Creates a Tkinter root window.
         2. Instantiates the SheetMetalClientHub GUI class.
         3. Starts the Tkinter main event loop to display the GUI.
     """
-    root = tk.Tk()
-    app = SheetMetalClientHub(root)
-    root.mainloop()
+    try:
+        root = tk.Tk()
+        app = SheetMetalClientHub(root)
+        logging.info("GUI launched successfully")
+        root.mainloop()
+    except Exception as e:
+        logging.error(f"Error launching GUI: {e}")
+        raise
 
 if __name__ == "__main__":
     # Entry point check to ensure main() is called only when the script is run directly
