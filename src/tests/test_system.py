@@ -43,7 +43,7 @@ class TestSystem(unittest.TestCase):
             ''')
         output_path = os.path.join(os.path.dirname(__file__), '../../data/output.txt')
         with open(output_path, 'w') as f:
-            f.write('PART-12345ABCDE,A,mild_steel,1.0,1000,500,1,50.0,[],[]\n')
+            f.write('PART-12345ABCDE,A,Mild Steel,1.0,1000,500,1,50.0,[],[]\n')
 
     def tearDown(self):
         self.root.destroy()
@@ -89,7 +89,7 @@ class TestSystem(unittest.TestCase):
         self.app.part_id_entry.delete(0, tk.END)
         self.app.part_id_entry.insert(0, 'PART-67890ABCDE')
         self.app.revision_entry.insert(0, 'A')
-        self.app.single_material_var.set('mild_steel')
+        self.app.single_material_var.set('Mild Steel')
         self.app.single_thickness_var.set('1.0')
         self.app.single_lay_flat_length_var.set('1000')
         self.app.single_lay_flat_width_var.set('500')
@@ -121,7 +121,7 @@ class TestSystem(unittest.TestCase):
         self.app.part_id_entry.delete(0, tk.END)
         self.app.part_id_entry.insert(0, 'PART-67891ABCDE')
         self.app.revision_entry.insert(0, 'A')
-        self.app.single_material_var.set('mild_steel')
+        self.app.single_material_var.set('Mild Steel')
         self.app.single_thickness_var.set('1.0')
         self.app.single_lay_flat_length_var.set('1000')
         self.app.single_lay_flat_width_var.set('500')
@@ -201,7 +201,7 @@ class TestSystem(unittest.TestCase):
         self.app.part_id_entry.delete(0, tk.END)
         self.app.part_id_entry.insert(0, 'PART-123ABCDE')
         self.app.revision_entry.insert(0, 'A')
-        self.app.single_material_var.set('mild_steel')
+        self.app.single_material_var.set('Mild Steel')
         self.app.single_thickness_var.set('1.0')
         self.app.single_lay_flat_length_var.set('1000')
         self.app.single_lay_flat_width_var.set('500')

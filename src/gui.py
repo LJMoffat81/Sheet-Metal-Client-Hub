@@ -13,11 +13,13 @@ LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Cli
 os.makedirs(LOG_DIR, exist_ok=True)
 log_file = os.path.join(LOG_DIR, 'gui.log')
 
-logging.basicConfig(
-    filename=log_file,
-    level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+logger = logging.getLogger('gui')
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(log_file, mode='a')
+handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+logger.handlers = [handler]
+logging.info("GUI logging initialized")
+handler.flush()
 
 # Check if running in testing mode
 TESTING_MODE = os.environ.get('TESTING_MODE', '0') == '1'
@@ -105,7 +107,7 @@ class SheetMetalClientHub:
         self.last_total_cost = None
         self.work_centre_vars = [tk.StringVar(value="") for _ in range(10)]
         self.work_centre_quantity_vars = [tk.StringVar(value="0") for _ in range(10)]
-        self.work_centre_sub_option_vars = [tk.StringVar(value="None") for _ in range(10)]  # For weld type, surface treatment
+        self.work_centre_sub_option_vars = [tk.StringVar(value="None") for _ in range(10)]
         self.fastener_type_var = tk.StringVar(value="None")
         self.fastener_count_var = tk.StringVar(value="0")
         self.create_login_screen()
@@ -120,7 +122,7 @@ class SheetMetalClientHub:
                 messagebox.showinfo(title, message)
             elif level == 'error':
                 messagebox.showerror(title, message)
-        logging.log(logging.INFO if level == 'info' else logging.INFO, f"{title}: {message}")
+        logging.log(logging.INFO if level == 'info' else logging.ERROR, f"{title}: {message}")
 
     def create_footer(self):
         """
@@ -239,7 +241,7 @@ class SheetMetalClientHub:
         """
         logging.info("Prompting for admin credentials")
         if TESTING_MODE:
-            log_message('info', 'Bypassing admin credential prompt in testing mode')
+            log_message(title='Info', message='Bypassing admin credential prompt in testing mode', level='info')
             return True
 
         dialog = Toplevel(self.root)
@@ -762,7 +764,7 @@ class SheetMetalClientHub:
 
             # Validate dimensions and quantity for single parts
             if selected_tab == 1:  # Single Part
-                material = self.single_material_var.get().lower()
+                material = self.single_material_var.get()
                 thickness = self.single_thickness_var.get()
                 length = self.single_lay_flat_length_var.get()
                 width = self.single_lay_flat_width_var.get()
@@ -953,8 +955,11 @@ class SheetMetalClientHub:
                     pass_fail="Fail"
                 )
                 return
+
             if part_type == "Single Part":
-                if material not in ['mild steel', 'aluminium', 'stainless steel']:
+                normalized_material = material.lower()
+                valid_materials = ['mild steel', 'aluminium', 'stainless steel']
+                if normalized_material not in valid_materials:
                     output = "Material must be 'Mild Steel', 'Aluminium', or 'Stainless Steel'"
                     self.show_message("Error", output, 'error')
                     log_test_result(
@@ -964,6 +969,16 @@ class SheetMetalClientHub:
                         pass_fail="Fail"
                     )
                     return
+                # Map material to rate key
+                material_rate_map = {
+                    'mild steel': 'mild_steel_rate',
+                    'aluminium': 'aluminium_rate',
+                    'stainless steel': 'stainless_steel_rate'
+                }
+                material_for_rates = material_rate_map[normalized_material]
+            else:
+                material_for_rates = 'N/A'
+
             if part_type == "Assembly" and quantity <= 0:
                 output = "Quantity must be a positive integer"
                 self.show_message("Error", output, 'error')
@@ -974,6 +989,7 @@ class SheetMetalClientHub:
                     pass_fail="Fail"
                 )
                 return
+
             if part_type == "Assembly":
                 existing_parts = load_existing_parts()
                 for sub_part in sub_parts:
@@ -987,6 +1003,7 @@ class SheetMetalClientHub:
                             pass_fail="Fail"
                         )
                         return
+
             if fastener_types_and_counts:
                 for f_type, f_count in fastener_types_and_counts:
                     if f_count > 100:
@@ -1015,7 +1032,7 @@ class SheetMetalClientHub:
                 'part_type': part_type,
                 'part_id': part_id,
                 'revision': revision,
-                'material': material,
+                'material': material_for_rates,
                 'thickness': thickness,
                 'length': length,
                 'width': width,

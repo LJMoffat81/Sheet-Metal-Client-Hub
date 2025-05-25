@@ -26,7 +26,7 @@ class TestCalculator(unittest.TestCase):
         LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
         os.makedirs(LOG_DIR, exist_ok=True)
         self.log_file = os.path.join(LOG_DIR, 'test_calculator.log')
-        logger = logging.getLogger()
+        logger = logging.getLogger('test_calculator')
         logger.setLevel(logging.DEBUG)
         self.handler = logging.FileHandler(self.log_file, mode='w')
         self.handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
@@ -36,7 +36,7 @@ class TestCalculator(unittest.TestCase):
         time.sleep(0.5)
 
     def tearDown(self):
-        logger = logging.getLogger()
+        logger = logging.getLogger('test_calculator')
         for handler in logger.handlers[:]:
             handler.close()
             logger.removeHandler(handler)
@@ -50,7 +50,7 @@ class TestCalculator(unittest.TestCase):
     def test_calculate_cost_single_part_with_welding(self):
         part_data = {
             'part_type': 'Single Part',
-            'material': 'mild_steel',
+            'material': 'mild_steel_rate',
             'thickness': 1.0,
             'length': 1000,
             'width': 500,
@@ -68,7 +68,7 @@ class TestCalculator(unittest.TestCase):
     def test_calculate_cost_single_part_with_coating(self):
         part_data = {
             'part_type': 'Single Part',
-            'material': 'mild_steel',
+            'material': 'mild_steel_rate',
             'thickness': 1.0,
             'length': 1000,
             'width': 500,
@@ -86,7 +86,7 @@ class TestCalculator(unittest.TestCase):
     def test_calculate_cost_single_part_with_fasteners(self):
         part_data = {
             'part_type': 'Single Part',
-            'material': 'mild_steel',
+            'material': 'mild_steel_rate',
             'thickness': 1.0,
             'length': 1000,
             'width': 500,
@@ -122,7 +122,7 @@ class TestCalculator(unittest.TestCase):
     def test_calculate_cost_invalid_work_centre(self):
         part_data = {
             'part_type': 'Single Part',
-            'material': 'mild_steel',
+            'material': 'mild_steel_rate',
             'thickness': 1.0,
             'length': 1000,
             'width': 500,
