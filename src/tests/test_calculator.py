@@ -16,12 +16,23 @@ class TestCalculator(unittest.TestCase):
         self.file_handler = FileHandler()
         self.rates = {
             'mild_steel_rate': 0.0001,
+            'aluminium_rate': 0.00015,
+            'stainless_steel_rate': 0.0002,
             'cutting_rate_per_mm': 0.01,
             'bending_rate_per_bend': 0.5,
             'mig_welding_rate_per_mm': 0.02,
+            'tig_welding_rate_per_mm': 0.025,
             'painting_rate_per_mm²': 0.001,
+            'coating_rate_per_mm²': 0.0015,
+            'assembly_rate_per_component': 0.8,
+            'finishing_rate_per_mm²': 0.002,
+            'drilling_rate_per_hole': 0.1,
+            'punching_rate_per_punch': 0.15,
+            'grinding_rate_per_mm²': 0.003,
+            'inspection_rate_per_unit': 0.2,
             'bolts_rate_per_unit': 0.1,
-            'assembly_rate_per_component': 0.8
+            'rivets_rate_per_unit': 0.08,
+            'screws_rate_per_unit': 0.09
         }
         LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
         os.makedirs(LOG_DIR, exist_ok=True)
@@ -34,6 +45,30 @@ class TestCalculator(unittest.TestCase):
         logging.info("Test setup initialized")
         self.handler.flush()
         time.sleep(0.5)
+        rates_path = os.path.join(os.path.dirname(__file__), '../../data/rates_global.txt')
+        with open(rates_path, 'w') as f:
+            f.write('''
+            {
+                "mild_steel_rate": 0.0001,
+                "aluminium_rate": 0.00015,
+                "stainless_steel_rate": 0.0002,
+                "cutting_rate_per_mm": 0.01,
+                "bending_rate_per_bend": 0.5,
+                "mig_welding_rate_per_mm": 0.02,
+                "tig_welding_rate_per_mm": 0.025,
+                "painting_rate_per_mm²": 0.001,
+                "coating_rate_per_mm²": 0.0015,
+                "assembly_rate_per_component": 0.8,
+                "finishing_rate_per_mm²": 0.002,
+                "drilling_rate_per_hole": 0.1,
+                "punching_rate_per_punch": 0.15,
+                "grinding_rate_per_mm²": 0.003,
+                "inspection_rate_per_unit": 0.2,
+                "bolts_rate_per_unit": 0.1,
+                "rivets_rate_per_unit": 0.08,
+                "screws_rate_per_unit": 0.09
+            }
+            ''')
 
     def tearDown(self):
         logger = logging.getLogger('test_calculator')
