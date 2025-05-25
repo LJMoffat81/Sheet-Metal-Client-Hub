@@ -5,8 +5,8 @@ import os
 # Add src/ to Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src')))
 
-from calculator import calculate_cost
-from file_handler import load_rates
+from src.file_handler import load_rates
+from src.calculator import calculate_cost
 
 class TestCalculator(unittest.TestCase):
     def setUp(self):

@@ -8,7 +8,7 @@ from tkinter import messagebox
 # Add src/ to Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src')))
 
-from gui import SheetMetalClientHub
+from src.gui import SheetMetalClientHub
 
 class TestGUI(unittest.TestCase):
     def setUp(self):
@@ -18,7 +18,7 @@ class TestGUI(unittest.TestCase):
     def tearDown(self):
         self.root.destroy()
 
-    @patch('gui.validate_credentials')
+    @patch('src.gui.validate_credentials')
     def test_login_success(self, mock_validate):
         mock_validate.return_value = True
         self.app.username_entry.insert(0, 'laurie')
@@ -26,7 +26,7 @@ class TestGUI(unittest.TestCase):
         self.app.login()
         self.assertEqual(self.app.role, 'User', "Login should set user role")
 
-    @patch('gui.validate_credentials')
+    @patch('src.gui.validate_credentials')
     @patch('tkinter.messagebox.showerror')
     def test_login_invalid(self, mock_showerror, mock_validate):
         mock_validate.return_value = False
@@ -73,7 +73,7 @@ class TestGUI(unittest.TestCase):
         self.app.calculate_and_save()
         mock_showerror.assert_called_with("Error", "Lay-Flat length must be between 50 and 3000 mm")
 
-    @patch('gui.update_rates')
+    @patch('src.gui.update_rates')
     def test_update_rate_valid(self, mock_update_rates):
         self.app.create_admin_screen()
         self.app.rate_key_entry.insert(0, 'mild_steel_rate')
@@ -89,7 +89,7 @@ class TestGUI(unittest.TestCase):
         self.app.update_rate()
         mock_showerror.assert_called_with("Error", "Rate value cannot be negative")
 
-    @patch('gui.save_quote')
+    @patch('src.gui.save_quote')
     def test_generate_quote_valid(self, mock_save_quote):
         self.app.create_quote_screen('PART-12345', 50.0)
         self.app.customer_entry.insert(0, 'Acme')
