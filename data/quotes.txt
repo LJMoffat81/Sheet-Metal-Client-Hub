@@ -8,3 +8,9 @@ QUOTE-2025-1748158071,LAURIE,11200000.000000002,12.0,2025-05-25,PART-67899
 PART-12345,Acme,50.0,20.0
 PART-12345,Acme,50.0,20.0
 PART-12345,Acme,50.0,20.0
+{
+    "part_id": "PART-44444",
+    "total_cost": 150.15,
+    "customer_name": "Laurie Test",
+    "profit_margin": 50.0
+}
