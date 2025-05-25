@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\src\main.py", line 7, in <module>
-    from gui import SheetMetalClientHub
-ImportError: cannot import name 'SheetMetalClientHub' from 'gui' (C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\src\gui.py)
