@@ -21,6 +21,7 @@ logging.basicConfig(
 
 # Check if running in testing mode
 TESTING_MODE = os.environ.get('TESTING_MODE', '0') == '1'
+logging.debug(f"TESTING_MODE set to: {TESTING_MODE}")
 
 # Get the absolute path to the repository root
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -102,7 +103,7 @@ class SheetMetalClientHub:
         self.assembly_selected_sub_parts = []
         self.last_part_id = None
         self.last_total_cost = None
-        self.work_centre_vars = [tk.StringVar(value="None") for _ in range(10)]
+        self.work_centre_vars = [tk.StringVar(value="") for _ in range(10)]
         self.work_centre_quantity_vars = [tk.StringVar(value="0") for _ in range(10)]
         self.work_centre_sub_option_vars = [tk.StringVar(value="None") for _ in range(10)]  # For weld type, surface treatment
         self.fastener_type_var = tk.StringVar(value="None")
@@ -111,23 +112,26 @@ class SheetMetalClientHub:
 
     def show_message(self, title, message, level='info'):
         """Display message or log it based on testing mode."""
+        logging.debug(f"Show message called, TESTING_MODE: {TESTING_MODE}")
         if TESTING_MODE:
-            log_message(level, f"{title}: {message}")
+            log_message(title=title, message=message, level=level)
         else:
             if level == 'info':
                 messagebox.showinfo(title, message)
             elif level == 'error':
                 messagebox.showerror(title, message)
-        logging.log(logging.INFO if level == 'info' else logging.ERROR, f"{title}: {message}")
+        logging.log(logging.INFO if level == 'info' else logging.INFO, f"{title}: {message}")
 
-    def create_footer(self, frame):
+    def create_footer(self):
         """
-        Create the footer for all screens with version and help button.
+        Create the footer for all screens with version number and help button.
         """
         logging.debug("Creating footer")
-        frame.configure(bg="lightgrey")
-        tk.Label(frame, text="Version 1.0", font=("Arial", 10), bg="lightgrey").pack(side=tk.LEFT, padx=10, pady=5)
-        tk.Button(frame, text="Help", command=self.show_help, font=("Arial", 10), bg="lightgrey").pack(side=tk.RIGHT, padx=10, pady=5)
+        footer = tk.Frame(self.root)
+        footer.pack(side=tk.BOTTOM, fill="x")
+        footer.configure(bg="lightgrey")
+        tk.Label(footer, text="Version 1.0", font=("Arial", 10), bg="lightgrey").pack(side=tk.LEFT, padx=10, pady=5)
+        tk.Button(footer, text="Help", command=self.show_help, font=("Arial", 10), bg="lightgrey").pack(side=tk.RIGHT, padx=10, pady=5)
 
     def show_help(self):
         """
@@ -170,9 +174,7 @@ class SheetMetalClientHub:
         tk.Button(main_frame, text="Clear", command=self.clear_login_fields, font=("Arial", 12)).grid(row=3, column=1, pady=10)
         self.root.bind('<Return>', lambda event: self.login())
 
-        footer = tk.Frame(self.root)
-        footer.pack(side=tk.BOTTOM, fill=tk.X)
-        self.create_footer(footer)
+        self.create_footer()
 
     def clear_login_fields(self):
         """
@@ -365,11 +367,9 @@ class SheetMetalClientHub:
         if tab_index == 1:
             selected_item = self.single_sub_parts_var.get()
             selected_list = self.single_selected_sub_parts
-            label = self.single_selected_sub_parts_label
         else:
             selected_item = self.assembly_sub_parts_var.get()
             selected_list = self.assembly_selected_sub_parts
-            label = self.assembly_selected_sub_parts_label
 
         if selected_item and selected_item not in ["Select Item", "No parts available", "No catalogue items available"]:
             if selected_item not in selected_list:
@@ -411,7 +411,7 @@ class SheetMetalClientHub:
         if hasattr(self, f'sub_option_dropdown_{index}'):
             getattr(self, f'sub_option_dropdown_{index}').grid_remove()
 
-        if work_centre == "None":
+        if work_centre == "":
             qty_dropdown.grid_remove()
             return
 
@@ -508,7 +508,7 @@ class SheetMetalClientHub:
         self.update_selected_items(0)
         self.assembly_sub_parts_var.set("Select Item")
         for var in self.work_centre_vars:
-            var.set("None")
+            var.set("")
         for var in self.work_centre_quantity_vars:
             var.set("0")
         for var in self.work_centre_sub_option_vars:
@@ -695,7 +695,7 @@ class SheetMetalClientHub:
 
         # WorkCentre and quantity options
         work_centres = [
-            "None", "Cutting", "Bending", "Welding", "Assembly", "Finishing",
+            "", "Cutting", "Bending", "Welding", "Assembly", "Finishing",
             "Drilling", "Punching", "Grinding", "Coating", "Inspection"
         ]
         self.quantity_dropdowns = []
@@ -731,9 +731,7 @@ class SheetMetalClientHub:
         self.back_button.pack(side=tk.LEFT, padx=10)
 
         # Footer
-        footer = tk.Frame(self.root)
-        footer.pack(side=tk.BOTTOM, fill=tk.X)
-        self.create_footer(footer)
+        self.create_footer()
 
         # Initialize sub-parts dropdowns
         self.update_sub_parts_dropdown(0)
@@ -881,7 +879,7 @@ class SheetMetalClientHub:
             work_centres = []
             for i, var in enumerate(self.work_centre_vars):
                 wc = var.get()
-                if wc != "None":
+                if wc != "":
                     qty = self.work_centre_quantity_vars[i].get()
                     sub_option = self.work_centre_sub_option_vars[i].get()
                     if qty == "0":
@@ -1103,9 +1101,7 @@ class SheetMetalClientHub:
         self.margin_entry.grid(row=2, column=1, padx=10, pady=5)
         tk.Button(main_frame, text="Generate Quote", command=lambda: self.generate_quote(part_id, total_cost), font=("Arial", 12)).grid(row=3, column=0, columnspan=2, pady=10)
 
-        footer = tk.Frame(self.root)
-        footer.pack(side=tk.BOTTOM, fill=tk.X)
-        self.create_footer(footer)
+        self.create_footer()
 
     def generate_quote(self, part_id, total_cost):
         """
@@ -1188,9 +1184,7 @@ class SheetMetalClientHub:
         tk.Button(main_frame, text="Update Rate", command=self.update_rate, font=("Arial", 12)).grid(row=3, column=0, pady=10)
         tk.Button(main_frame, text="User Features", command=self.create_part_input_screen, font=("Arial", 12)).grid(row=3, column=1, pady=10)
 
-        footer = tk.Frame(self.root)
-        footer.pack(side=tk.BOTTOM, fill=tk.X)
-        self.create_footer(footer)
+        self.create_footer()
 
     def update_rate(self):
         """
