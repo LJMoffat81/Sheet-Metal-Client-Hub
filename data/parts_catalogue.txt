@@ -8,3 +8,5 @@ FAS-001,Screw M3,0.50
 FAS-001,Screw M3,0.50
 FAS-001,Screw M3,0.50
 FAS-001,Screw M3,0.50
+FAS-001,Screw M3,0.50
+FAS-001,Screw M3,0.50

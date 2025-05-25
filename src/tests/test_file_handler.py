@@ -7,7 +7,7 @@ from unittest.mock import patch
 # Add src/ to Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src')))
 
-from file_handler import validate_credentials, load_rates, save_output, save_quote, update_rates
+from file_handler import validate_credentials, load_rates, save_output, save_quote, update_rates, BASE_DIR
 
 class TestFileHandler(unittest.TestCase):
     def setUp(self):
@@ -26,12 +26,13 @@ class TestFileHandler(unittest.TestCase):
             f.write('mild_steel_rate=0.10\nwelding_rate_per_mm=0.10\n')
 
         # Mock BASE_DIR to use temp_dir
-        self.original_base_dir = file_handler.BASE_DIR
-        file_handler.BASE_DIR = self.temp_dir
+        self.original_base_dir = BASE_DIR
+        with patch('file_handler.BASE_DIR', self.temp_dir):
+            self.temp_dir_patched = True
 
     def tearDown(self):
-        # Restore BASE_DIR
-        file_handler.BASE_DIR = self.original_base_dir
+        # No need to restore BASE_DIR since patch is scoped to setUp
+        pass
 
     def test_validate_credentials_valid(self):
         result = validate_credentials('laurie', 'moffat123')
