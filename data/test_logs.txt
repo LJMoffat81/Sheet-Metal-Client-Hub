@@ -690,3 +690,20 @@ Saved to data/output.txt, Status: Pass
 [2025-05-25 11:36:22] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
 [2025-05-25 11:36:46] Test: FR3-FR4-FR5: Cost calculation and output storage, Input: Part Type: Assembly, Part ID: ASSY-44444, Revision: a5, Material: N/A, Thickness: 0.0, Length: 0, Width: 0, Quantity: 5, Sub-Parts: ['PART-TEST123'], Weldment: No, Top-Level Assembly: ASSY-44444, Work Centres: [('Assembly', 2.0)], Output: Cost calculated: £50.0
 Saved to data/output.txt, Status: Pass
+[2025-05-25 13:16:08] Test: FR7: Quote with negative margin, Input: Customer Name: Acme, Profit Margin: -10%, Output: Profit margin cannot be negative, Status: Fail
+[2025-05-25 13:16:10] Test: FR7: Generate quote, Input: Customer Name: Acme, Profit Margin: 20%, Output: Quote generated and saved to data/quotes.txt, Status: Pass
+[2025-05-25 13:16:10] Test: FR1: Login with empty fields, Input: Username: , Password: [hidden], Output: Username and password cannot be empty, Status: Fail
+[2025-05-25 13:16:10] Test: FR1: Invalid login, Input: Username: laurie, Password: [hidden], Output: Invalid username or password, Status: Fail
+[2025-05-25 13:16:11] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-25 13:16:12] Test: FR2: Invalid lay-flat length, Input: Length: 4000, Output: Lay-Flat length must be between 50 and 3000 mm, Status: Fail
+[2025-05-25 13:16:12] Test: FR6: Update rate with negative value, Input: Rate Key: mild_steel_rate, Rate Value: -0.1, Output: Rate value cannot be negative, Status: Fail
+[2025-05-25 13:16:13] Test: FR6: Update rate, Input: Rate Key: mild_steel_rate, Rate Value: 0.15, Output: Rate 'mild_steel_rate' updated to 0.15 in data/rates_global.txt, Status: Pass
+[2025-05-25 13:16:14] Test: FR7: Quote with negative margin, Input: Customer Name: Acme, Profit Margin: -10%, Output: Profit margin cannot be negative, Status: Fail
+[2025-05-25 13:16:15] Test: FR7: Generate quote, Input: Customer Name: Acme, Profit Margin: 20%, Output: Quote generated and saved to data/quotes.txt, Status: Pass
+[2025-05-25 13:16:15] Test: FR1: Login with empty fields, Input: Username: , Password: [hidden], Output: Username and password cannot be empty, Status: Fail
+[2025-05-25 13:16:15] Test: FR1: Invalid login, Input: Username: laurie, Password: [hidden], Output: Invalid username or password, Status: Fail
+[2025-05-25 13:16:17] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
+[2025-05-25 13:16:17] Test: FR2: Invalid lay-flat length, Input: Length: 4000, Output: Lay-Flat length must be between 50 and 3000 mm, Status: Fail
+[2025-05-25 13:16:18] Test: FR6: Update rate with negative value, Input: Rate Key: mild_steel_rate, Rate Value: -0.1, Output: Rate value cannot be negative, Status: Fail
+[2025-05-25 13:16:19] Test: FR6: Update rate, Input: Rate Key: mild_steel_rate, Rate Value: 0.15, Output: Rate 'mild_steel_rate' updated to 0.15 in data/rates_global.txt, Status: Pass
+[2025-05-25 13:16:43] Test: FR1: Valid User login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Status: Pass
