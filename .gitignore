@@ -18,4 +18,3 @@ env/
 *.bak
 verify_repo.sh
 __pycache__/
-data/log/*.log
