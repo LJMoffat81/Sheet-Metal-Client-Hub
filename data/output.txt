@@ -1,1 +1,2 @@
 PART-12345ABCDE,A,Mild Steel,1.0,1000,500,1,50.0,[],[]
+PART-123,A,Mild Steel,1.0,1000,500,10,100.0,[('Bolts', 50)],[('Cutting', 1000, 'None')]

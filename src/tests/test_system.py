@@ -18,12 +18,13 @@ class TestSystem(unittest.TestCase):
         self.root = tk.Tk()
         self.app = SheetMetalClientHub(self.root)
         self.file_handler = FileHandler()
-        self.data_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data')
+        self.base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.data_dir = os.path.join(self.base_dir, 'data')
         os.makedirs(self.data_dir, exist_ok=True)
         LOG_DIR = os.path.join(self.data_dir, 'log')
         os.makedirs(LOG_DIR, exist_ok=True)
         self.log_file = os.path.join(LOG_DIR, 'test_system.log')
-        logger = logging.getLogger('test_system')
+        logger = logging.getLogger('test_system_unique')
         logger.handlers.clear()
         logger.setLevel(logging.DEBUG)
         self.handler = logging.FileHandler(self.log_file, mode='w')
@@ -33,6 +34,7 @@ class TestSystem(unittest.TestCase):
         self.handler.flush()
         time.sleep(1.0)
         rates_path = os.path.join(self.data_dir, 'rates_global.txt')
+        logging.debug(f"Writing rates to: {rates_path}")
         with open(rates_path, 'w') as f:
             f.write('''
             {
@@ -63,15 +65,19 @@ class TestSystem(unittest.TestCase):
     def tearDown(self):
         self.root.destroy()
         os.environ['TESTING_MODE'] = '0'
-        logger = logging.getLogger('test_system')
+        logger = logging.getLogger('test_system_unique')
         for handler in logger.handlers[:]:
             handler.close()
             logger.removeHandler(handler)
 
     def _read_log_file(self):
+        logging.debug(f"Reading log file: {self.log_file}")
         if os.path.exists(self.log_file):
             with open(self.log_file, 'r') as f:
-                return f.read()
+                content = f.read()
+                logging.debug(f"Log content: {content}")
+                return content
+        logging.debug("Log file not found")
         return ""
 
     @patch('tkinter.messagebox.showinfo')
@@ -87,7 +93,7 @@ class TestSystem(unittest.TestCase):
         self.app.rate_value_entry.insert(0, '0.3')
         self.app.update_rate()
         self.handler.flush()
-        time.sleep(0.1)
+        time.sleep(1.0)
         mock_update.assert_called_with('mild_steel_rate', 0.3)
         log_content = self._read_log_file()
         self.assertIn("Success: Rate 'mild_steel_rate' updated to 0.3", log_content)
@@ -120,7 +126,7 @@ class TestSystem(unittest.TestCase):
         self.app.margin_entry.insert(0, '20')
         self.app.generate_quote('PART-67890ABCDE', 50.0)
         self.handler.flush()
-        time.sleep(0.1)
+        time.sleep(1.0)
         mock_save_output.assert_called()
         mock_save_quote.assert_called()
         log_content = self._read_log_file()
@@ -155,7 +161,7 @@ class TestSystem(unittest.TestCase):
         self.app.margin_entry.insert(0, '20')
         self.app.generate_quote('PART-67891ABCDE', 50.0)
         self.handler.flush()
-        time.sleep(0.1)
+        time.sleep(1.0)
         mock_save_output.assert_called()
         mock_save_quote.assert_called()
         log_content = self._read_log_file()
@@ -186,7 +192,7 @@ class TestSystem(unittest.TestCase):
         self.app.margin_entry.insert(0, '15')
         self.app.generate_quote('ASSY-98765ABCDE', 100.0)
         self.handler.flush()
-        time.sleep(0.1)
+        time.sleep(1.0)
         mock_save_output.assert_called()
         mock_save_quote.assert_called()
         log_content = self._read_log_file()
@@ -199,7 +205,7 @@ class TestSystem(unittest.TestCase):
         self.app.password_entry.insert(0, 'wrong')
         self.app.login()
         self.handler.flush()
-        time.sleep(0.1)
+        time.sleep(1.0)
         log_content = self._read_log_file()
         self.assertIn("Error: Invalid username or password", log_content)
 
@@ -214,7 +220,7 @@ class TestSystem(unittest.TestCase):
         self.app.single_thickness_var.set('-1.0')
         self.app.calculate_and_save()
         self.handler.flush()
-        time.sleep(0.1)
+        time.sleep(1.0)
         log_content = self._read_log_file()
         self.assertIn("Error: Thickness must be between 1.0 and 3.0 mm", log_content)
 
@@ -236,7 +242,7 @@ class TestSystem(unittest.TestCase):
         self.app.work_centre_quantity_vars[0].set('100')
         self.app.calculate_and_save()
         self.handler.flush()
-        time.sleep(0.1)
+        time.sleep(1.0)
         log_content = self._read_log_file()
         self.assertIn("Error: Failed to load rates from data/rates_global.txt", log_content)
 
