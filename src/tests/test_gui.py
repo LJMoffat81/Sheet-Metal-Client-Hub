@@ -22,7 +22,6 @@ class TestGUI(unittest.TestCase):
         LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
         os.makedirs(LOG_DIR, exist_ok=True)
         self.log_file = os.path.join(LOG_DIR, 'test_gui.log')
-        # Ensure log file is created
         logger = logging.getLogger()
         logger.setLevel(logging.DEBUG)
         handler = logging.FileHandler(self.log_file, mode='w')
@@ -30,8 +29,7 @@ class TestGUI(unittest.TestCase):
         logger.handlers = [handler]
         logging.info("Test setup initialized")
         handler.flush()
-        time.sleep(0.5)  # Increased sleep for log write
-        # Create rates file
+        time.sleep(0.5)
         rates_path = os.path.join(os.path.dirname(__file__), '../../data/rates_global.txt')
         with open(rates_path, 'w') as f:
             f.write('''
@@ -40,7 +38,8 @@ class TestGUI(unittest.TestCase):
                 "cutting_rate_per_mm": 0.01,
                 "mig_welding_rate_per_mm": 0.02,
                 "painting_rate_per_mm²": 0.001,
-                "bolts_rate_per_unit": 0.1
+                "bolts_rate_per_unit": 0.1,
+                "assembly_rate_per_component": 0.8
             }
             ''')
 

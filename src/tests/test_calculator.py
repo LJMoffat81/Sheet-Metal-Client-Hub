@@ -3,13 +3,14 @@ from unittest.mock import patch
 import sys
 import os
 import time
+import logging
+import timeout_decorator
 
 # Add src/ to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from file_handler import FileHandler
 from calculator import calculate_cost
-import logging
 
 class TestCalculator(unittest.TestCase):
     def setUp(self):
@@ -26,13 +27,17 @@ class TestCalculator(unittest.TestCase):
         LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
         os.makedirs(LOG_DIR, exist_ok=True)
         self.log_file = os.path.join(LOG_DIR, 'test_calculator.log')
-        logging.basicConfig(
-            filename=self.log_file,
-            level=logging.DEBUG,
-            format='%(asctime)s - %(levelname)s - %(message)s'
-        )
+        logger = logging.getLogger()
+        logger.setLevel(logging.DEBUG)
+        handler = logging.FileHandler(self.log_file, mode='w')
+        handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+        logger.handlers = [handler]
         logging.info("Test setup initialized")
-        time.sleep(0.1)
+        handler.flush()
+        time.sleep(0.5)
+
+    def tearDown(self):
+        logging.getLogger().handlers = []
 
     def _read_log_file(self):
         if os.path.exists(self.log_file):
@@ -40,6 +45,7 @@ class TestCalculator(unittest.TestCase):
                 return f.read()
         return ""
 
+    @timeout_decorator.timeout(5)
     def test_calculate_cost_single_part_with_welding(self):
         part_data = {
             'part_type': 'Single Part',
@@ -58,6 +64,7 @@ class TestCalculator(unittest.TestCase):
         log_content = self._read_log_file()
         self.assertIn(f"Calculated cost: {cost}", log_content)
 
+    @timeout_decorator.timeout(5)
     def test_calculate_cost_single_part_with_coating(self):
         part_data = {
             'part_type': 'Single Part',
@@ -76,6 +83,7 @@ class TestCalculator(unittest.TestCase):
         log_content = self._read_log_file()
         self.assertIn(f"Calculated cost: {cost}", log_content)
 
+    @timeout_decorator.timeout(5)
     def test_calculate_cost_single_part_with_fasteners(self):
         part_data = {
             'part_type': 'Single Part',
@@ -94,6 +102,7 @@ class TestCalculator(unittest.TestCase):
         log_content = self._read_log_file()
         self.assertIn(f"Calculated cost: {cost}", log_content)
 
+    @timeout_decorator.timeout(5)
     def test_calculate_cost_assembly(self):
         part_data = {
             'part_type': 'Assembly',
@@ -112,6 +121,7 @@ class TestCalculator(unittest.TestCase):
         log_content = self._read_log_file()
         self.assertIn(f"Calculated cost: {cost}", log_content)
 
+    @timeout_decorator.timeout(5)
     def test_calculate_cost_invalid_work_centre(self):
         part_data = {
             'part_type': 'Single Part',
@@ -129,6 +139,7 @@ class TestCalculator(unittest.TestCase):
         log_content = self._read_log_file()
         self.assertIn("Missing rate", log_content)
 
+    @timeout_decorator.timeout(5)
     def test_calculate_cost_missing_rate(self):
         part_data = {
             'part_type': 'Single Part',

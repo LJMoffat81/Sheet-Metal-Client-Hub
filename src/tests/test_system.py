@@ -4,13 +4,14 @@ import tkinter as tk
 import sys
 import os
 import time
+import logging
+import timeout_decorator
 
 # Add src/ to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from gui import SheetMetalClientHub
 from file_handler import FileHandler
-import logging
 
 class TestSystem(unittest.TestCase):
     def setUp(self):
@@ -21,30 +22,36 @@ class TestSystem(unittest.TestCase):
         LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
         os.makedirs(LOG_DIR, exist_ok=True)
         self.log_file = os.path.join(LOG_DIR, 'test_system.log')
-        logging.basicConfig(
-            filename=self.log_file,
-            level=logging.DEBUG,
-            format='%(asctime)s - %(levelname)s - %(message)s'
-        )
+        logger = logging.getLogger()
+        logger.setLevel(logging.DEBUG)
+        handler = logging.FileHandler(self.log_file, mode='w')
+        handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+        logger.handlers = [handler]
         logging.info("Test setup initialized")
-        time.sleep(0.1)
-        # Ensure rates file exists for tests
+        handler.flush()
+        time.sleep(0.5)
+        # Create rates file
         rates_path = os.path.join(os.path.dirname(__file__), '../../data/rates_global.txt')
-        if not os.path.exists(rates_path):
-            with open(rates_path, 'w') as f:
-                f.write('''
-                {
-                    "mild_steel_rate": 0.0001,
-                    "cutting_rate_per_mm": 0.01,
-                    "mig_welding_rate_per_mm": 0.02,
-                    "bolts_rate_per_unit": 0.1,
-                    "assembly_rate_per_component": 0.8
-                }
-                ''')
+        with open(rates_path, 'w') as f:
+            f.write('''
+            {
+                "mild_steel_rate": 0.0001,
+                "cutting_rate_per_mm": 0.01,
+                "mig_welding_rate_per_mm": 0.02,
+                "painting_rate_per_mm²": 0.001,
+                "bolts_rate_per_unit": 0.1,
+                "assembly_rate_per_component": 0.8
+            }
+            ''')
+        # Create output.txt with a valid sub-part
+        output_path = os.path.join(os.path.dirname(__file__), '../../data/output.txt')
+        with open(output_path, 'w') as f:
+            f.write('PART-12345ABCDE,A,mild_steel,1.0,1000,500,1,50.0,[],[]\n')
 
     def tearDown(self):
         self.root.destroy()
         os.environ['TESTING_MODE'] = '0'
+        logging.getLogger().handlers = []
 
     def _read_log_file(self):
         if os.path.exists(self.log_file):
@@ -52,9 +59,12 @@ class TestSystem(unittest.TestCase):
                 return f.read()
         return ""
 
+    @patch('tkinter.messagebox.showinfo')
+    @patch('tkinter.messagebox.showerror')
     @patch('gui.FileHandler.validate_credentials')
     @patch('gui.FileHandler.update_rates')
-    def test_admin_rate_update(self, mock_update, mock_validate):
+    @timeout_decorator.timeout(5)
+    def test_admin_rate_update(self, mock_update, mock_validate, mock_showerror, mock_showinfo):
         mock_validate.return_value = True
         self.app.username_entry.insert(0, 'admin')
         self.app.password_entry.insert(0, 'admin123')
@@ -66,10 +76,13 @@ class TestSystem(unittest.TestCase):
         log_content = self._read_log_file()
         self.assertIn("Success: Rate 'mild_steel_rate' updated to 0.3", log_content)
 
+    @patch('tkinter.messagebox.showinfo')
+    @patch('tkinter.messagebox.showerror')
     @patch('gui.FileHandler.validate_credentials')
     @patch('gui.FileHandler.save_output')
     @patch('gui.FileHandler.save_quote')
-    def test_full_workflow_user_single_part_with_welding(self, mock_save_quote, mock_save_output, mock_validate):
+    @timeout_decorator.timeout(5)
+    def test_full_workflow_user_single_part_with_welding(self, mock_save_quote, mock_save_output, mock_validate, mock_showerror, mock_showinfo):
         mock_validate.return_value = True
         self.app.username_entry.insert(0, 'laurin')
         self.app.password_entry.insert(0, 'moffat123')
@@ -96,10 +109,13 @@ class TestSystem(unittest.TestCase):
         log_content = self._read_log_file()
         self.assertIn("Success: Quote generated and saved to data/quotes.txt", log_content)
 
+    @patch('tkinter.messagebox.showinfo')
+    @patch('tkinter.messagebox.showerror')
     @patch('gui.FileHandler.validate_credentials')
     @patch('gui.FileHandler.save_output')
     @patch('gui.FileHandler.save_quote')
-    def test_full_workflow_user_single_part_with_fasteners(self, mock_save_quote, mock_save_output, mock_validate):
+    @timeout_decorator.timeout(5)
+    def test_full_workflow_user_single_part_with_fasteners(self, mock_save_quote, mock_save_output, mock_validate, mock_showerror, mock_showinfo):
         mock_validate.return_value = True
         self.app.username_entry.insert(0, 'laurin')
         self.app.password_entry.insert(0, 'moffat123')
@@ -127,10 +143,13 @@ class TestSystem(unittest.TestCase):
         log_content = self._read_log_file()
         self.assertIn("Success: Quote generated and saved to data/quotes.txt", log_content)
 
+    @patch('tkinter.messagebox.showinfo')
+    @patch('tkinter.messagebox.showerror')
     @patch('gui.FileHandler.validate_credentials')
     @patch('gui.FileHandler.save_output')
     @patch('gui.FileHandler.save_quote')
-    def test_assembly_workflow(self, mock_save_quote, mock_save_output, mock_validate):
+    @timeout_decorator.timeout(5)
+    def test_assembly_workflow(self, mock_save_quote, mock_save_output, mock_validate, mock_showerror, mock_showinfo):
         mock_validate.return_value = True
         self.app.username_entry.insert(0, 'laurin')
         self.app.password_entry.insert(0, 'moffat123')
@@ -140,7 +159,7 @@ class TestSystem(unittest.TestCase):
         self.app.part_id_entry.insert(0, 'ASSY-98765ABCDE')
         self.app.revision_entry.insert(0, 'A')
         self.app.assembly_quantity_var.set('10')
-        self.app.assembly_sub_parts_var.set('PART-12345')
+        self.app.assembly_sub_parts_var.set('PART-12345ABCDE')
         self.app.add_sub_part(0)
         self.app.work_centre_vars[0].set('Assembly')
         self.app.work_centre_quantity_vars[0].set('10')
@@ -154,26 +173,35 @@ class TestSystem(unittest.TestCase):
         log_content = self._read_log_file()
         self.assertIn("Success: Quote generated and saved to data/quotes.txt", log_content)
 
-    def test_invalid_login(self):
+    @patch('tkinter.messagebox.showinfo')
+    @patch('tkinter.messagebox.showerror')
+    @timeout_decorator.timeout(5)
+    def test_invalid_login(self, mock_showerror, mock_showinfo):
         self.app.username_entry.insert(0, 'wrong')
         self.app.password_entry.insert(0, 'wrong')
         self.app.login()
         log_content = self._read_log_file()
         self.assertIn("Error: Invalid username or password", log_content)
 
-    def test_invalid_part_input(self):
+    @patch('tkinter.messagebox.showinfo')
+    @patch('tkinter.messagebox.showerror')
+    @timeout_decorator.timeout(5)
+    def test_invalid_part_input(self, mock_showerror, mock_showinfo):
         self.app.create_part_input_screen()
         self.app.notebook.select(1)
         self.app.part_id_entry.delete(0, tk.END)
-        self.app.part_id_entry.insert(0, 'PART-123')
+        self.app.part_id_entry.insert(0, 'PART-123ABCDE')
         self.app.revision_entry.insert(0, 'A')
         self.app.single_thickness_var.set('-1.0')
         self.app.calculate_and_save()
         log_content = self._read_log_file()
         self.assertIn("Error: Thickness must be between 1.0 and 3.0 mm", log_content)
 
+    @patch('tkinter.messagebox.showinfo')
+    @patch('tkinter.messagebox.showerror')
     @patch('gui.FileHandler.load_rates')
-    def test_empty_rates_file(self, mock_load_rates):
+    @timeout_decorator.timeout(5)
+    def test_empty_rates_file(self, mock_load_rates, mock_showerror, mock_showinfo):
         mock_load_rates.return_value = {}
         self.app.create_part_input_screen()
         self.app.notebook.select(1)
