@@ -33,7 +33,6 @@ class FileHandler:
 
     def validate_credentials(self, username, password):
         """Validate user credentials (placeholder)."""
-        # Replace with actual validation logic
         credentials_file = os.path.join("base_dir", "credentials.txt")
         if os.path.exists(credentials_file):
             with open(credentials_file, 'r') as f:
