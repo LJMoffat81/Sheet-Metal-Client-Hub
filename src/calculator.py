@@ -13,13 +13,21 @@ def calculate_cost(part_specs, rates):
     try:
         total_cost = 0.0
 
+        # Normalize material name for rate key
+        material_map = {
+            'mild steel': 'mild_steel',
+            'aluminium': 'aluminium',
+            'stainless steel': 'stainless_steel'
+        }
+
         # Material cost for single parts
         if part_specs['part_type'] == 'Single Part':
             material = part_specs['material'].lower()
+            normalized_material = material_map.get(material, material)
             thickness = float(part_specs['thickness'])
             length = float(part_specs['length'])
             width = float(part_specs['width'])
-            material_rate_key = f"{material}_rate"
+            material_rate_key = f"{normalized_material}_rate"
             if material_rate_key in rates:
                 # Calculate material cost: rate * thickness * area (length * width in mm²)
                 material_cost = rates[material_rate_key] * thickness * length * width / 1000  # Convert to GBP
