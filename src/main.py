@@ -7,9 +7,18 @@
 from gui import SheetMetalClientHub
 import tkinter as tk
 import logging
+import os
 
 # Set up logging
-logging.basicConfig(filename='main_output.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
+os.makedirs(LOG_DIR, exist_ok=True)
+log_file = os.path.join(LOG_DIR, 'main.log')
+
+logging.basicConfig(
+    filename=log_file,
+    level=logging.INFO,
+    format='%(asctime)s - %(message)s'
+)
 
 def main():
     """
