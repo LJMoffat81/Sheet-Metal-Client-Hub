@@ -1,9 +1,14 @@
 import unittest
 from unittest.mock import patch
 import tkinter as tk
+import sys
+import os
+
+# Add src/ to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from gui import SheetMetalClientHub
 from file_handler import FileHandler
-import os
 import logging
 
 class TestGUI(unittest.TestCase):
@@ -12,7 +17,9 @@ class TestGUI(unittest.TestCase):
         self.root = tk.Tk()
         self.app = SheetMetalClientHub(self.root)
         self.file_handler = FileHandler()
-        self.log_file = os.path.join('data', 'log', 'gui.log')
+        LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
+        os.makedirs(LOG_DIR, exist_ok=True)
+        self.log_file = os.path.join(LOG_DIR, 'test_gui.log')
         logging.basicConfig(
             filename=self.log_file,
             level=logging.DEBUG,

@@ -1,13 +1,27 @@
 import unittest
 from unittest.mock import patch, mock_open
+import sys
 import os
+
+# Add src/ to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from file_handler import FileHandler
+import logging
 
 class TestFileHandler(unittest.TestCase):
     def setUp(self):
         self.file_handler = FileHandler()
         self.temp_dir = os.path.join(os.path.dirname(__file__), 'temp')
         os.makedirs(self.temp_dir, exist_ok=True)
+        LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
+        os.makedirs(LOG_DIR, exist_ok=True)
+        self.log_file = os.path.join(LOG_DIR, 'test_file_handler.log')
+        logging.basicConfig(
+            filename=self.log_file,
+            level=logging.DEBUG,
+            format='%(asctime)s - %(levelname)s - %(message)s'
+        )
 
     def tearDown(self):
         import shutil

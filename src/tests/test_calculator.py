@@ -1,9 +1,14 @@
 import unittest
 from unittest.mock import patch
+import sys
+import os
+
+# Add src/ to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from file_handler import FileHandler
 from calculator import calculate_cost
 import logging
-import os
 
 class TestCalculator(unittest.TestCase):
     def setUp(self):
@@ -17,7 +22,9 @@ class TestCalculator(unittest.TestCase):
             'bolts_rate_per_unit': 0.1,
             'assembly_rate_per_component': 0.8
         }
-        self.log_file = os.path.join('data', 'log', 'calculator.log')
+        LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
+        os.makedirs(LOG_DIR, exist_ok=True)
+        self.log_file = os.path.join(LOG_DIR, 'test_calculator.log')
         logging.basicConfig(
             filename=self.log_file,
             level=logging.DEBUG,
