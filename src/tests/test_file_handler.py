@@ -112,7 +112,7 @@ class TestFileHandler(unittest.TestCase):
         self.assertIn(expected, content)
 
     def test_validate_credentials(self):
-        self.assertTrue(self.file_handler.validate_credentials('laurin', 'moffat123'))
+        self.assertTrue(self.file_handler.validate_credentials('laurie', 'moffat123'))
         self.assertFalse(self.file_handler.validate_credentials('wrong', 'wrong'))
 
 if __name__ == '__main__':
