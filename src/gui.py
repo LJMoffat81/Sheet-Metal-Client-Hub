@@ -9,7 +9,7 @@ from PIL import Image, ImageTk
 import logging
 
 # Set up logging
-LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
+LOG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'log')
 os.makedirs(LOG_DIR, exist_ok=True)
 log_file = os.path.join(LOG_DIR, 'gui.log')
 
@@ -91,9 +91,8 @@ class SheetMetalClientHub:
         logging.info("Initializing SheetMetalClientHub")
         self.root = root
         self.root.title("Sheet Metal Client Hub")
-        self.root.geometry("1000x750")
+        self.root.geometry("1200x900")  # Increased window size
         self.root.resizable(False, False)
-        self.root.minsize(400, 400)
         try:
             icon_path = os.path.join(BASE_DIR, 'docs/images/laser_gear.ico')
             self.root.iconbitmap(icon_path)
@@ -108,7 +107,6 @@ class SheetMetalClientHub:
         self.work_centre_vars = [tk.StringVar(value="") for _ in range(10)]
         self.work_centre_quantity_vars = [tk.StringVar(value="0") for _ in range(10)]
         self.work_centre_sub_option_vars = [tk.StringVar(value="None") for _ in range(10)]
-        self.fastener_type_var = tk.StringVar(value="None")
         self.fastener_count_var = tk.StringVar(value="0")
         self.create_login_screen()
 
@@ -344,22 +342,24 @@ class SheetMetalClientHub:
 
     def update_selected_items(self, tab_index):
         """
-        Update the Selected Items label to include material, sub-parts, and fasteners.
+        Update the Selected Items listbox to include material, sub-parts, and fasteners.
         """
         logging.debug(f"Updating selected items for tab {tab_index}")
         if tab_index == 1:  # Single Part
             material = self.single_material_var.get()
-            fastener = f"{self.fastener_type_var.get()} ({self.fastener_count_var.get()})" if self.fastener_type_var.get() != "None" and int(self.fastener_count_var.get()) > 0 else ""
-            selected_list = [material] + self.single_selected_sub_parts + ([fastener] if fastener else [])
-            label = self.single_selected_sub_parts_label
+            selected_list = [material] + self.single_selected_sub_parts
+            listbox = self.single_selected_sub_parts_listbox
+            fastener_count = int(self.fastener_count_var.get()) if self.fastener_count_var.get().isdigit() else 0
+            if fastener_count > 0:
+                for item in self.single_selected_sub_parts:
+                    selected_list.append(f"{item} ({fastener_count})")
         else:  # Assembly
             selected_list = self.assembly_selected_sub_parts
-            label = self.assembly_selected_sub_parts_label
+            listbox = self.assembly_selected_sub_parts_listbox
 
-        if selected_list:
-            label.config(text=f"Selected Items: {', '.join(selected_list)}")
-        else:
-            label.config(text="Selected Items: None")
+        listbox.delete(0, tk.END)
+        for i, item in enumerate(selected_list, 1):
+            listbox.insert(tk.END, f"{i}. {item}")
 
     def add_sub_part(self, tab_index):
         """
@@ -389,7 +389,6 @@ class SheetMetalClientHub:
         logging.debug(f"Clearing sub-parts for tab {tab_index}")
         if tab_index == 1:
             self.single_selected_sub_parts = []
-            self.fastener_type_var.set("None")
             self.fastener_count_var.set("0")
             self.update_selected_items(1)
         else:
@@ -499,7 +498,6 @@ class SheetMetalClientHub:
         self.single_custom_quantity_entry.delete(0, tk.END)
         self.single_custom_quantity_entry.config(state='disabled')
         self.single_selected_sub_parts = []
-        self.fastener_type_var.set("None")
         self.fastener_count_var.set("0")
         self.update_selected_items(1)
         self.single_sub_parts_var.set("Select Item")
@@ -557,33 +555,31 @@ class SheetMetalClientHub:
 
         tk.Label(top_frame, text="Manufacturing Input Screen", font=("Arial", 16, "bold")).pack(pady=5)
 
+        # Titles for Planned Materials and Planned Operations
+        title_frame = tk.Frame(top_frame)
+        title_frame.pack(fill=tk.X)
+        tk.Label(title_frame, text="Planned Materials", font=("Arial", 14, "bold")).place(x=300, y=0)
+        tk.Label(title_frame, text="Planned Operations", font=("Arial", 14, "bold")).place(x=900, y=0)
+
         # Main frame
         main_frame = tk.Frame(self.root)
         main_frame.pack(fill=tk.BOTH, expand=True)
-        main_frame.grid_rowconfigure(0, weight=1)
-        main_frame.grid_rowconfigure(1, weight=0)
-        main_frame.grid_columnconfigure(0, weight=1)
-        main_frame.grid_columnconfigure(1, weight=0)
-        main_frame.grid_columnconfigure(2, weight=1)
 
-        # Left frame
-        left_frame = tk.Frame(main_frame)
-        left_frame.grid(row=0, column=0, sticky="nsew")
+        # Left frame (Planned Materials)
+        left_frame = tk.Frame(main_frame, width=600)
+        left_frame.place(x=0, y=50, width=600, height=800)
+
+        # Right frame (Planned Operations)
+        right_frame = tk.Frame(main_frame, width=600)
+        right_frame.place(x=600, y=50, width=600, height=800)
 
         # Separator
         separator = ttk.Separator(main_frame, orient='vertical')
-        separator.grid(row=0, column=1, sticky="ns")
-
-        # Right frame
-        right_frame = tk.Frame(main_frame)
-        right_frame.grid(row=0, column=2, sticky="nsew")
+        separator.place(x=600, y=50, height=800)
 
         # Input frame in left frame
         input_frame = tk.Frame(left_frame)
-        input_frame.pack(side=tk.RIGHT, padx=10, pady=5)
-
-        # Planned Materials title
-        tk.Label(input_frame, text="Planned Materials", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=5)
+        input_frame.place(x=10, y=10, width=580, height=780)
 
         # Common fields
         self.part_id_label = tk.Label(input_frame, text="Part ID:", font=("Arial", 12))
@@ -591,14 +587,14 @@ class SheetMetalClientHub:
         self.part_id_entry.insert(0, "ASSY-")
         self.revision_label = tk.Label(input_frame, text="Revision:", font=("Arial", 12))
         self.revision_entry = tk.Entry(input_frame, font=("Arial", 12))
-        self.part_id_label.grid(row=1, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.part_id_entry.grid(row=1, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.revision_label.grid(row=2, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.revision_entry.grid(row=2, column=1, sticky="w", padx=(2, 5), pady=2)
+        self.part_id_label.grid(row=0, column=0, sticky="e", padx=(10, 2), pady=2)
+        self.part_id_entry.grid(row=0, column=1, sticky="w", padx=(2, 5), pady=2)
+        self.revision_label.grid(row=1, column=0, sticky="e", padx=(10, 2), pady=2)
+        self.revision_entry.grid(row=1, column=1, sticky="w", padx=(2, 5), pady=2)
 
         # Notebook for tabs
         self.notebook = ttk.Notebook(input_frame)
-        self.notebook.grid(row=3, column=0, columnspan=2, sticky="nsew", pady=5)
+        self.notebook.grid(row=2, column=0, columnspan=2, sticky="nsew", pady=5)
         self.notebook.bind('<<NotebookTabChanged>>', self.on_tab_changed)
 
         # Assembly tab
@@ -614,7 +610,15 @@ class SheetMetalClientHub:
         self.assembly_sub_parts_option = tk.OptionMenu(self.assembly_part_frame, self.assembly_sub_parts_var, "Select Item")
         self.assembly_add_sub_part_button = tk.Button(self.assembly_part_frame, text="Add Sub-Part", command=lambda: self.add_sub_part(0), font=("Arial", 12))
         self.assembly_clear_sub_parts_button = tk.Button(self.assembly_part_frame, text="Clear Selected", command=lambda: self.clear_sub_parts(0), font=("Arial", 12))
-        self.assembly_selected_sub_parts_label = tk.Label(self.assembly_part_frame, text="Selected Items: None", font=("Arial", 12), wraplength=400, justify="left")
+
+        # Scrollable Listbox for selected sub-parts
+        self.assembly_selected_sub_parts_frame = tk.Frame(self.assembly_part_frame)
+        self.assembly_selected_sub_parts_listbox = tk.Listbox(self.assembly_selected_sub_parts_frame, font=("Arial", 12), height=10, width=40)
+        scrollbar = tk.Scrollbar(self.assembly_selected_sub_parts_frame, orient="vertical")
+        scrollbar.config(command=self.assembly_selected_sub_parts_listbox.yview)
+        self.assembly_selected_sub_parts_listbox.config(yscrollcommand=scrollbar.set)
+        self.assembly_selected_sub_parts_listbox.pack(side=tk.LEFT, fill=tk.Y)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
         self.assembly_quantity_label.grid(row=0, column=0, sticky="e", padx=(10, 2), pady=2)
         self.assembly_quantity_option.grid(row=0, column=1, sticky="w", padx=(2, 5), pady=2)
@@ -623,7 +627,7 @@ class SheetMetalClientHub:
         self.assembly_sub_parts_option.grid(row=2, column=1, sticky="w", padx=(2, 5), pady=2)
         self.assembly_add_sub_part_button.grid(row=3, column=1, sticky="w", padx=(2, 5), pady=2)
         self.assembly_clear_sub_parts_button.grid(row=4, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.assembly_selected_sub_parts_label.grid(row=5, column=0, columnspan=2, sticky="w", padx=(10, 5), pady=2)
+        self.assembly_selected_sub_parts_frame.grid(row=5, column=0, columnspan=2, sticky="w", padx=(10, 5), pady=2)
 
         self.assembly_quantity_var.trace("w", lambda *args: self.update_quantity_entry_state())
 
@@ -653,13 +657,19 @@ class SheetMetalClientHub:
         self.single_sub_parts_label = tk.Label(self.single_part_frame, text="Fasteners/Inserts:", font=("Arial", 12))
         self.single_sub_parts_var = tk.StringVar(value="Select Item")
         self.single_sub_parts_option = tk.OptionMenu(self.single_part_frame, self.single_sub_parts_var, "Select Item")
-        self.fastener_type_label = tk.Label(self.single_part_frame, text="Fastener Type:", font=("Arial", 12))
-        self.fastener_type_option = tk.OptionMenu(self.single_part_frame, self.fastener_type_var, "None", "Bolts", "Rivets", "Screws")
         self.fastener_count_label = tk.Label(self.single_part_frame, text="Fastener Count:", font=("Arial", 12))
         self.fastener_count_entry = tk.Entry(self.single_part_frame, textvariable=self.fastener_count_var, font=("Arial", 12))
         self.single_add_sub_part_button = tk.Button(self.single_part_frame, text="Add Fastener/Insert", command=lambda: self.add_sub_part(1), font=("Arial", 12))
         self.single_clear_sub_parts_button = tk.Button(self.single_part_frame, text="Clear Selected", command=lambda: self.clear_sub_parts(1), font=("Arial", 12))
-        self.single_selected_sub_parts_label = tk.Label(self.single_part_frame, text="Selected Items: Mild Steel", font=("Arial", 12), wraplength=400, justify="left")
+
+        # Scrollable Listbox for selected items
+        self.single_selected_sub_parts_frame = tk.Frame(self.single_part_frame)
+        self.single_selected_sub_parts_listbox = tk.Listbox(self.single_selected_sub_parts_frame, font=("Arial", 12), height=10, width=40)
+        scrollbar = tk.Scrollbar(self.single_selected_sub_parts_frame, orient="vertical")
+        scrollbar.config(command=self.single_selected_sub_parts_listbox.yview)
+        self.single_selected_sub_parts_listbox.config(yscrollcommand=scrollbar.set)
+        self.single_selected_sub_parts_listbox.pack(side=tk.LEFT, fill=tk.Y)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
         self.single_material_label.grid(row=0, column=0, sticky="e", padx=(10, 2), pady=2)
         self.single_material_option.grid(row=0, column=1, sticky="w", padx=(2, 5), pady=2)
@@ -676,24 +686,19 @@ class SheetMetalClientHub:
         self.single_weldment_option.grid(row=6, column=1, sticky="w", padx=(2, 5), pady=2)
         self.single_sub_parts_label.grid(row=7, column=0, sticky="e", padx=(10, 2), pady=2)
         self.single_sub_parts_option.grid(row=7, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.fastener_type_label.grid(row=8, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.fastener_type_option.grid(row=8, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.fastener_count_label.grid(row=9, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.fastener_count_entry.grid(row=9, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.single_add_sub_part_button.grid(row=10, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.single_clear_sub_parts_button.grid(row=11, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.single_selected_sub_parts_label.grid(row=12, column=0, columnspan=2, sticky="w", padx=(10, 5), pady=2)
+        self.fastener_count_label.grid(row=8, column=0, sticky="e", padx=(10, 2), pady=2)
+        self.fastener_count_entry.grid(row=8, column=1, sticky="w", padx=(2, 5), pady=2)
+        self.single_add_sub_part_button.grid(row=9, column=1, sticky="w", padx=(2, 5), pady=2)
+        self.single_clear_sub_parts_button.grid(row=10, column=1, sticky="w", padx=(2, 5), pady=2)
+        self.single_selected_sub_parts_frame.grid(row=11, column=0, columnspan=2, sticky="w", padx=(10, 5), pady=2)
 
         self.single_material_var.trace("w", lambda *args: self.update_selected_items(1))
         self.single_quantity_var.trace("w", lambda *args: self.update_quantity_entry_state())
-        self.fastener_type_var.trace("w", lambda *args: self.update_selected_items(1))
         self.fastener_count_var.trace("w", lambda *args: self.update_selected_items(1))
 
         # Operations frame in right frame
         self.operations_frame = tk.Frame(right_frame)
-        self.operations_frame.pack(side=tk.LEFT, padx=10, pady=5)
-
-        tk.Label(self.operations_frame, text="Planned Operations", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=4, pady=5)
+        self.operations_frame.place(x=10, y=10, width=580, height=780)
 
         # WorkCentre and quantity options
         work_centres = [
@@ -725,7 +730,7 @@ class SheetMetalClientHub:
 
         # Bottom frame for navigation buttons
         bottom_frame = tk.Frame(main_frame)
-        bottom_frame.grid(row=1, column=0, columnspan=3, sticky="ew", pady=5)
+        bottom_frame.place(x=0, y=850, width=1200, height=50)
 
         self.settings_button = tk.Button(bottom_frame, text="Settings", command=self.go_to_settings, font=("Arial", 12))
         self.back_button = tk.Button(bottom_frame, text="Back", command=self.go_back_to_login, font=("Arial", 12))
@@ -828,7 +833,13 @@ class SheetMetalClientHub:
                     return
                 weldment_indicator = self.single_weldment_var.get()
                 sub_parts = self.single_selected_sub_parts
-                fastener_types_and_counts = [(self.fastener_type_var.get(), int(self.fastener_count_var.get()))] if self.fastener_type_var.get() != "None" and int(self.fastener_count_var.get()) > 0 else []
+                fastener_types_and_counts = []
+                fastener_count = int(self.fastener_count_var.get()) if self.fastener_count_var.get().isdigit() else 0
+                if fastener_count > 0:
+                    for item in sub_parts:
+                        item_id = item.split(':')[0].strip()
+                        fastener_type = item_id[:3].upper()  # First 3 letters of part number
+                        fastener_types_and_counts.append((fastener_type, fastener_count))
                 top_level_assembly = "N/A"
             else:  # Assembly
                 material = "N/A"
@@ -1021,8 +1032,8 @@ class SheetMetalClientHub:
             catalogue_cost = 0.0
             if part_type == "Single Part":
                 catalogue = load_parts_catalogue()
-                for item_id in sub_parts:
-                    item_id = item_id.split(':')[0].strip()
+                for item in sub_parts:
+                    item_id = item.split(':')[0].strip()
                     for cat_id, _, price in catalogue:
                         if item_id == cat_id:
                             catalogue_cost += price
@@ -1045,7 +1056,7 @@ class SheetMetalClientHub:
                 'fastener_types_and_counts': fastener_types_and_counts
             }
 
-            rates = self.file_handler.load_rates('data/rates_global.txt')
+            rates = self.file_handler.load_rates('rates_global.txt')
             if not rates:
                 output = "Failed to load rates from data/rates_global.txt"
                 self.show_message("Error", output, 'error')
@@ -1153,7 +1164,13 @@ class SheetMetalClientHub:
                 )
                 return
 
-            fastener_types_and_counts = [(self.fastener_type_var.get(), int(self.fastener_count_var.get()))] if self.fastener_type_var.get() != "None" and int(self.fastener_count_var.get()) > 0 else []
+            fastener_types_and_counts = []
+            fastener_count = int(self.fastener_count_var.get()) if self.fastener_count_var.get().isdigit() else 0
+            if fastener_count > 0:
+                for item in self.single_selected_sub_parts:
+                    item_id = item.split(':')[0].strip()
+                    fastener_type = item_id[:3].upper()  # First 3 letters of part number
+                    fastener_types_and_counts.append((fastener_type, fastener_count))
             self.file_handler.save_quote(part_id, total_cost, customer_name, profit_margin, fastener_types_and_counts)
             output = "Quote generated and saved to data/quotes.txt"
             self.show_message("Success", output, 'info')
