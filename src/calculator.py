@@ -38,7 +38,7 @@ def calculate_cost(part_data, rates):
         if part_type == 'Single Part' and material != 'N/A':
             material_rate_key = material.lower()
             if material_rate_key not in rates:
-                logging.error(f"Missing rate for {material_rate_key}")
+                logging.error(f"Missing material rate for {material_rate_key}")
                 return 0.0
             material_cost = rates[material_rate_key] * thickness * length * width * quantity
             total_cost += material_cost
@@ -84,7 +84,7 @@ def calculate_cost(part_data, rates):
                 total_cost += fastener_cost
                 logging.debug(f"Fastener {fastener_type} cost: £{fastener_cost}")
             else:
-                logging.error(f"Missing rate for {rate_key}")
+                logging.error(f"Missing fastener rate for {rate_key} (type: {fastener_type})")
                 return 0.0
 
         # Catalogue cost
