@@ -581,23 +581,24 @@ class SheetMetalClientHub:
         input_frame = tk.Frame(left_frame)
         input_frame.place(x=10, y=10, width=580, height=780)
 
-        # Common fields
+        # Common fields (right-aligned with labels beside entries)
         self.part_id_label = tk.Label(input_frame, text="Part ID:", font=("Arial", 12))
         self.part_id_entry = tk.Entry(input_frame, font=("Arial", 12))
         self.part_id_entry.insert(0, "ASSY-")
         self.revision_label = tk.Label(input_frame, text="Revision:", font=("Arial", 12))
         self.revision_entry = tk.Entry(input_frame, font=("Arial", 12))
-        # Right-align by using grid with column weights
-        input_frame.grid_columnconfigure(0, weight=1)
-        input_frame.grid_columnconfigure(1, weight=0)
-        self.part_id_label.grid(row=0, column=0, sticky="w", padx=(10, 2), pady=2)
-        self.part_id_entry.grid(row=0, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.revision_label.grid(row=1, column=0, sticky="w", padx=(10, 2), pady=2)
-        self.revision_entry.grid(row=1, column=1, sticky="e", padx=(2, 10), pady=2)
+        # Use multiple columns to position labels beside entries
+        input_frame.grid_columnconfigure(0, weight=1)  # Spacer
+        input_frame.grid_columnconfigure(1, weight=0)  # Label
+        input_frame.grid_columnconfigure(2, weight=0)  # Entry
+        self.part_id_label.grid(row=0, column=1, sticky="e", padx=(0, 5), pady=2)
+        self.part_id_entry.grid(row=0, column=2, sticky="e", padx=(0, 10), pady=2)
+        self.revision_label.grid(row=1, column=1, sticky="e", padx=(0, 5), pady=2)
+        self.revision_entry.grid(row=1, column=2, sticky="e", padx=(0, 10), pady=2)
 
         # Notebook for tabs
         self.notebook = ttk.Notebook(input_frame)
-        self.notebook.grid(row=2, column=0, columnspan=2, sticky="e", pady=5)
+        self.notebook.grid(row=2, column=0, columnspan=3, sticky="e", pady=5)
         self.notebook.bind('<<NotebookTabChanged>>', self.on_tab_changed)
 
         # Assembly tab
