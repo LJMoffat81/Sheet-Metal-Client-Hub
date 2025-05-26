@@ -15,3 +15,5 @@ ASSY-44458,l7,N/A,0.0,0,0,5,72.5,[],[('Cutting', 1000.0, 'None'), ('Bending', 5.
 PART-123,A,Mild Steel,1.0,1000,500,10,100.0,[('Bolts', 50)],[('Cutting', 1000, 'None')]
 PART-67891ABCDE,A,Mild Steel,1.0,1000,500,5,255.0,[],[('Coating', 1000.0, 'Painting')]
 PART-67890ABCDE,A,Mild Steel,1.0,1000,500,10,520.0,[],[('Welding', 100.0, 'MIG')]
+PART-55555,h77,Stainless Steel,1.2,100,500,10,287.5,[('PEM', 10)],[('Cutting', 100.0, 'None'), ('Bending', 2.0, 'None'), ('Welding', 500.0, 'MIG')]
+PART-55555,h77,Stainless Steel,1.2,100,500,10,287.5,[('PEM', 10)],[('Cutting', 100.0, 'None'), ('Bending', 2.0, 'None'), ('Welding', 500.0, 'MIG')]
