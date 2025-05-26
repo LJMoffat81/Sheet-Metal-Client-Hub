@@ -16,5 +16,6 @@
     "inspection_rate_per_unit": 0.2,
     "bolts_rate_per_unit": 0.1,
     "rivets_rate_per_unit": 0.08,
-    "screws_rate_per_unit": 0.09
+    "screws_rate_per_unit": 0.09,
+    "fas_rate_per_unit": 0.3
 }
