@@ -2,6 +2,7 @@ import os
 import json
 import logging
 import hashlib
+from cryptography.fernet import Fernet
 
 # Set up logging
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -124,14 +125,34 @@ class FileHandler:
         except Exception as e:
             logging.error(f"Error updating rates: {e}")
 
+    def load_credentials(self):
+        """Load encrypted user credentials from users.json."""
+        try:
+            key_path = os.path.join(self.data_dir, 'key.key')
+            users_path = os.path.join(self.data_dir, 'users.json')
+            if not os.path.exists(key_path) or not os.path.exists(users_path):
+                logging.error(f"Credentials files missing: {key_path}, {users_path}")
+                return {}
+            with open(key_path, 'rb') as f:
+                key = f.read()
+            fernet = Fernet(key)
+            with open(users_path, 'rb') as f:
+                encrypted_data = f.read()
+            decrypted_data = fernet.decrypt(encrypted_data).decode('utf-8')
+            users = json.loads(decrypted_data)
+            logging.debug(f"Loaded credentials from: {users_path}")
+            return users
+        except Exception as e:
+            logging.error(f"Error loading credentials: {e}")
+            return {}
+
     def validate_credentials(self, username, password):
         """Validate user credentials using hashed passwords."""
         try:
-            # Hardcoded users with SHA-256 hashed passwords
-            users = {
-                'laurie': '4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0',  # Hash of 'moffat123'
-                'admin': '1b3231655cebb7a1f783eddf27d254ca7e6c8b89e4f69f7f63f0cfbdc9b5f6e4'   # Hash of 'admin123'
-            }
+            users = self.load_credentials()
+            if not users:
+                logging.error("No users loaded, authentication failed")
+                return False
             hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
             logging.debug(f"Input hash for {username}: {hashed_password}")
             valid = username in users and users[username] == hashed_password
