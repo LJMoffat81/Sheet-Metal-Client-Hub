@@ -2,9 +2,11 @@ import unittest
 import os
 import logging
 import json
-import sys
+import hashlib
+from cryptography.fernet import Fernet
 
 # Add src/ to the Python path
+import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from file_handler import FileHandler
@@ -12,7 +14,7 @@ from file_handler import FileHandler
 class TestFileHandler(unittest.TestCase):
     def setUp(self):
         self.file_handler = FileHandler()
-        LOG_DIR = r"C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log"
+        LOG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'log')
         os.makedirs(LOG_DIR, exist_ok=True)
         self.log_file = os.path.join(LOG_DIR, 'file_handler.log')
         logger = logging.getLogger('test_file_handler')
@@ -32,6 +34,21 @@ class TestFileHandler(unittest.TestCase):
         self.output_file = os.path.join(self.test_dir, 'output.txt')
         self.quotes_file = os.path.join(self.test_dir, 'quotes.txt')
 
+        # Setup credentials
+        self.users_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'users.json')
+        self.key_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'key.key')
+        key = Fernet.generate_key()
+        with open(self.key_file, 'wb') as f:
+            f.write(key)
+        fernet = Fernet(key)
+        users = {
+            'laurie': hashlib.sha256('moffat123'.encode('utf-8')).hexdigest(),
+            'admin': hashlib.sha256('admin123'.encode('utf-8')).hexdigest()
+        }
+        encrypted_data = fernet.encrypt(json.dumps(users).encode('utf-8'))
+        with open(self.users_file, 'wb') as f:
+            f.write(encrypted_data)
+
     def tearDown(self):
         logger = logging.getLogger('test_file_handler')
         for handler in logger.handlers[:]:
@@ -41,6 +58,10 @@ class TestFileHandler(unittest.TestCase):
             for file in os.listdir(self.test_dir):
                 os.remove(os.path.join(self.test_dir, file))
             os.rmdir(self.test_dir)
+        if os.path.exists(self.users_file):
+            os.remove(self.users_file)
+        if os.path.exists(self.key_file):
+            os.remove(self.key_file)
 
     def test_file_exists(self):
         with open(self.test_file, 'w') as f:
@@ -94,7 +115,7 @@ class TestFileHandler(unittest.TestCase):
         fastener_types_and_counts = [('Bolts', 50)]
         work_centres = [('Cutting', 1000, 'None')]
         self.file_handler.save_output(part_id, revision, material, thickness, length, width, quantity, total_cost, fastener_types_and_counts, work_centres)
-        with open('data/output.txt', 'r') as f:
+        with open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'output.txt'), 'r') as f:
             content = f.read()
         expected = f"{part_id},{revision},{material},{thickness},{length},{width},{quantity},{total_cost},{fastener_types_and_counts},{work_centres}\n"
         self.assertIn(expected, content)
@@ -106,14 +127,16 @@ class TestFileHandler(unittest.TestCase):
         profit_margin = 20.0
         fastener_types_and_counts = [('Bolts', 50)]
         self.file_handler.save_quote(part_id, total_cost, customer_name, profit_margin, fastener_types_and_counts)
-        with open('data/quotes.txt', 'r') as f:
+        with open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'quotes.txt'), 'r') as f:
             content = f.read()
         expected = f"{part_id},{total_cost},{customer_name},{profit_margin},{fastener_types_and_counts}\n"
         self.assertIn(expected, content)
 
     def test_validate_credentials(self):
         self.assertTrue(self.file_handler.validate_credentials('laurie', 'moffat123'))
-        self.assertFalse(self.file_handler.validate_credentials('wrong', 'wrong'))
+        self.assertTrue(self.file_handler.validate_credentials('admin', 'admin123'))
+        self.assertFalse(self.file_handler.validate_credentials('laurie', 'wrong'))
+        self.assertFalse(self.file_handler.validate_credentials('wrong', 'moffat123'))
 
 if __name__ == '__main__':
     unittest.main()
