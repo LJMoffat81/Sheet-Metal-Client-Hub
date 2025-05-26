@@ -37,13 +37,23 @@ class FileHandler:
     def read_file(self, filename):
         """Read content from a file."""
         try:
-            with open(os.path.join(self.data_dir, filename), 'r') as f:
+            with open(os.path.join(self.data_dir, filename), 'r', encoding='utf-8') as f:
                 content = f.read()
                 logging.debug(f"Read file: {filename}")
                 return content
         except FileNotFoundError:
             logging.error(f"File not found: {filename}")
             return ""
+        except UnicodeDecodeError:
+            logging.error(f"Unicode decode error for {filename}, attempting Windows-1252")
+            try:
+                with open(os.path.join(self.data_dir, filename), 'r', encoding='windows-1252') as f:
+                    content = f.read()
+                logging.debug(f"Read file {filename} with Windows-1252 encoding")
+                return content
+            except Exception as e:
+                logging.error(f"Error reading file {filename} with fallback encoding: {e}")
+                return ""
         except Exception as e:
             logging.error(f"Error reading file {filename}: {e}")
             return ""
@@ -51,7 +61,7 @@ class FileHandler:
     def write_file(self, filename, content):
         """Write content to a file."""
         try:
-            with open(os.path.join(self.data_dir, filename), 'w') as f:
+            with open(os.path.join(self.data_dir, filename), 'w', encoding='utf-8') as f:
                 f.write(content)
             logging.debug(f"Wrote to file: {filename}")
         except Exception as e:
@@ -77,13 +87,27 @@ class FileHandler:
         """Load rates from a JSON file."""
         try:
             path = os.path.join(self.data_dir, filename)
-            with open(path, 'r') as f:
+            with open(path, 'r', encoding='utf-8') as f:
                 rates = json.load(f)
                 logging.debug(f"Loaded rates from: {path}")
                 return rates
         except FileNotFoundError:
             logging.error(f"Rates file not found: {filename}")
             return {}
+        except UnicodeDecodeError:
+            logging.error(f"Unicode decode error for {filename}, attempting Windows-1252")
+            try:
+                with open(path, 'r', encoding='windows-1252') as f:
+                    content = f.read()
+                rates = json.loads(content)
+                logging.debug(f"Loaded rates from {path} with Windows-1252 encoding")
+                # Rewrite as UTF-8 to fix encoding
+                with open(path, 'w', encoding='utf-8') as f:
+                    json.dump(rates, f, indent=4)
+                return rates
+            except Exception as e:
+                logging.error(f"Error loading rates with fallback encoding: {e}")
+                return {}
         except json.JSONDecodeError:
             logging.error(f"Invalid JSON in rates file: {filename}")
             return {}
@@ -96,7 +120,7 @@ class FileHandler:
         try:
             path = os.path.join(self.data_dir, 'output.txt')
             output_line = f"{part_id},{revision},{material},{thickness},{length},{width},{quantity},{total_cost},{fastener_types_and_counts},{work_centres}\n"
-            with open(path, 'a') as f:
+            with open(path, 'a', encoding='utf-8') as f:
                 f.write(output_line)
             logging.debug(f"Saved output to: {path}")
         except Exception as e:
@@ -107,7 +131,7 @@ class FileHandler:
         try:
             path = os.path.join(self.data_dir, 'quotes.txt')
             quote_line = f"{part_id},{total_cost},{customer_name},{profit_margin},{fastener_types_and_counts}\n"
-            with open(path, 'a') as f:
+            with open(path, 'a', encoding='utf-8') as f:
                 f.write(quote_line)
             logging.debug(f"Saved quote to: {path}")
         except Exception as e:
@@ -119,7 +143,7 @@ class FileHandler:
             path = os.path.join(self.data_dir, 'rates_global.txt')
             rates = self.load_rates('rates_global.txt')
             rates[rate_key] = rate_value
-            with open(path, 'w') as f:
+            with open(path, 'w', encoding='utf-8') as f:
                 json.dump(rates, f, indent=4)
             logging.debug(f"Updated rate {rate_key} to {rate_value} in: {path}")
         except Exception as e:
