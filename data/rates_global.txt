@@ -17,5 +17,6 @@
     "bolts_rate_per_unit": 0.1,
     "rivets_rate_per_unit": 0.08,
     "screws_rate_per_unit": 0.09,
-    "fas_rate_per_unit": 0.3
+    "fas_rate_per_unit": 0.3,
+    "pem_rate_per_unit": 0.4
 }
