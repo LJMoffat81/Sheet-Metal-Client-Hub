@@ -104,6 +104,7 @@ class SheetMetalClientHub:
         self.assembly_selected_sub_parts = []
         self.last_part_id = None
         self.last_total_cost = None
+        self.parts_list = []  # Store multiple parts for quote
         self.work_centre_vars = [tk.StringVar(value="") for _ in range(10)]
         self.work_centre_quantity_vars = [tk.StringVar(value="0") for _ in range(10)]
         self.work_centre_sub_option_vars = [tk.StringVar(value="None") for _ in range(10)]
@@ -141,8 +142,8 @@ class SheetMetalClientHub:
         guide = (
             "Sheet Metal Client Hub - User Guide\n\n"
             "1. Login: Enter username and password (e.g., laurie:moffat123).\n"
-            "2. Part Input: Enter part or assembly details (PART-/ASSY- prefix auto-added), select materials, fasteners/sub-parts, and WorkCentre operations with quantities and sub-options (e.g., weld type).\n"
-            "3. Quote: Generate a quote with customer name and profit margin.\n"
+            "2. Part Input: Enter part or assembly details, select materials, fasteners, and operations. Use 'Add Another Part' to add multiple parts to a quote. View added parts below the Submit button.\n"
+            "3. Quote: Submit parts to generate a quote with customer name and profit margin.\n"
             "4. Admin: Update rates (e.g., mild_steel_rate) if admin.\n"
             "For support, contact [support email]."
         )
@@ -472,6 +473,7 @@ class SheetMetalClientHub:
         """
         logging.info("Returning to login screen")
         self.role = None
+        self.parts_list = []  # Clear parts list on logout
         self.create_login_screen()
         log_test_result(
             test_case="Back to Login",
@@ -482,9 +484,11 @@ class SheetMetalClientHub:
 
     def reset_part_input(self):
         """
-        Reset all part input fields to default values.
+        Reset all part input fields to default values and save current part if valid.
         """
         logging.info("Resetting part input fields")
+        # Save current part before resetting
+        self.calculate_and_save(add_another=True)
         self.part_id_entry.delete(0, tk.END)
         self.part_id_entry.insert(0, "ASSY-")
         self.revision_entry.delete(0, tk.END)
@@ -518,7 +522,7 @@ class SheetMetalClientHub:
         for i in range(10):
             if hasattr(self, f'sub_option_dropdown_{i}'):
                 getattr(self, f'sub_option_dropdown_{i}').grid_remove()
-        self.submit_button.config(state='disabled')
+        self.submit_button.config(state='normal' if self.parts_list else 'disabled')
         self.add_another_part_button.config(state='disabled')
         log_test_result(
             test_case="Reset Part Input",
@@ -526,6 +530,16 @@ class SheetMetalClientHub:
             output="All fields reset to default",
             pass_fail="Pass"
         )
+
+    def update_parts_listbox(self):
+        """
+        Update the Listbox to display all added parts.
+        """
+        logging.debug("Updating parts listbox")
+        self.parts_listbox.delete(0, tk.END)
+        for i, part in enumerate(self.parts_list, 1):
+            display = f"{i}. {part['part_id']}: £{part['total_cost']}"
+            self.parts_listbox.insert(tk.END, display)
 
     def create_part_input_screen(self):
         """
@@ -587,10 +601,9 @@ class SheetMetalClientHub:
         self.part_id_entry.insert(0, "ASSY-")
         self.revision_label = tk.Label(input_frame, text="Revision:", font=("Arial", 12))
         self.revision_entry = tk.Entry(input_frame, font=("Arial", 12))
-        # Use multiple columns to position labels beside entries
-        input_frame.grid_columnconfigure(0, weight=1)  # Spacer
-        input_frame.grid_columnconfigure(1, weight=0)  # Label
-        input_frame.grid_columnconfigure(2, weight=0)  # Entry
+        input_frame.grid_columnconfigure(0, weight=1)
+        input_frame.grid_columnconfigure(1, weight=0)
+        input_frame.grid_columnconfigure(2, weight=0)
         self.part_id_label.grid(row=0, column=1, sticky="e", padx=(0, 5), pady=2)
         self.part_id_entry.grid(row=0, column=2, sticky="e", padx=(0, 10), pady=2)
         self.revision_label.grid(row=1, column=1, sticky="e", padx=(0, 5), pady=2)
@@ -624,7 +637,6 @@ class SheetMetalClientHub:
         self.assembly_selected_sub_parts_listbox.pack(side=tk.LEFT, fill=tk.Y)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
-        # Right-align assembly tab widgets
         self.assembly_part_frame.grid_columnconfigure(0, weight=1)
         self.assembly_part_frame.grid_columnconfigure(1, weight=0)
         self.assembly_quantity_label.grid(row=0, column=0, sticky="w", padx=(10, 2), pady=2)
@@ -678,7 +690,6 @@ class SheetMetalClientHub:
         self.single_selected_sub_parts_listbox.pack(side=tk.LEFT, fill=tk.Y)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
-        # Right-align single part tab widgets
         self.single_part_frame.grid_columnconfigure(0, weight=1)
         self.single_part_frame.grid_columnconfigure(1, weight=0)
         self.single_material_label.grid(row=0, column=0, sticky="w", padx=(10, 2), pady=2)
@@ -732,11 +743,22 @@ class SheetMetalClientHub:
         buttons_subframe = tk.Frame(self.operations_frame)
         buttons_subframe.grid(row=12, column=0, columnspan=4, pady=5)
 
-        self.submit_button = tk.Button(buttons_subframe, text="Submit", command=lambda: self.create_quote_screen(self.last_part_id, self.last_total_cost), font=("Arial", 10), state='disabled')
+        self.submit_button = tk.Button(buttons_subframe, text="Submit", command=lambda: self.create_quote_screen(self.parts_list), font=("Arial", 10), state='disabled')
         self.submit_button.pack(side=tk.LEFT, padx=5)
 
         self.add_another_part_button = tk.Button(buttons_subframe, text="Add Another Part", command=self.reset_part_input, font=("Arial", 10), state='disabled')
         self.add_another_part_button.pack(side=tk.LEFT, padx=5)
+
+        # Vertical Listbox for added parts
+        parts_list_frame = tk.Frame(self.operations_frame)
+        parts_list_frame.grid(row=13, column=0, columnspan=4, pady=5, sticky="w")
+        tk.Label(parts_list_frame, text="Added Parts:", font=("Arial", 12)).pack(side=tk.TOP, anchor="w")
+        self.parts_listbox = tk.Listbox(parts_list_frame, font=("Arial", 12), height=8, width=40)
+        scrollbar = tk.Scrollbar(parts_list_frame, orient="vertical")
+        scrollbar.config(command=self.parts_listbox.yview)
+        self.parts_listbox.config(yscrollcommand=scrollbar.set)
+        self.parts_listbox.pack(side=tk.LEFT, fill=tk.Y)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
         # Bottom frame for navigation buttons
         bottom_frame = tk.Frame(main_frame)
@@ -766,9 +788,11 @@ class SheetMetalClientHub:
         self.part_id_entry.insert(0, prefix)
         self.update_selected_items(selected_tab)
 
-    def calculate_and_save(self):
+    def calculate_and_save(self, add_another=False):
         """
         Calculate cost and save output based on part specifications (FR2, FR3, FR4, FR5).
+        Args:
+            add_another (bool): If True, save part and reset for adding another part.
         """
         logging.info("Calculating and saving part specifications")
         try:
@@ -1091,7 +1115,13 @@ class SheetMetalClientHub:
                 return
 
             self.file_handler.save_output(part_id, revision, material, thickness, length, width, quantity, total_cost, fastener_types_and_counts, work_centres)
-            output = f"Cost calculated: £{total_cost}\nSaved to data/output.txt"
+            self.parts_list.append({
+                'part_id': part_id,
+                'total_cost': total_cost,
+                'specs': part_specs
+            })
+            self.update_parts_listbox()
+            output = f"Part {part_id} added: £{total_cost}"
             self.show_message("Success", output, 'info')
             log_test_result(
                 test_case="FR3-FR4-FR5: Cost calculation and output storage",
@@ -1122,34 +1152,42 @@ class SheetMetalClientHub:
                 pass_fail="Fail"
             )
 
-    def create_quote_screen(self, part_id, total_cost):
+    def create_quote_screen(self, parts_list):
         """
-        Create the quote generation screen (FR7).
+        Create the quote generation screen for multiple parts (FR7).
         """
         logging.info("Creating quote screen")
         self.clear_screen()
         main_frame = tk.Frame(self.root)
         main_frame.place(relx=0.5, rely=0.5, anchor="center")
         tk.Label(main_frame, text="Generate Quote", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
-        tk.Label(main_frame, text="Customer Name:", font=("Arial", 12)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
+
+        # Display parts list
+        total_cost = sum(part['total_cost'] for part in parts_list)
+        parts_display = "\n".join(f"{part['part_id']}: £{part['total_cost']}" for part in parts_list)
+        tk.Label(main_frame, text=f"Parts in Quote:\n{parts_display}\nTotal Cost: £{total_cost}", font=("Arial", 12), justify="left").grid(row=1, column=0, columnspan=2, pady=5)
+
+        tk.Label(main_frame, text="Customer Name:", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
         self.customer_entry = tk.Entry(main_frame, font=("Arial", 12))
-        self.customer_entry.grid(row=1, column=1, padx=10, pady=5)
-        tk.Label(main_frame, text="Profit Margin (%):", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
+        self.customer_entry.grid(row=2, column=1, padx=10, pady=5)
+        tk.Label(main_frame, text="Profit Margin (%):", font=("Arial", 12)).grid(row=3, column=0, padx=10, pady=5, sticky="e")
         self.margin_entry = tk.Entry(main_frame, font=("Arial", 12))
-        self.margin_entry.grid(row=2, column=1, padx=10, pady=5)
-        tk.Button(main_frame, text="Generate Quote", command=lambda: self.generate_quote(part_id, total_cost), font=("Arial", 12)).grid(row=3, column=0, columnspan=2, pady=10)
+        self.margin_entry.grid(row=3, column=1, padx=10, pady=5)
+        tk.Button(main_frame, text="Generate Quote", command=lambda: self.generate_quote(parts_list), font=("Arial", 12)).grid(row=4, column=0, columnspan=2, pady=10)
 
         self.create_footer()
 
-    def generate_quote(self, part_id, total_cost):
+    def generate_quote(self, parts_list):
         """
-        Generate and save a quote (FR7).
+        Generate and save a quote for multiple parts (FR7).
         """
         logging.info("Generating quote")
         try:
             customer_name = self.customer_entry.get().strip()
             profit_margin = self.margin_entry.get().strip()
-            input_data = f"Customer Name: {customer_name}, Profit Margin: {profit_margin}%"
+            total_cost = sum(part['total_cost'] for part in parts_list)
+            part_ids = [part['part_id'] for part in parts_list]
+            input_data = f"Customer Name: {customer_name}, Profit Margin: {profit_margin}%, Parts: {part_ids}"
 
             if not customer_name:
                 output = "Customer name cannot be empty"
@@ -1174,15 +1212,18 @@ class SheetMetalClientHub:
                 )
                 return
 
-            fastener_types_and_counts = []
-            fastener_count = int(self.fastener_count_var.get()) if self.fastener_count_var.get().isdigit() else 0
-            if fastener_count > 0:
-                for item in self.single_selected_sub_parts:
-                    item_id = item.split(':')[0].strip()
-                    fastener_type = item_id[:3].upper()  # First 3 letters of part number
-                    fastener_types_and_counts.append((fastener_type, fastener_count))
-            self.file_handler.save_quote(part_id, total_cost, customer_name, profit_margin, fastener_types_and_counts)
-            output = "Quote generated and saved to data/quotes.txt"
+            # Aggregate fastener types and counts across parts
+            fastener_types_and_counts = {}
+            for part in parts_list:
+                for f_type, f_count in part['specs'].get('fastener_types_and_counts', []):
+                    fastener_types_and_counts[f_type] = fastener_types_and_counts.get(f_type, 0) + f_count
+            fastener_list = [(f_type, count) for f_type, count in fastener_types_and_counts.items()]
+
+            # Save quote for each part
+            for part in parts_list:
+                self.file_handler.save_quote(part['part_id'], part['total_cost'], customer_name, profit_margin, fastener_list)
+
+            output = f"Quote generated for {len(parts_list)} parts and saved to data/quotes.txt"
             self.show_message("Success", output, 'info')
             log_test_result(
                 test_case="FR7: Generate quote",
@@ -1190,6 +1231,7 @@ class SheetMetalClientHub:
                 output=output,
                 pass_fail="Pass"
             )
+            self.parts_list = []  # Clear parts list after quote
             self.create_part_input_screen()
         except ValueError:
             output = "Invalid profit margin: please enter a numeric value"
