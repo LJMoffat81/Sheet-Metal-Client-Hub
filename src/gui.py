@@ -91,7 +91,7 @@ class SheetMetalClientHub:
         logging.info("Initializing SheetMetalClientHub")
         self.root = root
         self.root.title("Sheet Metal Client Hub")
-        self.root.geometry("1200x900")  # Increased window size
+        self.root.geometry("1200x900")  # Fixed window size
         self.root.resizable(False, False)
         try:
             icon_path = os.path.join(BASE_DIR, 'docs/images/laser_gear.ico')
@@ -577,7 +577,7 @@ class SheetMetalClientHub:
         separator = ttk.Separator(main_frame, orient='vertical')
         separator.place(x=600, y=50, height=800)
 
-        # Input frame in left frame
+        # Input frame in left frame (right-aligned)
         input_frame = tk.Frame(left_frame)
         input_frame.place(x=10, y=10, width=580, height=780)
 
@@ -587,14 +587,17 @@ class SheetMetalClientHub:
         self.part_id_entry.insert(0, "ASSY-")
         self.revision_label = tk.Label(input_frame, text="Revision:", font=("Arial", 12))
         self.revision_entry = tk.Entry(input_frame, font=("Arial", 12))
-        self.part_id_label.grid(row=0, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.part_id_entry.grid(row=0, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.revision_label.grid(row=1, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.revision_entry.grid(row=1, column=1, sticky="w", padx=(2, 5), pady=2)
+        # Right-align by using grid with column weights
+        input_frame.grid_columnconfigure(0, weight=1)
+        input_frame.grid_columnconfigure(1, weight=0)
+        self.part_id_label.grid(row=0, column=0, sticky="w", padx=(10, 2), pady=2)
+        self.part_id_entry.grid(row=0, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.revision_label.grid(row=1, column=0, sticky="w", padx=(10, 2), pady=2)
+        self.revision_entry.grid(row=1, column=1, sticky="e", padx=(2, 10), pady=2)
 
         # Notebook for tabs
         self.notebook = ttk.Notebook(input_frame)
-        self.notebook.grid(row=2, column=0, columnspan=2, sticky="nsew", pady=5)
+        self.notebook.grid(row=2, column=0, columnspan=2, sticky="e", pady=5)
         self.notebook.bind('<<NotebookTabChanged>>', self.on_tab_changed)
 
         # Assembly tab
@@ -620,14 +623,17 @@ class SheetMetalClientHub:
         self.assembly_selected_sub_parts_listbox.pack(side=tk.LEFT, fill=tk.Y)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
-        self.assembly_quantity_label.grid(row=0, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.assembly_quantity_option.grid(row=0, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.assembly_custom_quantity_entry.grid(row=1, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.assembly_sub_parts_label.grid(row=2, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.assembly_sub_parts_option.grid(row=2, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.assembly_add_sub_part_button.grid(row=3, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.assembly_clear_sub_parts_button.grid(row=4, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.assembly_selected_sub_parts_frame.grid(row=5, column=0, columnspan=2, sticky="w", padx=(10, 5), pady=2)
+        # Right-align assembly tab widgets
+        self.assembly_part_frame.grid_columnconfigure(0, weight=1)
+        self.assembly_part_frame.grid_columnconfigure(1, weight=0)
+        self.assembly_quantity_label.grid(row=0, column=0, sticky="w", padx=(10, 2), pady=2)
+        self.assembly_quantity_option.grid(row=0, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.assembly_custom_quantity_entry.grid(row=1, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.assembly_sub_parts_label.grid(row=2, column=0, sticky="w", padx=(10, 2), pady=2)
+        self.assembly_sub_parts_option.grid(row=2, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.assembly_add_sub_part_button.grid(row=3, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.assembly_clear_sub_parts_button.grid(row=4, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.assembly_selected_sub_parts_frame.grid(row=5, column=0, columnspan=2, sticky="e", padx=(10, 10), pady=2)
 
         self.assembly_quantity_var.trace("w", lambda *args: self.update_quantity_entry_state())
 
@@ -671,26 +677,29 @@ class SheetMetalClientHub:
         self.single_selected_sub_parts_listbox.pack(side=tk.LEFT, fill=tk.Y)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
-        self.single_material_label.grid(row=0, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.single_material_option.grid(row=0, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.single_thickness_label.grid(row=1, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.single_thickness_option.grid(row=1, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.single_lay_flat_length_label.grid(row=2, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.single_lay_flat_length_option.grid(row=2, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.single_lay_flat_width_label.grid(row=3, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.single_lay_flat_width_option.grid(row=3, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.single_quantity_label.grid(row=4, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.single_quantity_option.grid(row=4, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.single_custom_quantity_entry.grid(row=5, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.single_weldment_label.grid(row=6, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.single_weldment_option.grid(row=6, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.single_sub_parts_label.grid(row=7, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.single_sub_parts_option.grid(row=7, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.fastener_count_label.grid(row=8, column=0, sticky="e", padx=(10, 2), pady=2)
-        self.fastener_count_entry.grid(row=8, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.single_add_sub_part_button.grid(row=9, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.single_clear_sub_parts_button.grid(row=10, column=1, sticky="w", padx=(2, 5), pady=2)
-        self.single_selected_sub_parts_frame.grid(row=11, column=0, columnspan=2, sticky="w", padx=(10, 5), pady=2)
+        # Right-align single part tab widgets
+        self.single_part_frame.grid_columnconfigure(0, weight=1)
+        self.single_part_frame.grid_columnconfigure(1, weight=0)
+        self.single_material_label.grid(row=0, column=0, sticky="w", padx=(10, 2), pady=2)
+        self.single_material_option.grid(row=0, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.single_thickness_label.grid(row=1, column=0, sticky="w", padx=(10, 2), pady=2)
+        self.single_thickness_option.grid(row=1, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.single_lay_flat_length_label.grid(row=2, column=0, sticky="w", padx=(10, 2), pady=2)
+        self.single_lay_flat_length_option.grid(row=2, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.single_lay_flat_width_label.grid(row=3, column=0, sticky="w", padx=(10, 2), pady=2)
+        self.single_lay_flat_width_option.grid(row=3, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.single_quantity_label.grid(row=4, column=0, sticky="w", padx=(10, 2), pady=2)
+        self.single_quantity_option.grid(row=4, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.single_custom_quantity_entry.grid(row=5, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.single_weldment_label.grid(row=6, column=0, sticky="w", padx=(10, 2), pady=2)
+        self.single_weldment_option.grid(row=6, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.single_sub_parts_label.grid(row=7, column=0, sticky="w", padx=(10, 2), pady=2)
+        self.single_sub_parts_option.grid(row=7, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.fastener_count_label.grid(row=8, column=0, sticky="w", padx=(10, 2), pady=2)
+        self.fastener_count_entry.grid(row=8, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.single_add_sub_part_button.grid(row=9, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.single_clear_sub_parts_button.grid(row=10, column=1, sticky="e", padx=(2, 10), pady=2)
+        self.single_selected_sub_parts_frame.grid(row=11, column=0, columnspan=2, sticky="e", padx=(10, 10), pady=2)
 
         self.single_material_var.trace("w", lambda *args: self.update_selected_items(1))
         self.single_quantity_var.trace("w", lambda *args: self.update_quantity_entry_state())
