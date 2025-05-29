@@ -1,1 +1,14 @@
-gAAAAABoM7LAGWbHlJwLaR_2Hh-DfklW3QpmoS6pPpR-N8eegqyT6LRrum7NR5SIDx32298D0UCK1jmKgNzUHzwv8n54W5uyezGdqz625Xvs5tswfE0RcDwlLbK3DmcnbpHX0e_jzAKiR17-CgGX7W5v4enrD9-NgD3qc_LW0E8H4ku90PCpqyyd2mPC5vrMYSSEiPSPpsrcMvBDYyBusdLPlidczyNf307STFCYLizrzYtKUhB9IlRbgV83Uxijbx_mLNkgZhto6rXimtK0JMEh_YqzEBRbxm4Lsaa7-yXJA9z0ArPO5Ko=
+{
+    "laurie": {
+        "password": "4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0",
+        "role": "User"
+    },
+    "admin": {
+        "password": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+        "role": "Admin"
+    },
+    "Testy": {
+        "password": "b31f42daf5c1704178cd68fc088a63912d704aa19c40e8731aa18cfa73439905",
+        "role": "User"
+    }
+}

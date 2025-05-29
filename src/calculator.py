@@ -1,98 +1,46 @@
-import os
 import logging
+from logging_config import setup_logger
 
 # Set up logging
-LOG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'log')
-os.makedirs(LOG_DIR, exist_ok=True)
-logging.basicConfig(
-    filename=os.path.join(LOG_DIR, 'main_output.log'),
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+logger = setup_logger('calculator', 'calculator.log')
 
-def calculate_cost(part_data, rates):
+def calculate_cost(part_specs, rates):
     """
-    Calculate the total cost for a part or assembly based on specifications and rates.
-
-    Args:
-        part_data (dict): Specifications including part type, material, dimensions, etc.
-        rates (dict): Rates for materials, operations, and fasteners.
-
-    Returns:
-        float: Total cost, or 0.0 if calculation fails.
+    Calculate the total cost for a part based on specifications and rates.
     """
+    logger.info(f"Calculating cost for part {part_specs['part_id']}")
     try:
-        logging.debug(f"Calculating cost for part_data: {part_data}")
         total_cost = 0.0
-        part_type = part_data.get('part_type')
-        material = part_data.get('material')
-        thickness = float(part_data.get('thickness', 0))
-        length = float(part_data.get('length', 0))
-        width = float(part_data.get('width', 0))
-        quantity = int(part_data.get('quantity', 1))
-        work_centres = part_data.get('work_centres', [])
-        catalogue_cost = float(part_data.get('catalogue_cost', 0.0))
-        fastener_types_and_counts = part_data.get('fastener_types_and_counts', [])
+        part_type = part_specs['part_type']
+        quantity = part_specs['quantity']
+        catalogue_cost = part_specs.get('catalogue_cost', 0.0)
 
-        # Material cost for single parts
-        if part_type == 'Single Part' and material != 'N/A':
-            material_rate_key = material.lower()
-            if material_rate_key not in rates:
-                logging.error(f"Missing material rate for {material_rate_key}")
-                return 0.0
-            material_cost = rates[material_rate_key] * thickness * length * width * quantity
+        if part_type == "Single Part":
+            material_rate = rates.get(part_specs['material'], {}).get('value', 0.0)
+            area = part_specs['length'] * part_specs['width'] / 1_000_000  # m²
+            material_cost = material_rate * area * part_specs['thickness'] * quantity
             total_cost += material_cost
-            logging.debug(f"Material cost: £{material_cost}")
+            logger.debug(f"Material cost: £{material_cost} (area={area}m², thickness={part_specs['thickness']}mm)")
 
-        # WorkCentre costs
-        for work_centre, qty, sub_option in work_centres:
-            rate_key = None
-            if work_centre == 'Cutting':
-                rate_key = 'cutting_rate_per_mm'
-            elif work_centre == 'Bending':
-                rate_key = 'bending_rate_per_bend'
-            elif work_centre == 'Welding':
-                rate_key = 'mig_welding_rate_per_mm' if sub_option == 'MIG' else 'tig_welding_rate_per_mm'
-            elif work_centre == 'Assembly':
-                rate_key = 'assembly_rate_per_component'
-            elif work_centre == 'Finishing':
-                rate_key = 'finishing_rate_per_mm²'
-            elif work_centre == 'Drilling':
-                rate_key = 'drilling_rate_per_hole'
-            elif work_centre == 'Punching':
-                rate_key = 'punching_rate_per_punch'
-            elif work_centre == 'Grinding':
-                rate_key = 'grinding_rate_per_mm²'
-            elif work_centre == 'Coating':
-                rate_key = 'painting_rate_per_mm²' if sub_option == 'Painting' else 'coating_rate_per_mm²'
-            elif work_centre == 'Inspection':
-                rate_key = 'inspection_rate_per_unit'
-
-            if rate_key and rate_key in rates:
-                work_centre_cost = rates[rate_key] * qty * quantity
-                total_cost += work_centre_cost
-                logging.debug(f"{work_centre} cost: £{work_centre_cost}")
+        for wc, qty, sub_option in part_specs['work_centres']:
+            rate_key = f"{wc.lower()}_rate"
+            rate = rates.get(rate_key, {}).get('value', 0.0)
+            if rates.get(rate_key, {}).get('type') == 'hourly':
+                sub_field = rates[rate_key].get('sub_field')
+                sub_value = rates[rate_key].get('sub_value', 1.0)
+                if sub_field and sub_value:
+                    operation_cost = rate * (qty / sub_value) * quantity
+                else:
+                    operation_cost = rate * qty * quantity
             else:
-                logging.error(f"Missing rate for {rate_key or work_centre.lower() + '_rate'}")
-                return 0.0
+                operation_cost = rate * qty * quantity
+            total_cost += operation_cost
+            logger.debug(f"Operation cost for {wc} ({sub_option}): £{operation_cost} (qty={qty})")
 
-        # Fastener costs
-        for fastener_type, count in fastener_types_and_counts:
-            rate_key = f"{fastener_type.lower()}_rate_per_unit"
-            if rate_key in rates:
-                fastener_cost = rates[rate_key] * count * quantity
-                total_cost += fastener_cost
-                logging.debug(f"Fastener {fastener_type} cost: £{fastener_cost}")
-            else:
-                logging.error(f"Missing fastener rate for {rate_key} (type: {fastener_type})")
-                return 0.0
-
-        # Catalogue cost
         total_cost += catalogue_cost * quantity
-        logging.debug(f"Catalogue cost: £{catalogue_cost * quantity}")
-
-        logging.info(f"Total cost calculated: £{total_cost}")
+        logger.debug(f"Catalogue cost: £{catalogue_cost} x {quantity}")
+        logger.info(f"Total cost for {part_specs['part_id']}: £{total_cost}")
         return total_cost
     except Exception as e:
-        logging.error(f"Error in cost calculation: {e}")
+        logger.error(f"Error calculating cost for {part_specs['part_id']}: {e}")
         return 0.0

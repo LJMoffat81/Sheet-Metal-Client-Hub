@@ -1,0 +1,254 @@
+{
+  "test_cases": [
+    {
+      "id": "TC-GUI-01",
+      "description": "Verify login with valid User credentials",
+      "preconditions": "`users.json` contains `laurie` (password hash: `4b5a1911...`, role: User)",
+      "steps": [
+        "Run `python src/main.py`.",
+        "Enter username `laurie`, password `moffat123`.",
+        "Click “Login” or press Enter."
+      ],
+      "expected_result": "Part input screen loads with `#f0f0f0` header, `#28a745` buttons (“Calculate Cost & Add Part”, “Add Part to List”, “Screen Reset”, “Quote”), `#007bff` for “Clear Parts List”, `data/log/gui.log` shows `Login successful as User`."
+    },
+    {
+      "id": "TC-GUI-02",
+      "description": "Verify login with valid Admin credentials",
+      "preconditions": "`users.json` contains `admin` (password hash: `240be518...`, role: Admin)",
+      "steps": [
+        "Run `python src/main.py`.",
+        "Enter username `admin`, password `admin123`.",
+        "Click “Login”."
+      ],
+      "expected_result": "Admin settings screen loads, `#28a745` for “Create User”, `#dc3545` for “Remove User”, `#ffc107` for “Edit User”, log shows `Login successful as Admin`."
+    },
+    {
+      "id": "TC-GUI-03",
+      "description": "Verify login with invalid credentials",
+      "preconditions": "`users.json` as above",
+      "steps": [
+        "Enter username `laurie`, password `wrongpass`.",
+        "Click “Login”."
+      ],
+      "expected_result": "Error message: “Invalid username or password”, remains on login screen, log shows `Invalid credentials`."
+    },
+    {
+      "id": "TC-GUI-04",
+      "description": "Verify part input screen for Single Part",
+      "preconditions": "Logged in as `laurie`, `parts_catalogue.txt` has `FAS-001,Screw M3,10.0`, etc.",
+      "steps": [
+        "Select Single Part tab.",
+        "Enter `PART-123`, revision `A`, material `Mild Steel`, thickness `1.0`, length `1000`, width `500`, quantity `10`.",
+        "Add fastener `FAS-001: Screw M3`, count `50`.",
+        "Add operations: Cutting (1000mm), Bending (5 bends), Welding (500mm, MIG).",
+        "Click “Calculate Cost & Add Part”."
+      ],
+      "expected_result": "Part added to listbox (`PART-123 (10)`), cost includes £500 (50 * £10.0), buttons enabled, log shows `Calculating part specs`, `Added catalogue cost`."
+    },
+    {
+      "id": "TC-GUI-05",
+      "description": "Verify part input screen reset",
+      "preconditions": "Logged in as `laurie`, part added",
+      "steps": [
+        "Add part as in TC-GUI-04.",
+        "Click “Screen Reset”."
+      ],
+      "expected_result": "Inputs reset (Part ID: `ASSY-`, material: `Mild Steel`, etc.), operations cleared, buttons disabled except “Add Part to List”, log shows `Clearing input parameters`."
+    },
+    {
+      "id": "TC-GUI-06",
+      "description": "Verify part search pop-up",
+      "preconditions": "Logged in as `laurie`, `output.txt` contains `PART-123`",
+      "steps": [
+        "Click “Add Part to List”.",
+        "Search `PART-123`, select, set quantity `5`.",
+        "Click “Add Part”."
+      ],
+      "expected_result": "Part added to listbox (`PART-123 (5)`), success message, log shows `Adding part`, no comma-separated ID issues."
+    },
+    {
+      "id": "TC-GUI-07",
+      "description": "Verify quote screen functionality",
+      "preconditions": "Logged in as `laurie`, parts added via TC-GUI-04, TC-GUI-06",
+      "steps": [
+        "Click “Quote”.",
+        "Enter customer name `FatMan`, profit margin `33`.",
+        "Click “Generate Quote”."
+      ],
+      "expected_result": "Quote generated, total calculated based on `output.txt` costs, saved to `quotes.txt`, returns to part input screen, parts list cleared, log shows `Generating quote`."
+    },
+    {
+      "id": "TC-GUI-08",
+      "description": "Verify admin settings screen",
+      "preconditions": "Logged in as `admin`",
+      "steps": [
+        "Create user `testuser`, password `test123`, role `User`.",
+        "Remove `testuser`.",
+        "Update `mild_steel_rate` to `10.0`."
+      ],
+      "expected_result": "User created/removed in `users.json`, rate updated in `rates.json`, `#28a745`/`#dc3545`/`#ffc107` buttons, log shows `Creating user`, `Removing user`, `Updating rate`."
+    },
+    {
+      "id": "TC-GUI-09",
+      "description": "Verify admin credentials dialog",
+      "preconditions": "Logged in as `laurie`",
+      "steps": [
+        "Click “Settings”.",
+        "Enter `admin`, `admin123`.",
+        "Click “Submit”."
+      ],
+      "expected_result": "Admin settings screen loads, log shows `Admin validated`."
+    },
+    {
+      "id": "TC-GUI-10",
+      "description": "Verify clear parts list",
+      "preconditions": "Logged in as `laurie`, multiple parts added",
+      "steps": [
+        "Add parts via TC-GUI-04, TC-GUI-06.",
+        "Click “Clear Parts List” multiple times rapidly."
+      ],
+      "expected_result": "Listbox cleared once, `added_parts` empty, “Quote” button disabled, log shows single `Clearing parts list` due to debounce."
+    },
+    {
+      "id": "TC-COST-01",
+      "description": "Verify cost for Mild Steel, 1.0mm, Cutting",
+      "preconditions": "Logged in as `laurie`, `rates.json` loaded",
+      "steps": [
+        "Single Part, `PART-101`, revision `A`, Mild Steel, 1.0mm, 1000x500mm, quantity `10`.",
+        "Add Cutting (1000mm).",
+        "Click “Calculate Cost & Add Part”."
+      ],
+      "expected_result": "Cost calculated (material + Cutting cost, e.g., £753), added to listbox, saved to `output.txt`, log shows `Material cost`, `Operation cost`."
+    },
+    {
+      "id": "TC-COST-02",
+      "description": "Verify cost for Stainless Steel, 2.5mm, Bending",
+      "preconditions": "As above",
+      "steps": [
+        "Single Part, `PART-102`, revision `B`, Stainless Steel, 2.5mm, 1500x1000mm, quantity `5`.",
+        "Add Bending (5 bends).",
+        "Calculate cost."
+      ],
+      "expected_result": "Cost calculated (material + Bending cost, e.g., £1250), added to listbox, log shows costs."
+    },
+    {
+      "id": "TC-COST-03",
+      "description": "Verify cost for all material thicknesses",
+      "preconditions": "As above",
+      "steps": [
+        "For each thickness (1, 1.2, 1.5, 2, 2.5, 3mm), add Single Part `PART-103`–`PART-108`.",
+        "Mild Steel, 1000x500mm, quantity `1`, Cutting (100mm).",
+        "Calculate costs."
+      ],
+      "expected_result": "Costs vary by thickness (higher for thicker), all added to listbox, saved to `output.txt`, log shows costs."
+    },
+    {
+      "id": "TC-COST-04",
+      "description": "Verify cost with all 10 work centres",
+      "preconditions": "As above",
+      "steps": [
+        "Single Part, `PART-109`, revision 'A', Aluminium, 1.5mm, 1000x500mm, quantity `10`.",
+        "Add all work centres with min quantities (Cutting: 100mm, Bending: 1 bend, Welding: 100mm MIG, Assembly: 100mm, Finishing: 1000mm², Drilling: 1 hole, Punching: 1 punch, Grinding: 1000mm², Coating: 1000mm² Painting, Inspection: 1).",
+        "Calculate cost."
+      ],
+      "expected_result": "Cost includes all operations, added to listbox, saved to `output.txt`, log shows costs (check for high Finishing/Grinding)."
+    },
+    {
+      "id": "TC-COST-05",
+      "description": "Verify cost with fasteners",
+      "preconditions": "As above, `parts_catalogue.txt` valid",
+      "steps": [
+        "Single Part, `PART-110`, revision 'A', Mild Steel, 1.0mm, 1000x500mm, quantity `10`.",
+        "Add `FAS-001: Screw M3`, count `50`.",
+        "Calculate cost."
+      ],
+      "expected_result": "Cost includes £500 (50 * £10.0), added to listbox, log shows `Added catalogue cost`."
+    },
+    {
+      "id": "TC-FIO-001",
+      "description": "Verify user credentials read",
+      "preconditions": "`users.json` has `laurie` (hash: `4b5a1911...`), `admin` (hash: `240be518...`)",
+      "steps": [
+        "Login with `laurie:moffat123`."
+      ],
+      "expected_result": "Login succeeds, log shows `Credentials validated`, `users.json` unchanged."
+    },
+    {
+      "id": "TC-FIO-002",
+      "description": "Verify rates read and write",
+      "preconditions": "`rates.json` has valid rates",
+      "steps": [
+        "Login as `admin`.",
+        "Update `mild_steel_rate` to `10.0`.",
+        "Check `rates.json`."
+      ],
+      "expected_result": "Rate updated in `rates.json`, log shows `Updating rate`, subsequent calculations use new rate."
+    },
+    {
+      "id": "TC-FIO-003",
+      "description": "Verify output file save",
+      "preconditions": "`output.txt` writable",
+      "steps": [
+        "Calculate cost for `PART-123` (TC-GUI-04).",
+        "Check `output.txt`."
+      ],
+      "expected_result": "Part details saved (e.g., `PART-123,A,Mild Steel,...`), log shows `Output saved`."
+    },
+    {
+      "id": "TC-FIO-004",
+      "description": "Verify parts catalogue read",
+      "preconditions": "`parts_catalogue.txt` has `FAS-001,Screw M3,10.0`, etc.",
+      "steps": [
+        "Add fastener `FAS-001` in Single Part (TC-COST-05).",
+        "Calculate cost."
+      ],
+      "expected_result": "Cost includes £500 (50 * £10.0), log shows `Added catalogue cost`, `parts_catalogue.txt` unchanged."
+    },
+    {
+      "id": "TC-FIO-005",
+      "description": "Verify quote file save",
+      "preconditions": "`quotes.txt` writable",
+      "steps": [
+        "Generate quote (TC-GUI-07).",
+        "Check `quotes.txt`."
+      ],
+      "expected_result": "Quote saved with customer `FatMan`, total cost, log shows `Quote saved`."
+    },
+    {
+      "id": "TC-UNIT-01",
+      "description": "Test calculator cost function",
+      "preconditions": "`calculator.py` accessible, mock `rates.json`",
+      "steps": [
+        "Run unit test for `calculate_cost` with Mild Steel, 1.0mm, 1000x500mm, Cutting 100mm."
+      ],
+      "expected_result": "Returns correct cost (e.g., £753 based on rates), test passes."
+    },
+    {
+      "id": "TC-UNIT-02",
+      "description": "Test GUI login validation",
+      "preconditions": "`gui.py` accessible, mock `file_handler`",
+      "steps": [
+        "Run unit test for `login` with mock `validate_credentials` returning True for `laurie`."
+      ],
+      "expected_result": "Returns “Login successful as User”, test passes."
+    },
+    {
+      "id": "TC-UNIT-03",
+      "description": "Test logic save function",
+      "preconditions": "`logic.py` accessible, mock `file_handler`",
+      "steps": [
+        "Run unit test for `calculate_and_save` with mock inputs (Single Part, `PART-123`)."
+      ],
+      "expected_result": "Saves to mock `output.txt`, returns total cost, test passes."
+    },
+    {
+      "id": "TC-UNIT-04",
+      "description": "Test utils hash function",
+      "preconditions": "`utils.py` accessible",
+      "steps": [
+        "Run unit test for `hash_password` with input `moffat123`."
+      ],
+      "expected_result": "Returns hash `4b5a1911...`, test passes."
+    }
+  ]
+}

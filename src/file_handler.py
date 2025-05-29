@@ -1,187 +1,187 @@
-import os
 import json
+import os
 import logging
-import hashlib
-from cryptography.fernet import Fernet
+from logging_config import setup_logger
 
 # Set up logging
+logger = setup_logger('file_handler', 'file_handler.log')
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LOG_DIR = os.path.join(BASE_DIR, 'data', 'log')
-os.makedirs(LOG_DIR, exist_ok=True)
-logging.basicConfig(
-    filename=os.path.join(LOG_DIR, 'main_output.log'),
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
 
 class FileHandler:
-    """Handle file operations and user authentication for Sheet Metal Client Hub."""
-
     def __init__(self):
-        """Initialize data directory."""
-        self.data_dir = os.path.join(BASE_DIR, 'data')
-        os.makedirs(self.data_dir, exist_ok=True)
-        logging.debug(f"Initialized FileHandler with data directory: {self.data_dir}")
+        self.users_file = os.path.join(BASE_DIR, 'data', 'users.json')
+        self.rates_file = os.path.join(BASE_DIR, 'data', 'rates.json')
+        self.output_file = os.path.join(BASE_DIR, 'data', 'output.txt')
+        self.quotes_file = os.path.join(BASE_DIR, 'data', 'quotes.txt')
+        logger.info("FileHandler initialized")
 
-    def file_exists(self, filename):
-        """Check if a file exists."""
+    def validate_credentials(self, username, hashed_password):
+        """
+        Validate user credentials against users.json.
+        """
+        logger.info(f"Validating credentials for username: {username}")
         try:
-            path = os.path.join(self.data_dir, filename)
-            exists = os.path.exists(path)
-            logging.debug(f"Checked file existence: {path}, exists: {exists}")
-            return exists
+            with open(self.users_file, 'r', encoding='utf-8') as f:
+                users = json.load(f)
+            if username in users and users[username]['password'] == hashed_password:
+                logger.info(f"Credentials validated for {username}")
+                return True
+            logger.debug(f"Validation failed for {username}")
+            return False
+        except FileNotFoundError:
+            logger.error(f"Users file not found: {self.users_file}")
+            return False
         except Exception as e:
-            logging.error(f"Error checking file existence {filename}: {e}")
+            logger.error(f"Error validating credentials: {e}")
             return False
 
-    def read_file(self, filename):
-        """Read content from a file."""
+    def get_user_role(self, username):
+        """
+        Get the role of a user from users.json.
+        """
+        logger.info(f"Retrieving role for username: {username}")
         try:
-            with open(os.path.join(self.data_dir, filename), 'r', encoding='utf-8') as f:
-                content = f.read()
-                logging.debug(f"Read file: {filename}")
-                return content
+            with open(self.users_file, 'r', encoding='utf-8') as f:
+                users = json.load(f)
+            role = users.get(username, {}).get('role')
+            logger.debug(f"Role for {username}: {role}")
+            return role
         except FileNotFoundError:
-            logging.error(f"File not found: {filename}")
-            return ""
-        except UnicodeDecodeError:
-            logging.error(f"Unicode decode error for {filename}, attempting Windows-1252")
-            try:
-                with open(os.path.join(self.data_dir, filename), 'r', encoding='windows-1252') as f:
-                    content = f.read()
-                logging.debug(f"Read file {filename} with Windows-1252 encoding")
-                return content
-            except Exception as e:
-                logging.error(f"Error reading file {filename} with fallback encoding: {e}")
-                return ""
+            logger.error(f"Users file not found: {self.users_file}")
+            return None
         except Exception as e:
-            logging.error(f"Error reading file {filename}: {e}")
-            return ""
+            logger.error(f"Error retrieving role: {e}")
+            return None
 
-    def write_file(self, filename, content):
-        """Write content to a file."""
+    def load_rates(self):
+        """
+        Load rates from rates.json.
+        """
+        logger.info("Loading rates")
         try:
-            with open(os.path.join(self.data_dir, filename), 'w', encoding='utf-8') as f:
-                f.write(content)
-            logging.debug(f"Wrote to file: {filename}")
-        except Exception as e:
-            logging.error(f"Error writing to file {filename}: {e}")
-
-    def process_file(self, filename):
-        """Process a file and return its lines as a list."""
-        try:
-            if not filename:
-                logging.error("Empty filename provided")
-                raise ValueError("Filename cannot be empty")
-            content = self.read_file(filename)
-            if content:
-                lines = [line.strip() for line in content.splitlines() if line.strip()]
-                logging.debug(f"Processed file {filename}, {len(lines)} lines")
-                return lines
-            return []
-        except Exception as e:
-            logging.error(f"Error processing file {filename}: {e}")
-            return []
-
-    def load_rates(self, filename):
-        """Load rates from a JSON file."""
-        try:
-            path = os.path.join(self.data_dir, filename)
-            with open(path, 'r', encoding='utf-8') as f:
+            with open(self.rates_file, 'r', encoding='utf-8') as f:
                 rates = json.load(f)
-                logging.debug(f"Loaded rates from: {path}")
-                return rates
+            logger.debug(f"Loaded {len(rates)} rates")
+            return rates
         except FileNotFoundError:
-            logging.error(f"Rates file not found: {filename}")
-            return {}
-        except UnicodeDecodeError:
-            logging.error(f"Unicode decode error for {filename}, attempting Windows-1252")
-            try:
-                with open(path, 'r', encoding='windows-1252') as f:
-                    content = f.read()
-                rates = json.loads(content)
-                logging.debug(f"Loaded rates from {path} with Windows-1252 encoding")
-                # Rewrite as UTF-8 to fix encoding
-                with open(path, 'w', encoding='utf-8') as f:
-                    json.dump(rates, f, indent=4)
-                return rates
-            except Exception as e:
-                logging.error(f"Error loading rates with fallback encoding: {e}")
-                return {}
-        except json.JSONDecodeError:
-            logging.error(f"Invalid JSON in rates file: {filename}")
+            logger.error(f"Rates file not found: {self.rates_file}")
             return {}
         except Exception as e:
-            logging.error(f"Error loading rates {filename}: {e}")
+            logger.error(f"Error loading rates: {e}")
             return {}
 
-    def save_output(self, part_id, revision, material, thickness, length, width, quantity, total_cost, fastener_types_and_counts, work_centres):
-        """Save part output to a file."""
+    def save_output(self, part_id, revision, material, thickness, length, width, quantity, total_cost, fastener_types, work_centres):
+        """
+        Save part output to output.txt.
+        """
+        logger.info(f"Saving output for part {part_id}")
         try:
-            path = os.path.join(self.data_dir, 'output.txt')
-            output_line = f"{part_id},{revision},{material},{thickness},{length},{width},{quantity},{total_cost},{fastener_types_and_counts},{work_centres}\n"
-            with open(path, 'a', encoding='utf-8') as f:
-                f.write(output_line)
-            logging.debug(f"Saved output to: {path}")
+            with open(self.output_file, 'a', encoding='utf-8') as f:
+                work_centres_str = ";".join([f"{wc[0]}:{wc[1]}:{wc[2]}" for wc in work_centres])
+                f.write(f"{part_id},{revision},{material},{thickness},{length},{width},{quantity},{total_cost},{fastener_types},{work_centres_str}\n")
+            logger.debug(f"Output saved for {part_id}")
         except Exception as e:
-            logging.error(f"Error saving output: {e}")
+            logger.error(f"Error saving output: {e}")
 
-    def save_quote(self, part_id, total_cost, customer_name, profit_margin, fastener_types_and_counts):
-        """Save quote to a file."""
+    def save_quote(self, part_details, final_cost, customer_name, profit_margin, fastener_types):
+        """
+        Save quote to quotes.txt.
+        """
+        logger.info(f"Saving quote for customer {customer_name}")
         try:
-            path = os.path.join(self.data_dir, 'quotes.txt')
-            quote_line = f"{part_id},{total_cost},{customer_name},{profit_margin},{fastener_types_and_counts}\n"
-            with open(path, 'a', encoding='utf-8') as f:
-                f.write(quote_line)
-            logging.debug(f"Saved quote to: {path}")
+            with open(self.quotes_file, 'a', encoding='utf-8') as f:
+                parts_str = ";".join([f"{p['part_id']}:{p['quantity']}:{p['unit_cost']}" for p in part_details])
+                f.write(f"{customer_name},{final_cost},{profit_margin},{parts_str},{fastener_types}\n")
+            logger.debug(f"Quote saved for {customer_name}")
         except Exception as e:
-            logging.error(f"Error saving quote: {e}")
+            logger.error(f"Error saving quote: {e}")
 
-    def update_rates(self, rate_key, rate_value):
-        """Update a rate in the rates file."""
+    def create_user(self, username, hashed_password, role):
+        """
+        Create a new user in users.json.
+        """
+        logger.info(f"Creating user {username}")
         try:
-            path = os.path.join(self.data_dir, 'rates_global.txt')
-            rates = self.load_rates('rates_global.txt')
-            rates[rate_key] = rate_value
-            with open(path, 'w', encoding='utf-8') as f:
+            with open(self.users_file, 'r', encoding='utf-8') as f:
+                users = json.load(f)
+            if username in users:
+                logger.error(f"User {username} already exists")
+                raise ValueError("User already exists")
+            users[username] = {'password': hashed_password, 'role': role}
+            with open(self.users_file, 'w', encoding='utf-8') as f:
+                json.dump(users, f, indent=4)
+            logger.debug(f"User {username} created with role {role}")
+        except FileNotFoundError:
+            logger.error(f"Users file not found: {self.users_file}")
+            users = {username: {'password': hashed_password, 'role': role}}
+            with open(self.users_file, 'w', encoding='utf-8') as f:
+                json.dump(users, f, indent=4)
+            logger.debug(f"Created users file with user {username}")
+        except Exception as e:
+            logger.error(f"Error creating user: {e}")
+            raise
+
+    def remove_user(self, username):
+        """
+        Remove a user from users.json.
+        """
+        logger.info(f"Removing user {username}")
+        try:
+            with open(self.users_file, 'r', encoding='utf-8') as f:
+                users = json.load(f)
+            if username not in users:
+                logger.error(f"User {username} not found")
+                raise ValueError("User not found")
+            del users[username]
+            with open(self.users_file, 'w', encoding='utf-8') as f:
+                json.dump(users, f, indent=4)
+            logger.debug(f"User {username} removed")
+        except FileNotFoundError:
+            logger.error(f"Users file not found: {self.users_file}")
+            raise
+        except Exception as e:
+            logger.error(f"Error removing user: {e}")
+            raise
+
+    def get_all_usernames(self):
+        """
+        Get all usernames from users.json.
+        """
+        logger.info("Retrieving all usernames")
+        try:
+            with open(self.users_file, 'r', encoding='utf-8') as f:
+                users = json.load(f)
+            usernames = list(users.keys())
+            logger.debug(f"Retrieved {len(usernames)} usernames")
+            return usernames
+        except FileNotFoundError:
+            logger.error(f"Users file not found: {self.users_file}")
+            return []
+        except Exception as e:
+            logger.error(f"Error retrieving usernames: {e}")
+            return []
+
+    def update_rates(self, rate_key, rate_value, sub_value):
+        """
+        Update a rate in rates.json.
+        """
+        logger.info(f"Updating rate {rate_key}")
+        try:
+            with open(self.rates_file, 'r', encoding='utf-8') as f:
+                rates = json.load(f)
+            if rate_key not in rates:
+                logger.error(f"Rate key {rate_key} not found")
+                raise ValueError("Rate key not found")
+            rates[rate_key]['value'] = rate_value
+            if sub_value is not None:
+                rates[rate_key]['sub_value'] = sub_value
+            with open(self.rates_file, 'w', encoding='utf-8') as f:
                 json.dump(rates, f, indent=4)
-            logging.debug(f"Updated rate {rate_key} to {rate_value} in: {path}")
+            logger.debug(f"Rate {rate_key} updated to {rate_value}{f', sub_value={sub_value}' if sub_value else ''}")
+        except FileNotFoundError:
+            logger.error(f"Rates file not found: {self.rates_file}")
+            raise
         except Exception as e:
-            logging.error(f"Error updating rates: {e}")
-
-    def load_credentials(self):
-        """Load encrypted user credentials from users.json."""
-        try:
-            key_path = os.path.join(self.data_dir, 'key.key')
-            users_path = os.path.join(self.data_dir, 'users.json')
-            if not os.path.exists(key_path) or not os.path.exists(users_path):
-                logging.error(f"Credentials files missing: {key_path}, {users_path}")
-                return {}
-            with open(key_path, 'rb') as f:
-                key = f.read()
-            fernet = Fernet(key)
-            with open(users_path, 'rb') as f:
-                encrypted_data = f.read()
-            decrypted_data = fernet.decrypt(encrypted_data).decode('utf-8')
-            users = json.loads(decrypted_data)
-            logging.debug(f"Loaded credentials from: {users_path}")
-            return users
-        except Exception as e:
-            logging.error(f"Error loading credentials: {e}")
-            return {}
-
-    def validate_credentials(self, username, password):
-        """Validate user credentials using hashed passwords."""
-        try:
-            users = self.load_credentials()
-            if not users:
-                logging.error("No users loaded, authentication failed")
-                return False
-            hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
-            logging.debug(f"Input hash for {username}: {hashed_password}")
-            valid = username in users and users[username] == hashed_password
-            logging.debug(f"Validated credentials for {username}: {'success' if valid else 'failure'}")
-            return valid
-        except Exception as e:
-            logging.error(f"Error validating credentials: {e}")
-            return False
+            logger.error(f"Error updating rate: {e}")
+            raise

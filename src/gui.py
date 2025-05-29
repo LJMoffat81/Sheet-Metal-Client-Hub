@@ -1,419 +1,360 @@
 import tkinter as tk
 from tkinter import messagebox, Toplevel, ttk
 import os
-import re
-from file_handler import FileHandler
-from calculator import calculate_cost
-from logger import log_test_result, log_message
-from PIL import Image, ImageTk
+import json
 import logging
+import time
+from file_handler import FileHandler
+from logger import log_message
+from PIL import Image, ImageTk
+from utils import hash_password, load_existing_parts, load_parts_catalogue, load_part_cost, handle_errors
+from logic import calculate_and_save, generate_quote, update_rate, create_user, remove_user
+from logging_config import setup_logger
 
-# Set up logging
-LOG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'log')
-os.makedirs(LOG_DIR, exist_ok=True)
-log_file = os.path.join(LOG_DIR, 'gui.log')
-
-logger = logging.getLogger('gui')
-logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler(log_file, mode='a')
-handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
-logger.handlers = [handler]
-logging.info("GUI logging initialized")
-handler.flush()
-
-# Check if running in testing mode
+logger = setup_logger('gui', 'gui.log')
 TESTING_MODE = os.environ.get('TESTING_MODE', '0') == '1'
-logging.debug(f"TESTING_MODE set to: {TESTING_MODE}")
-
-# Get the absolute path to the repository root
+logger.debug(f"TESTING_MODE: {TESTING_MODE}")
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-def load_existing_parts():
-    """
-    Load existing part IDs from data/output.txt for sub-parts dropdown.
-    Returns a list of part IDs.
-    """
-    parts = []
-    try:
-        with open(os.path.join(BASE_DIR, 'data/output.txt'), 'r') as f:
-            for line in f:
-                if line.strip():
-                    part_id = line.split(',')[0].strip()
-                    if re.match(r"^(PART|ASSY)-[A-Za-z0-9]{5,15}$", part_id):
-                        parts.append(part_id)
-        logging.debug(f"Loaded {len(parts)} parts from output.txt")
-        return parts
-    except FileNotFoundError:
-        logging.error("output.txt not found")
-        return []
-    except Exception as e:
-        logging.error(f"Error loading parts: {e}")
-        return []
-
-def load_parts_catalogue():
-    """
-    Load fasteners and PEM inserts from data/parts_catalogue.txt.
-    Returns a list of tuples (item_id, description, price).
-    """
-    catalogue = []
-    try:
-        with open(os.path.join(BASE_DIR, 'data/parts_catalogue.txt'), 'r') as f:
-            for line in f:
-                if line.strip():
-                    try:
-                        parts = line.strip().split(',')
-                        if len(parts) != 3:
-                            logging.warning(f"Skipping malformed line in parts_catalogue.txt: {line.strip()}")
-                            continue
-                        item_id, description, price = parts
-                        catalogue.append((item_id, description, float(price)))
-                    except ValueError as e:
-                        logging.error(f"Error parsing line in parts_catalogue.txt: {line.strip()} - {e}")
-                        continue
-        logging.debug(f"Loaded {len(catalogue)} items from parts_catalogue.txt")
-        return catalogue
-    except FileNotFoundError:
-        logging.error("parts_catalogue.txt not found")
-        return []
-    except Exception as e:
-        logging.error(f"Error loading parts catalogue: {e}")
-        return []
-
 class SheetMetalClientHub:
-    """
-    Main GUI class for the Sheet Metal Client Hub application.
-    Manages all screens (login, part input, quote, admin) and user interactions.
-    """
     def __init__(self, root):
-        """
-        Initialize the GUI application.
-        """
-        logging.info("Initializing SheetMetalClientHub")
+        logger.info("Initializing SheetMetalClientHub")
+        if not isinstance(root, tk.Tk):
+            logger.error("Invalid root: expected tk.Tk")
+            raise ValueError("Root must be tk.Tk")
         self.root = root
         self.root.title("Sheet Metal Client Hub")
-        self.root.geometry("1200x900")  # Fixed window size
-        self.root.resizable(False, False)
+        self.root.geometry("1000x750")
+        self.root.minsize(1050, 800)
         try:
-            icon_path = os.path.join(BASE_DIR, 'docs/images/laser_gear.ico')
-            self.root.iconbitmap(icon_path)
+            self.root.iconbitmap(os.path.join(BASE_DIR, 'docs/images/laser_gear.ico'))
         except tk.TclError:
-            logging.warning("Could not load laser_gear.ico, using default icon")
+            logger.warning("Could not load laser_gear.ico")
         self.file_handler = FileHandler()
         self.role = None
         self.single_selected_sub_parts = []
         self.assembly_selected_sub_parts = []
+        self.added_parts = []
         self.last_part_id = None
         self.last_total_cost = None
-        self.parts_list = []  # Store multiple parts for quote
         self.work_centre_vars = [tk.StringVar(value="") for _ in range(10)]
         self.work_centre_quantity_vars = [tk.StringVar(value="0") for _ in range(10)]
         self.work_centre_sub_option_vars = [tk.StringVar(value="None") for _ in range(10)]
         self.fastener_count_var = tk.StringVar(value="0")
+        self.assembly_sub_part_quantity_var = tk.StringVar(value="1")
+        self.assembly_quantity_var = tk.StringVar(value="1")
+        self.single_quantity_var = tk.StringVar(value="1")
+        self.assembly_sub_parts_var = tk.StringVar(value="Select Item")
+        self.single_sub_parts_var = tk.StringVar(value="Select Item")
+        self.single_material_var = tk.StringVar(value="Mild Steel")
+        self.single_thickness_var = tk.StringVar(value="1.0")
+        self.single_lay_flat_length_var = tk.StringVar(value="1000")
+        self.single_lay_flat_width_var = tk.StringVar(value="500")
+        self.single_weldment_var = tk.StringVar(value="No")
+        self.last_clear_time = 0
+        self.clear_debounce_interval = 0.5
         self.create_login_screen()
 
     def show_message(self, title, message, level='info'):
-        """Display message or log it based on testing mode."""
-        logging.debug(f"Show message called, TESTING_MODE: {TESTING_MODE}")
+        logger.debug(f"Show message: {title}")
         if TESTING_MODE:
             log_message(title=title, message=message, level=level)
         else:
-            if level == 'info':
-                messagebox.showinfo(title, message)
-            elif level == 'error':
-                messagebox.showerror(title, message)
-        logging.log(logging.INFO if level == 'info' else logging.ERROR, f"{title}: {message}")
+            messagebox.showinfo(title, message) if level == 'info' else messagebox.showerror(title, message)
+        logger.log(logging.INFO if level == 'info' else logging.ERROR, f"{title}: {message}")
+
+    def _create_header(self, parent, title):
+        frame = tk.Frame(parent, bg="#f0f0f0")
+        frame.pack(side=tk.TOP, fill="x", padx=10, pady=(10, 10))
+        tk.Label(frame, text=title, font=("Arial", 16, "bold"), bg="#f0f0f0").pack(pady=5)
+        try:
+            image = Image.open(os.path.join(BASE_DIR, 'docs/images/laser_gear.png')).resize((32, 32), Image.LANCZOS)
+            photo = ImageTk.PhotoImage(image)
+            label = tk.Label(frame, image=photo, bg="#f0f0f0")
+            label.image = photo
+            label.pack(pady=5)
+            logger.debug("Loaded laser_gear.png")
+        except FileNotFoundError:
+            logger.warning("laser_gear.png not found")
+            tk.Label(frame, text="[Logo]", font=("Arial", 10), bg="#f0f0f0").pack(pady=5)
+        except Exception as e:
+            logger.error(f"Error loading logo: {e}")
+            tk.Label(frame, text="[Logo]", font=("Arial", 10), bg="#f0f0f0").pack(pady=5)
+        return frame
+
+    def _create_panel(self, parent, place=False, **kwargs):
+        frame = tk.Frame(parent, bg="#e8ecef", bd=1, relief=tk.SOLID, **kwargs)
+        if place:
+            frame.place(relx=0.5, rely=0.5, anchor="center")
+        else:
+            frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
+        return frame
+
+    def _create_styled_button(self, parent, text, command, style='action', width=15):
+        colors = {'action': '#28a745', 'destructive': '#dc3545', 'navigation': '#007bff', 'edit': '#ffc107'}
+        bg = colors.get(style, '#28a745')
+        btn = tk.Button(parent, text=text, command=command, font=("Arial", 12), bg=bg, fg="#ffffff", width=width)
+        return btn
 
     def create_footer(self):
-        """
-        Create the footer for all screens with version number and help button.
-        """
-        logging.debug("Creating footer")
-        footer = tk.Frame(self.root)
+        logger.debug("Creating footer")
+        footer = tk.Frame(self.root, bg="lightgrey")
         footer.pack(side=tk.BOTTOM, fill="x")
-        footer.configure(bg="lightgrey")
         tk.Label(footer, text="Version 1.0", font=("Arial", 10), bg="lightgrey").pack(side=tk.LEFT, padx=10, pady=5)
         tk.Button(footer, text="Help", command=self.show_help, font=("Arial", 10), bg="lightgrey").pack(side=tk.RIGHT, padx=10, pady=5)
 
     def show_help(self):
-        """
-        Display a help guide for the application.
-        """
-        logging.info("Displaying help guide")
+        logger.info("Displaying help guide")
         guide = (
             "Sheet Metal Client Hub - User Guide\n\n"
-            "1. Login: Enter username and password (e.g., laurie:moffat123).\n"
-            "2. Part Input: Enter part or assembly details, select materials, fasteners, and operations. Use 'Add Another Part' to add multiple parts to a quote. View added parts below the Submit button.\n"
-            "3. Quote: Submit parts to generate a quote with customer name and profit margin.\n"
-            "4. Admin: Update rates (e.g., mild_steel_rate) if admin.\n"
-            "For support, contact [support email]."
+            "1. Login: Use username/password (e.g., laurie:moffat123, admin:admin123). Check data/users.json if issues.\n"
+            "2. Part Input: Enter part/assembly details, select materials, fasteners, WorkCentre operations.\n"
+            "3. Quote: Generate quotes with customer name and profit margin.\n"
+            "4. Admin: Manage users and rates. Rates stored in data/rates.json.\n"
+            "Support: [support email]."
         )
-        self.show_message("Help - Sheet Metal Client Hub", guide, 'info')
-        log_test_result(
-            test_case="Help Guide Accessed",
-            input_data="None",
-            output="Help guide displayed",
-            pass_fail="Pass"
-        )
+        self.show_message("Help", guide, 'info')
+
+    def create_widget_pair(self, parent, label_text, widget_type, row, col=0, options=None, textvariable=None, default=None, state='normal'):
+        tk.Label(parent, text=label_text, font=("Arial", 12), bg="#e8ecef").grid(row=row, column=col, sticky="e", padx=(10, 2), pady=2)
+        if widget_type == tk.Entry:
+            widget = tk.Entry(parent, font=("Arial", 12), textvariable=textvariable, state=state)
+            if default:
+                widget.insert(0, default)
+        elif widget_type == tk.OptionMenu:
+            widget = tk.OptionMenu(parent, textvariable, *options)
+        elif widget_type == tk.Listbox:
+            widget = tk.Listbox(parent, font=("Arial", 12), height=options.get('height', 5), width=options.get('width', 40))
+        widget.grid(row=row, column=col+1, sticky="w", padx=(2, 5), pady=2)
+        return widget
+
+    def _configure_grid(self, frame, cols=2):
+        for i in range(cols):
+            frame.grid_columnconfigure(i, weight=1)
 
     def create_login_screen(self):
-        """
-        Create the login screen for user authentication (FR1).
-        """
-        logging.info("Creating login screen")
+        logger.info("Creating login screen")
         self.clear_screen()
-        main_frame = tk.Frame(self.root)
-        main_frame.place(relx=0.5, rely=0.5, anchor="center")
-        tk.Label(main_frame, text="Login", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
-        tk.Label(main_frame, text="Username:", font=("Arial", 12)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
-        self.username_entry = tk.Entry(main_frame, font=("Arial", 12))
-        self.username_entry.grid(row=1, column=1, padx=10, pady=5)
+        self._create_header(self.root, "Login")
+        main_frame = self._create_panel(self.root, place=True)
+        self.username_entry = self.create_widget_pair(main_frame, "Username:", tk.Entry, row=0)
         self.username_entry.focus_set()
-        tk.Label(main_frame, text="Password:", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
-        self.password_entry = tk.Entry(main_frame, show="*", font=("Arial", 12))
-        self.password_entry.grid(row=2, column=1, padx=10, pady=5)
-        tk.Button(main_frame, text="Login", command=self.login, font=("Arial", 12)).grid(row=3, column=0, pady=10)
-        tk.Button(main_frame, text="Clear", command=self.clear_login_fields, font=("Arial", 12)).grid(row=3, column=1, pady=10)
+        self.password_entry = self.create_widget_pair(main_frame, "Password:", tk.Entry, row=1)
+        self.password_entry.config(show="*")
+        self._create_styled_button(main_frame, "Login", self.login).grid(row=2, column=0, padx=5, pady=10)
+        self._create_styled_button(main_frame, "Clear", lambda: self.clear_fields([(self.username_entry, ""), (self.password_entry, "")], "Clearing login fields", "FR1"), style='navigation').grid(row=2, column=1, padx=5, pady=10)
         self.root.bind('<Return>', lambda event: self.login())
-
+        self._configure_grid(main_frame)
         self.create_footer()
 
-    def clear_login_fields(self):
-        """
-        Clear username and password entry fields.
-        """
-        logging.debug("Clearing login fields")
-        self.username_entry.delete(0, tk.END)
-        self.password_entry.delete(0, tk.END)
-        self.username_entry.focus_set()
-        log_test_result(
-            test_case="FR1: Clear login fields",
-            input_data="None",
-            output="Username and password fields cleared",
-            pass_fail="Pass"
-        )
+    def clear_fields(self, field_pairs, log_msg, test_case):
+        logger.info(log_msg)
+        for field, default in field_pairs:
+            try:
+                if isinstance(field, tk.Entry) and field.winfo_exists():
+                    field.delete(0, tk.END)
+                    if default:
+                        field.insert(0, default)
+                elif isinstance(field, tk.StringVar):
+                    field.set(default)
+                elif isinstance(field, tk.Listbox) and field.winfo_exists():
+                    field.delete(0, tk.END)
+            except tk.TclError as e:
+                logger.warning(f"Error clearing field: {e}")
 
+    @handle_errors("FR1: Login", lambda self: f"Username: {getattr(self, 'username_entry', {'get': lambda: ''}).get().strip()}")
     def login(self):
-        """
-        Handle login button click and validate credentials (FR1).
-        """
-        logging.info("Attempting login")
+        logger.info("Attempting login")
         username = self.username_entry.get().strip()
         password = self.password_entry.get().strip()
         if not username or not password:
-            output = "Username and password cannot be empty"
-            self.show_message("Error", output, 'error')
-            log_test_result(
-                test_case="FR1: Login with empty fields",
-                input_data=f"Username: {username}, Password: [hidden]",
-                output=output,
-                pass_fail="Fail"
-            )
-            return
-        if self.file_handler.validate_credentials(username, password):
-            self.role = "Admin" if username == "admin" else "User"
-            output = f"Login successful as {self.role}"
-            self.show_message("Success", output, 'info')
-            log_test_result(
-                test_case=f"FR1: Valid {self.role} login",
-                input_data=f"Username: {username}, Password: [hidden]",
-                output=output,
-                pass_fail="Pass"
-            )
-            if self.role == "User":
-                self.create_part_input_screen()
+            logger.error("Empty credentials")
+            raise ValueError("Username and password cannot be empty")
+        
+        hashed_password = hash_password(password)
+        if not hashed_password:
+            logger.error(f"Hash failed for {username}")
+            raise ValueError("Error processing password")
+        
+        try:
+            users_file = os.path.join(BASE_DIR, 'data', 'users.json')
+            if not os.path.exists(users_file):
+                logger.error(f"Users file missing: {users_file}")
+                raise FileNotFoundError("Users file not found")
+            with open(users_file, 'r', encoding='utf-8') as f:
+                users = json.load(f)
+            if self.file_handler.validate_credentials(username, hashed_password):
+                self.role = self.file_handler.get_user_role(username)
+                if not self.role:
+                    logger.error(f"No role for {username}")
+                    raise ValueError("User role not found")
+                logger.info(f"Login successful as {self.role}")
+                if self.role == "User":
+                    self.create_part_input_screen()
+                else:
+                    self.create_admin_screen()
+                return f"Login successful as {self.role}"
             else:
-                self.create_admin_screen()
-        else:
-            output = "Invalid username or password"
-            self.show_message("Error", output, 'error')
-            log_test_result(
-                test_case="FR1: Invalid login",
-                input_data=f"Username: {username}, Password: [hidden]",
-                output=output,
-                pass_fail="Fail"
-            )
+                logger.error(f"Invalid credentials for {username}")
+                raise ValueError("Invalid username or password")
+        except Exception as e:
+            logger.error(f"Login error: {e}")
+            raise ValueError(f"Authentication error: {str(e)}")
 
-    def prompt_admin_credentials(self):
-        """
-        Prompt for admin credentials in a dialog window.
-        Returns True if valid, False otherwise.
-        """
-        logging.info("Prompting for admin credentials")
+    def prompt_admin_create(self):
+        logger.info("Prompting admin credentials")
         if TESTING_MODE:
-            log_message(title='Info', message='Bypassing admin credential prompt in testing mode', level='info')
+            log_message(title='Admin', message='Bypassing admin prompt', level='info')
             return True
 
-        dialog = Toplevel(self.root)
+        dialog = tk.Toplevel(self.root)
         dialog.title("Admin Login")
-        dialog.geometry("300x200")
+        dialog.geometry("400x300")
         dialog.transient(self.root)
         dialog.grab_set()
 
-        tk.Label(dialog, text="Admin Username:", font=("Arial", 12)).grid(row=0, column=0, padx=10, pady=5, sticky="e")
-        admin_username_entry = tk.Entry(dialog, font=("Arial", 12))
-        admin_username_entry.grid(row=0, column=1, padx=10, pady=5)
-        admin_username_entry.focus_set()
-
-        tk.Label(dialog, text="Admin Password:", font=("Arial", 12)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
-        admin_password_entry = tk.Entry(dialog, show="*", font=("Arial", 12))
-        admin_password_entry.grid(row=1, column=1, padx=10, pady=5)
+        self._create_header(dialog, "Admin Login")
+        main_frame = self._create_panel(dialog)
+        username_entry = self.create_widget_pair(main_frame, "Admin Username:", tk.Entry, row=0)
+        username_entry.focus_set()
+        password_entry = self.create_widget_pair(main_frame, "Admin Password:", tk.Entry, row=1)
+        password_entry.config(show="*")
 
         result = {"valid": False}
 
         def validate():
-            username = admin_username_entry.get().strip()
-            password = admin_password_entry.get().strip()
+            username = username_entry.get().strip()
+            password = password_entry.get().strip()
             if not username or not password:
-                self.show_message("Error", "Username and password cannot be empty", 'error')
-                log_test_result(
-                    test_case="Admin Credential Prompt: Empty fields",
-                    input_data=f"Username: {username}, Password: [hidden]",
-                    output="Username and password cannot be empty",
-                    pass_fail="Fail"
-                )
+                self.show_message("Error", "Credentials cannot be empty", 'error')
                 return
-            if self.file_handler.validate_credentials(username, password) and username == "admin":
-                result["valid"] = True
-                dialog.destroy()
-            else:
-                self.show_message("Error", "Invalid admin credentials", 'error')
-                log_test_result(
-                    test_case="Admin Credential Prompt: Invalid credentials",
-                    input_data=f"Username: {username}, Password: [hidden]",
-                    output="Invalid admin credentials",
-                    pass_fail="Fail"
-                )
+            hashed_password = hash_password(password)
+            if not hashed_password:
+                logger.error(f"Hash failed for {username}")
+                self.show_message("Error", "Error processing credentials", 'error')
+                return
+            try:
+                if self.file_handler.validate_credentials(username, hashed_password) and self.file_handler.get_user_role(username) == "Admin":
+                    logger.info(f"Admin validated: {username}")
+                    result["valid"] = True
+                    dialog.destroy()
+                else:
+                    logger.error(f"Invalid admin credentials: {username}")
+                    self.show_message("Error", "Invalid admin credentials", 'error')
+            except Exception as e:
+                logger.error(f"Validation error: {e}")
+                self.show_message("Error", f"Authentication error: {str(e)}", 'error')
 
-        tk.Button(dialog, text="Submit", command=validate, font=("Arial", 12)).grid(row=2, column=0, pady=10)
-        tk.Button(dialog, text="Cancel", command=dialog.destroy, font=("Arial", 12)).grid(row=2, column=1, pady=10)
+        self._create_styled_button(main_frame, "Submit", validate).grid(row=2, column=0, padx=5, pady=10)
+        self._create_styled_button(main_frame, "Cancel", dialog.destroy, style='navigation').grid(row=2, column=1, padx=5, pady=10)
         dialog.bind('<Return>', lambda event: validate())
-
+        self._configure_grid(main_frame)
         self.root.wait_window(dialog)
-        logging.debug(f"Admin credential prompt result: {result['valid']}")
         return result["valid"]
 
     def update_quantity_entry_state(self):
-        """
-        Enable or disable the custom quantity entry based on the quantity dropdown selection.
-        """
-        logging.debug("Updating quantity entry state")
-        if self.assembly_quantity_var.get() == "Other":
-            self.assembly_custom_quantity_entry.config(state='normal')
-        else:
-            self.assembly_custom_quantity_entry.config(state='disabled')
-        if self.single_quantity_var.get() == "Other":
-            self.single_custom_quantity_entry.config(state='normal')
-        else:
-            self.single_custom_quantity_entry.config(state='disabled')
+        logger.debug("Updating quantity entry state")
+        for var, entry in [(self.assembly_quantity_var, self.assembly_custom_quantity_entry), 
+                          (self.single_quantity_var, self.single_custom_quantity_entry)]:
+            entry.config(state='normal' if var.get() == "Other" else 'disabled')
 
     def update_sub_parts_dropdown(self, tab_index):
-        """
-        Update the sub-parts dropdown based on tab selection.
-        - Assembly (tab_index=0): Load existing parts from data/output.txt.
-        - Single Part (tab_index=1): Load fasteners/inserts from data/parts_catalogue.txt.
-        """
-        logging.debug(f"Updating sub-parts dropdown for tab {tab_index}")
-        if tab_index == 1:
-            var = self.single_sub_parts_var
-            option = self.single_sub_parts_option
-        else:
-            var = self.assembly_sub_parts_var
-            option = self.assembly_sub_parts_option
-
+        logger.debug(f"Updating sub-parts dropdown: tab {tab_index}")
+        var, option = (self.single_sub_parts_var, self.single_sub_parts_option) if tab_index == 1 else (self.assembly_sub_parts_var, self.assembly_sub_parts_option)
         var.set("Select Item")
         menu = option['menu']
         menu.delete(0, tk.END)
         menu.add_command(label="Select Item", command=lambda: var.set("Select Item"))
-
-        if tab_index == 0:  # Assembly
-            existing_parts = load_existing_parts()
-            if existing_parts:
-                for part_id in existing_parts:
-                    menu.add_command(label=part_id, command=lambda x=part_id: var.set(x))
-            else:
-                menu.add_command(label="No parts available", command=lambda: var.set("No parts available"))
-        else:  # Single Part
-            catalogue = load_parts_catalogue()
-            if catalogue:
-                for item_id, description, _ in catalogue:
-                    label = f"{item_id}: {description}"
-                    menu.add_command(label=label, command=lambda x=label: var.set(x))
-            else:
-                menu.add_command(label="No catalogue items available", command=lambda: var.set("No catalogue items available"))
+        items = load_parts_catalogue() if tab_index == 1 else load_existing_parts()
+        if tab_index == 1:
+            for item_id, desc, price in items or []:
+                label = f"{item_id}: {desc}"
+                menu.add_command(label=label, command=lambda x=label: var.set(x))
+        else:
+            for item in items or []:
+                menu.add_command(label=item, command=lambda x=item: var.set(x))
+        if not items:
+            menu.add_command(label="No items available", command=lambda: var.set("No items available"))
 
     def update_selected_items(self, tab_index):
-        """
-        Update the Selected Items listbox to include material, sub-parts, and fasteners.
-        """
-        logging.debug(f"Updating selected items for tab {tab_index}")
-        if tab_index == 1:  # Single Part
-            material = self.single_material_var.get()
-            selected_list = [material] + self.single_selected_sub_parts
-            listbox = self.single_selected_sub_parts_listbox
-            fastener_count = int(self.fastener_count_var.get()) if self.fastener_count_var.get().isdigit() else 0
-            if fastener_count > 0:
-                for item in self.single_selected_sub_parts:
-                    selected_list.append(f"{item} ({fastener_count})")
-        else:  # Assembly
-            selected_list = self.assembly_selected_sub_parts
-            listbox = self.assembly_selected_sub_parts_listbox
-
+        logger.debug(f"Updating selected items: tab {tab_index}")
+        listbox = self.single_selected_sub_parts_listbox if tab_index == 1 else self.assembly_selected_sub_parts_listbox
         listbox.delete(0, tk.END)
-        for i, item in enumerate(selected_list, 1):
-            listbox.insert(tk.END, f"{i}. {item}")
+        if tab_index == 1:
+            listbox.insert(tk.END, self.single_material_var.get())
+            for item_id, desc, count in self.single_selected_sub_parts:
+                listbox.insert(tk.END, f"{item_id}: {desc} ({count})" if count > 1 else f"{item_id}: {desc}")
+        else:
+            for part_id, qty in self.assembly_selected_sub_parts:
+                listbox.insert(tk.END, f"{part_id} ({qty})" if qty > 1 else part_id)
 
     def add_sub_part(self, tab_index):
-        """
-        Add the selected sub-part or fastener to the list of selected items.
-        """
-        logging.debug(f"Adding sub-part for tab {tab_index}")
+        logger.debug(f"Adding sub-part: tab {tab_index}")
         if tab_index == 1:
             selected_item = self.single_sub_parts_var.get()
             selected_list = self.single_selected_sub_parts
+            if selected_item and selected_item not in ["Select Item", "No catalogue items available"]:
+                try:
+                    item_id, desc = selected_item.split(": ", 1)
+                except ValueError:
+                    item_id = selected_item
+                    desc = item_id
+                count = int(self.fastener_count_var.get() or 0)
+                if count > 0:
+                    for i, (eid, edesc, ec) in enumerate(selected_list):
+                        if eid == item_id:
+                            selected_list[i] = (item_id, desc, ec + count)
+                            break
+                    else:
+                        selected_list.append((item_id, desc, count))
+                self.single_sub_parts_var.set("Select Item")
         else:
             selected_item = self.assembly_sub_parts_var.get()
             selected_list = self.assembly_selected_sub_parts
-
-        if selected_item and selected_item not in ["Select Item", "No parts available", "No catalogue items available"]:
-            if selected_item not in selected_list:
-                selected_list.append(selected_item)
-            if tab_index == 1:
-                self.single_sub_parts_var.set("Select Item")
-            else:
+            qty = int(self.assembly_sub_part_quantity_var.get() or 1)
+            if selected_item and selected_item not in ["Select Item", "No parts available"]:
+                for i, (pid, pq) in enumerate(selected_list):
+                    if pid == selected_item:
+                        selected_list[i] = (selected_item, pq + qty)
+                        break
+                else:
+                    selected_list.append((selected_item, qty))
                 self.assembly_sub_parts_var.set("Select Item")
+                self.assembly_sub_part_quantity_var.set("1")
         self.update_selected_items(tab_index)
 
     def clear_sub_parts(self, tab_index):
-        """
-        Clear all selected sub-parts or fasteners and update the display.
-        """
-        logging.debug(f"Clearing sub-parts for tab {tab_index}")
+        logger.debug(f"Clearing sub-parts: tab {tab_index}")
+        fields = [(self.single_selected_sub_parts_listbox, None), (self.fastener_count_var, "0")] if tab_index == 1 else [(self.assembly_selected_sub_parts_listbox, None)]
+        self.clear_fields(fields, f"Clearing sub-parts: tab {tab_index}", f"Clear Sub-Parts Tab {tab_index}")
         if tab_index == 1:
             self.single_selected_sub_parts = []
-            self.fastener_count_var.set("0")
-            self.update_selected_items(1)
         else:
             self.assembly_selected_sub_parts = []
-            self.update_selected_items(0)
 
     def update_quantity_dropdown(self, index, work_centre):
-        """
-        Update the quantity dropdown based on the selected WorkCentre, including sub-options for Welding and Coating.
-        """
-        logging.debug(f"Updating quantity dropdown for index {index}, work centre {work_centre}")
+        logger.debug(f"Updating quantity dropdown: index {index}, work_centre {work_centre}")
         qty_dropdown = self.quantity_dropdowns[index]
         qty_var = self.work_centre_quantity_vars[index]
         sub_option_var = self.work_centre_sub_option_vars[index]
         qty_var.set("0")
         sub_option_var.set("None")
+
+        for i, var in enumerate(self.work_centre_vars):
+            if i != index and var.get() == work_centre and work_centre:
+                current_qty = float(self.work_centre_quantity_vars[i].get() or 0)
+                self.work_centre_quantity_vars[i].set(str(current_qty + 100))
+                self.work_centre_vars[index].set("")
+                qty_dropdown.grid_remove()
+                self.update_selected_items(self.notebook.index(self.notebook.select()))
+                return
+
         qty_menu = qty_dropdown['menu']
         qty_menu.delete(0, tk.END)
-
-        # Remove existing sub-option dropdown if any
         if hasattr(self, f'sub_option_dropdown_{index}'):
             getattr(self, f'sub_option_dropdown_{index}').grid_remove()
 
-        if work_centre == "":
+        if not work_centre:
             qty_dropdown.grid_remove()
             return
 
@@ -423,17 +364,15 @@ class SheetMetalClientHub:
         for qty in quantities:
             qty_menu.add_command(label=f"{label}: {qty}", command=lambda x=qty: qty_var.set(str(x)))
 
-        # Add sub-option dropdown for Welding or Coating
         if work_centre in ["Welding", "Coating"]:
             sub_options = ["None", "MIG", "TIG"] if work_centre == "Welding" else ["None", "Painting", "Coating"]
             sub_option_dropdown = tk.OptionMenu(self.operations_frame, sub_option_var, *sub_options)
             sub_option_dropdown.grid(row=index+1, column=3, sticky="w", padx=(2, 5), pady=2)
             setattr(self, f'sub_option_dropdown_{index}', sub_option_dropdown)
 
+        self.update_selected_items(self.notebook.index(self.notebook.select()))
+
     def get_quantity_options(self, work_centre):
-        """
-        Return quantity options and label for the given WorkCentre.
-        """
         options = {
             "Cutting": ([100, 500, 1000, 2000, 3000], "Cutting Length (mm)"),
             "Bending": ([1, 2, 5, 10, 20], "Number of Bends"),
@@ -449,908 +388,484 @@ class SheetMetalClientHub:
         return options.get(work_centre, ([0], "Quantity"))
 
     def go_to_settings(self):
-        """
-        Navigate to admin settings screen, prompting for credentials if not admin.
-        """
-        logging.info("Navigating to settings")
-        if self.role == "Admin":
-            self.create_admin_screen()
-        elif self.prompt_admin_credentials():
+        logger.info("Navigating to settings")
+        if self.role == "Admin" or self.prompt_admin_create():
             self.role = "Admin"
             self.create_admin_screen()
         else:
             self.show_message("Error", "Admin access denied", 'error')
-            log_test_result(
-                test_case="Settings Access: Denied",
-                input_data="Non-admin user",
-                output="Admin access denied",
-                pass_fail="Fail"
-            )
 
     def go_back_to_login(self):
-        """
-        Return to the login screen and reset role.
-        """
-        logging.info("Returning to login screen")
+        logger.info("Returning to login")
         self.role = None
-        self.parts_list = []  # Clear parts list on logout
         self.create_login_screen()
-        log_test_result(
-            test_case="Back to Login",
-            input_data="None",
-            output="Returned to login screen",
-            pass_fail="Pass"
-        )
 
-    def reset_part_input(self):
-        """
-        Reset all part input fields to default values and save current part if valid.
-        """
-        logging.info("Resetting part input fields")
-        # Save current part before resetting
-        self.calculate_and_save(add_another=True)
-        self.part_id_entry.delete(0, tk.END)
-        self.part_id_entry.insert(0, "ASSY-")
-        self.revision_entry.delete(0, tk.END)
+    def clear_input_parameters(self):
+        logger.info("Clearing input parameters")
+        fields = [
+            (self.part_id_entry, "ASSY-"), (self.revision_entry, ""),
+            (self.single_material_var, "Mild Steel"), (self.single_thickness_var, "1.0"),
+            (self.single_lay_flat_length_var, "1000"), (self.single_lay_flat_width_var, "500"),
+            (self.single_weldment_var, "No"), (self.single_quantity_var, "1"),
+            (self.single_custom_quantity_entry, ""), (self.single_selected_sub_parts_listbox, None),
+            (self.fastener_count_var, "0"),
+            (self.single_sub_parts_var, "Select Item"), (self.assembly_quantity_var, "1"),
+            (self.assembly_custom_quantity_entry, ""), (self.assembly_selected_sub_parts_listbox, None),
+            (self.assembly_sub_parts_var, "Select Item"), (self.assembly_sub_part_quantity_var, "1"),
+        ] + [(v, "") for v in self.work_centre_vars] + [(v, "0") for v in self.work_centre_quantity_vars] + [(v, "None") for v in self.work_centre_sub_option_vars]
+        self.clear_fields(fields, "Clearing input parameters", "Clear Input Parameters")
         self.notebook.select(0)
-        self.single_material_var.set("Mild Steel")
-        self.single_thickness_var.set("1.0")
-        self.single_lay_flat_length_var.set("1000")
-        self.single_lay_flat_width_var.set("500")
-        self.single_weldment_var.set("No")
-        self.single_quantity_var.set("1")
-        self.single_custom_quantity_entry.delete(0, tk.END)
-        self.single_custom_quantity_entry.config(state='disabled')
-        self.single_selected_sub_parts = []
-        self.fastener_count_var.set("0")
-        self.update_selected_items(1)
-        self.single_sub_parts_var.set("Select Item")
-        self.assembly_quantity_var.set("1")
-        self.assembly_custom_quantity_entry.delete(0, tk.END)
-        self.assembly_custom_quantity_entry.config(state='disabled')
-        self.assembly_selected_sub_parts = []
-        self.update_selected_items(0)
-        self.assembly_sub_parts_var.set("Select Item")
-        for var in self.work_centre_vars:
-            var.set("")
-        for var in self.work_centre_quantity_vars:
-            var.set("0")
-        for var in self.work_centre_sub_option_vars:
-            var.set("None")
         for dropdown in self.quantity_dropdowns:
             dropdown.grid_remove()
         for i in range(10):
             if hasattr(self, f'sub_option_dropdown_{i}'):
                 getattr(self, f'sub_option_dropdown_{i}').grid_remove()
-        self.submit_button.config(state='normal' if self.parts_list else 'disabled')
-        self.add_another_part_button.config(state='disabled')
-        log_test_result(
-            test_case="Reset Part Input",
-            input_data="None",
-            output="All fields reset to default",
-            pass_fail="Pass"
-        )
+        for btn in [self.submit_button, self.add_another_part_button, self.add_to_parts_list_button]:
+            btn.config(state='disabled')
 
-    def update_parts_listbox(self):
-        """
-        Update the Listbox to display all added parts.
-        """
-        logging.debug("Updating parts listbox")
-        self.parts_listbox.delete(0, tk.END)
-        for i, part in enumerate(self.parts_list, 1):
-            display = f"{i}. {part['part_id']}: £{part['total_cost']}"
-            self.parts_listbox.insert(tk.END, display)
+    def add_part_to_list(self, part_id, quantity):
+        logger.info(f"Adding part {part_id} (qty: {quantity})")
+        self.added_parts.append({'part_id': part_id, 'quantity': quantity})
+        if hasattr(self, 'parts_list_listbox') and self.parts_list_listbox.winfo_exists():
+            self.parts_list_listbox.insert(tk.END, f"{part_id} ({quantity})" if quantity > 1 else part_id)
+        if len(self.added_parts) > 0 and hasattr(self, 'submit_button'):
+            self.submit_button.config(state='normal')
+
+    def open_part_search_popup(self):
+        logger.info("Opening part search pop-up")
+        dialog = tk.Toplevel(self.root)
+        dialog.title("Add Part from Database")
+        dialog.geometry("500x450")
+        dialog.resizable(False, False)
+        dialog.transient(self.root)
+        dialog.grab_set()
+
+        self._create_header(dialog, "Add Part from Database")
+        main_frame = self._create_panel(dialog)
+        search_var = tk.StringVar()
+        search_entry = self.create_widget_pair(main_frame, "Search Parts:", tk.Entry, row=0, textvariable=search_var)
+        search_entry.focus_set()
+
+        parts_listbox = self.create_widget_pair(main_frame, "", tk.Listbox, row=1, options={'height': 10, 'width': 30})
+        parts_listbox.grid(row=1, column=0, columnspan=2, padx=10, pady=5)
+        scrollbar = tk.Scrollbar(main_frame, orient=tk.VERTICAL)
+        parts_listbox.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=parts_listbox.yview)
+        scrollbar.grid(row=1, column=2, sticky="ns")
+
+        quantity_var = tk.StringVar(value="1")
+        self.create_widget_pair(main_frame, "Quantity:", tk.OptionMenu, row=2, options=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], textvariable=quantity_var)
+
+        def update_parts_list(event=None):
+            search_term = search_var.get().lower()
+            parts_listbox.delete(0, tk.END)
+            for part in load_existing_parts():
+                if search_term in part.lower():
+                    parts_listbox.insert(tk.END, part)
+
+        def add_selected_part():
+            selection = parts_listbox.curselection()
+            if not selection:
+                self.show_message("Error", "Select a part", 'error')
+                return
+            part_id = parts_listbox.get(selection[0])
+            quantity = int(quantity_var.get())
+            self.add_part_to_list(part_id, quantity)
+            self.show_message("Success", f"Added {part_id} (Qty: {quantity})", 'info')
+            dialog.destroy()
+
+        self._create_styled_button(main_frame, "Add Part", add_selected_part).grid(row=3, column=0, padx=5, pady=10)
+        self._create_styled_button(main_frame, "Cancel", dialog.destroy, style='navigation').grid(row=3, column=1, padx=5, pady=10)
+        update_parts_list()
+        search_entry.bind('<KeyRelease>', update_parts_list)
+        dialog.bind('<Return>', lambda event: add_selected_part())
+        self._configure_grid(main_frame)
+
+    def clear_parts_list(self):
+        current_time = time.time()
+        if current_time - self.last_clear_time < self.clear_debounce_interval:
+            logger.debug("Debouncing clear_parts_list")
+            return
+        self.last_clear_time = current_time
+        logger.info("Clearing parts list")
+        if hasattr(self, 'parts_list_listbox') and self.parts_list_listbox.winfo_exists():
+            self.clear_fields([(self.parts_list_listbox, None)], "Clearing parts list", "Clear Parts List")
+        self.added_parts = []
+        if hasattr(self, 'submit_button'):
+            self.submit_button.config(state='disabled')
+
+    def update_parts_list_display(self):
+        if hasattr(self, 'parts_list_listbox') and self.parts_list_listbox.winfo_exists():
+            self.parts_list_listbox.delete(0, tk.END)
+            for part in self.added_parts:
+                qty = part.get('quantity', 1)
+                self.parts_list_listbox.insert(tk.END, f"{part['part_id']} ({qty})" if qty > 1 else part['part_id'])
+            logger.debug("Updated parts list display")
 
     def create_part_input_screen(self):
-        """
-        Create the part input screen for entering part specifications (FR2).
-        """
-        logging.info("Creating part input screen")
+        logger.info("Creating part input screen")
         self.clear_screen()
+        self._create_header(self.root, "Manufacturing Input Screen")
+        main_frame = self._create_panel(self.root)
+        main_frame.grid_rowconfigure(0, weight=1)
+        main_frame.grid_columnconfigure(0, weight=1)
+        main_frame.grid_columnconfigure(1, weight=0)
+        main_frame.grid_columnconfigure(2, weight=1)
 
-        # Top frame for title and image
-        top_frame = tk.Frame(self.root)
-        top_frame.pack(side=tk.TOP, fill=tk.X)
+        # Left panel
+        left_frame = tk.Frame(main_frame, bg="#e8ecef")
+        left_frame.grid(row=0, column=0, sticky="nsew", padx=(0, 5))
+        input_frame = tk.Frame(left_frame, bg="#e8ecef")
+        input_frame.pack(side=tk.RIGHT, padx=10, pady=5, fill=tk.BOTH, expand=True)
+        tk.Label(input_frame, text="Planned Materials", font=("Arial", 14, "bold"), bg="#e8ecef").grid(row=0, column=0, columnspan=2, pady=5)
 
-        # Load and display laser_gear image
-        try:
-            image_path = os.path.join(BASE_DIR, 'docs/images/laser_gear.png')
-            image = Image.open(image_path).resize((32, 32), Image.LANCZOS)
-            photo = ImageTk.PhotoImage(image)
-            image_label = tk.Label(top_frame, image=photo)
-            image_label.image = photo
-            image_label.pack(pady=5)
-        except FileNotFoundError:
-            logging.warning(f"laser_gear.png not found at {image_path}. Using fallback.")
-            tk.Label(top_frame, text="[Laser Gear Image]", font=("Arial", 10)).pack(pady=5)
-        except Exception as e:
-            logging.error(f"Error loading laser_gear image: {e}")
-            tk.Label(top_frame, text="[Laser Gear Image]", font=("Arial", 10)).pack(pady=5)
+        self.part_id_entry = self.create_widget_pair(input_frame, "Part ID:", tk.Entry, row=1, default="ASSY-")
+        self.revision_entry = self.create_widget_pair(input_frame, "Revision:", tk.Entry, row=2)
 
-        tk.Label(top_frame, text="Manufacturing Input Screen", font=("Arial", 16, "bold")).pack(pady=5)
-
-        # Titles for Planned Materials and Planned Operations
-        title_frame = tk.Frame(top_frame)
-        title_frame.pack(fill=tk.X)
-        tk.Label(title_frame, text="Planned Materials", font=("Arial", 14, "bold")).place(x=300, y=0)
-        tk.Label(title_frame, text="Planned Operations", font=("Arial", 14, "bold")).place(x=900, y=0)
-
-        # Main frame
-        main_frame = tk.Frame(self.root)
-        main_frame.pack(fill=tk.BOTH, expand=True)
-
-        # Left frame (Planned Materials)
-        left_frame = tk.Frame(main_frame, width=600)
-        left_frame.place(x=0, y=50, width=600, height=800)
-
-        # Right frame (Planned Operations)
-        right_frame = tk.Frame(main_frame, width=600)
-        right_frame.place(x=600, y=50, width=600, height=800)
-
-        # Separator
-        separator = ttk.Separator(main_frame, orient='vertical')
-        separator.place(x=600, y=50, height=800)
-
-        # Input frame in left frame (right-aligned)
-        input_frame = tk.Frame(left_frame)
-        input_frame.place(x=10, y=10, width=580, height=780)
-
-        # Common fields (right-aligned with labels beside entries)
-        self.part_id_label = tk.Label(input_frame, text="Part ID:", font=("Arial", 12))
-        self.part_id_entry = tk.Entry(input_frame, font=("Arial", 12))
-        self.part_id_entry.insert(0, "ASSY-")
-        self.revision_label = tk.Label(input_frame, text="Revision:", font=("Arial", 12))
-        self.revision_entry = tk.Entry(input_frame, font=("Arial", 12))
-        input_frame.grid_columnconfigure(0, weight=1)
-        input_frame.grid_columnconfigure(1, weight=0)
-        input_frame.grid_columnconfigure(2, weight=0)
-        self.part_id_label.grid(row=0, column=1, sticky="e", padx=(0, 5), pady=2)
-        self.part_id_entry.grid(row=0, column=2, sticky="e", padx=(0, 10), pady=2)
-        self.revision_label.grid(row=1, column=1, sticky="e", padx=(0, 5), pady=2)
-        self.revision_entry.grid(row=1, column=2, sticky="e", padx=(0, 10), pady=2)
-
-        # Notebook for tabs
         self.notebook = ttk.Notebook(input_frame)
-        self.notebook.grid(row=2, column=0, columnspan=3, sticky="e", pady=5)
+        self.notebook.grid(row=3, column=0, columnspan=2, sticky="nsew", pady=5)
         self.notebook.bind('<<NotebookTabChanged>>', self.on_tab_changed)
 
         # Assembly tab
-        self.assembly_part_frame = tk.Frame(self.notebook)
+        self.assembly_part_frame = tk.Frame(self.notebook, bg="#e8ecef")
         self.notebook.add(self.assembly_part_frame, text="Assembly")
-
-        self.assembly_quantity_label = tk.Label(self.assembly_part_frame, text="Quantity:", font=("Arial", 12))
-        self.assembly_quantity_var = tk.StringVar(value="1")
-        self.assembly_quantity_option = tk.OptionMenu(self.assembly_part_frame, self.assembly_quantity_var, "1", "5", "10", "20", "50", "100", "Other")
-        self.assembly_custom_quantity_entry = tk.Entry(self.assembly_part_frame, font=("Arial", 12), state='disabled')
-        self.assembly_sub_parts_label = tk.Label(self.assembly_part_frame, text="Sub-Parts:", font=("Arial", 12))
-        self.assembly_sub_parts_var = tk.StringVar(value="Select Item")
-        self.assembly_sub_parts_option = tk.OptionMenu(self.assembly_part_frame, self.assembly_sub_parts_var, "Select Item")
-        self.assembly_add_sub_part_button = tk.Button(self.assembly_part_frame, text="Add Sub-Part", command=lambda: self.add_sub_part(0), font=("Arial", 12))
-        self.assembly_clear_sub_parts_button = tk.Button(self.assembly_part_frame, text="Clear Selected", command=lambda: self.clear_sub_parts(0), font=("Arial", 12))
-
-        # Scrollable Listbox for selected sub-parts
-        self.assembly_selected_sub_parts_frame = tk.Frame(self.assembly_part_frame)
-        self.assembly_selected_sub_parts_listbox = tk.Listbox(self.assembly_selected_sub_parts_frame, font=("Arial", 12), height=10, width=40)
-        scrollbar = tk.Scrollbar(self.assembly_selected_sub_parts_frame, orient="vertical")
-        scrollbar.config(command=self.assembly_selected_sub_parts_listbox.yview)
+        self.assembly_quantity_option = self.create_widget_pair(self.assembly_part_frame, "Quantity:", tk.OptionMenu, row=0, textvariable=self.assembly_quantity_var, options=["1", "5", "10", "20", "50", "100", "Other"])
+        self.assembly_custom_quantity_entry = self.create_widget_pair(self.assembly_part_frame, "", tk.Entry, row=1, state='disabled')
+        self.assembly_sub_parts_option = self.create_widget_pair(self.assembly_part_frame, "Sub-Parts:", tk.OptionMenu, row=2, textvariable=self.assembly_sub_parts_var, options=["Select Item"])
+        self.assembly_sub_part_quantity_option = self.create_widget_pair(self.assembly_part_frame, "Sub-Part Qty:", tk.OptionMenu, row=3, textvariable=self.assembly_sub_part_quantity_var, options=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+        self._create_styled_button(self.assembly_part_frame, "Add Sub-Part", lambda: self.add_sub_part(0)).grid(row=4, column=1, sticky="w", padx=(2, 5), pady=2)
+        self._create_styled_button(self.assembly_part_frame, "Clear Selected", lambda: self.clear_sub_parts(0), style='navigation').grid(row=5, column=1, sticky="w", padx=(2, 5), pady=2)
+        listbox_frame = tk.Frame(self.assembly_part_frame, bg="#e8ecef")
+        self.assembly_selected_sub_parts_listbox = tk.Listbox(listbox_frame, font=("Arial", 12), height=5, width=40)
+        scrollbar = tk.Scrollbar(listbox_frame, orient=tk.VERTICAL)
         self.assembly_selected_sub_parts_listbox.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=self.assembly_selected_sub_parts_listbox.yview)
         self.assembly_selected_sub_parts_listbox.pack(side=tk.LEFT, fill=tk.Y)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-        self.assembly_part_frame.grid_columnconfigure(0, weight=1)
-        self.assembly_part_frame.grid_columnconfigure(1, weight=0)
-        self.assembly_quantity_label.grid(row=0, column=0, sticky="w", padx=(10, 2), pady=2)
-        self.assembly_quantity_option.grid(row=0, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.assembly_custom_quantity_entry.grid(row=1, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.assembly_sub_parts_label.grid(row=2, column=0, sticky="w", padx=(10, 2), pady=2)
-        self.assembly_sub_parts_option.grid(row=2, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.assembly_add_sub_part_button.grid(row=3, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.assembly_clear_sub_parts_button.grid(row=4, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.assembly_selected_sub_parts_frame.grid(row=5, column=0, columnspan=2, sticky="e", padx=(10, 10), pady=2)
+        listbox_frame.grid(row=6, column=0, columnspan=2, sticky="w", padx=(10, 5), pady=2)
 
         self.assembly_quantity_var.trace("w", lambda *args: self.update_quantity_entry_state())
 
         # Single Part tab
-        self.single_part_frame = tk.Frame(self.notebook)
+        self.single_part_frame = tk.Frame(self.notebook, bg="#e8ecef")
         self.notebook.add(self.single_part_frame, text="Single Part")
-
-        self.single_material_label = tk.Label(self.single_part_frame, text="Material:", font=("Arial", 12))
-        self.single_material_var = tk.StringVar(value="Mild Steel")
-        self.single_material_option = tk.OptionMenu(self.single_part_frame, self.single_material_var, "Mild Steel", "Aluminium", "Stainless Steel")
-        self.single_thickness_label = tk.Label(self.single_part_frame, text="Thickness (mm):", font=("Arial", 12))
-        self.single_thickness_var = tk.StringVar(value="1.0")
-        self.single_thickness_option = tk.OptionMenu(self.single_part_frame, self.single_thickness_var, "1.0", "1.2", "1.5", "2.0", "2.5", "3.0")
-        self.single_lay_flat_length_label = tk.Label(self.single_part_frame, text="Lay-Flat Length (mm):", font=("Arial", 12))
-        self.single_lay_flat_length_var = tk.StringVar(value="1000")
-        self.single_lay_flat_length_option = tk.OptionMenu(self.single_part_frame, self.single_lay_flat_length_var, "50", "100", "500", "1000", "1500", "2000", "3000")
-        self.single_lay_flat_width_label = tk.Label(self.single_part_frame, text="Lay-Flat Width (mm):", font=("Arial", 12))
-        self.single_lay_flat_width_var = tk.StringVar(value="500")
-        self.single_lay_flat_width_option = tk.OptionMenu(self.single_part_frame, self.single_lay_flat_width_var, "50", "100", "500", "1000", "1500")
-        self.single_quantity_label = tk.Label(self.single_part_frame, text="Quantity:", font=("Arial", 12))
-        self.single_quantity_var = tk.StringVar(value="1")
-        self.single_quantity_option = tk.OptionMenu(self.single_part_frame, self.single_quantity_var, "1", "5", "10", "20", "50", "100", "Other")
-        self.single_custom_quantity_entry = tk.Entry(self.single_part_frame, font=("Arial", 12), state='disabled')
-        self.single_weldment_label = tk.Label(self.single_part_frame, text="Weldment Indicator:", font=("Arial", 12))
-        self.single_weldment_var = tk.StringVar(value="No")
-        self.single_weldment_option = tk.OptionMenu(self.single_part_frame, self.single_weldment_var, "Yes", "No")
-        self.single_sub_parts_label = tk.Label(self.single_part_frame, text="Fasteners/Inserts:", font=("Arial", 12))
-        self.single_sub_parts_var = tk.StringVar(value="Select Item")
-        self.single_sub_parts_option = tk.OptionMenu(self.single_part_frame, self.single_sub_parts_var, "Select Item")
-        self.fastener_count_label = tk.Label(self.single_part_frame, text="Fastener Count:", font=("Arial", 12))
-        self.fastener_count_entry = tk.Entry(self.single_part_frame, textvariable=self.fastener_count_var, font=("Arial", 12))
-        self.single_add_sub_part_button = tk.Button(self.single_part_frame, text="Add Fastener/Insert", command=lambda: self.add_sub_part(1), font=("Arial", 12))
-        self.single_clear_sub_parts_button = tk.Button(self.single_part_frame, text="Clear Selected", command=lambda: self.clear_sub_parts(1), font=("Arial", 12))
-
-        # Scrollable Listbox for selected items
-        self.single_selected_sub_parts_frame = tk.Frame(self.single_part_frame)
-        self.single_selected_sub_parts_listbox = tk.Listbox(self.single_selected_sub_parts_frame, font=("Arial", 12), height=10, width=40)
-        scrollbar = tk.Scrollbar(self.single_selected_sub_parts_frame, orient="vertical")
-        scrollbar.config(command=self.single_selected_sub_parts_listbox.yview)
+        self.single_material_option = self.create_widget_pair(self.single_part_frame, "Material:", tk.OptionMenu, row=0, textvariable=self.single_material_var, options=["Mild Steel", "Aluminium", "Stainless Steel"])
+        self.single_thickness_option = self.create_widget_pair(self.single_part_frame, "Thickness (mm):", tk.OptionMenu, row=1, textvariable=self.single_thickness_var, options=["1.0", "1.2", "1.5", "2.0", "2.5", "3.0"])
+        self.single_lay_flat_length_option = self.create_widget_pair(self.single_part_frame, "Lay-Flat Length (mm):", tk.OptionMenu, row=2, textvariable=self.single_lay_flat_length_var, options=["50", "100", "500", "1000", "1500", "2000", "3000"])
+        self.single_lay_flat_width_option = self.create_widget_pair(self.single_part_frame, "Lay-Flat Width (mm):", tk.OptionMenu, row=3, textvariable=self.single_lay_flat_width_var, options=["50", "100", "500", "1000", "1500"])
+        self.single_quantity_option = self.create_widget_pair(self.single_part_frame, "Quantity:", tk.OptionMenu, row=4, textvariable=self.single_quantity_var, options=["1", "5", "10", "20", "50", "100", "Other"])
+        self.single_custom_quantity_entry = self.create_widget_pair(self.single_part_frame, "", tk.Entry, row=5, state='disabled')
+        self.single_weldment_option = self.create_widget_pair(self.single_part_frame, "Weldment Indicator:", tk.OptionMenu, row=6, textvariable=self.single_weldment_var, options=["Yes", "No"])
+        self.single_sub_parts_option = self.create_widget_pair(self.single_part_frame, "Fasteners/Inserts:", tk.OptionMenu, row=7, textvariable=self.single_sub_parts_var, options=["Select Item"])
+        self.fastener_count_entry = self.create_widget_pair(self.single_part_frame, "Fastener Count:", tk.Entry, row=8, textvariable=self.fastener_count_var)
+        self._create_styled_button(self.single_part_frame, "Add Fastener/Insert", lambda: self.add_sub_part(1)).grid(row=9, column=1, sticky="w", padx=(2, 5), pady=2)
+        self._create_styled_button(self.single_part_frame, "Clear Selected", lambda: self.clear_sub_parts(1), style='navigation').grid(row=10, column=1, sticky="w", padx=(2, 5), pady=2)
+        listbox_frame = tk.Frame(self.single_part_frame, bg="#e8ecef")
+        self.single_selected_sub_parts_listbox = tk.Listbox(listbox_frame, font=("Arial", 12), height=5, width=40)
+        scrollbar = tk.Scrollbar(listbox_frame, orient=tk.VERTICAL)
         self.single_selected_sub_parts_listbox.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=self.single_selected_sub_parts_listbox.yview)
         self.single_selected_sub_parts_listbox.pack(side=tk.LEFT, fill=tk.Y)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-        self.single_part_frame.grid_columnconfigure(0, weight=1)
-        self.single_part_frame.grid_columnconfigure(1, weight=0)
-        self.single_material_label.grid(row=0, column=0, sticky="w", padx=(10, 2), pady=2)
-        self.single_material_option.grid(row=0, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.single_thickness_label.grid(row=1, column=0, sticky="w", padx=(10, 2), pady=2)
-        self.single_thickness_option.grid(row=1, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.single_lay_flat_length_label.grid(row=2, column=0, sticky="w", padx=(10, 2), pady=2)
-        self.single_lay_flat_length_option.grid(row=2, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.single_lay_flat_width_label.grid(row=3, column=0, sticky="w", padx=(10, 2), pady=2)
-        self.single_lay_flat_width_option.grid(row=3, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.single_quantity_label.grid(row=4, column=0, sticky="w", padx=(10, 2), pady=2)
-        self.single_quantity_option.grid(row=4, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.single_custom_quantity_entry.grid(row=5, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.single_weldment_label.grid(row=6, column=0, sticky="w", padx=(10, 2), pady=2)
-        self.single_weldment_option.grid(row=6, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.single_sub_parts_label.grid(row=7, column=0, sticky="w", padx=(10, 2), pady=2)
-        self.single_sub_parts_option.grid(row=7, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.fastener_count_label.grid(row=8, column=0, sticky="w", padx=(10, 2), pady=2)
-        self.fastener_count_entry.grid(row=8, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.single_add_sub_part_button.grid(row=9, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.single_clear_sub_parts_button.grid(row=10, column=1, sticky="e", padx=(2, 10), pady=2)
-        self.single_selected_sub_parts_frame.grid(row=11, column=0, columnspan=2, sticky="e", padx=(10, 10), pady=2)
+        listbox_frame.grid(row=11, column=0, columnspan=2, sticky="w", padx=(10, 5), pady=2)
 
         self.single_material_var.trace("w", lambda *args: self.update_selected_items(1))
         self.single_quantity_var.trace("w", lambda *args: self.update_quantity_entry_state())
         self.fastener_count_var.trace("w", lambda *args: self.update_selected_items(1))
 
-        # Operations frame in right frame
-        self.operations_frame = tk.Frame(right_frame)
-        self.operations_frame.place(x=10, y=10, width=580, height=780)
+        # Separator
+        separator = ttk.Separator(main_frame, orient='vertical')
+        separator.grid(row=0, column=1, sticky="ns", padx=5)
 
-        # WorkCentre and quantity options
-        work_centres = [
-            "", "Cutting", "Bending", "Welding", "Assembly", "Finishing",
-            "Drilling", "Punching", "Grinding", "Coating", "Inspection"
-        ]
+        # Right panel
+        right_frame = tk.Frame(main_frame, bg="#e8ecef")
+        right_frame.grid(row=0, column=2, sticky="nsew", padx=(5, 0))
+        self.operations_frame = tk.Frame(right_frame, bg="#e8ecef")
+        self.operations_frame.pack(side=tk.LEFT, padx=10, pady=5, fill=tk.BOTH, expand=True)
+        tk.Label(self.operations_frame, text="Planned Operations", font=("Arial", 14, "bold"), bg="#e8ecef").grid(row=0, column=0, columnspan=4, pady=5)
+
+        work_centres = ["", "Cutting", "Bending", "Welding", "Assembly", "Finishing", "Drilling", "Punching", "Grinding", "Coating", "Inspection"]
         self.quantity_dropdowns = []
         for i in range(10):
-            op_label = f"Operation {(i+1)*10}:"
-            tk.Label(self.operations_frame, text=op_label, font=("Arial", 10)).grid(row=i+1, column=0, sticky="w", padx=(5, 2), pady=2)
+            tk.Label(self.operations_frame, text=f"Operation {(i+1)*10}:", font=("Arial", 10), bg="#e8ecef").grid(row=i+1, column=0, sticky="w", padx=(5, 2), pady=2)
             dropdown = tk.OptionMenu(self.operations_frame, self.work_centre_vars[i], *work_centres, command=lambda wc, idx=i: self.update_quantity_dropdown(idx, wc))
             dropdown.grid(row=i+1, column=1, sticky="w", padx=(2, 5), pady=2)
             qty_dropdown = tk.OptionMenu(self.operations_frame, self.work_centre_quantity_vars[i], "0")
             qty_dropdown.grid_remove()
             self.quantity_dropdowns.append(qty_dropdown)
 
-        # Calculate Cost and buttons subframe
-        self.calculate_cost_button = tk.Button(self.operations_frame, text="Calculate Cost", command=self.calculate_and_save, font=("Arial", 10))
+        self.calculate_cost_button = self._create_styled_button(self.operations_frame, "Calculate Cost & Add Part", self.calculate_and_save, width=20)
         self.calculate_cost_button.grid(row=11, column=0, columnspan=4, pady=5)
 
-        buttons_subframe = tk.Frame(self.operations_frame)
+        buttons_subframe = tk.Frame(self.operations_frame, bg="#e8ecef")
         buttons_subframe.grid(row=12, column=0, columnspan=4, pady=5)
-
-        self.submit_button = tk.Button(buttons_subframe, text="Submit", command=lambda: self.create_quote_screen(self.parts_list), font=("Arial", 10), state='disabled')
-        self.submit_button.pack(side=tk.LEFT, padx=5)
-
-        self.add_another_part_button = tk.Button(buttons_subframe, text="Add Another Part", command=self.reset_part_input, font=("Arial", 10), state='disabled')
+        self.add_another_part_button = self._create_styled_button(buttons_subframe, "Screen Reset", self.clear_input_parameters, style='action', width=12)
         self.add_another_part_button.pack(side=tk.LEFT, padx=5)
+        self.add_another_part_button.config(state='disabled')
+        self.add_to_parts_list_button = self._create_styled_button(buttons_subframe, "Add Part to List", self.open_part_search_popup, style='action', width=12)
+        self.add_to_parts_list_button.pack(side=tk.LEFT, padx=5)
+        self.clear_parts_list_button = self._create_styled_button(buttons_subframe, "Clear Parts List", self.clear_parts_list, style='navigation', width=12)
+        self.clear_parts_list_button.pack(side=tk.LEFT, padx=5)
+        self.submit_button = self._create_styled_button(buttons_subframe, "Quote", self.create_quote_screen, style='action', width=12)
+        self.submit_button.pack(side=tk.LEFT, padx=5)
+        self.submit_button.config(state='disabled')
 
-        # Vertical Listbox for added parts
-        parts_list_frame = tk.Frame(self.operations_frame)
-        parts_list_frame.grid(row=13, column=0, columnspan=4, pady=5, sticky="w")
-        tk.Label(parts_list_frame, text="Added Parts:", font=("Arial", 12)).pack(side=tk.TOP, anchor="w")
-        self.parts_listbox = tk.Listbox(parts_list_frame, font=("Arial", 12), height=8, width=40)
-        scrollbar = tk.Scrollbar(parts_list_frame, orient="vertical")
-        scrollbar.config(command=self.parts_listbox.yview)
-        self.parts_listbox.config(yscrollcommand=scrollbar.set)
-        self.parts_listbox.pack(side=tk.LEFT, fill=tk.Y)
+        parts_list_frame = tk.Frame(self.operations_frame, bg="#e8ecef")
+        self.parts_list_listbox = tk.Listbox(parts_list_frame, font=("Arial", 10), height=5, width=40)
+        scrollbar = tk.Scrollbar(parts_list_frame, orient=tk.VERTICAL)
+        self.parts_list_listbox.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=self.parts_list_listbox.yview)
+        self.parts_list_listbox.pack(side=tk.LEFT, fill=tk.Y)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        parts_list_frame.grid(row=13, column=0, columnspan=4, pady=5)
 
-        # Bottom frame for navigation buttons
-        bottom_frame = tk.Frame(main_frame)
-        bottom_frame.place(x=0, y=850, width=1200, height=50)
-
-        self.settings_button = tk.Button(bottom_frame, text="Settings", command=self.go_to_settings, font=("Arial", 12))
-        self.back_button = tk.Button(bottom_frame, text="Back", command=self.go_back_to_login, font=("Arial", 12))
+        bottom_frame = tk.Frame(main_frame, bg="#e8ecef")
+        bottom_frame.grid(row=1, column=0, columnspan=3, sticky="ew", pady=5)
+        self.settings_button = self._create_styled_button(bottom_frame, "Settings", self.go_to_settings, style='navigation')
+        self.back_button = self._create_styled_button(bottom_frame, "Back to Login", self.go_back_to_login, style='navigation')
         self.settings_button.pack(side=tk.LEFT, padx=10)
         self.back_button.pack(side=tk.LEFT, padx=10)
 
-        # Footer
         self.create_footer()
-
-        # Initialize sub-parts dropdowns
         self.update_sub_parts_dropdown(0)
         self.update_sub_parts_dropdown(1)
+        self.update_parts_list_display()
 
     def on_tab_changed(self, event):
-        """
-        Handle tab change event to update Part ID prefix and sub-parts dropdown.
-        """
-        logging.debug("Tab changed")
+        logger.debug("Tab changed")
         selected_tab = self.notebook.index(self.notebook.select())
         self.update_sub_parts_dropdown(selected_tab)
         self.part_id_entry.delete(0, tk.END)
-        prefix = "ASSY-" if selected_tab == 0 else "PART-"
-        self.part_id_entry.insert(0, prefix)
+        self.part_id_entry.insert(0, "ASSY-" if selected_tab == 0 else "PART-")
         self.update_selected_items(selected_tab)
 
-    def calculate_and_save(self, add_another=False):
-        """
-        Calculate cost and save output based on part specifications (FR2, FR3, FR4, FR5).
-        Args:
-            add_another (bool): If True, save part and reset for adding another part.
-        """
-        logging.info("Calculating and saving part specifications")
-        try:
-            selected_tab = self.notebook.index(self.notebook.select())
-            part_type = "Single Part" if selected_tab == 1 else "Assembly"
-            part_id = self.part_id_entry.get().strip()
-            revision = self.revision_entry.get().strip()
+    @handle_errors("FR3-FR4-FR5: Cost calculation", lambda self: f"Part Type: {'Single Part' if self.notebook.index(self.notebook.select()) == 1 else 'Assembly'}, Part ID: {self.part_id_entry.get().strip()}")
+    def calculate_and_save(self):
+        logger.info("Calculating part specs")
+        selected_tab = self.notebook.index(self.notebook.select())
+        part_type = "Single Part" if selected_tab == 1 else "Assembly"
+        part_id = self.part_id_entry.get().strip()
+        revision = self.revision_entry.get().strip()
 
-            # Validate dimensions and quantity for single parts
-            if selected_tab == 1:  # Single Part
-                material = self.single_material_var.get()
-                thickness = self.single_thickness_var.get()
-                length = self.single_lay_flat_length_var.get()
-                width = self.single_lay_flat_width_var.get()
-                quantity = self.single_quantity_var.get()
-                if quantity == "Other":
-                    quantity = self.single_custom_quantity_entry.get().strip()
-                try:
-                    length = int(length)
-                    width = int(width)
-                    thickness = float(thickness)
-                    quantity = int(quantity)
-                    if not (50 <= length <= 3000):
-                        output = "Lay-Flat length must be between 50 and 3000 mm"
-                        self.show_message("Error", output, 'error')
-                        log_test_result(
-                            test_case="FR2: Invalid lay-flat length",
-                            input_data=f"Length: {length}",
-                            output=output,
-                            pass_fail="Fail"
-                        )
-                        return
-                    if not (50 <= width <= 1500):
-                        output = "Lay-Flat width must be between 50 and 1500 mm"
-                        self.show_message("Error", output, 'error')
-                        log_test_result(
-                            test_case="FR2: Invalid lay-flat width",
-                            input_data=f"Width: {width}",
-                            output=output,
-                            pass_fail="Fail"
-                        )
-                        return
-                    if not (1.0 <= thickness <= 3.0):
-                        output = "Thickness must be between 1.0 and 3.0 mm"
-                        self.show_message("Error", output, 'error')
-                        log_test_result(
-                            test_case="FR2: Invalid thickness",
-                            input_data=f"Thickness: {thickness}",
-                            output=output,
-                            pass_fail="Fail"
-                        )
-                        return
-                    if quantity <= 0:
-                        output = "Quantity must be a positive integer"
-                        self.show_message("Error", output, 'error')
-                        log_test_result(
-                            test_case="FR2: Invalid quantity",
-                            input_data=f"Quantity: {quantity}",
-                            output=output,
-                            pass_fail="Fail"
-                        )
-                        return
-                except ValueError:
-                    output = "Invalid numeric input for dimensions, thickness, or quantity"
-                    self.show_message("Error", output, 'error')
-                    log_test_result(
-                        test_case="FR2: Invalid numeric input",
-                        input_data=f"Length: {length}, Width: {width}, Thickness: {thickness}, Quantity: {quantity}",
-                        output=output,
-                        pass_fail="Fail"
-                    )
-                    return
-                weldment_indicator = self.single_weldment_var.get()
-                sub_parts = self.single_selected_sub_parts
-                fastener_types_and_counts = []
-                fastener_count = int(self.fastener_count_var.get()) if self.fastener_count_var.get().isdigit() else 0
-                if fastener_count > 0:
-                    for item in sub_parts:
-                        item_id = item.split(':')[0].strip()
-                        fastener_type = item_id[:3].upper()  # First 3 letters of part number
-                        fastener_types_and_counts.append((fastener_type, fastener_count))
-                top_level_assembly = "N/A"
-            else:  # Assembly
-                material = "N/A"
-                thickness = "0.0"
-                length = "0"
-                width = "0"
-                weldment_indicator = "No"
-                quantity = self.assembly_quantity_var.get()
-                if quantity == "Other":
-                    quantity = self.assembly_custom_quantity_entry.get().strip()
-                try:
-                    quantity = int(quantity)
-                    if quantity <= 0:
-                        output = "Quantity must be a positive integer"
-                        self.show_message("Error", output, 'error')
-                        log_test_result(
-                            test_case="FR2: Invalid quantity",
-                            input_data=f"Quantity: {quantity}",
-                            output=output,
-                            pass_fail="Fail"
-                        )
-                        return
-                except ValueError:
-                    output = "Invalid quantity input"
-                    self.show_message("Error", output, 'error')
-                    log_test_result(
-                        test_case="FR2: Invalid quantity",
-                        input_data=f"Quantity: {quantity}",
-                        output=output,
-                        pass_fail="Fail"
-                    )
-                    return
-                sub_parts = self.assembly_selected_sub_parts
-                fastener_types_and_counts = []
-                top_level_assembly = part_id
+        specs = {
+            'material': self.single_material_var.get() if selected_tab == 1 else "N/A",
+            'thickness': float(self.single_thickness_var.get()) if selected_tab == 1 else 0.0,
+            'length': int(self.single_lay_flat_length_var.get()) if selected_tab == 1 else 0,
+            'width': int(self.single_lay_flat_width_var.get()) if selected_tab == 1 else 0,
+            'quantity': int(self.single_custom_quantity_entry.get().strip() if self.single_quantity_var.get() == "Other" else self.single_quantity_var.get()) if selected_tab == 1 else int(self.assembly_custom_quantity_entry.get().strip() if self.assembly_quantity_var.get() == "Other" else self.assembly_quantity_var.get()),
+            'weldment_indicator': self.single_weldment_var.get() if selected_tab == 1 else "No",
+            'sub_parts': self.single_selected_sub_parts if selected_tab == 1 else self.assembly_selected_sub_parts,
+            'fastener_types_and_counts': [],
+            'top_level_assembly': "N/A" if selected_tab == 1 else part_id
+        }
 
-            # Validate Part ID and Revision
-            if not all([part_id, revision]):
-                output = "Part ID and Revision are required"
-                self.show_message("Error", output, 'error')
-                log_test_result(
-                    test_case="FR2: Part input with empty fields",
-                    input_data=f"Part ID: {part_id}, Revision: {revision}",
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
+        work_centres = []
+        for i, (wc, qty, sub) in enumerate(zip(self.work_centre_vars, self.work_centre_quantity_vars, self.work_centre_sub_option_vars)):
+            if wc.get():
+                if qty.get() == "0":
+                    raise ValueError(f"Quantity for {wc.get()} in Operation {(i+1)*10} required")
+                if wc.get() in ["Welding", "Coating"] and sub.get() == "None":
+                    raise ValueError(f"{'Weld type' if wc.get() == 'Welding' else 'Surface treatment type'} required for {wc.get()}")
+                work_centres.append((wc.get(), float(qty.get()), sub.get()))
 
-            # Collect WorkCentre, quantity, and sub-option pairs
-            work_centres = []
-            for i, var in enumerate(self.work_centre_vars):
-                wc = var.get()
-                if wc != "":
-                    qty = self.work_centre_quantity_vars[i].get()
-                    sub_option = self.work_centre_sub_option_vars[i].get()
-                    if qty == "0":
-                        output = f"Quantity for {wc} in Operation {(i+1)*10} must be selected"
-                        self.show_message("Error", output, 'error')
-                        log_test_result(
-                            test_case="FR2: Missing WorkCentre quantity",
-                            input_data=f"Operation {(i+1)*10}, WorkCentre: {wc}",
-                            output=output,
-                            pass_fail="Fail"
-                        )
-                        return
-                    if wc == "Welding" and sub_option == "None":
-                        output = f"Weld type must be selected for Welding in Operation {(i+1)*10}"
-                        self.show_message("Error", output, 'error')
-                        log_test_result(
-                            test_case="FR2.3: Missing weld type",
-                            input_data=f"Operation {(i+1)*10}, WorkCentre: {wc}",
-                            output=output,
-                            pass_fail="Fail"
-                        )
-                        return
-                    if wc == "Coating" and sub_option == "None":
-                        output = f"Surface treatment type must be selected for Coating in Operation {(i+1)*10}"
-                        self.show_message("Error", output, 'error')
-                        log_test_result(
-                            test_case="FR2.7: Missing surface treatment type",
-                            input_data=f"Operation {(i+1)*10}, WorkCentre: {wc}",
-                            output=output,
-                            pass_fail="Fail"
-                        )
-                        return
-                    work_centres.append((wc, float(qty), sub_option))
+        part_specs = {'part_type': part_type, 'part_id': part_id, 'revision': revision, 'specs': specs, 'work_centres': work_centres}
+        rates = self.file_handler.load_rates()
+        total_cost = calculate_and_save(part_specs, self.file_handler, rates, self.added_parts, self.show_message)
+        self.submit_button.config(state='normal')
+        self.add_another_part_button.config(state='normal')
+        self.add_to_parts_list_button.config(state='normal')
+        self.last_part_id = part_id
+        self.last_total_cost = total_cost
+        self.add_part_to_list(part_id, specs['quantity'])
 
-            input_data = (f"Part Type: {part_type}, Part ID: {part_id}, Revision: {revision}, Material: {material}, "
-                          f"Thickness: {thickness}, Length: {length}, Width: {width}, Quantity: {quantity}, "
-                          f"Sub-Parts: {sub_parts}, Weldment: {weldment_indicator}, Top-Level Assembly: {top_level_assembly}, "
-                          f"Fasteners: {fastener_types_and_counts}, Work Centres: {work_centres}")
-
-            if not work_centres:
-                output = "At least one WorkCentre operation must be selected"
-                self.show_message("Error", output, 'error')
-                log_test_result(
-                    test_case="FR2: No WorkCentre operations selected",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-
-            if part_type == "Assembly":
-                if not sub_parts:
-                    output = "At least one sub-part must be selected for an assembly"
-                    self.show_message("Error", output, 'error')
-                    log_test_result(
-                        test_case="FR2: Assembly with no sub-parts",
-                        input_data=input_data,
-                        output=output,
-                        pass_fail="Fail"
-                    )
-                    return
-
-            expected_prefix = "PART-" if part_type == "Single Part" else "ASSY-"
-            if not part_id.startswith(expected_prefix) or not re.match(rf"^{expected_prefix}[A-Za-z0-9]{{5,15}}$", part_id):
-                output = f"Part ID must be {expected_prefix}[5-15 alphanumeric]"
-                self.show_message("Error", output, 'error')
-                log_test_result(
-                    test_case="FR2: Invalid part ID",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-
-            if part_type == "Single Part":
-                normalized_material = material.lower()
-                valid_materials = ['mild steel', 'aluminium', 'stainless steel']
-                if normalized_material not in valid_materials:
-                    output = "Material must be 'Mild Steel', 'Aluminium', or 'Stainless Steel'"
-                    self.show_message("Error", output, 'error')
-                    log_test_result(
-                        test_case="FR2: Invalid material",
-                        input_data=input_data,
-                        output=output,
-                        pass_fail="Fail"
-                    )
-                    return
-                # Map material to rate key for calculator
-                material_rate_map = {
-                    'mild steel': 'mild_steel_rate',
-                    'aluminium': 'aluminium_rate',
-                    'stainless steel': 'stainless_steel_rate'
-                }
-                material_for_rates = material_rate_map[normalized_material]
-            else:
-                material_for_rates = 'N/A'
-
-            if part_type == "Assembly" and quantity <= 0:
-                output = "Quantity must be a positive integer"
-                self.show_message("Error", output, 'error')
-                log_test_result(
-                    test_case="FR2: Invalid quantity",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-
-            if part_type == "Assembly":
-                existing_parts = load_existing_parts()
-                for sub_part in sub_parts:
-                    if sub_part not in existing_parts:
-                        output = f"Sub-part {sub_part} does not exist in the system"
-                        self.show_message("Error", output, 'error')
-                        log_test_result(
-                            test_case="FR2: Invalid sub-part",
-                            input_data=input_data,
-                            output=output,
-                            pass_fail="Fail"
-                        )
-                        return
-
-            if fastener_types_and_counts:
-                for f_type, f_count in fastener_types_and_counts:
-                    if f_count > 100:
-                        output = f"Fastener count for {f_type} must be 0-100"
-                        self.show_message("Error", output, 'error')
-                        log_test_result(
-                            test_case="FR2.10: Invalid fastener count",
-                            input_data=input_data,
-                            output=output,
-                            pass_fail="Fail"
-                        )
-                        return
-
-            # Calculate catalogue cost for single parts
-            catalogue_cost = 0.0
-            if part_type == "Single Part":
-                catalogue = load_parts_catalogue()
-                for item in sub_parts:
-                    item_id = item.split(':')[0].strip()
-                    for cat_id, _, price in catalogue:
-                        if item_id == cat_id:
-                            catalogue_cost += price
-                            break
-
-            part_specs = {
-                'part_type': part_type,
-                'part_id': part_id,
-                'revision': revision,
-                'material': material_for_rates,
-                'thickness': thickness,
-                'length': length,
-                'width': width,
-                'quantity': quantity,
-                'sub_parts': sub_parts,
-                'top_level_assembly': top_level_assembly,
-                'weldment_indicator': weldment_indicator,
-                'catalogue_cost': catalogue_cost,
-                'work_centres': work_centres,
-                'fastener_types_and_counts': fastener_types_and_counts
-            }
-
-            rates = self.file_handler.load_rates('rates_global.txt')
-            if not rates:
-                output = "Failed to load rates from data/rates_global.txt"
-                self.show_message("Error", output, 'error')
-                log_test_result(
-                    test_case="FR3: Cost calculation with missing rates",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-
-            total_cost = calculate_cost(part_specs, rates)
-            if total_cost == 0.0:
-                output = "Cost calculation failed, check inputs or rates"
-                self.show_message("Error", output, 'error')
-                log_test_result(
-                    test_case="FR3-FR4: Cost calculation failure",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-
-            self.file_handler.save_output(part_id, revision, material, thickness, length, width, quantity, total_cost, fastener_types_and_counts, work_centres)
-            self.parts_list.append({
-                'part_id': part_id,
-                'total_cost': total_cost,
-                'specs': part_specs
-            })
-            self.update_parts_listbox()
-            output = f"Part {part_id} added: £{total_cost}"
-            self.show_message("Success", output, 'info')
-            log_test_result(
-                test_case="FR3-FR4-FR5: Cost calculation and output storage",
-                input_data=input_data,
-                output=output,
-                pass_fail="Pass"
-            )
-            self.submit_button.config(state='normal')
-            self.add_another_part_button.config(state='normal')
-            self.last_part_id = part_id
-            self.last_total_cost = total_cost
-        except ValueError:
-            output = "Invalid input: Quantity must be valid"
-            self.show_message("Error", output, 'error')
-            log_test_result(
-                test_case="FR2: Invalid numeric input",
-                input_data=input_data,
-                output=output,
-                pass_fail="Fail"
-            )
-        except Exception as e:
-            output = f"Unexpected error: {e}"
-            self.show_message("Error", output, 'error')
-            log_test_result(
-                test_case="FR2-FR3-FR4: Unexpected error",
-                input_data=input_data,
-                output=output,
-                pass_fail="Fail"
-            )
-
-    def create_quote_screen(self, parts_list):
-        """
-        Create the quote generation screen for multiple parts (FR7).
-        """
-        logging.info("Creating quote screen")
+    def create_quote_screen(self):
+        logger.info("Creating quote screen")
         self.clear_screen()
-        main_frame = tk.Frame(self.root)
-        main_frame.place(relx=0.5, rely=0.5, anchor="center")
-        tk.Label(main_frame, text="Generate Quote", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
+        self._create_header(self.root, "Generate Quote")
+        main_frame = self._create_panel(self.root)
+        self.customer_entry = self.create_widget_pair(main_frame, "Customer Name:", tk.Entry, row=0)
+        self.margin_entry = self.create_widget_pair(main_frame, "Profit Margin (%):", tk.Entry, row=1)
+        self._create_styled_button(main_frame, "Generate Quote", self.generate_quote).grid(row=2, column=0, columnspan=2, pady=10)
 
-        # Display parts list
-        total_cost = sum(part['total_cost'] for part in parts_list)
-        parts_display = "\n".join(f"{part['part_id']}: £{part['total_cost']}" for part in parts_list)
-        tk.Label(main_frame, text=f"Parts in Quote:\n{parts_display}\nTotal Cost: £{total_cost}", font=("Arial", 12), justify="left").grid(row=1, column=0, columnspan=2, pady=5)
+        table_frame = tk.Frame(main_frame, bg="#e8ecef")
+        table_frame.grid(row=3, column=0, columnspan=2, padx=10, pady=(10, 20), sticky="ew")
+        tk.Label(table_frame, text="Parts Summary", font=("Arial", 12, "bold"), bg="#e8ecef").pack(pady=(0, 5))
 
-        tk.Label(main_frame, text="Customer Name:", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
-        self.customer_entry = tk.Entry(main_frame, font=("Arial", 12))
-        self.customer_entry.grid(row=2, column=1, padx=10, pady=5)
-        tk.Label(main_frame, text="Profit Margin (%):", font=("Arial", 12)).grid(row=3, column=0, padx=10, pady=5, sticky="e")
-        self.margin_entry = tk.Entry(main_frame, font=("Arial", 12))
-        self.margin_entry.grid(row=3, column=1, padx=10, pady=5)
-        tk.Button(main_frame, text="Generate Quote", command=lambda: self.generate_quote(parts_list), font=("Arial", 12)).grid(row=4, column=0, columnspan=2, pady=10)
+        style = ttk.Style()
+        style.configure("Quote.Treeview", font=("Arial", 12), rowheight=25)
+        style.configure("Quote.Treeview.Heading", font=("Arial", 12, "bold"))
 
+        columns = ("Part ID", "Quantity", "Unit Cost", "Total Cost")
+        tree = ttk.Treeview(table_frame, columns=columns, show="headings", style="Quote.Treeview", height=10)
+        for col in columns:
+            tree.heading(col, text=col)
+        tree.column("Part ID", width=200, anchor="w")
+        tree.column("Quantity", width=100, anchor="center")
+        tree.column("Unit Cost", width=150, anchor="e")
+        tree.column("Total Cost", width=150, anchor="e")
+        tree.pack(fill=tk.BOTH, expand=True)
+
+        scrollbar = ttk.Scrollbar(table_frame, orient=tk.VERTICAL, command=tree.yview)
+        tree.configure(yscrollcommand=scrollbar.set)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        total_sum = 0.0
+        for part in self.added_parts:
+            part_id = part['part_id']
+            quantity = part['quantity']
+            unit_cost = load_part_cost(part_id)
+            if unit_cost is None:
+                raise ValueError(f"Cost not found for part {part_id}")
+            total_cost = unit_cost * quantity
+            total_sum += total_cost
+            tree.insert("", tk.END, values=(part_id, quantity, f"{unit_cost:.2f}", f"{total_cost:.2f}"))
+
+        tk.Label(table_frame, text=f"Total: £{total_sum:.2f}", font=("Arial", 12, "bold"), bg="#e8ecef").pack(pady=(5, 0))
         self.create_footer()
 
-    def generate_quote(self, parts_list):
-        """
-        Generate and save a quote for multiple parts (FR7).
-        """
-        logging.info("Generating quote")
-        try:
-            customer_name = self.customer_entry.get().strip()
-            profit_margin = self.margin_entry.get().strip()
-            total_cost = sum(part['total_cost'] for part in parts_list)
-            part_ids = [part['part_id'] for part in parts_list]
-            input_data = f"Customer Name: {customer_name}, Profit Margin: {profit_margin}%, Parts: {part_ids}"
-
-            if not customer_name:
-                output = "Customer name cannot be empty"
-                self.show_message("Error", output, 'error')
-                log_test_result(
-                    test_case="FR7: Quote with empty customer name",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-
-            profit_margin = float(profit_margin)
-            if profit_margin < 0:
-                output = "Profit margin cannot be negative"
-                self.show_message("Error", output, 'error')
-                log_test_result(
-                    test_case="FR7: Quote with negative margin",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-
-            # Aggregate fastener types and counts across parts
-            fastener_types_and_counts = {}
-            for part in parts_list:
-                for f_type, f_count in part['specs'].get('fastener_types_and_counts', []):
-                    fastener_types_and_counts[f_type] = fastener_types_and_counts.get(f_type, 0) + f_count
-            fastener_list = [(f_type, count) for f_type, count in fastener_types_and_counts.items()]
-
-            # Save quote for each part
-            for part in parts_list:
-                self.file_handler.save_quote(part['part_id'], part['total_cost'], customer_name, profit_margin, fastener_list)
-
-            output = f"Quote generated for {len(parts_list)} parts and saved to data/quotes.txt"
-            self.show_message("Success", output, 'info')
-            log_test_result(
-                test_case="FR7: Generate quote",
-                input_data=input_data,
-                output=output,
-                pass_fail="Pass"
-            )
-            self.parts_list = []  # Clear parts list after quote
-            self.create_part_input_screen()
-        except ValueError:
-            output = "Invalid profit margin: please enter a numeric value"
-            self.show_message("Error", output, 'error')
-            log_test_result(
-                test_case="FR7: Quote with invalid margin",
-                input_data=input_data,
-                output=output,
-                pass_fail="Fail"
-            )
-        except Exception as e:
-            output = f"Unexpected error: {e}"
-            self.show_message("Error", output, 'error')
-            log_test_result(
-                test_case="FR7: Unexpected error",
-                input_data=input_data,
-                output=output,
-                pass_fail="Fail"
-            )
+    @handle_errors("FR7: Generate quote", lambda self: f"Customer: {getattr(self, 'customer_entry', {'get': lambda: ''}).get().strip()}")
+    def generate_quote(self):
+        logger.info("Generating quote")
+        customer_name = self.customer_entry.get().strip()
+        profit_margin = self.margin_entry.get().strip()
+        generate_quote(customer_name, profit_margin, self.added_parts, self.file_handler, self.show_message)
+        self.root.update()
+        self.create_part_input_screen()
+        self.clear_parts_list()
 
     def create_admin_screen(self):
-        """
-        Create the admin screen for updating rates (FR6).
-        """
-        logging.info("Creating admin settings screen")
+        logger.info("Creating admin screen")
         self.clear_screen()
-        main_frame = tk.Frame(self.root)
-        main_frame.place(relx=0.5, rely=0.5, anchor="center")
-        tk.Label(main_frame, text="Admin Settings", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
-        tk.Label(main_frame, text="Rate Key (e.g., mild_steel_rate):", font=("Arial", 12)).grid(row=1, column=0, padx=10, pady=5, sticky="e")
-        self.rate_key_entry = tk.Entry(main_frame, font=("Arial", 12))
-        self.rate_key_entry.grid(row=1, column=1, padx=10, pady=5)
-        tk.Label(main_frame, text="Rate Value (GBP):", font=("Arial", 12)).grid(row=2, column=0, padx=10, pady=5, sticky="e")
-        self.rate_value_entry = tk.Entry(main_frame, font=("Arial", 12))
-        self.rate_value_entry.grid(row=2, column=1, padx=10, pady=5)
-        tk.Button(main_frame, text="Update Rate", command=self.update_rate, font=("Arial", 12)).grid(row=3, column=0, pady=10)
-        tk.Button(main_frame, text="User Features", command=self.create_part_input_screen, font=("Arial", 12)).grid(row=3, column=1, pady=10)
+        self._create_header(self.root, "Admin Settings")
+        main_frame = self._create_panel(self.root)
+        main_frame.grid_columnconfigure(0, weight=1)
+        main_frame.grid_columnconfigure(1, weight=1)
+        main_frame.grid_rowconfigure(0, weight=1)
 
+        # Rate Management
+        rate_frame = tk.Frame(main_frame, bg="#e8ecef", bd=1, relief=tk.SOLID)
+        rate_frame.grid(row=0, column=0, sticky="nsew", padx=(0, 10), pady=10)
+        tk.Label(rate_frame, text="Rate Management", font=("Arial", 14, "bold"), bg="#e8ecef").grid(row=0, column=0, columnspan=3, sticky="w", padx=10, pady=(10, 5))
+
+        self.rate_key_var = tk.StringVar(value="Select Rate Key")
+        try:
+            rates = self.file_handler.load_rates()
+            rate_keys = list(rates.keys())
+        except ValueError as e:
+            self.show_message("Error", f"Failed to load rates: {str(e)}", 'error')
+            rate_keys = []
+            logger.error(f"Rate load error: {e}")
+        rate_key_dropdown = self.create_widget_pair(rate_frame, "Rate Key:", tk.OptionMenu, row=1, col=0, options=["Select Rate Key"] + rate_keys, textvariable=self.rate_key_var)
+        self._create_styled_button(rate_frame, "Update Rate", self.update_rate).grid(row=1, column=2, padx=5, pady=5)
+
+        self.rate_value_var = tk.StringVar()
+        self.rate_sub_value_var = tk.StringVar()
+        self.rate_value_frame = tk.Frame(rate_frame, bg="#e8ecef")
+        self.rate_value_frame.grid(row=2, column=0, columnspan=3, sticky="ew", padx=10, pady=5)
+
+        def update_rate_fields(*args):
+            logger.debug("Updating rate fields")
+            for widget in self.rate_value_frame.winfo_children():
+                widget.destroy()
+            rate_key = self.rate_key_var.get()
+            if rate_key not in rates:
+                return
+            config = rates[rate_key]
+            rate_type = config.get('type', 'simple')
+            unit = config.get('unit', '£/unit')
+            self.create_widget_pair(self.rate_value_frame, f"Rate Value ({unit}):", tk.Entry, row=0, col=0, textvariable=self.rate_value_var)
+            if rate_type == 'hourly' and 'sub_field' in config:
+                self.create_widget_pair(self.rate_value_frame, f"{config['sub_field']}:", tk.Entry, row=1, col=0, textvariable=self.rate_sub_value_var)
+
+        self.rate_key_var.trace("w", update_rate_fields)
+        update_rate_fields()
+
+        # User Management
+        user_frame = tk.Frame(main_frame, bg="#e8ecef", bd=1, relief=tk.SOLID)
+        user_frame.grid(row=0, column=1, sticky="nsew", padx=(10, 0), pady=10)
+        tk.Label(user_frame, text="User Management", font=("Arial", 14, "bold"), bg="#e8ecef").grid(row=0, column=0, columnspan=3, sticky="w", padx=10, pady=(10, 5))
+
+        self.new_username_var = tk.StringVar()
+        self.new_password_var = tk.StringVar()
+        self.new_role_var = tk.StringVar(value="User")
+        self.create_widget_pair(user_frame, "Role:", tk.OptionMenu, row=1, col=0, options=["User", "Admin"], textvariable=self.new_role_var)
+        self.create_widget_pair(user_frame, "New Username:", tk.Entry, row=2, col=0, textvariable=self.new_username_var)
+        self.create_widget_pair(user_frame, "New Password:", tk.Entry, row=3, col=0, textvariable=self.new_password_var).config(show="*")
+        self._create_styled_button(user_frame, "Create User", self.create_user).grid(row=1, column=2, padx=5, pady=5)
+
+        self.edit_username_var = tk.StringVar(value="Select User")
+        users = self.file_handler.get_all_usernames()
+        self.edit_user_dropdown = self.create_widget_pair(user_frame, "Edit User:", tk.OptionMenu, row=4, col=0, options=["Select User"] + users, textvariable=self.edit_username_var)
+        self._create_styled_button(user_frame, "Edit User", self.edit_user, style='edit').grid(row=4, column=2, padx=5, pady=5)
+
+        self.remove_username_var = tk.StringVar(value="Select User")
+        self.remove_user_dropdown = self.create_widget_pair(user_frame, "Remove User:", tk.OptionMenu, row=5, col=0, options=["Select User"] + users, textvariable=self.remove_username_var)
+        self._create_styled_button(user_frame, "Remove User", self.remove_user, style='destructive').grid(row=5, column=2, padx=5, pady=5)
+
+        def update_user_dropdowns(*args):
+            logger.debug("Updating user dropdowns")
+            users = self.file_handler.get_all_usernames()
+            for var, dropdown in [(self.edit_username_var, self.edit_user_dropdown), (self.remove_username_var, self.remove_user_dropdown)]:
+                var.set("Select User")
+                menu = dropdown['menu']
+                menu.delete(0, tk.END)
+                menu.add_command(label="Select User", command=lambda v=var: v.set("Select User"))
+                for user in users:
+                    menu.add_command(label=user, command=lambda u=user, v=var: v.set(u))
+
+        self.new_username_var.trace("w", update_user_dropdowns)
+        nav_frame = tk.Frame(self.root, bg="#e8ecef")
+        nav_frame.pack(side=tk.BOTTOM, fill=tk.X, padx=10, pady=5)
+        self._create_styled_button(nav_frame, "User Features", self.create_part_input_screen, style='navigation').pack(side=tk.LEFT, padx=10)
+        self._create_styled_button(nav_frame, "Back to Login", self.go_back_to_login, style='navigation').pack(side=tk.LEFT, padx=10)
         self.create_footer()
 
+    @handle_errors("Create User", lambda self: f"Username: {self.new_username_var.get().strip()}")
+    def create_user(self):
+        logger.info("Creating user")
+        username = self.new_username_var.get().strip()
+        password = self.new_password_var.get().strip()
+        role = self.new_role_var.get()
+        create_user(username, password, role, self.file_handler, self.show_message)
+        self.new_username_var.set("")
+        self.new_password_var.set("")
+        self.new_role_var.set("User")
+
+    @handle_errors("Remove User", lambda self: f"Username: {self.remove_username_var.get().strip()}")
+    def remove_user(self):
+        logger.info("Removing user")
+        username = self.remove_username_var.get().strip()
+        remove_user(username, self.file_handler, self.show_message)
+        self.remove_username_var.set("Select User")
+
+    @handle_errors("FR6: Update rate", lambda self: f"Rate Key: {self.rate_key_var.get()}")
     def update_rate(self):
-        """
-        Update a rate in data/rates_global.txt (FR6).
-        """
-        logging.info("Updating rate")
-        try:
-            rate_key = self.rate_key_entry.get().strip()
-            rate_value = self.rate_value_entry.get().strip()
-            input_data = f"Rate Key: {rate_key}, Rate Value: {rate_value}"
+        logger.info("Updating rate")
+        rate_key = self.rate_key_var.get()
+        rate_value = self.rate_value_var.get().strip()
+        sub_value = self.rate_sub_value_var.get().strip()
+        update_rate(rate_key, rate_value, sub_value, self.file_handler, self.show_message)
+        self.rate_value_var.set("")
+        self.rate_sub_value_var.set("")
 
-            if not rate_key:
-                output = "Rate key cannot be empty"
-                self.show_message("Error", output, 'error')
-                log_test_result(
-                    test_case="FR6: Update rate with empty key",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-
-            rate_value = float(rate_value)
-            if rate_value < 0:
-                output = "Rate value cannot be negative"
-                self.show_message("Error", output, 'error')
-                log_test_result(
-                    test_case="FR6: Update rate with negative value",
-                    input_data=input_data,
-                    output=output,
-                    pass_fail="Fail"
-                )
-                return
-
-            self.file_handler.update_rates(rate_key, rate_value)
-            output = f"Rate '{rate_key}' updated to {rate_value} in data/rates_global.txt"
-            self.show_message("Success", output, 'info')
-            log_test_result(
-                test_case="FR6: Update rate",
-                input_data=input_data,
-                output=output,
-                pass_fail="Pass"
-            )
-        except ValueError:
-            output = "Invalid rate value: please enter a numeric value"
-            self.show_message("Error", output, 'error')
-            log_test_result(
-                test_case="FR6: Update rate with invalid value",
-                input_data=input_data,
-                output=output,
-                pass_fail="Fail"
-            )
-        except Exception as e:
-            output = f"Unexpected error: {e}"
-            self.show_message("Error", output, 'error')
-            log_test_result(
-                test_case="FR6: Unexpected error",
-                input_data=input_data,
-                output=output,
-                pass_fail="Fail"
-            )
+    @handle_errors("Edit User", lambda self: f"Username: {self.edit_username_var.get().strip()}")
+    def edit_user(self):
+        logger.info("Attempting to edit user")
+        username = self.edit_username_var.get().strip()
+        if username == "Select User":
+            self.show_message("Error", "Select a user to edit", 'error')
+            logger.error("No user selected")
+            return
+        self.show_message("Info", f"Edit user for {username} not implemented", 'info')
+        self.edit_username_var.set("Select User")
 
     def clear_screen(self):
-        """
-        Clear all widgets from the current screen.
-        """
-        logging.debug("Clearing screen")
+        logger.debug("Clearing screen")
         for widget in self.root.winfo_children():
-            widget.destroy()
-
-if __name__ == "__main__":
-    try:
-        root = tk.Tk()
-        app = SheetMetalClientHub(root)
-        root.mainloop()
-    except Exception as e:
-        logging.error(f"Error starting GUI: {e}")
-        log_test_result(
-            test_case="GUI Initialization",
-            input_data="None",
-            output=f"Error starting GUI: {e}",
-            pass_fail="Fail"
-        )
+            try:
+                widget.destroy()
+            except tk.TclError as e:
+                logger.warning(f"Error destroying widget: {e}")
+        for attr in ['parts_list_listbox', 'submit_button']:
+            if hasattr(self, attr):
+                delattr(self, attr)

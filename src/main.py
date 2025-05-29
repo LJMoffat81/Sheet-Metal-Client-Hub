@@ -1,40 +1,30 @@
-import sys
-import os
 import tkinter as tk
+from gui import SheetMetalClientHub
+from logging_config import setup_logger
+import platform
+import sys
 import logging
 
-# Add the parent directory (src/) to the Python path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 # Set up logging
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LOG_DIR = os.path.join(BASE_DIR, 'data', 'log')
-os.makedirs(LOG_DIR, exist_ok=True)
-logging.basicConfig(
-    filename=os.path.join(LOG_DIR, 'main.log'),
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+logger = setup_logger('main', 'main.log')
 
-try:
-    from gui import SheetMetalClientHub
-except ImportError as e:
-    logging.error(f"Failed to import SheetMetalClientHub: {e}")
-    print(f"Error: Failed to import SheetMetalClientHub: {e}")
-    sys.exit(1)
-
-def main():
-    """Launch the Sheet Metal Client Hub GUI."""
-    logging.info("Starting Sheet Metal Client Hub application")
+if __name__ == "__main__":
     try:
+        logger.info("Starting Sheet Metal Client Hub application")
+        logger.info(f"Python version: {sys.version}")
+        logger.info(f"Platform: {platform.platform()}")
         root = tk.Tk()
         app = SheetMetalClientHub(root)
         root.mainloop()
-        logging.info("Application closed successfully")
+    except TypeError as e:
+        logger.error(f"Constructor error in SheetMetalClientHub: {e}")
+        logger.debug(f"Check gui.py SheetMetalClientHub.__init__ signature. Ensure it accepts 'root' parameter.")
+    except AttributeError as e:
+        logger.error(f"Missing method in SheetMetalClientHub: {e}")
+        logger.debug(f"Verify gui.py contains all required methods (e.g., create_login_screen)")
+    except tk.TclError as e:
+        logger.error(f"Tkinter error starting GUI: {e}")
     except Exception as e:
-        logging.error(f"Error launching GUI: {e}")
-        print(f"Error launching GUI: {e}")
-        sys.exit(1)
-
-if __name__ == "__main__":
-    main()
+        logger.error(f"Unexpected error starting GUI: {e}")
+    finally:
+        logger.info("Application closed")

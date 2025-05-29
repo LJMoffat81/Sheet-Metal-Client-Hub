@@ -1,0 +1,1557 @@
+2025-05-28 20:53:39,036 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 20:53:39,097 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 20:53:39,098 - INFO - calculator logging initialized
+2025-05-28 20:53:39,134 - INFO - file_handler logging initialized
+2025-05-28 20:53:39,135 - INFO - logger logging initialized
+2025-05-28 20:53:39,173 - INFO - logic logging initialized
+2025-05-28 20:53:39,174 - INFO - gui logging initialized
+2025-05-28 20:53:39,174 - DEBUG - TESTING_MODE: False
+2025-05-28 20:53:39,501 - INFO - Initializing SheetMetalClientHub
+2025-05-28 20:53:39,553 - INFO - Creating login screen
+2025-05-28 20:53:39,554 - DEBUG - Clearing screen
+2025-05-28 20:53:39,648 - DEBUG - Loaded laser_gear.png
+2025-05-28 20:53:39,650 - DEBUG - Creating footer
+2025-05-28 20:53:39,651 - INFO - Attempting login
+2025-05-28 20:53:39,658 - INFO - Login successful as User
+2025-05-28 20:53:39,658 - INFO - Creating part input screen
+2025-05-28 20:53:39,658 - DEBUG - Clearing screen
+2025-05-28 20:53:39,686 - DEBUG - Loaded laser_gear.png
+2025-05-28 20:53:39,706 - DEBUG - Creating footer
+2025-05-28 20:53:39,706 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 20:53:39,714 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 20:53:39,720 - DEBUG - Updated parts list display
+2025-05-28 20:53:39,720 - DEBUG - Show message: Success
+2025-05-28 20:53:39,729 - DEBUG - Tab changed
+2025-05-28 20:53:39,729 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 20:53:39,731 - DEBUG - Updating selected items: tab 0
+2025-05-28 20:53:42,029 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 21:04:54,028 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 21:04:54,079 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:04:54,081 - INFO - calculator logging initialized
+2025-05-28 21:04:54,099 - INFO - file_handler logging initialized
+2025-05-28 21:04:54,102 - INFO - logger logging initialized
+2025-05-28 21:04:54,116 - INFO - logic logging initialized
+2025-05-28 21:04:54,117 - INFO - gui logging initialized
+2025-05-28 21:04:54,117 - DEBUG - TESTING_MODE: False
+2025-05-28 21:04:54,178 - INFO - Initializing SheetMetalClientHub
+2025-05-28 21:04:54,219 - INFO - Creating login screen
+2025-05-28 21:04:54,219 - DEBUG - Clearing screen
+2025-05-28 21:04:54,257 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:04:54,259 - DEBUG - Creating footer
+2025-05-28 21:04:54,259 - INFO - Attempting login
+2025-05-28 21:04:54,260 - INFO - Login successful as User
+2025-05-28 21:04:54,260 - INFO - Creating part input screen
+2025-05-28 21:04:54,260 - DEBUG - Clearing screen
+2025-05-28 21:04:54,288 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:04:54,309 - DEBUG - Creating footer
+2025-05-28 21:04:54,310 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:04:54,310 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 21:04:54,311 - DEBUG - Updated parts list display
+2025-05-28 21:04:54,311 - DEBUG - Show message: Success
+2025-05-28 21:04:54,320 - DEBUG - Tab changed
+2025-05-28 21:04:54,320 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:04:54,321 - DEBUG - Updating selected items: tab 0
+2025-05-28 21:04:56,031 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 21:04:56,209 - INFO - Calculating and saving part specifications
+2025-05-28 21:04:56,222 - ERROR - Error running tests or updating log: 'TextTestResult' object has no attribute 'passed'
+2025-05-28 21:09:31,402 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 21:09:31,453 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:09:31,454 - WARNING - Could not load test_file_handler.py: No module named 'tests.test_file_handler'
+2025-05-28 21:09:31,454 - WARNING - Could not load test_system.py: No module named 'tests.test_system'
+2025-05-28 21:09:31,455 - INFO - calculator logging initialized
+2025-05-28 21:09:31,455 - INFO - Calculating cost for part PART-101
+2025-05-28 21:09:31,455 - ERROR - Error calculating cost for PART-101: 'part_type'
+2025-05-28 21:09:31,462 - INFO - file_handler logging initialized
+2025-05-28 21:09:31,466 - INFO - logger logging initialized
+2025-05-28 21:09:31,479 - INFO - logic logging initialized
+2025-05-28 21:09:31,479 - INFO - gui logging initialized
+2025-05-28 21:09:31,479 - DEBUG - TESTING_MODE: False
+2025-05-28 21:09:31,540 - INFO - Initializing SheetMetalClientHub
+2025-05-28 21:09:31,578 - INFO - Creating login screen
+2025-05-28 21:09:31,578 - DEBUG - Clearing screen
+2025-05-28 21:09:31,616 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:09:31,617 - DEBUG - Creating footer
+2025-05-28 21:09:31,618 - INFO - Attempting login
+2025-05-28 21:09:31,619 - INFO - Login successful as User
+2025-05-28 21:09:31,619 - INFO - Creating part input screen
+2025-05-28 21:09:31,619 - DEBUG - Clearing screen
+2025-05-28 21:09:31,646 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:09:31,665 - DEBUG - Creating footer
+2025-05-28 21:09:31,666 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:09:31,666 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 21:09:31,667 - DEBUG - Updated parts list display
+2025-05-28 21:09:31,667 - DEBUG - Show message: Success
+2025-05-28 21:09:31,677 - DEBUG - Tab changed
+2025-05-28 21:09:31,677 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:09:31,679 - DEBUG - Updating selected items: tab 0
+2025-05-28 21:09:34,324 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 21:09:34,499 - INFO - Calculating and saving part specifications
+2025-05-28 21:09:34,501 - ERROR - Error running tests or updating log: 'TextTestResult' object has no attribute 'passed'
+2025-05-28 21:14:38,264 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 21:14:38,316 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:14:38,318 - INFO - calculator logging initialized
+2025-05-28 21:14:38,318 - INFO - Calculating cost for part PART-101
+2025-05-28 21:14:38,318 - ERROR - Error calculating cost for PART-101: 'quantity'
+2025-05-28 21:14:38,325 - INFO - file_handler logging initialized
+2025-05-28 21:14:38,329 - INFO - logger logging initialized
+2025-05-28 21:14:38,342 - INFO - logic logging initialized
+2025-05-28 21:14:38,343 - INFO - gui logging initialized
+2025-05-28 21:14:38,343 - DEBUG - TESTING_MODE: False
+2025-05-28 21:14:38,404 - INFO - Initializing SheetMetalClientHub
+2025-05-28 21:14:38,443 - INFO - Creating login screen
+2025-05-28 21:14:38,444 - DEBUG - Clearing screen
+2025-05-28 21:14:38,481 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:14:38,482 - DEBUG - Creating footer
+2025-05-28 21:14:38,483 - INFO - Attempting login
+2025-05-28 21:14:38,484 - INFO - Login successful as User
+2025-05-28 21:14:38,484 - INFO - Creating part input screen
+2025-05-28 21:14:38,484 - DEBUG - Clearing screen
+2025-05-28 21:14:38,513 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:14:38,532 - DEBUG - Creating footer
+2025-05-28 21:14:38,533 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:14:38,534 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 21:14:38,534 - DEBUG - Updated parts list display
+2025-05-28 21:14:38,535 - DEBUG - Show message: Success
+2025-05-28 21:14:38,544 - DEBUG - Tab changed
+2025-05-28 21:14:38,545 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:14:38,547 - DEBUG - Updating selected items: tab 0
+2025-05-28 21:14:40,656 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 21:14:40,837 - INFO - Calculating and saving part specifications
+2025-05-28 21:14:40,840 - ERROR - Error running tests or updating log: 'TextTestResult' object has no attribute 'passed'
+2025-05-28 21:19:05,339 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 21:19:05,390 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:19:05,391 - INFO - calculator logging initialized
+2025-05-28 21:19:05,392 - INFO - Calculating cost for part PART-101
+2025-05-28 21:19:05,392 - ERROR - Error calculating cost for PART-101: 'quantity'
+2025-05-28 21:19:05,399 - INFO - file_handler logging initialized
+2025-05-28 21:19:05,402 - INFO - logger logging initialized
+2025-05-28 21:19:05,416 - INFO - logic logging initialized
+2025-05-28 21:19:05,416 - INFO - gui logging initialized
+2025-05-28 21:19:05,417 - DEBUG - TESTING_MODE: False
+2025-05-28 21:19:05,478 - INFO - Initializing SheetMetalClientHub
+2025-05-28 21:19:05,519 - INFO - Creating login screen
+2025-05-28 21:19:05,519 - DEBUG - Clearing screen
+2025-05-28 21:19:05,556 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:19:05,557 - DEBUG - Creating footer
+2025-05-28 21:19:05,558 - INFO - Attempting login
+2025-05-28 21:19:05,559 - INFO - Login successful as User
+2025-05-28 21:19:05,559 - INFO - Creating part input screen
+2025-05-28 21:19:05,559 - DEBUG - Clearing screen
+2025-05-28 21:19:05,587 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:19:05,606 - DEBUG - Creating footer
+2025-05-28 21:19:05,607 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:19:05,608 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 21:19:05,608 - DEBUG - Updated parts list display
+2025-05-28 21:19:05,609 - DEBUG - Show message: Success
+2025-05-28 21:19:05,618 - DEBUG - Tab changed
+2025-05-28 21:19:05,618 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:19:05,619 - DEBUG - Updating selected items: tab 0
+2025-05-28 21:19:07,357 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 21:19:07,536 - INFO - Calculating and saving part specifications
+2025-05-28 21:19:07,539 - ERROR - Error running tests or updating log: 'TextTestResult' object has no attribute 'passed'
+2025-05-28 21:24:39,495 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 21:24:39,549 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:24:39,550 - INFO - calculator logging initialized
+2025-05-28 21:24:39,551 - INFO - Calculating cost for part PART-101
+2025-05-28 21:24:39,551 - DEBUG - Material cost: £0.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 21:24:39,552 - ERROR - Error calculating cost for PART-101: 'float' object has no attribute 'get'
+2025-05-28 21:24:39,558 - INFO - file_handler logging initialized
+2025-05-28 21:24:39,562 - INFO - logger logging initialized
+2025-05-28 21:24:39,576 - INFO - logic logging initialized
+2025-05-28 21:24:39,577 - INFO - gui logging initialized
+2025-05-28 21:24:39,577 - DEBUG - TESTING_MODE: False
+2025-05-28 21:24:39,641 - INFO - Initializing SheetMetalClientHub
+2025-05-28 21:24:39,685 - INFO - Creating login screen
+2025-05-28 21:24:39,686 - DEBUG - Clearing screen
+2025-05-28 21:24:39,726 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:24:39,728 - DEBUG - Creating footer
+2025-05-28 21:24:39,728 - INFO - Attempting login
+2025-05-28 21:24:39,729 - INFO - Login successful as User
+2025-05-28 21:24:39,729 - INFO - Creating part input screen
+2025-05-28 21:24:39,730 - DEBUG - Clearing screen
+2025-05-28 21:24:39,758 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:24:39,778 - DEBUG - Creating footer
+2025-05-28 21:24:39,779 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:24:39,780 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 21:24:39,781 - DEBUG - Updated parts list display
+2025-05-28 21:24:39,781 - DEBUG - Show message: Success
+2025-05-28 21:24:39,791 - DEBUG - Tab changed
+2025-05-28 21:24:39,791 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:24:39,792 - DEBUG - Updating selected items: tab 0
+2025-05-28 21:24:41,535 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 21:24:41,710 - INFO - Calculating and saving part specifications
+2025-05-28 21:24:41,713 - ERROR - Error running tests or updating log: 'TextTestResult' object has no attribute 'passed'
+2025-05-28 21:28:42,662 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 21:28:42,716 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:28:42,718 - INFO - calculator logging initialized
+2025-05-28 21:28:42,718 - INFO - Calculating cost for part PART-101
+2025-05-28 21:28:42,719 - DEBUG - Material cost: £0.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 21:28:42,719 - ERROR - Error calculating cost for PART-101: 'float' object has no attribute 'get'
+2025-05-28 21:28:42,726 - INFO - file_handler logging initialized
+2025-05-28 21:28:42,730 - INFO - logger logging initialized
+2025-05-28 21:28:42,746 - INFO - logic logging initialized
+2025-05-28 21:28:42,746 - INFO - gui logging initialized
+2025-05-28 21:28:42,747 - DEBUG - TESTING_MODE: False
+2025-05-28 21:28:42,813 - INFO - Initializing SheetMetalClientHub
+2025-05-28 21:28:42,865 - INFO - Creating login screen
+2025-05-28 21:28:42,866 - DEBUG - Clearing screen
+2025-05-28 21:28:42,907 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:28:42,909 - DEBUG - Creating footer
+2025-05-28 21:28:42,910 - INFO - Attempting login
+2025-05-28 21:28:42,911 - INFO - Login successful as User
+2025-05-28 21:28:42,911 - INFO - Creating part input screen
+2025-05-28 21:28:42,912 - DEBUG - Clearing screen
+2025-05-28 21:28:42,941 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:28:42,962 - DEBUG - Creating footer
+2025-05-28 21:28:42,963 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:28:42,965 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 21:28:42,965 - DEBUG - Updated parts list display
+2025-05-28 21:28:42,966 - DEBUG - Show message: Success
+2025-05-28 21:28:42,975 - DEBUG - Tab changed
+2025-05-28 21:28:42,975 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:28:42,976 - DEBUG - Updating selected items: tab 0
+2025-05-28 21:28:44,402 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 21:28:44,578 - INFO - Calculating and saving part specifications
+2025-05-28 21:28:44,581 - ERROR - Error running tests or updating log: 'TextTestResult' object has no attribute 'passed'
+2025-05-28 21:38:30,470 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 21:38:30,524 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:38:30,539 - INFO - calculator logging initialized
+2025-05-28 21:38:30,539 - INFO - Calculating cost for part PART-101
+2025-05-28 21:38:30,540 - DEBUG - Material cost: £0.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 21:38:30,540 - ERROR - Error calculating cost for PART-101: 'float' object has no attribute 'get'
+2025-05-28 21:38:30,570 - INFO - file_handler logging initialized
+2025-05-28 21:38:30,599 - INFO - logger logging initialized
+2025-05-28 21:38:30,618 - INFO - logic logging initialized
+2025-05-28 21:38:30,620 - INFO - gui logging initialized
+2025-05-28 21:38:30,621 - DEBUG - TESTING_MODE: False
+2025-05-28 21:38:30,687 - INFO - Initializing SheetMetalClientHub
+2025-05-28 21:38:30,741 - INFO - Creating login screen
+2025-05-28 21:38:30,741 - DEBUG - Clearing screen
+2025-05-28 21:38:30,781 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:38:30,784 - DEBUG - Creating footer
+2025-05-28 21:38:30,785 - INFO - Attempting login
+2025-05-28 21:38:30,786 - INFO - Login successful as User
+2025-05-28 21:38:30,786 - INFO - Creating part input screen
+2025-05-28 21:38:30,786 - DEBUG - Clearing screen
+2025-05-28 21:38:30,817 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:38:30,837 - DEBUG - Creating footer
+2025-05-28 21:38:30,837 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:38:30,838 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 21:38:30,838 - DEBUG - Updated parts list display
+2025-05-28 21:38:30,839 - DEBUG - Show message: Success
+2025-05-28 21:38:30,848 - DEBUG - Tab changed
+2025-05-28 21:38:30,849 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:38:30,850 - DEBUG - Updating selected items: tab 0
+2025-05-28 21:38:32,677 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 21:38:32,855 - INFO - Calculating and saving part specifications
+2025-05-28 21:38:32,888 - ERROR - Error reading log file C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log\gui.log: 'utf-8' codec can't decode byte 0xa3 in position 60738: invalid start byte
+2025-05-28 21:38:32,889 - ERROR - Error reading log file C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log\gui.log: 'utf-8' codec can't decode byte 0xa3 in position 60738: invalid start byte
+2025-05-28 21:38:32,905 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:40:38,307 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 21:40:38,358 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:40:38,359 - INFO - calculator logging initialized
+2025-05-28 21:40:38,360 - INFO - Calculating cost for part PART-101
+2025-05-28 21:40:38,360 - DEBUG - Material cost: £0.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 21:40:38,361 - ERROR - Error calculating cost for PART-101: 'float' object has no attribute 'get'
+2025-05-28 21:40:38,368 - INFO - file_handler logging initialized
+2025-05-28 21:40:38,371 - INFO - logger logging initialized
+2025-05-28 21:40:38,385 - INFO - logic logging initialized
+2025-05-28 21:40:38,385 - INFO - gui logging initialized
+2025-05-28 21:40:38,385 - DEBUG - TESTING_MODE: False
+2025-05-28 21:40:38,447 - INFO - Initializing SheetMetalClientHub
+2025-05-28 21:40:38,487 - INFO - Creating login screen
+2025-05-28 21:40:38,488 - DEBUG - Clearing screen
+2025-05-28 21:40:38,526 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:40:38,527 - DEBUG - Creating footer
+2025-05-28 21:40:38,528 - INFO - Attempting login
+2025-05-28 21:40:38,528 - INFO - Login successful as User
+2025-05-28 21:40:38,529 - INFO - Creating part input screen
+2025-05-28 21:40:38,529 - DEBUG - Clearing screen
+2025-05-28 21:40:38,558 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:40:38,577 - DEBUG - Creating footer
+2025-05-28 21:40:38,578 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:40:38,580 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 21:40:38,580 - DEBUG - Updated parts list display
+2025-05-28 21:40:38,581 - DEBUG - Show message: Success
+2025-05-28 21:40:38,589 - DEBUG - Tab changed
+2025-05-28 21:40:38,590 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:40:38,591 - DEBUG - Updating selected items: tab 0
+2025-05-28 21:40:40,725 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 21:40:40,906 - INFO - Calculating and saving part specifications
+2025-05-28 21:40:40,936 - ERROR - Error reading log file C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log\gui.log: 'utf-8' codec can't decode byte 0xa3 in position 60738: invalid start byte
+2025-05-28 21:40:40,937 - ERROR - Error reading log file C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\log\gui.log: 'utf-8' codec can't decode byte 0xa3 in position 60738: invalid start byte
+2025-05-28 21:40:40,954 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:47:20,657 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 21:47:20,709 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:47:20,714 - INFO - calculator logging initialized
+2025-05-28 21:47:20,714 - INFO - Calculating cost for part PART-101
+2025-05-28 21:47:20,715 - DEBUG - Material cost: £0.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 21:47:20,715 - ERROR - Error calculating cost for PART-101: 'float' object has no attribute 'get'
+2025-05-28 21:47:20,728 - INFO - file_handler logging initialized
+2025-05-28 21:47:20,750 - INFO - logger logging initialized
+2025-05-28 21:47:20,767 - INFO - logic logging initialized
+2025-05-28 21:47:20,768 - INFO - gui logging initialized
+2025-05-28 21:47:20,768 - DEBUG - TESTING_MODE: False
+2025-05-28 21:47:20,832 - INFO - Initializing SheetMetalClientHub
+2025-05-28 21:47:20,885 - INFO - Creating login screen
+2025-05-28 21:47:20,885 - DEBUG - Clearing screen
+2025-05-28 21:47:20,924 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:47:20,926 - DEBUG - Creating footer
+2025-05-28 21:47:20,926 - INFO - Attempting login
+2025-05-28 21:47:20,927 - INFO - Login successful as User
+2025-05-28 21:47:20,927 - INFO - Creating part input screen
+2025-05-28 21:47:20,927 - DEBUG - Clearing screen
+2025-05-28 21:47:20,955 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:47:20,974 - DEBUG - Creating footer
+2025-05-28 21:47:20,975 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:47:20,976 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 21:47:20,976 - DEBUG - Updated parts list display
+2025-05-28 21:47:20,977 - DEBUG - Show message: Success
+2025-05-28 21:47:20,985 - DEBUG - Tab changed
+2025-05-28 21:47:20,986 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:47:20,987 - DEBUG - Updating selected items: tab 0
+2025-05-28 21:47:22,563 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 21:47:22,739 - INFO - Calculating and saving part specifications
+2025-05-28 21:47:22,797 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:56:49,314 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 21:56:49,365 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:56:49,369 - INFO - calculator logging initialized
+2025-05-28 21:56:49,369 - INFO - Calculating cost for part PART-101
+2025-05-28 21:56:49,369 - ERROR - Error calculating cost for PART-101: 'quantity'
+2025-05-28 21:56:49,390 - INFO - file_handler logging initialized
+2025-05-28 21:56:49,408 - INFO - logger logging initialized
+2025-05-28 21:56:49,425 - INFO - logic logging initialized
+2025-05-28 21:56:49,425 - INFO - gui logging initialized
+2025-05-28 21:56:49,426 - DEBUG - TESTING_MODE: False
+2025-05-28 21:56:49,487 - INFO - Initializing SheetMetalClientHub
+2025-05-28 21:56:49,529 - INFO - Creating login screen
+2025-05-28 21:56:49,529 - DEBUG - Clearing screen
+2025-05-28 21:56:49,568 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:56:49,569 - DEBUG - Creating footer
+2025-05-28 21:56:49,570 - INFO - Attempting login
+2025-05-28 21:56:49,570 - INFO - Login successful as User
+2025-05-28 21:56:49,571 - INFO - Creating part input screen
+2025-05-28 21:56:49,571 - DEBUG - Clearing screen
+2025-05-28 21:56:49,597 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:56:49,618 - DEBUG - Creating footer
+2025-05-28 21:56:49,618 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:56:49,619 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 21:56:49,620 - DEBUG - Updated parts list display
+2025-05-28 21:56:49,620 - DEBUG - Show message: Success
+2025-05-28 21:56:49,629 - DEBUG - Tab changed
+2025-05-28 21:56:49,629 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:56:49,630 - DEBUG - Updating selected items: tab 0
+2025-05-28 21:56:51,637 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 21:56:51,813 - INFO - Calculating and saving part specifications
+2025-05-28 21:56:51,863 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:59:03,003 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 21:59:03,055 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 21:59:03,056 - INFO - calculator logging initialized
+2025-05-28 21:59:03,057 - INFO - Calculating cost for part PART-101
+2025-05-28 21:59:03,057 - ERROR - Error calculating cost for PART-101: 'quantity'
+2025-05-28 21:59:03,064 - INFO - file_handler logging initialized
+2025-05-28 21:59:03,067 - INFO - logger logging initialized
+2025-05-28 21:59:03,081 - INFO - logic logging initialized
+2025-05-28 21:59:03,081 - INFO - gui logging initialized
+2025-05-28 21:59:03,082 - DEBUG - TESTING_MODE: False
+2025-05-28 21:59:03,143 - INFO - Initializing SheetMetalClientHub
+2025-05-28 21:59:03,183 - INFO - Creating login screen
+2025-05-28 21:59:03,184 - DEBUG - Clearing screen
+2025-05-28 21:59:03,221 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:59:03,222 - DEBUG - Creating footer
+2025-05-28 21:59:03,223 - INFO - Attempting login
+2025-05-28 21:59:03,224 - INFO - Login successful as User
+2025-05-28 21:59:03,224 - INFO - Creating part input screen
+2025-05-28 21:59:03,224 - DEBUG - Clearing screen
+2025-05-28 21:59:03,252 - DEBUG - Loaded laser_gear.png
+2025-05-28 21:59:03,272 - DEBUG - Creating footer
+2025-05-28 21:59:03,272 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:59:03,273 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 21:59:03,274 - DEBUG - Updated parts list display
+2025-05-28 21:59:03,274 - DEBUG - Show message: Success
+2025-05-28 21:59:03,282 - DEBUG - Tab changed
+2025-05-28 21:59:03,282 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 21:59:03,284 - DEBUG - Updating selected items: tab 0
+2025-05-28 21:59:04,890 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 21:59:05,066 - INFO - Calculating and saving part specifications
+2025-05-28 21:59:05,108 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 22:15:25,468 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 22:15:25,521 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 22:15:25,524 - INFO - calculator logging initialized
+2025-05-28 22:15:25,525 - INFO - Calculating cost for part PART-101
+2025-05-28 22:15:25,525 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 22:15:25,525 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-28 22:15:25,526 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-28 22:15:25,526 - INFO - Total cost for PART-101: £750.3
+2025-05-28 22:15:25,537 - INFO - file_handler logging initialized
+2025-05-28 22:15:25,555 - INFO - logger logging initialized
+2025-05-28 22:15:25,571 - INFO - logic logging initialized
+2025-05-28 22:15:25,572 - INFO - gui logging initialized
+2025-05-28 22:15:25,572 - DEBUG - TESTING_MODE: False
+2025-05-28 22:15:25,632 - INFO - Initializing SheetMetalClientHub
+2025-05-28 22:15:25,673 - INFO - Creating login screen
+2025-05-28 22:15:25,674 - DEBUG - Clearing screen
+2025-05-28 22:15:25,711 - DEBUG - Loaded laser_gear.png
+2025-05-28 22:15:25,712 - DEBUG - Creating footer
+2025-05-28 22:15:25,713 - INFO - Attempting login
+2025-05-28 22:15:25,713 - INFO - Login successful as User
+2025-05-28 22:15:25,713 - INFO - Creating part input screen
+2025-05-28 22:15:25,713 - DEBUG - Clearing screen
+2025-05-28 22:15:25,740 - DEBUG - Loaded laser_gear.png
+2025-05-28 22:15:25,760 - DEBUG - Creating footer
+2025-05-28 22:15:25,760 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 22:15:25,761 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 22:15:25,762 - DEBUG - Updated parts list display
+2025-05-28 22:15:25,762 - DEBUG - Show message: Success
+2025-05-28 22:15:25,770 - DEBUG - Tab changed
+2025-05-28 22:15:25,770 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 22:15:25,772 - DEBUG - Updating selected items: tab 0
+2025-05-28 22:15:27,411 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 22:15:27,585 - INFO - Calculating and saving part specifications
+2025-05-28 22:15:27,586 - ERROR - Invalid part ID format: PART-123
+2025-05-28 22:15:27,635 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 22:20:04,233 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 22:20:04,285 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 22:20:04,288 - INFO - calculator logging initialized
+2025-05-28 22:20:04,289 - INFO - Calculating cost for part PART-101
+2025-05-28 22:20:04,289 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 22:20:04,289 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-28 22:20:04,290 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-28 22:20:04,290 - INFO - Total cost for PART-101: £750.3
+2025-05-28 22:20:04,301 - INFO - file_handler logging initialized
+2025-05-28 22:20:04,319 - INFO - logger logging initialized
+2025-05-28 22:20:04,334 - INFO - logic logging initialized
+2025-05-28 22:20:04,335 - INFO - gui logging initialized
+2025-05-28 22:20:04,336 - DEBUG - TESTING_MODE: False
+2025-05-28 22:20:04,396 - INFO - Initializing SheetMetalClientHub
+2025-05-28 22:20:04,437 - INFO - Creating login screen
+2025-05-28 22:20:04,438 - DEBUG - Clearing screen
+2025-05-28 22:20:04,475 - DEBUG - Loaded laser_gear.png
+2025-05-28 22:20:04,476 - DEBUG - Creating footer
+2025-05-28 22:20:04,477 - INFO - Attempting login
+2025-05-28 22:20:04,478 - INFO - Login successful as User
+2025-05-28 22:20:04,478 - INFO - Creating part input screen
+2025-05-28 22:20:04,478 - DEBUG - Clearing screen
+2025-05-28 22:20:04,508 - DEBUG - Loaded laser_gear.png
+2025-05-28 22:20:04,528 - DEBUG - Creating footer
+2025-05-28 22:20:04,529 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 22:20:04,530 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 22:20:04,531 - DEBUG - Updated parts list display
+2025-05-28 22:20:04,531 - DEBUG - Show message: Success
+2025-05-28 22:20:04,540 - DEBUG - Tab changed
+2025-05-28 22:20:04,540 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 22:20:04,542 - DEBUG - Updating selected items: tab 0
+2025-05-28 22:20:06,031 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 22:20:06,208 - INFO - Calculating and saving part specifications
+2025-05-28 22:20:06,209 - INFO - Calculating cost for part PART-12345
+2025-05-28 22:20:06,209 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 22:20:06,210 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-28 22:20:06,210 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-28 22:20:06,210 - INFO - Total cost for PART-12345: £750.3
+2025-05-28 22:20:06,211 - INFO - Part PART-12345 saved with total cost £750.3
+2025-05-28 22:20:06,211 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-12345, Quantity: 1, Output: Part PART-12345 added, Result: Pass
+2025-05-28 22:20:06,212 - DEBUG - Test result logged: Add Part to Parts List - Pass
+2025-05-28 22:20:06,259 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 22:24:19,023 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 22:24:19,074 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 22:24:19,078 - INFO - calculator logging initialized
+2025-05-28 22:24:19,079 - DEBUG - TestCalculator input: {'part_id': 'PART-101', 'part_type': 'Single Part', 'material': 'mild_steel_rate', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-28 22:24:19,079 - INFO - Calculating cost for part PART-101
+2025-05-28 22:24:19,079 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 22:24:19,079 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-28 22:24:19,079 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-28 22:24:19,080 - INFO - Total cost for PART-101: £750.3
+2025-05-28 22:24:19,087 - DEBUG - Password bytes: b'moffat123'
+2025-05-28 22:24:19,087 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-28 22:24:19,091 - INFO - file_handler logging initialized
+2025-05-28 22:24:19,110 - INFO - logger logging initialized
+2025-05-28 22:24:19,127 - INFO - logic logging initialized
+2025-05-28 22:24:19,127 - INFO - gui logging initialized
+2025-05-28 22:24:19,128 - DEBUG - TESTING_MODE: False
+2025-05-28 22:24:19,190 - INFO - Initializing SheetMetalClientHub
+2025-05-28 22:24:19,235 - INFO - Creating login screen
+2025-05-28 22:24:19,235 - DEBUG - Clearing screen
+2025-05-28 22:24:19,248 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-28 22:24:19,248 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-28 22:24:19,248 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-28 22:24:19,273 - DEBUG - Loaded laser_gear.png
+2025-05-28 22:24:19,274 - DEBUG - Creating footer
+2025-05-28 22:24:19,274 - INFO - Attempting login
+2025-05-28 22:24:19,275 - DEBUG - Password bytes: b'moffat123'
+2025-05-28 22:24:19,275 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-28 22:24:19,275 - INFO - Login successful as User
+2025-05-28 22:24:19,275 - INFO - Creating part input screen
+2025-05-28 22:24:19,275 - DEBUG - Clearing screen
+2025-05-28 22:24:19,283 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-28 22:24:19,283 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-28 22:24:19,283 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-28 22:24:19,305 - DEBUG - Loaded laser_gear.png
+2025-05-28 22:24:19,324 - DEBUG - Creating footer
+2025-05-28 22:24:19,325 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 22:24:19,325 - DEBUG - Loaded 35 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-28 22:24:19,325 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 22:24:19,326 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-28 22:24:19,326 - DEBUG - Updated parts list display
+2025-05-28 22:24:19,326 - DEBUG - Show message: Success
+2025-05-28 22:24:19,336 - DEBUG - Tab changed
+2025-05-28 22:24:19,336 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 22:24:19,338 - DEBUG - Loaded 35 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-28 22:24:19,338 - DEBUG - Updating selected items: tab 0
+2025-05-28 22:24:21,324 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 22:24:21,502 - DEBUG - TestLogic input: {'part_type': 'Single Part', 'part_id': 'PART-12345', 'revision': 'A', 'specs': {'material': 'Mild Steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'sub_parts': [], 'fastener_types_and_counts': [], 'top_level_assembly': False, 'weldment_indicator': False}, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-28 22:24:21,502 - INFO - Calculating and saving part specifications
+2025-05-28 22:24:21,503 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-28 22:24:21,503 - INFO - Calculating cost for part PART-12345
+2025-05-28 22:24:21,503 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 22:24:21,503 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-28 22:24:21,503 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-28 22:24:21,503 - INFO - Total cost for PART-12345: £750.3
+2025-05-28 22:24:21,504 - INFO - Part PART-12345 saved with total cost £750.3
+2025-05-28 22:24:21,504 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-12345, Quantity: 1, Output: Part PART-12345 added, Result: Pass
+2025-05-28 22:24:21,504 - DEBUG - Test result logged: Add Part to Parts List - Pass
+2025-05-28 22:24:21,504 - ERROR - Error running tests or updating log: 'NoneType' object has no attribute 'id'
+2025-05-28 22:35:58,583 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 22:35:58,635 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 22:35:58,639 - INFO - calculator logging initialized
+2025-05-28 22:35:58,640 - DEBUG - TestCalculator input: {'part_id': 'PART-101', 'part_type': 'Single Part', 'material': 'mild_steel_rate', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-28 22:35:58,640 - INFO - Calculating cost for part PART-101
+2025-05-28 22:35:58,640 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 22:35:58,640 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-28 22:35:58,641 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-28 22:35:58,641 - INFO - Total cost for PART-101: £750.3
+2025-05-28 22:35:58,648 - DEBUG - Password bytes: b'moffat123'
+2025-05-28 22:35:58,648 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-28 22:35:58,652 - INFO - file_handler logging initialized
+2025-05-28 22:35:58,671 - INFO - logger logging initialized
+2025-05-28 22:35:58,686 - INFO - logic logging initialized
+2025-05-28 22:35:58,687 - INFO - gui logging initialized
+2025-05-28 22:35:58,688 - DEBUG - TESTING_MODE: False
+2025-05-28 22:35:58,748 - INFO - Initializing SheetMetalClientHub
+2025-05-28 22:35:58,787 - INFO - Creating login screen
+2025-05-28 22:35:58,788 - DEBUG - Clearing screen
+2025-05-28 22:35:58,800 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-28 22:35:58,800 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-28 22:35:58,800 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-28 22:35:58,825 - DEBUG - Loaded laser_gear.png
+2025-05-28 22:35:58,826 - DEBUG - Creating footer
+2025-05-28 22:35:58,827 - INFO - Attempting login
+2025-05-28 22:35:58,827 - DEBUG - Password bytes: b'moffat123'
+2025-05-28 22:35:58,827 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-28 22:35:58,828 - INFO - Login successful as User
+2025-05-28 22:35:58,828 - INFO - Creating part input screen
+2025-05-28 22:35:58,828 - DEBUG - Clearing screen
+2025-05-28 22:35:58,836 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-28 22:35:58,836 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-28 22:35:58,836 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-28 22:35:58,856 - DEBUG - Loaded laser_gear.png
+2025-05-28 22:35:58,876 - DEBUG - Creating footer
+2025-05-28 22:35:58,876 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 22:35:58,877 - DEBUG - Loaded 35 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-28 22:35:58,877 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 22:35:58,878 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-28 22:35:58,878 - DEBUG - Updated parts list display
+2025-05-28 22:35:58,878 - DEBUG - Show message: Success
+2025-05-28 22:35:58,886 - DEBUG - Tab changed
+2025-05-28 22:35:58,887 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 22:35:58,888 - DEBUG - Loaded 35 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-28 22:35:58,888 - DEBUG - Updating selected items: tab 0
+2025-05-28 22:36:02,342 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 22:36:02,519 - DEBUG - TestLogic input: {'part_type': 'Single Part', 'part_id': 'PART-12345', 'revision': 'A', 'specs': {'material': 'Mild Steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'sub_parts': [], 'fastener_types_and_counts': [], 'top_level_assembly': False, 'weldment_indicator': False}, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-28 22:36:02,520 - INFO - Calculating and saving part specifications
+2025-05-28 22:36:02,520 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-28 22:36:02,520 - INFO - Calculating cost for part PART-12345
+2025-05-28 22:36:02,520 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 22:36:02,521 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-28 22:36:02,521 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-28 22:36:02,521 - INFO - Total cost for PART-12345: £750.3
+2025-05-28 22:36:02,522 - INFO - Part PART-12345 saved with total cost £750.3
+2025-05-28 22:36:02,522 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-12345, Quantity: 1, Output: Part PART-12345 added, Result: Pass
+2025-05-28 22:36:02,522 - DEBUG - Test result logged: Add Part to Parts List - Pass
+2025-05-28 22:36:02,522 - DEBUG - Test suite contents: []
+2025-05-28 22:36:02,522 - WARNING - Encountered None in test suite, skipping
+2025-05-28 22:36:02,522 - WARNING - Encountered None in test suite, skipping
+2025-05-28 22:36:02,523 - WARNING - Encountered None in test suite, skipping
+2025-05-28 22:36:02,523 - WARNING - Encountered None in test suite, skipping
+2025-05-28 22:36:02,542 - DEBUG - Test results to update: {}
+2025-05-28 22:36:02,543 - DEBUG - Processing test ID: TC-GUI-01
+2025-05-28 22:36:02,552 - DEBUG - Updated GUI test: TC-GUI-01
+2025-05-28 22:36:02,552 - DEBUG - Processing test ID: TC-GUI-02
+2025-05-28 22:36:02,552 - DEBUG - Processing test ID: TC-GUI-03
+2025-05-28 22:36:02,552 - DEBUG - Processing test ID: TC-GUI-04
+2025-05-28 22:36:02,553 - DEBUG - Processing test ID: TC-GUI-05
+2025-05-28 22:36:02,553 - DEBUG - Processing test ID: TC-GUI-06
+2025-05-28 22:36:02,553 - DEBUG - Processing test ID: TC-GUI-07
+2025-05-28 22:36:02,554 - DEBUG - Updated GUI test: TC-GUI-07
+2025-05-28 22:36:02,555 - DEBUG - Processing test ID: TC-GUI-08
+2025-05-28 22:36:02,555 - DEBUG - Processing test ID: TC-GUI-09
+2025-05-28 22:36:02,555 - DEBUG - Processing test ID: TC-GUI-10
+2025-05-28 22:36:02,555 - DEBUG - Processing test ID: TC-COST-01
+2025-05-28 22:36:02,555 - DEBUG - Processing test ID: TC-COST-02
+2025-05-28 22:36:02,556 - DEBUG - Processing test ID: TC-COST-03
+2025-05-28 22:36:02,556 - DEBUG - Processing test ID: TC-COST-04
+2025-05-28 22:36:02,556 - DEBUG - Processing test ID: TC-COST-05
+2025-05-28 22:36:02,556 - DEBUG - Processing test ID: TC-FIO-001
+2025-05-28 22:36:02,557 - DEBUG - Processing test ID: TC-FIO-002
+2025-05-28 22:36:02,557 - DEBUG - Processing test ID: TC-FIO-003
+2025-05-28 22:36:02,557 - DEBUG - Processing test ID: TC-FIO-004
+2025-05-28 22:36:02,557 - DEBUG - Processing test ID: TC-FIO-005
+2025-05-28 22:36:02,557 - DEBUG - Processing test ID: TC-UNIT-01
+2025-05-28 22:36:02,558 - DEBUG - Processing test ID: TC-UNIT-02
+2025-05-28 22:36:02,558 - DEBUG - Processing test ID: TC-UNIT-03
+2025-05-28 22:36:02,558 - DEBUG - Processing test ID: TC-UNIT-04
+2025-05-28 22:36:02,572 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 22:41:11,272 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 22:41:11,324 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 22:41:11,324 - DEBUG - Test suite before run: ['__main__.run_unit_tests.<locals>.TestCalculator.test_cost_mild_steel', '__main__.run_unit_tests.<locals>.TestUtils.test_hash_password', '__main__.run_unit_tests.<locals>.TestGUI.test_login', '__main__.run_unit_tests.<locals>.TestLogic.test_calculate_and_save']
+2025-05-28 22:41:11,328 - INFO - calculator logging initialized
+2025-05-28 22:41:11,329 - DEBUG - TestCalculator input: {'part_id': 'PART-101', 'part_type': 'Single Part', 'material': 'mild_steel_rate', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-28 22:41:11,329 - INFO - Calculating cost for part PART-101
+2025-05-28 22:41:11,329 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 22:41:11,329 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-28 22:41:11,330 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-28 22:41:11,330 - INFO - Total cost for PART-101: £750.3
+2025-05-28 22:41:11,337 - DEBUG - Password bytes: b'moffat123'
+2025-05-28 22:41:11,337 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-28 22:41:11,341 - INFO - file_handler logging initialized
+2025-05-28 22:41:11,359 - INFO - logger logging initialized
+2025-05-28 22:41:11,375 - INFO - logic logging initialized
+2025-05-28 22:41:11,376 - INFO - gui logging initialized
+2025-05-28 22:41:11,376 - DEBUG - TESTING_MODE: False
+2025-05-28 22:41:11,437 - INFO - Initializing SheetMetalClientHub
+2025-05-28 22:41:11,481 - INFO - Creating login screen
+2025-05-28 22:41:11,481 - DEBUG - Clearing screen
+2025-05-28 22:41:11,494 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-28 22:41:11,494 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-28 22:41:11,494 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-28 22:41:11,521 - DEBUG - Loaded laser_gear.png
+2025-05-28 22:41:11,523 - DEBUG - Creating footer
+2025-05-28 22:41:11,524 - INFO - Attempting login
+2025-05-28 22:41:11,524 - DEBUG - Password bytes: b'moffat123'
+2025-05-28 22:41:11,524 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-28 22:41:11,524 - INFO - Login successful as User
+2025-05-28 22:41:11,525 - INFO - Creating part input screen
+2025-05-28 22:41:11,525 - DEBUG - Clearing screen
+2025-05-28 22:41:11,535 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-28 22:41:11,535 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-28 22:41:11,535 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-28 22:41:11,555 - DEBUG - Loaded laser_gear.png
+2025-05-28 22:41:11,581 - DEBUG - Creating footer
+2025-05-28 22:41:11,581 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 22:41:11,582 - DEBUG - Loaded 35 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-28 22:41:11,582 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 22:41:11,583 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-28 22:41:11,583 - DEBUG - Updated parts list display
+2025-05-28 22:41:11,583 - DEBUG - Show message: Success
+2025-05-28 22:41:11,594 - DEBUG - Tab changed
+2025-05-28 22:41:11,595 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 22:41:11,596 - DEBUG - Loaded 35 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-28 22:41:11,597 - DEBUG - Updating selected items: tab 0
+2025-05-28 22:41:13,250 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 22:41:13,428 - DEBUG - TestLogic input: {'part_type': 'Single Part', 'part_id': 'PART-12345', 'revision': 'A', 'specs': {'material': 'Mild Steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'sub_parts': [], 'fastener_types_and_counts': [], 'top_level_assembly': False, 'weldment_indicator': False}, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-28 22:41:13,428 - INFO - Calculating and saving part specifications
+2025-05-28 22:41:13,428 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-28 22:41:13,428 - INFO - Calculating cost for part PART-12345
+2025-05-28 22:41:13,429 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-28 22:41:13,429 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-28 22:41:13,429 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-28 22:41:13,429 - INFO - Total cost for PART-12345: £750.3
+2025-05-28 22:41:13,430 - INFO - Part PART-12345 saved with total cost £750.3
+2025-05-28 22:41:13,430 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-12345, Quantity: 1, Output: Part PART-12345 added, Result: Pass
+2025-05-28 22:41:13,430 - DEBUG - Test result logged: Add Part to Parts List - Pass
+2025-05-28 22:41:13,431 - DEBUG - Test result for test_cost_mild_steel: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-28 22:41:13,431 - DEBUG - Test result for test_hash_password: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-28 22:41:13,431 - DEBUG - Test result for test_login: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-28 22:41:13,431 - DEBUG - Test result for test_calculate_and_save: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-28 22:41:13,431 - DEBUG - Final test results: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-28 22:41:13,450 - DEBUG - Test results to update: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-28 22:41:13,451 - DEBUG - Processing test ID: TC-GUI-01
+2025-05-28 22:41:13,460 - DEBUG - Updated GUI test: TC-GUI-01
+2025-05-28 22:41:13,460 - DEBUG - Processing test ID: TC-GUI-02
+2025-05-28 22:41:13,461 - DEBUG - Processing test ID: TC-GUI-03
+2025-05-28 22:41:13,461 - DEBUG - Processing test ID: TC-GUI-04
+2025-05-28 22:41:13,461 - DEBUG - Processing test ID: TC-GUI-05
+2025-05-28 22:41:13,461 - DEBUG - Processing test ID: TC-GUI-06
+2025-05-28 22:41:13,461 - DEBUG - Processing test ID: TC-GUI-07
+2025-05-28 22:41:13,463 - DEBUG - Updated GUI test: TC-GUI-07
+2025-05-28 22:41:13,463 - DEBUG - Processing test ID: TC-GUI-08
+2025-05-28 22:41:13,463 - DEBUG - Processing test ID: TC-GUI-09
+2025-05-28 22:41:13,463 - DEBUG - Processing test ID: TC-GUI-10
+2025-05-28 22:41:13,464 - DEBUG - Processing test ID: TC-COST-01
+2025-05-28 22:41:13,464 - DEBUG - Processing test ID: TC-COST-02
+2025-05-28 22:41:13,464 - DEBUG - Processing test ID: TC-COST-03
+2025-05-28 22:41:13,464 - DEBUG - Processing test ID: TC-COST-04
+2025-05-28 22:41:13,465 - DEBUG - Processing test ID: TC-COST-05
+2025-05-28 22:41:13,465 - DEBUG - Processing test ID: TC-FIO-001
+2025-05-28 22:41:13,465 - DEBUG - Processing test ID: TC-FIO-002
+2025-05-28 22:41:13,465 - DEBUG - Processing test ID: TC-FIO-003
+2025-05-28 22:41:13,465 - DEBUG - Processing test ID: TC-FIO-004
+2025-05-28 22:41:13,466 - DEBUG - Processing test ID: TC-FIO-005
+2025-05-28 22:41:13,466 - DEBUG - Processing test ID: TC-UNIT-01
+2025-05-28 22:41:13,467 - DEBUG - Updated row for TC-UNIT-01: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-28 22:41:13,467 - DEBUG - Processing test ID: TC-UNIT-02
+2025-05-28 22:41:13,468 - DEBUG - Updated row for TC-UNIT-02: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-28 22:41:13,468 - DEBUG - Processing test ID: TC-UNIT-03
+2025-05-28 22:41:13,469 - DEBUG - Updated row for TC-UNIT-03: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-28 22:41:13,469 - DEBUG - Processing test ID: TC-UNIT-04
+2025-05-28 22:41:13,470 - DEBUG - Updated row for TC-UNIT-04: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-28 22:41:13,484 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 22:48:33,658 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-28 22:48:33,709 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-28 22:48:33,710 - DEBUG - Test suite before run: ['__main__.run_unit_tests.<locals>.TestCalculator.test_cost_mild_steel', '__main__.run_unit_tests.<locals>.TestUtils.test_hash_password', '__main__.run_unit_tests.<locals>.TestGUI.test_login', '__main__.run_unit_tests.<locals>.TestLogic.test_calculate_and_save']
+2025-05-28 22:48:33,711 - INFO - calculator logging initialized
+2025-05-28 22:48:33,711 - DEBUG - TestCalculator input: {'part_id': 'PART-101', 'part_type': 'Single Part', 'material': 'mild_steel_rate', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-28 22:48:33,711 - INFO - Calculating cost for part PART-101
+2025-05-28 22:48:33,712 - DEBUG - Material cost: Â£750.0 (area=0.5mÂ², thickness=1.0mm)
+2025-05-28 22:48:33,712 - DEBUG - Operation cost for Cutting (None): Â£0.3 (qty=100)
+2025-05-28 22:48:33,712 - DEBUG - Catalogue cost: Â£0.0 x 1
+2025-05-28 22:48:33,712 - INFO - Total cost for PART-101: Â£750.3
+2025-05-28 22:48:33,713 - DEBUG - Password bytes: b'moffat123'
+2025-05-28 22:48:33,713 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-28 22:48:33,719 - INFO - file_handler logging initialized
+2025-05-28 22:48:33,722 - INFO - logger logging initialized
+2025-05-28 22:48:33,736 - INFO - logic logging initialized
+2025-05-28 22:48:33,736 - INFO - gui logging initialized
+2025-05-28 22:48:33,737 - DEBUG - TESTING_MODE: False
+2025-05-28 22:48:33,797 - INFO - Initializing SheetMetalClientHub
+2025-05-28 22:48:33,838 - INFO - Creating login screen
+2025-05-28 22:48:33,838 - DEBUG - Clearing screen
+2025-05-28 22:48:33,851 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-28 22:48:33,851 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-28 22:48:33,851 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-28 22:48:33,877 - DEBUG - Loaded laser_gear.png
+2025-05-28 22:48:33,878 - DEBUG - Creating footer
+2025-05-28 22:48:33,879 - INFO - Attempting login
+2025-05-28 22:48:33,879 - DEBUG - Password bytes: b'moffat123'
+2025-05-28 22:48:33,879 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-28 22:48:33,880 - INFO - Login successful as User
+2025-05-28 22:48:33,880 - INFO - Creating part input screen
+2025-05-28 22:48:33,880 - DEBUG - Clearing screen
+2025-05-28 22:48:33,887 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-28 22:48:33,887 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-28 22:48:33,887 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-28 22:48:33,908 - DEBUG - Loaded laser_gear.png
+2025-05-28 22:48:33,928 - DEBUG - Creating footer
+2025-05-28 22:48:33,929 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 22:48:33,929 - DEBUG - Loaded 35 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-28 22:48:33,930 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-28 22:48:33,930 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-28 22:48:33,930 - DEBUG - Updated parts list display
+2025-05-28 22:48:33,930 - DEBUG - Show message: Success
+2025-05-28 22:48:33,938 - DEBUG - Tab changed
+2025-05-28 22:48:33,939 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-28 22:48:33,940 - DEBUG - Loaded 35 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-28 22:48:33,940 - DEBUG - Updating selected items: tab 0
+2025-05-28 22:48:35,579 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-28 22:48:35,755 - DEBUG - TestLogic input: {'part_type': 'Single Part', 'part_id': 'PART-12345', 'revision': 'A', 'specs': {'material': 'Mild Steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'sub_parts': [], 'fastener_types_and_counts': [], 'top_level_assembly': False, 'weldment_indicator': False}, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-28 22:48:35,755 - INFO - Calculating and saving part specifications
+2025-05-28 22:48:35,756 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-28 22:48:35,756 - INFO - Calculating cost for part PART-12345
+2025-05-28 22:48:35,756 - DEBUG - Material cost: Â£750.0 (area=0.5mÂ², thickness=1.0mm)
+2025-05-28 22:48:35,757 - DEBUG - Operation cost for Cutting (None): Â£0.3 (qty=100)
+2025-05-28 22:48:35,757 - DEBUG - Catalogue cost: Â£0.0 x 1
+2025-05-28 22:48:35,757 - INFO - Total cost for PART-12345: Â£750.3
+2025-05-28 22:48:35,758 - INFO - Part PART-12345 saved with total cost Â£750.3
+2025-05-28 22:48:35,758 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-12345, Quantity: 1, Output: Part PART-12345 added, Result: Pass
+2025-05-28 22:48:35,758 - DEBUG - Test result logged: Add Part to Parts List - Pass
+2025-05-28 22:48:35,759 - DEBUG - Test result for test_cost_mild_steel: {'status': 'Pass', 'comment': 'Cost calculated: Â£750.3'}
+2025-05-28 22:48:35,759 - DEBUG - Test result for test_hash_password: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-28 22:48:35,759 - DEBUG - Test result for test_login: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-28 22:48:35,759 - DEBUG - Test result for test_calculate_and_save: {'status': 'Pass', 'comment': 'Part saved with cost Â£750.3'}
+2025-05-28 22:48:35,759 - DEBUG - Final test results: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: Â£750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost Â£750.3'}}
+2025-05-28 22:48:35,778 - DEBUG - Test results to update: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: Â£750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost Â£750.3'}}
+2025-05-28 22:48:35,779 - DEBUG - Processing test ID: TC-GUI-01
+2025-05-28 22:48:35,788 - DEBUG - Updated GUI test: TC-GUI-01
+2025-05-28 22:48:35,788 - DEBUG - Processing test ID: TC-GUI-02
+2025-05-28 22:48:35,789 - DEBUG - Processing test ID: TC-GUI-03
+2025-05-28 22:48:35,789 - DEBUG - Processing test ID: TC-GUI-04
+2025-05-28 22:48:35,789 - DEBUG - Processing test ID: TC-GUI-05
+2025-05-28 22:48:35,789 - DEBUG - Processing test ID: TC-GUI-06
+2025-05-28 22:48:35,789 - DEBUG - Processing test ID: TC-GUI-07
+2025-05-28 22:48:35,791 - DEBUG - Updated GUI test: TC-GUI-07
+2025-05-28 22:48:35,791 - DEBUG - Processing test ID: TC-GUI-08
+2025-05-28 22:48:35,791 - DEBUG - Processing test ID: TC-GUI-09
+2025-05-28 22:48:35,791 - DEBUG - Processing test ID: TC-GUI-10
+2025-05-28 22:48:35,792 - DEBUG - Processing test ID: TC-COST-01
+2025-05-28 22:48:35,792 - DEBUG - Processing test ID: TC-COST-02
+2025-05-28 22:48:35,792 - DEBUG - Processing test ID: TC-COST-03
+2025-05-28 22:48:35,792 - DEBUG - Processing test ID: TC-COST-04
+2025-05-28 22:48:35,792 - DEBUG - Processing test ID: TC-COST-05
+2025-05-28 22:48:35,793 - DEBUG - Processing test ID: TC-FIO-001
+2025-05-28 22:48:35,793 - DEBUG - Processing test ID: TC-FIO-002
+2025-05-28 22:48:35,793 - DEBUG - Processing test ID: TC-FIO-003
+2025-05-28 22:48:35,793 - DEBUG - Processing test ID: TC-FIO-004
+2025-05-28 22:48:35,794 - DEBUG - Processing test ID: TC-FIO-005
+2025-05-28 22:48:35,794 - DEBUG - Processing test ID: TC-UNIT-01
+2025-05-28 22:48:35,795 - DEBUG - Updated row for TC-UNIT-01: {'status': 'Pass', 'comment': 'Cost calculated: Â£750.3'}
+2025-05-28 22:48:35,795 - DEBUG - Processing test ID: TC-UNIT-02
+2025-05-28 22:48:35,796 - DEBUG - Updated row for TC-UNIT-02: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-28 22:48:35,796 - DEBUG - Processing test ID: TC-UNIT-03
+2025-05-28 22:48:35,797 - DEBUG - Updated row for TC-UNIT-03: {'status': 'Pass', 'comment': 'Part saved with cost Â£750.3'}
+2025-05-28 22:48:35,797 - DEBUG - Processing test ID: TC-UNIT-04
+2025-05-28 22:48:35,798 - DEBUG - Updated row for TC-UNIT-04: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-28 22:48:35,811 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:09:04,451 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-29 00:09:04,503 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:09:04,503 - DEBUG - Test suite before run: ['__main__.run_unit_tests.<locals>.TestCalculator.test_cost_mild_steel', '__main__.run_unit_tests.<locals>.TestUtils.test_hash_password', '__main__.run_unit_tests.<locals>.TestGUI.test_login', '__main__.run_unit_tests.<locals>.TestLogic.test_calculate_and_save']
+2025-05-29 00:09:04,504 - INFO - calculator logging initialized
+2025-05-29 00:09:04,504 - DEBUG - TestCalculator input: {'part_id': 'PART-101', 'part_type': 'Single Part', 'material': 'mild_steel_rate', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:09:04,505 - INFO - Calculating cost for part PART-101
+2025-05-29 00:09:04,505 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:09:04,505 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:09:04,506 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:09:04,506 - INFO - Total cost for PART-101: £750.3
+2025-05-29 00:09:04,507 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:09:04,507 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:09:04,512 - INFO - file_handler logging initialized
+2025-05-29 00:09:04,516 - INFO - logger logging initialized
+2025-05-29 00:09:04,530 - INFO - logic logging initialized
+2025-05-29 00:09:04,530 - INFO - gui logging initialized
+2025-05-29 00:09:04,531 - DEBUG - TESTING_MODE: False
+2025-05-29 00:09:04,591 - INFO - Initializing SheetMetalClientHub
+2025-05-29 00:09:04,630 - INFO - Creating login screen
+2025-05-29 00:09:04,631 - DEBUG - Clearing screen
+2025-05-29 00:09:04,643 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:09:04,643 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:09:04,643 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:09:04,668 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:09:04,669 - DEBUG - Creating footer
+2025-05-29 00:09:04,670 - INFO - Attempting login
+2025-05-29 00:09:04,670 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:09:04,670 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:09:04,671 - INFO - Login successful as User
+2025-05-29 00:09:04,671 - INFO - Creating part input screen
+2025-05-29 00:09:04,671 - DEBUG - Clearing screen
+2025-05-29 00:09:04,678 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:09:04,678 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:09:04,678 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:09:04,699 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:09:04,718 - DEBUG - Creating footer
+2025-05-29 00:09:04,719 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:09:04,719 - DEBUG - Loaded 38 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:09:04,720 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-29 00:09:04,720 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:09:04,720 - DEBUG - Updated parts list display
+2025-05-29 00:09:04,721 - DEBUG - Show message: Success
+2025-05-29 00:09:04,730 - DEBUG - Tab changed
+2025-05-29 00:09:04,730 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:09:04,731 - DEBUG - Loaded 38 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:09:04,732 - DEBUG - Updating selected items: tab 0
+2025-05-29 00:09:06,958 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-29 00:09:07,128 - DEBUG - TestLogic input: {'part_type': 'Single Part', 'part_id': 'PART-12345', 'revision': 'A', 'specs': {'material': 'Mild Steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'sub_parts': [], 'fastener_types_and_counts': [], 'top_level_assembly': False, 'weldment_indicator': False}, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:09:07,128 - INFO - Calculating and saving part specifications
+2025-05-29 00:09:07,129 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:09:07,129 - INFO - Calculating cost for part PART-12345
+2025-05-29 00:09:07,129 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:09:07,129 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:09:07,130 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:09:07,130 - INFO - Total cost for PART-12345: £750.3
+2025-05-29 00:09:07,130 - INFO - Part PART-12345 saved with total cost £750.3
+2025-05-29 00:09:07,131 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-12345, Quantity: 1, Output: Part PART-12345 added, Result: Pass
+2025-05-29 00:09:07,131 - DEBUG - Test result logged: Add Part to Parts List - Pass
+2025-05-29 00:09:07,131 - DEBUG - Test result for test_cost_mild_steel: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:09:07,131 - DEBUG - Test result for test_hash_password: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:09:07,132 - DEBUG - Test result for test_login: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:09:07,132 - DEBUG - Test result for test_calculate_and_save: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:09:07,132 - DEBUG - Final test results: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:09:07,151 - DEBUG - Test results to update: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:09:07,152 - DEBUG - Processing test ID: TC-GUI-01
+2025-05-29 00:09:07,161 - DEBUG - Updated GUI test: TC-GUI-01
+2025-05-29 00:09:07,162 - DEBUG - Processing test ID: TC-GUI-02
+2025-05-29 00:09:07,162 - DEBUG - Processing test ID: TC-GUI-03
+2025-05-29 00:09:07,162 - DEBUG - Processing test ID: TC-GUI-04
+2025-05-29 00:09:07,162 - DEBUG - Processing test ID: TC-GUI-05
+2025-05-29 00:09:07,163 - DEBUG - Processing test ID: TC-GUI-06
+2025-05-29 00:09:07,163 - DEBUG - Processing test ID: TC-GUI-07
+2025-05-29 00:09:07,164 - DEBUG - Updated GUI test: TC-GUI-07
+2025-05-29 00:09:07,164 - DEBUG - Processing test ID: TC-GUI-08
+2025-05-29 00:09:07,164 - DEBUG - Processing test ID: TC-GUI-09
+2025-05-29 00:09:07,165 - DEBUG - Processing test ID: TC-GUI-10
+2025-05-29 00:09:07,165 - DEBUG - Processing test ID: TC-COST-01
+2025-05-29 00:09:07,165 - DEBUG - Processing test ID: TC-COST-02
+2025-05-29 00:09:07,165 - DEBUG - Processing test ID: TC-COST-03
+2025-05-29 00:09:07,166 - DEBUG - Processing test ID: TC-COST-04
+2025-05-29 00:09:07,166 - DEBUG - Processing test ID: TC-COST-05
+2025-05-29 00:09:07,166 - DEBUG - Processing test ID: TC-FIO-001
+2025-05-29 00:09:07,166 - DEBUG - Processing test ID: TC-FIO-002
+2025-05-29 00:09:07,166 - DEBUG - Processing test ID: TC-FIO-003
+2025-05-29 00:09:07,167 - DEBUG - Processing test ID: TC-FIO-004
+2025-05-29 00:09:07,167 - DEBUG - Processing test ID: TC-FIO-005
+2025-05-29 00:09:07,167 - DEBUG - Processing test ID: TC-UNIT-01
+2025-05-29 00:09:07,168 - DEBUG - Updated row for TC-UNIT-01: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:09:07,168 - DEBUG - Processing test ID: TC-UNIT-02
+2025-05-29 00:09:07,169 - DEBUG - Updated row for TC-UNIT-02: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:09:07,169 - DEBUG - Processing test ID: TC-UNIT-03
+2025-05-29 00:09:07,170 - DEBUG - Updated row for TC-UNIT-03: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:09:07,170 - DEBUG - Processing test ID: TC-UNIT-04
+2025-05-29 00:09:07,171 - DEBUG - Updated row for TC-UNIT-04: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:09:07,184 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:17:32,725 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-29 00:17:32,777 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:17:32,777 - DEBUG - Test suite before run: ['__main__.run_unit_tests.<locals>.TestCalculator.test_cost_mild_steel', '__main__.run_unit_tests.<locals>.TestUtils.test_hash_password', '__main__.run_unit_tests.<locals>.TestGUI.test_login', '__main__.run_unit_tests.<locals>.TestLogic.test_calculate_and_save']
+2025-05-29 00:17:32,778 - INFO - calculator logging initialized
+2025-05-29 00:17:32,779 - DEBUG - TestCalculator input: {'part_id': 'PART-101', 'part_type': 'Single Part', 'material': 'mild_steel_rate', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:17:32,779 - INFO - Calculating cost for part PART-101
+2025-05-29 00:17:32,779 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:17:32,779 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:17:32,780 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:17:32,780 - INFO - Total cost for PART-101: £750.3
+2025-05-29 00:17:32,780 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:17:32,781 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:17:32,786 - INFO - file_handler logging initialized
+2025-05-29 00:17:32,790 - INFO - logger logging initialized
+2025-05-29 00:17:32,804 - INFO - logic logging initialized
+2025-05-29 00:17:32,804 - INFO - gui logging initialized
+2025-05-29 00:17:32,804 - DEBUG - TESTING_MODE: False
+2025-05-29 00:17:32,865 - INFO - Initializing SheetMetalClientHub
+2025-05-29 00:17:32,903 - INFO - Creating login screen
+2025-05-29 00:17:32,903 - DEBUG - Clearing screen
+2025-05-29 00:17:32,915 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:17:32,916 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:17:32,916 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:17:32,940 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:17:32,941 - DEBUG - Creating footer
+2025-05-29 00:17:32,942 - INFO - Attempting login
+2025-05-29 00:17:32,943 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:17:32,943 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:17:32,943 - INFO - Login successful as User
+2025-05-29 00:17:32,943 - INFO - Creating part input screen
+2025-05-29 00:17:32,944 - DEBUG - Clearing screen
+2025-05-29 00:17:32,950 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:17:32,950 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:17:32,950 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:17:32,970 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:17:32,989 - DEBUG - Creating footer
+2025-05-29 00:17:32,990 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:17:32,990 - DEBUG - Loaded 38 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:17:32,990 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-29 00:17:32,991 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:17:32,991 - DEBUG - Updated parts list display
+2025-05-29 00:17:32,991 - DEBUG - Show message: Success
+2025-05-29 00:17:33,001 - DEBUG - Tab changed
+2025-05-29 00:17:33,001 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:17:33,002 - DEBUG - Loaded 38 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:17:33,002 - DEBUG - Updating selected items: tab 0
+2025-05-29 00:17:35,116 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-29 00:17:35,288 - DEBUG - TestLogic input: {'part_type': 'Single Part', 'part_id': 'PART-12345', 'revision': 'A', 'specs': {'material': 'Mild Steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'sub_parts': [], 'fastener_types_and_counts': [], 'top_level_assembly': False, 'weldment_indicator': False}, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:17:35,288 - INFO - Calculating and saving part specifications
+2025-05-29 00:17:35,288 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:17:35,288 - INFO - Calculating cost for part PART-12345
+2025-05-29 00:17:35,289 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:17:35,289 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:17:35,289 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:17:35,289 - INFO - Total cost for PART-12345: £750.3
+2025-05-29 00:17:35,290 - INFO - Part PART-12345 saved with total cost £750.3
+2025-05-29 00:17:35,290 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-12345, Quantity: 1, Output: Part PART-12345 added, Result: Pass
+2025-05-29 00:17:35,290 - DEBUG - Test result logged: Add Part to Parts List - Pass
+2025-05-29 00:17:35,291 - DEBUG - Test result for test_cost_mild_steel: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:17:35,291 - DEBUG - Test result for test_hash_password: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:17:35,291 - DEBUG - Test result for test_login: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:17:35,291 - DEBUG - Test result for test_calculate_and_save: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:17:35,291 - DEBUG - Final test results: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:17:35,310 - DEBUG - Test results to update: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:17:35,310 - DEBUG - Processing test ID: TC-GUI-01
+2025-05-29 00:17:35,320 - DEBUG - Updated GUI test: TC-GUI-01
+2025-05-29 00:17:35,320 - DEBUG - Processing test ID: TC-GUI-02
+2025-05-29 00:17:35,321 - DEBUG - Processing test ID: TC-GUI-03
+2025-05-29 00:17:35,321 - DEBUG - Processing test ID: TC-GUI-04
+2025-05-29 00:17:35,321 - DEBUG - Processing test ID: TC-GUI-05
+2025-05-29 00:17:35,321 - DEBUG - Processing test ID: TC-GUI-06
+2025-05-29 00:17:35,321 - DEBUG - Processing test ID: TC-GUI-07
+2025-05-29 00:17:35,323 - DEBUG - Updated GUI test: TC-GUI-07
+2025-05-29 00:17:35,323 - DEBUG - Processing test ID: TC-GUI-08
+2025-05-29 00:17:35,323 - DEBUG - Processing test ID: TC-GUI-09
+2025-05-29 00:17:35,323 - DEBUG - Processing test ID: TC-GUI-10
+2025-05-29 00:17:35,323 - DEBUG - Processing test ID: TC-COST-01
+2025-05-29 00:17:35,324 - DEBUG - Processing test ID: TC-COST-02
+2025-05-29 00:17:35,324 - DEBUG - Processing test ID: TC-COST-03
+2025-05-29 00:17:35,324 - DEBUG - Processing test ID: TC-COST-04
+2025-05-29 00:17:35,324 - DEBUG - Processing test ID: TC-COST-05
+2025-05-29 00:17:35,325 - DEBUG - Processing test ID: TC-FIO-001
+2025-05-29 00:17:35,325 - DEBUG - Processing test ID: TC-FIO-002
+2025-05-29 00:17:35,325 - DEBUG - Processing test ID: TC-FIO-003
+2025-05-29 00:17:35,325 - DEBUG - Processing test ID: TC-FIO-004
+2025-05-29 00:17:35,325 - DEBUG - Processing test ID: TC-FIO-005
+2025-05-29 00:17:35,326 - DEBUG - Processing test ID: TC-UNIT-01
+2025-05-29 00:17:35,326 - DEBUG - Updated row for TC-UNIT-01: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:17:35,327 - DEBUG - Processing test ID: TC-UNIT-02
+2025-05-29 00:17:35,328 - DEBUG - Updated row for TC-UNIT-02: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:17:35,328 - DEBUG - Processing test ID: TC-UNIT-03
+2025-05-29 00:17:35,329 - DEBUG - Updated row for TC-UNIT-03: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:17:35,329 - DEBUG - Processing test ID: TC-UNIT-04
+2025-05-29 00:17:35,330 - DEBUG - Updated row for TC-UNIT-04: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:17:35,343 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:26:40,314 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-29 00:26:40,365 - INFO - Test log document created: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:26:40,366 - DEBUG - Test suite before run: ['__main__.run_unit_tests.<locals>.TestCalculator.test_cost_mild_steel', '__main__.run_unit_tests.<locals>.TestUtils.test_hash_password', '__main__.run_unit_tests.<locals>.TestGUI.test_login', '__main__.run_unit_tests.<locals>.TestLogic.test_calculate_and_save']
+2025-05-29 00:26:40,367 - INFO - calculator logging initialized
+2025-05-29 00:26:40,367 - DEBUG - TestCalculator input: {'part_id': 'PART-101', 'part_type': 'Single Part', 'material': 'mild_steel_rate', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:26:40,368 - INFO - Calculating cost for part PART-101
+2025-05-29 00:26:40,368 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:26:40,368 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:26:40,368 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:26:40,368 - INFO - Total cost for PART-101: £750.3
+2025-05-29 00:26:40,369 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:26:40,369 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:26:40,374 - INFO - file_handler logging initialized
+2025-05-29 00:26:40,378 - INFO - logger logging initialized
+2025-05-29 00:26:40,392 - INFO - logic logging initialized
+2025-05-29 00:26:40,392 - INFO - gui logging initialized
+2025-05-29 00:26:40,393 - DEBUG - TESTING_MODE: False
+2025-05-29 00:26:40,453 - INFO - Initializing SheetMetalClientHub
+2025-05-29 00:26:40,492 - INFO - Creating login screen
+2025-05-29 00:26:40,493 - DEBUG - Clearing screen
+2025-05-29 00:26:40,506 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:26:40,506 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:26:40,506 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:26:40,533 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:26:40,534 - DEBUG - Creating footer
+2025-05-29 00:26:40,535 - INFO - Attempting login
+2025-05-29 00:26:40,535 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:26:40,535 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:26:40,536 - INFO - Login successful as User
+2025-05-29 00:26:40,536 - INFO - Creating part input screen
+2025-05-29 00:26:40,536 - DEBUG - Clearing screen
+2025-05-29 00:26:40,543 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:26:40,543 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:26:40,543 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:26:40,565 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:26:40,584 - DEBUG - Creating footer
+2025-05-29 00:26:40,584 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:26:40,585 - DEBUG - Loaded 38 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:26:40,585 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-29 00:26:40,586 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:26:40,586 - DEBUG - Updated parts list display
+2025-05-29 00:26:40,586 - DEBUG - Show message: Success
+2025-05-29 00:26:40,595 - DEBUG - Tab changed
+2025-05-29 00:26:40,595 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:26:40,597 - DEBUG - Loaded 38 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:26:40,597 - DEBUG - Updating selected items: tab 0
+2025-05-29 00:26:42,051 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-29 00:26:42,221 - DEBUG - TestLogic input: {'part_type': 'Single Part', 'part_id': 'PART-12345', 'revision': 'A', 'specs': {'material': 'Mild Steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'sub_parts': [], 'fastener_types_and_counts': [], 'top_level_assembly': False, 'weldment_indicator': False}, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:26:42,221 - INFO - Calculating and saving part specifications
+2025-05-29 00:26:42,222 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:26:42,222 - INFO - Calculating cost for part PART-12345
+2025-05-29 00:26:42,222 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:26:42,223 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:26:42,223 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:26:42,223 - INFO - Total cost for PART-12345: £750.3
+2025-05-29 00:26:42,223 - INFO - Part PART-12345 saved with total cost £750.3
+2025-05-29 00:26:42,224 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-12345, Quantity: 1, Output: Part PART-12345 added, Result: Pass
+2025-05-29 00:26:42,224 - DEBUG - Test result logged: Add Part to Parts List - Pass
+2025-05-29 00:26:42,225 - DEBUG - Test result for test_cost_mild_steel: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:26:42,225 - DEBUG - Test result for test_hash_password: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:26:42,225 - DEBUG - Test result for test_login: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:26:42,225 - DEBUG - Test result for test_calculate_and_save: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:26:42,225 - DEBUG - Final test results: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:26:42,244 - DEBUG - Test results to update: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:26:42,244 - DEBUG - Processing test ID: TC-GUI-01
+2025-05-29 00:26:42,254 - DEBUG - Updated GUI test: TC-GUI-01
+2025-05-29 00:26:42,254 - DEBUG - Processing test ID: TC-GUI-02
+2025-05-29 00:26:42,255 - DEBUG - Processing test ID: TC-GUI-03
+2025-05-29 00:26:42,255 - DEBUG - Processing test ID: TC-GUI-04
+2025-05-29 00:26:42,255 - DEBUG - Processing test ID: TC-GUI-05
+2025-05-29 00:26:42,255 - DEBUG - Processing test ID: TC-GUI-06
+2025-05-29 00:26:42,255 - DEBUG - Processing test ID: TC-GUI-07
+2025-05-29 00:26:42,257 - DEBUG - Updated GUI test: TC-GUI-07
+2025-05-29 00:26:42,257 - DEBUG - Processing test ID: TC-GUI-08
+2025-05-29 00:26:42,257 - DEBUG - Processing test ID: TC-GUI-09
+2025-05-29 00:26:42,257 - DEBUG - Processing test ID: TC-GUI-10
+2025-05-29 00:26:42,257 - DEBUG - Processing test ID: TC-COST-01
+2025-05-29 00:26:42,258 - DEBUG - Processing test ID: TC-COST-02
+2025-05-29 00:26:42,258 - DEBUG - Processing test ID: TC-COST-03
+2025-05-29 00:26:42,258 - DEBUG - Processing test ID: TC-COST-04
+2025-05-29 00:26:42,258 - DEBUG - Processing test ID: TC-COST-05
+2025-05-29 00:26:42,259 - DEBUG - Processing test ID: TC-FIO-001
+2025-05-29 00:26:42,259 - DEBUG - Processing test ID: TC-FIO-002
+2025-05-29 00:26:42,259 - DEBUG - Processing test ID: TC-FIO-003
+2025-05-29 00:26:42,259 - DEBUG - Processing test ID: TC-FIO-004
+2025-05-29 00:26:42,259 - DEBUG - Processing test ID: TC-FIO-005
+2025-05-29 00:26:42,260 - DEBUG - Processing test ID: TC-UNIT-01
+2025-05-29 00:26:42,260 - DEBUG - Updated row for TC-UNIT-01: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:26:42,261 - DEBUG - Processing test ID: TC-UNIT-02
+2025-05-29 00:26:42,261 - DEBUG - Updated row for TC-UNIT-02: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:26:42,262 - DEBUG - Processing test ID: TC-UNIT-03
+2025-05-29 00:26:42,263 - DEBUG - Updated row for TC-UNIT-03: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:26:42,263 - DEBUG - Processing test ID: TC-UNIT-04
+2025-05-29 00:26:42,264 - DEBUG - Updated row for TC-UNIT-04: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:26:42,277 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:31:06,934 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-29 00:31:06,944 - INFO - Loaded existing Test_Log.docx: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:31:06,945 - DEBUG - Test suite before run: ['__main__.run_unit_tests.<locals>.TestCalculator.test_cost_mild_steel', '__main__.run_unit_tests.<locals>.TestUtils.test_hash_password', '__main__.run_unit_tests.<locals>.TestGUI.test_login', '__main__.run_unit_tests.<locals>.TestLogic.test_calculate_and_save']
+2025-05-29 00:31:06,946 - INFO - calculator logging initialized
+2025-05-29 00:31:06,946 - DEBUG - TestCalculator input: {'part_id': 'PART-101', 'part_type': 'Single Part', 'material': 'mild_steel_rate', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:31:06,946 - INFO - Calculating cost for part PART-101
+2025-05-29 00:31:06,946 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:31:06,947 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:31:06,947 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:31:06,947 - INFO - Total cost for PART-101: £750.3
+2025-05-29 00:31:06,947 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:31:06,948 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:31:06,948 - INFO - file_handler logging initialized
+2025-05-29 00:31:06,955 - INFO - logger logging initialized
+2025-05-29 00:31:06,969 - INFO - logic logging initialized
+2025-05-29 00:31:06,969 - INFO - gui logging initialized
+2025-05-29 00:31:06,969 - DEBUG - TESTING_MODE: False
+2025-05-29 00:31:07,029 - INFO - Initializing SheetMetalClientHub
+2025-05-29 00:31:07,068 - INFO - Creating login screen
+2025-05-29 00:31:07,068 - DEBUG - Clearing screen
+2025-05-29 00:31:07,081 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:31:07,081 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:31:07,081 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:31:07,105 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:31:07,107 - DEBUG - Creating footer
+2025-05-29 00:31:07,107 - INFO - Attempting login
+2025-05-29 00:31:07,107 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:31:07,107 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:31:07,108 - INFO - Login successful as User
+2025-05-29 00:31:07,108 - INFO - Creating part input screen
+2025-05-29 00:31:07,108 - DEBUG - Clearing screen
+2025-05-29 00:31:07,116 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:31:07,117 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:31:07,117 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:31:07,136 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:31:07,155 - DEBUG - Creating footer
+2025-05-29 00:31:07,155 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:31:07,155 - DEBUG - Loaded 38 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:31:07,156 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-29 00:31:07,156 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:31:07,156 - DEBUG - Updated parts list display
+2025-05-29 00:31:07,156 - DEBUG - Show message: Success
+2025-05-29 00:31:07,165 - DEBUG - Tab changed
+2025-05-29 00:31:07,165 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:31:07,166 - DEBUG - Loaded 38 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:31:07,167 - DEBUG - Updating selected items: tab 0
+2025-05-29 00:31:08,977 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-29 00:31:09,146 - DEBUG - TestLogic input: {'part_type': 'Single Part', 'part_id': 'PART-12345', 'revision': 'A', 'specs': {'material': 'Mild Steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'sub_parts': [], 'fastener_types_and_counts': [], 'top_level_assembly': False, 'weldment_indicator': False}, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:31:09,146 - INFO - Calculating and saving part specifications
+2025-05-29 00:31:09,147 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:31:09,147 - INFO - Calculating cost for part PART-12345
+2025-05-29 00:31:09,147 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:31:09,147 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:31:09,147 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:31:09,148 - INFO - Total cost for PART-12345: £750.3
+2025-05-29 00:31:09,148 - INFO - Part PART-12345 saved with total cost £750.3
+2025-05-29 00:31:09,148 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-12345, Quantity: 1, Output: Part PART-12345 added, Result: Pass
+2025-05-29 00:31:09,148 - DEBUG - Test result logged: Add Part to Parts List - Pass
+2025-05-29 00:31:09,149 - DEBUG - Test result for test_cost_mild_steel: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:31:09,149 - DEBUG - Test result for test_hash_password: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:31:09,149 - DEBUG - Test result for test_login: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:31:09,149 - DEBUG - Test result for test_calculate_and_save: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:31:09,149 - DEBUG - Final test results: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:31:09,158 - DEBUG - Test results to update: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:31:09,159 - DEBUG - Processing test ID: TC-GUI-01
+2025-05-29 00:31:09,169 - DEBUG - Updated GUI test: TC-GUI-01
+2025-05-29 00:31:09,169 - DEBUG - Processing test ID: TC-GUI-02
+2025-05-29 00:31:09,170 - DEBUG - Processing test ID: TC-GUI-03
+2025-05-29 00:31:09,170 - DEBUG - Processing test ID: TC-GUI-04
+2025-05-29 00:31:09,170 - DEBUG - Processing test ID: TC-GUI-05
+2025-05-29 00:31:09,170 - DEBUG - Processing test ID: TC-GUI-06
+2025-05-29 00:31:09,170 - DEBUG - Processing test ID: TC-GUI-07
+2025-05-29 00:31:09,172 - DEBUG - Updated GUI test: TC-GUI-07
+2025-05-29 00:31:09,172 - DEBUG - Processing test ID: TC-GUI-08
+2025-05-29 00:31:09,172 - DEBUG - Processing test ID: TC-GUI-09
+2025-05-29 00:31:09,172 - DEBUG - Processing test ID: TC-GUI-10
+2025-05-29 00:31:09,173 - DEBUG - Processing test ID: TC-COST-01
+2025-05-29 00:31:09,173 - DEBUG - Processing test ID: TC-COST-02
+2025-05-29 00:31:09,173 - DEBUG - Processing test ID: TC-COST-03
+2025-05-29 00:31:09,173 - DEBUG - Processing test ID: TC-COST-04
+2025-05-29 00:31:09,173 - DEBUG - Processing test ID: TC-COST-05
+2025-05-29 00:31:09,174 - DEBUG - Processing test ID: TC-FIO-001
+2025-05-29 00:31:09,175 - DEBUG - Updated FIO test: TC-FIO-001
+2025-05-29 00:31:09,175 - DEBUG - Processing test ID: TC-FIO-002
+2025-05-29 00:31:09,175 - DEBUG - Processing test ID: TC-FIO-003
+2025-05-29 00:31:09,175 - DEBUG - Processing test ID: TC-FIO-004
+2025-05-29 00:31:09,176 - DEBUG - Processing test ID: TC-FIO-005
+2025-05-29 00:31:09,176 - DEBUG - Processing test ID: TC-UNIT-01
+2025-05-29 00:31:09,177 - DEBUG - Updated row for TC-UNIT-01: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:31:09,177 - DEBUG - Processing test ID: TC-UNIT-02
+2025-05-29 00:31:09,178 - DEBUG - Updated row for TC-UNIT-02: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:31:09,178 - DEBUG - Processing test ID: TC-UNIT-03
+2025-05-29 00:31:09,179 - DEBUG - Updated row for TC-UNIT-03: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:31:09,179 - DEBUG - Processing test ID: TC-UNIT-04
+2025-05-29 00:31:09,180 - DEBUG - Updated row for TC-UNIT-04: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:31:09,193 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:39:52,556 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-29 00:39:52,575 - INFO - Loaded existing Test_Log.docx: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:39:52,576 - DEBUG - Test suite before run: ['__main__.run_unit_tests.<locals>.TestCalculator.test_cost_mild_steel', '__main__.run_unit_tests.<locals>.TestUtils.test_hash_password', '__main__.run_unit_tests.<locals>.TestGUI.test_login', '__main__.run_unit_tests.<locals>.TestLogic.test_calculate_and_save']
+2025-05-29 00:39:52,577 - INFO - calculator logging initialized
+2025-05-29 00:39:52,577 - DEBUG - TestCalculator input: {'part_id': 'PART-101', 'part_type': 'Single Part', 'material': 'mild_steel_rate', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:39:52,578 - INFO - Calculating cost for part PART-101
+2025-05-29 00:39:52,578 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:39:52,578 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:39:52,578 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:39:52,579 - INFO - Total cost for PART-101: £750.3
+2025-05-29 00:39:52,579 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:39:52,580 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:39:52,581 - INFO - file_handler logging initialized
+2025-05-29 00:39:52,588 - INFO - logger logging initialized
+2025-05-29 00:39:52,602 - INFO - logic logging initialized
+2025-05-29 00:39:52,602 - INFO - gui logging initialized
+2025-05-29 00:39:52,603 - DEBUG - TESTING_MODE: False
+2025-05-29 00:39:52,663 - INFO - Initializing SheetMetalClientHub
+2025-05-29 00:39:52,702 - INFO - Creating login screen
+2025-05-29 00:39:52,702 - DEBUG - Clearing screen
+2025-05-29 00:39:52,715 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:39:52,716 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:39:52,716 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:39:52,743 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:39:52,744 - DEBUG - Creating footer
+2025-05-29 00:39:52,745 - INFO - Attempting login
+2025-05-29 00:39:52,745 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:39:52,745 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:39:52,746 - INFO - Login successful as User
+2025-05-29 00:39:52,746 - INFO - Creating part input screen
+2025-05-29 00:39:52,746 - DEBUG - Clearing screen
+2025-05-29 00:39:52,753 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:39:52,753 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:39:52,753 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:39:52,774 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:39:52,795 - DEBUG - Creating footer
+2025-05-29 00:39:52,795 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:39:52,796 - DEBUG - Loaded 38 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:39:52,797 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-29 00:39:52,797 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:39:52,798 - DEBUG - Updated parts list display
+2025-05-29 00:39:52,798 - DEBUG - Show message: Success
+2025-05-29 00:39:52,807 - DEBUG - Tab changed
+2025-05-29 00:39:52,807 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:39:52,809 - DEBUG - Loaded 38 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:39:52,809 - DEBUG - Updating selected items: tab 0
+2025-05-29 00:39:54,146 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-29 00:39:54,320 - DEBUG - TestLogic input: {'part_type': 'Single Part', 'part_id': 'PART-12345', 'revision': 'A', 'specs': {'material': 'Mild Steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'sub_parts': [], 'fastener_types_and_counts': [], 'top_level_assembly': False, 'weldment_indicator': False}, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:39:54,320 - INFO - Calculating and saving part specifications
+2025-05-29 00:39:54,321 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:39:54,321 - INFO - Calculating cost for part PART-12345
+2025-05-29 00:39:54,321 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:39:54,321 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:39:54,322 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:39:54,322 - INFO - Total cost for PART-12345: £750.3
+2025-05-29 00:39:54,322 - INFO - Part PART-12345 saved with total cost £750.3
+2025-05-29 00:39:54,323 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-12345, Quantity: 1, Output: Part PART-12345 added, Result: Pass
+2025-05-29 00:39:54,323 - DEBUG - Test result logged: Add Part to Parts List - Pass
+2025-05-29 00:39:54,323 - DEBUG - Test result for test_cost_mild_steel: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:39:54,323 - DEBUG - Test result for test_hash_password: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:39:54,323 - DEBUG - Test result for test_login: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:39:54,324 - DEBUG - Test result for test_calculate_and_save: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:39:54,324 - DEBUG - Final test results: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:39:54,333 - DEBUG - Test results to update: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:39:54,334 - DEBUG - Processing test ID: TC-GUI-01
+2025-05-29 00:39:54,344 - DEBUG - Updated GUI test: TC-GUI-01
+2025-05-29 00:39:54,344 - DEBUG - Processing test ID: TC-GUI-02
+2025-05-29 00:39:54,345 - DEBUG - Processing test ID: TC-GUI-03
+2025-05-29 00:39:54,345 - DEBUG - Processing test ID: TC-GUI-04
+2025-05-29 00:39:54,345 - DEBUG - Processing test ID: TC-GUI-05
+2025-05-29 00:39:54,345 - DEBUG - Processing test ID: TC-GUI-06
+2025-05-29 00:39:54,345 - DEBUG - Processing test ID: TC-GUI-07
+2025-05-29 00:39:54,347 - DEBUG - Updated GUI test: TC-GUI-07
+2025-05-29 00:39:54,347 - DEBUG - Processing test ID: TC-GUI-08
+2025-05-29 00:39:54,347 - DEBUG - Processing test ID: TC-GUI-09
+2025-05-29 00:39:54,347 - DEBUG - Processing test ID: TC-GUI-10
+2025-05-29 00:39:54,347 - DEBUG - Processing test ID: TC-COST-01
+2025-05-29 00:39:54,348 - DEBUG - Processing test ID: TC-COST-02
+2025-05-29 00:39:54,348 - DEBUG - Processing test ID: TC-COST-03
+2025-05-29 00:39:54,348 - DEBUG - Processing test ID: TC-COST-04
+2025-05-29 00:39:54,348 - DEBUG - Processing test ID: TC-COST-05
+2025-05-29 00:39:54,349 - DEBUG - Processing test ID: TC-FIO-001
+2025-05-29 00:39:54,350 - DEBUG - Updated FIO test: TC-FIO-001
+2025-05-29 00:39:54,350 - DEBUG - Processing test ID: TC-FIO-002
+2025-05-29 00:39:54,350 - DEBUG - Processing test ID: TC-FIO-003
+2025-05-29 00:39:54,350 - DEBUG - Processing test ID: TC-FIO-004
+2025-05-29 00:39:54,351 - DEBUG - Processing test ID: TC-FIO-005
+2025-05-29 00:39:54,351 - DEBUG - Processing test ID: TC-UNIT-01
+2025-05-29 00:39:54,352 - DEBUG - Updated row for TC-UNIT-01: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:39:54,352 - DEBUG - Processing test ID: TC-UNIT-02
+2025-05-29 00:39:54,353 - DEBUG - Updated row for TC-UNIT-02: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:39:54,353 - DEBUG - Processing test ID: TC-UNIT-03
+2025-05-29 00:39:54,354 - DEBUG - Updated row for TC-UNIT-03: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:39:54,354 - DEBUG - Processing test ID: TC-UNIT-04
+2025-05-29 00:39:54,355 - DEBUG - Updated row for TC-UNIT-04: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:39:54,368 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:50:23,765 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-29 00:50:23,775 - INFO - Loaded existing Test_Log.docx: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:50:23,776 - DEBUG - Test suite before run: ['__main__.run_unit_tests.<locals>.TestCalculator.test_cost_mild_steel', '__main__.run_unit_tests.<locals>.TestUtils.test_hash_password', '__main__.run_unit_tests.<locals>.TestGUI.test_login', '__main__.run_unit_tests.<locals>.TestLogic.test_calculate_and_save']
+2025-05-29 00:50:23,777 - INFO - calculator logging initialized
+2025-05-29 00:50:23,778 - DEBUG - TestCalculator input: {'part_id': 'PART-101', 'part_type': 'Single Part', 'material': 'mild_steel_rate', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:50:23,778 - INFO - Calculating cost for part PART-101
+2025-05-29 00:50:23,778 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:50:23,778 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:50:23,778 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:50:23,779 - INFO - Total cost for PART-101: £750.3
+2025-05-29 00:50:23,779 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:50:23,780 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:50:23,781 - INFO - file_handler logging initialized
+2025-05-29 00:50:23,789 - INFO - logger logging initialized
+2025-05-29 00:50:23,802 - INFO - logic logging initialized
+2025-05-29 00:50:23,803 - INFO - gui logging initialized
+2025-05-29 00:50:23,803 - DEBUG - TESTING_MODE: False
+2025-05-29 00:50:23,864 - INFO - Initializing SheetMetalClientHub
+2025-05-29 00:50:23,904 - INFO - Creating login screen
+2025-05-29 00:50:23,904 - DEBUG - Clearing screen
+2025-05-29 00:50:23,917 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:50:23,918 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:50:23,918 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:50:23,943 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:50:23,944 - DEBUG - Creating footer
+2025-05-29 00:50:23,945 - INFO - Attempting login
+2025-05-29 00:50:23,945 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:50:23,945 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:50:23,946 - INFO - Login successful as User
+2025-05-29 00:50:23,946 - INFO - Creating part input screen
+2025-05-29 00:50:23,946 - DEBUG - Clearing screen
+2025-05-29 00:50:23,953 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:50:23,953 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:50:23,953 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:50:23,974 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:50:23,993 - DEBUG - Creating footer
+2025-05-29 00:50:23,993 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:50:23,994 - DEBUG - Loaded 39 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:50:23,994 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-29 00:50:23,994 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:50:23,995 - DEBUG - Updated parts list display
+2025-05-29 00:50:23,995 - DEBUG - Show message: Success
+2025-05-29 00:50:24,003 - DEBUG - Tab changed
+2025-05-29 00:50:24,003 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:50:24,004 - DEBUG - Loaded 39 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:50:24,004 - DEBUG - Updating selected items: tab 0
+2025-05-29 00:50:25,469 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-29 00:50:25,645 - DEBUG - TestLogic input: {'part_type': 'Single Part', 'part_id': 'PART-12345', 'revision': 'A', 'specs': {'material': 'Mild Steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'sub_parts': [], 'fastener_types_and_counts': [], 'top_level_assembly': False, 'weldment_indicator': False}, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:50:25,645 - INFO - Calculating and saving part specifications
+2025-05-29 00:50:25,645 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:50:25,645 - INFO - Calculating cost for part PART-12345
+2025-05-29 00:50:25,646 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:50:25,646 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:50:25,646 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:50:25,646 - INFO - Total cost for PART-12345: £750.3
+2025-05-29 00:50:25,647 - INFO - Part PART-12345 saved with total cost £750.3
+2025-05-29 00:50:25,647 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-12345, Quantity: 1, Output: Part PART-12345 added, Result: Pass
+2025-05-29 00:50:25,647 - DEBUG - Test result logged: Add Part to Parts List - Pass
+2025-05-29 00:50:25,648 - DEBUG - Test result for test_cost_mild_steel: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:50:25,648 - DEBUG - Test result for test_hash_password: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:50:25,648 - DEBUG - Test result for test_login: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:50:25,648 - DEBUG - Test result for test_calculate_and_save: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:50:25,648 - DEBUG - Final test results: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:50:25,657 - DEBUG - Test results to update: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:50:25,658 - DEBUG - Processing test ID: TC-GUI-01
+2025-05-29 00:50:25,668 - DEBUG - Updated GUI test: TC-GUI-01
+2025-05-29 00:50:25,668 - DEBUG - Processing test ID: TC-GUI-02
+2025-05-29 00:50:25,669 - DEBUG - Processing test ID: TC-GUI-03
+2025-05-29 00:50:25,669 - DEBUG - Processing test ID: TC-GUI-04
+2025-05-29 00:50:25,669 - DEBUG - Processing test ID: TC-GUI-05
+2025-05-29 00:50:25,669 - DEBUG - Processing test ID: TC-GUI-06
+2025-05-29 00:50:25,670 - DEBUG - Processing test ID: TC-GUI-07
+2025-05-29 00:50:25,671 - DEBUG - Updated GUI test: TC-GUI-07
+2025-05-29 00:50:25,671 - DEBUG - Processing test ID: TC-GUI-08
+2025-05-29 00:50:25,671 - DEBUG - Processing test ID: TC-GUI-09
+2025-05-29 00:50:25,671 - DEBUG - Processing test ID: TC-GUI-10
+2025-05-29 00:50:25,672 - DEBUG - Processing test ID: TC-COST-01
+2025-05-29 00:50:25,672 - DEBUG - Processing test ID: TC-COST-02
+2025-05-29 00:50:25,672 - DEBUG - Processing test ID: TC-COST-03
+2025-05-29 00:50:25,672 - DEBUG - Processing test ID: TC-COST-04
+2025-05-29 00:50:25,673 - DEBUG - Processing test ID: TC-COST-05
+2025-05-29 00:50:25,673 - DEBUG - Processing test ID: TC-FIO-001
+2025-05-29 00:50:25,674 - DEBUG - Updated FIO test: TC-FIO-001
+2025-05-29 00:50:25,674 - DEBUG - Processing test ID: TC-FIO-002
+2025-05-29 00:50:25,674 - DEBUG - Processing test ID: TC-FIO-003
+2025-05-29 00:50:25,675 - DEBUG - Processing test ID: TC-FIO-004
+2025-05-29 00:50:25,675 - DEBUG - Processing test ID: TC-FIO-005
+2025-05-29 00:50:25,675 - DEBUG - Processing test ID: TC-UNIT-01
+2025-05-29 00:50:25,676 - DEBUG - Updated row for TC-UNIT-01: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:50:25,676 - DEBUG - Processing test ID: TC-UNIT-02
+2025-05-29 00:50:25,677 - DEBUG - Updated row for TC-UNIT-02: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:50:25,677 - DEBUG - Processing test ID: TC-UNIT-03
+2025-05-29 00:50:25,678 - DEBUG - Updated row for TC-UNIT-03: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:50:25,678 - DEBUG - Processing test ID: TC-UNIT-04
+2025-05-29 00:50:25,679 - DEBUG - Updated row for TC-UNIT-04: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:50:25,692 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:53:48,200 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-29 00:53:48,211 - INFO - Loaded existing Test_Log.docx: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 00:53:48,211 - DEBUG - Test suite before run: ['__main__.run_unit_tests.<locals>.TestCalculator.test_cost_mild_steel', '__main__.run_unit_tests.<locals>.TestUtils.test_hash_password', '__main__.run_unit_tests.<locals>.TestGUI.test_login', '__main__.run_unit_tests.<locals>.TestLogic.test_calculate_and_save']
+2025-05-29 00:53:48,212 - INFO - calculator logging initialized
+2025-05-29 00:53:48,213 - DEBUG - TestCalculator input: {'part_id': 'PART-101', 'part_type': 'Single Part', 'material': 'mild_steel_rate', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:53:48,213 - INFO - Calculating cost for part PART-101
+2025-05-29 00:53:48,213 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:53:48,213 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:53:48,214 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:53:48,214 - INFO - Total cost for PART-101: £750.3
+2025-05-29 00:53:48,215 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:53:48,215 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:53:48,216 - INFO - file_handler logging initialized
+2025-05-29 00:53:48,224 - INFO - logger logging initialized
+2025-05-29 00:53:48,237 - INFO - logic logging initialized
+2025-05-29 00:53:48,238 - INFO - gui logging initialized
+2025-05-29 00:53:48,239 - DEBUG - TESTING_MODE: False
+2025-05-29 00:53:48,300 - INFO - Initializing SheetMetalClientHub
+2025-05-29 00:53:48,349 - INFO - Creating login screen
+2025-05-29 00:53:48,349 - DEBUG - Clearing screen
+2025-05-29 00:53:48,365 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:53:48,366 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:53:48,366 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:53:48,394 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:53:48,396 - DEBUG - Creating footer
+2025-05-29 00:53:48,396 - INFO - Attempting login
+2025-05-29 00:53:48,397 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 00:53:48,397 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 00:53:48,397 - INFO - Login successful as User
+2025-05-29 00:53:48,397 - INFO - Creating part input screen
+2025-05-29 00:53:48,398 - DEBUG - Clearing screen
+2025-05-29 00:53:48,405 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 00:53:48,405 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 00:53:48,405 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 00:53:48,427 - DEBUG - Loaded laser_gear.png
+2025-05-29 00:53:48,454 - DEBUG - Creating footer
+2025-05-29 00:53:48,454 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:53:48,455 - DEBUG - Loaded 40 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:53:48,455 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-29 00:53:48,456 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:53:48,456 - DEBUG - Updated parts list display
+2025-05-29 00:53:48,456 - DEBUG - Show message: Success
+2025-05-29 00:53:48,465 - DEBUG - Tab changed
+2025-05-29 00:53:48,465 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 00:53:48,466 - DEBUG - Loaded 40 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 00:53:48,467 - DEBUG - Updating selected items: tab 0
+2025-05-29 00:53:50,094 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-29 00:53:50,263 - DEBUG - TestLogic input: {'part_type': 'Single Part', 'part_id': 'PART-12345', 'revision': 'A', 'specs': {'material': 'Mild Steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'sub_parts': [], 'fastener_types_and_counts': [], 'top_level_assembly': False, 'weldment_indicator': False}, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 00:53:50,263 - INFO - Calculating and saving part specifications
+2025-05-29 00:53:50,264 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 00:53:50,264 - INFO - Calculating cost for part PART-12345
+2025-05-29 00:53:50,264 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 00:53:50,265 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 00:53:50,265 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 00:53:50,265 - INFO - Total cost for PART-12345: £750.3
+2025-05-29 00:53:50,266 - INFO - Part PART-12345 saved with total cost £750.3
+2025-05-29 00:53:50,266 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-12345, Quantity: 1, Output: Part PART-12345 added, Result: Pass
+2025-05-29 00:53:50,266 - DEBUG - Test result logged: Add Part to Parts List - Pass
+2025-05-29 00:53:50,267 - DEBUG - Test result for test_cost_mild_steel: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:53:50,267 - DEBUG - Test result for test_hash_password: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:53:50,267 - DEBUG - Test result for test_login: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:53:50,267 - DEBUG - Test result for test_calculate_and_save: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:53:50,267 - DEBUG - Final test results: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:53:50,276 - DEBUG - Test results to update: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 00:53:50,276 - DEBUG - Processing test ID: TC-GUI-01
+2025-05-29 00:53:50,287 - DEBUG - Updated GUI test: TC-GUI-01
+2025-05-29 00:53:50,287 - DEBUG - Processing test ID: TC-GUI-02
+2025-05-29 00:53:50,287 - DEBUG - Processing test ID: TC-GUI-03
+2025-05-29 00:53:50,288 - DEBUG - Processing test ID: TC-GUI-04
+2025-05-29 00:53:50,288 - DEBUG - Processing test ID: TC-GUI-05
+2025-05-29 00:53:50,288 - DEBUG - Processing test ID: TC-GUI-06
+2025-05-29 00:53:50,288 - DEBUG - Processing test ID: TC-GUI-07
+2025-05-29 00:53:50,290 - DEBUG - Updated GUI test: TC-GUI-07
+2025-05-29 00:53:50,290 - DEBUG - Processing test ID: TC-GUI-08
+2025-05-29 00:53:50,290 - DEBUG - Processing test ID: TC-GUI-09
+2025-05-29 00:53:50,290 - DEBUG - Processing test ID: TC-GUI-10
+2025-05-29 00:53:50,290 - DEBUG - Processing test ID: TC-COST-01
+2025-05-29 00:53:50,291 - DEBUG - Processing test ID: TC-COST-02
+2025-05-29 00:53:50,291 - DEBUG - Processing test ID: TC-COST-03
+2025-05-29 00:53:50,291 - DEBUG - Processing test ID: TC-COST-04
+2025-05-29 00:53:50,291 - DEBUG - Processing test ID: TC-COST-05
+2025-05-29 00:53:50,291 - DEBUG - Processing test ID: TC-FIO-001
+2025-05-29 00:53:50,293 - DEBUG - Updated FIO test: TC-FIO-001
+2025-05-29 00:53:50,293 - DEBUG - Processing test ID: TC-FIO-002
+2025-05-29 00:53:50,293 - DEBUG - Processing test ID: TC-FIO-003
+2025-05-29 00:53:50,293 - DEBUG - Processing test ID: TC-FIO-004
+2025-05-29 00:53:50,294 - DEBUG - Processing test ID: TC-FIO-005
+2025-05-29 00:53:50,294 - DEBUG - Processing test ID: TC-UNIT-01
+2025-05-29 00:53:50,295 - DEBUG - Updated row for TC-UNIT-01: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 00:53:50,295 - DEBUG - Processing test ID: TC-UNIT-02
+2025-05-29 00:53:50,296 - DEBUG - Updated row for TC-UNIT-02: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 00:53:50,296 - DEBUG - Processing test ID: TC-UNIT-03
+2025-05-29 00:53:50,297 - DEBUG - Updated row for TC-UNIT-03: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 00:53:50,297 - DEBUG - Processing test ID: TC-UNIT-04
+2025-05-29 00:53:50,298 - DEBUG - Updated row for TC-UNIT-04: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 00:53:50,311 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 01:59:30,559 - INFO - Loaded 24 test cases from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\test_cases.json
+2025-05-29 01:59:30,569 - INFO - Loaded existing Test_Log.docx: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx
+2025-05-29 01:59:30,570 - DEBUG - Test suite before run: ['__main__.run_unit_tests.<locals>.TestCalculator.test_cost_mild_steel', '__main__.run_unit_tests.<locals>.TestUtils.test_hash_password', '__main__.run_unit_tests.<locals>.TestGUI.test_login', '__main__.run_unit_tests.<locals>.TestLogic.test_calculate_and_save']
+2025-05-29 01:59:30,571 - INFO - calculator logging initialized
+2025-05-29 01:59:30,571 - DEBUG - TestCalculator input: {'part_id': 'PART-101', 'part_type': 'Single Part', 'material': 'mild_steel_rate', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 01:59:30,572 - INFO - Calculating cost for part PART-101
+2025-05-29 01:59:30,572 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 01:59:30,572 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 01:59:30,572 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 01:59:30,573 - INFO - Total cost for PART-101: £750.3
+2025-05-29 01:59:30,574 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 01:59:30,574 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 01:59:30,575 - INFO - file_handler logging initialized
+2025-05-29 01:59:30,583 - INFO - logger logging initialized
+2025-05-29 01:59:30,597 - INFO - logic logging initialized
+2025-05-29 01:59:30,598 - INFO - gui logging initialized
+2025-05-29 01:59:30,598 - DEBUG - TESTING_MODE: False
+2025-05-29 01:59:30,659 - INFO - Initializing SheetMetalClientHub
+2025-05-29 01:59:30,698 - INFO - Creating login screen
+2025-05-29 01:59:30,698 - DEBUG - Clearing screen
+2025-05-29 01:59:30,711 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 01:59:30,711 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 01:59:30,711 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 01:59:30,736 - DEBUG - Loaded laser_gear.png
+2025-05-29 01:59:30,737 - DEBUG - Creating footer
+2025-05-29 01:59:30,738 - INFO - Attempting login
+2025-05-29 01:59:30,738 - DEBUG - Password bytes: b'moffat123'
+2025-05-29 01:59:30,738 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0 (input: 'moffat123')
+2025-05-29 01:59:30,739 - INFO - Login successful as User
+2025-05-29 01:59:30,739 - INFO - Creating part input screen
+2025-05-29 01:59:30,739 - DEBUG - Clearing screen
+2025-05-29 01:59:30,748 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-29 01:59:30,748 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-29 01:59:30,749 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-29 01:59:30,769 - DEBUG - Loaded laser_gear.png
+2025-05-29 01:59:30,790 - DEBUG - Creating footer
+2025-05-29 01:59:30,791 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 01:59:30,792 - DEBUG - Loaded 105 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 01:59:30,793 - DEBUG - Updating sub-parts dropdown: tab 1
+2025-05-29 01:59:30,793 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 01:59:30,793 - DEBUG - Updated parts list display
+2025-05-29 01:59:30,793 - DEBUG - Show message: Success
+2025-05-29 01:59:30,803 - DEBUG - Tab changed
+2025-05-29 01:59:30,803 - DEBUG - Updating sub-parts dropdown: tab 0
+2025-05-29 01:59:30,807 - DEBUG - Loaded 105 parts from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\output.txt
+2025-05-29 01:59:30,809 - DEBUG - Updating selected items: tab 0
+2025-05-29 01:59:32,284 - INFO - Success: FR1: Login completed: Login successful as User
+2025-05-29 01:59:32,459 - DEBUG - TestLogic input: {'part_type': 'Single Part', 'part_id': 'PART-12345', 'revision': 'A', 'specs': {'material': 'Mild Steel', 'thickness': 1.0, 'length': 1000, 'width': 500, 'quantity': 1, 'sub_parts': [], 'fastener_types_and_counts': [], 'top_level_assembly': False, 'weldment_indicator': False}, 'work_centres': [('Cutting', 100, 'None')]}
+2025-05-29 01:59:32,459 - INFO - Calculating and saving part specifications
+2025-05-29 01:59:32,459 - DEBUG - Loaded 4 items from C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\parts_catalogue.txt
+2025-05-29 01:59:32,459 - INFO - Calculating cost for part PART-12345
+2025-05-29 01:59:32,460 - DEBUG - Material cost: £750.0 (area=0.5m², thickness=1.0mm)
+2025-05-29 01:59:32,460 - DEBUG - Operation cost for Cutting (None): £0.3 (qty=100)
+2025-05-29 01:59:32,460 - DEBUG - Catalogue cost: £0.0 x 1
+2025-05-29 01:59:32,460 - INFO - Total cost for PART-12345: £750.3
+2025-05-29 01:59:32,461 - INFO - Part PART-12345 saved with total cost £750.3
+2025-05-29 01:59:32,461 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-12345, Quantity: 1, Output: Part PART-12345 added, Result: Pass
+2025-05-29 01:59:32,461 - DEBUG - Test result logged: Add Part to Parts List - Pass
+2025-05-29 01:59:32,462 - DEBUG - Test result for test_cost_mild_steel: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 01:59:32,462 - DEBUG - Test result for test_hash_password: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 01:59:32,462 - DEBUG - Test result for test_login: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 01:59:32,462 - DEBUG - Test result for test_calculate_and_save: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 01:59:32,462 - DEBUG - Final test results: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 01:59:32,471 - DEBUG - Test results to update: {'test_cost_mild_steel': {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}, 'test_hash_password': {'status': 'Pass', 'comment': 'Password hashed correctly'}, 'test_login': {'status': 'Pass', 'comment': 'Login successful as User'}, 'test_calculate_and_save': {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}}
+2025-05-29 01:59:32,472 - DEBUG - Processing test ID: TC-GUI-01
+2025-05-29 01:59:32,483 - DEBUG - Updated GUI test: TC-GUI-01
+2025-05-29 01:59:32,483 - DEBUG - Processing test ID: TC-GUI-02
+2025-05-29 01:59:32,484 - DEBUG - Processing test ID: TC-GUI-03
+2025-05-29 01:59:32,484 - DEBUG - Processing test ID: TC-GUI-04
+2025-05-29 01:59:32,484 - DEBUG - Processing test ID: TC-GUI-05
+2025-05-29 01:59:32,484 - DEBUG - Processing test ID: TC-GUI-06
+2025-05-29 01:59:32,484 - DEBUG - Processing test ID: TC-GUI-07
+2025-05-29 01:59:32,486 - DEBUG - Updated GUI test: TC-GUI-07
+2025-05-29 01:59:32,486 - DEBUG - Processing test ID: TC-GUI-08
+2025-05-29 01:59:32,486 - DEBUG - Processing test ID: TC-GUI-09
+2025-05-29 01:59:32,486 - DEBUG - Processing test ID: TC-GUI-10
+2025-05-29 01:59:32,487 - DEBUG - Processing test ID: TC-COST-01
+2025-05-29 01:59:32,487 - DEBUG - Processing test ID: TC-COST-02
+2025-05-29 01:59:32,487 - DEBUG - Processing test ID: TC-COST-03
+2025-05-29 01:59:32,487 - DEBUG - Processing test ID: TC-COST-04
+2025-05-29 01:59:32,488 - DEBUG - Processing test ID: TC-COST-05
+2025-05-29 01:59:32,488 - DEBUG - Processing test ID: TC-FIO-001
+2025-05-29 01:59:32,489 - DEBUG - Updated FIO test: TC-FIO-001
+2025-05-29 01:59:32,489 - DEBUG - Processing test ID: TC-FIO-002
+2025-05-29 01:59:32,490 - DEBUG - Processing test ID: TC-FIO-003
+2025-05-29 01:59:32,490 - DEBUG - Processing test ID: TC-FIO-004
+2025-05-29 01:59:32,490 - DEBUG - Processing test ID: TC-FIO-005
+2025-05-29 01:59:32,490 - DEBUG - Processing test ID: TC-UNIT-01
+2025-05-29 01:59:32,491 - DEBUG - Updated row for TC-UNIT-01: {'status': 'Pass', 'comment': 'Cost calculated: £750.3'}
+2025-05-29 01:59:32,491 - DEBUG - Processing test ID: TC-UNIT-02
+2025-05-29 01:59:32,492 - DEBUG - Updated row for TC-UNIT-02: {'status': 'Pass', 'comment': 'Login successful as User'}
+2025-05-29 01:59:32,492 - DEBUG - Processing test ID: TC-UNIT-03
+2025-05-29 01:59:32,493 - DEBUG - Updated row for TC-UNIT-03: {'status': 'Pass', 'comment': 'Part saved with cost £750.3'}
+2025-05-29 01:59:32,493 - DEBUG - Processing test ID: TC-UNIT-04
+2025-05-29 01:59:32,494 - DEBUG - Updated row for TC-UNIT-04: {'status': 'Pass', 'comment': 'Password hashed correctly'}
+2025-05-29 01:59:32,508 - INFO - Test log document updated: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\test_logs\Test_Log.docx

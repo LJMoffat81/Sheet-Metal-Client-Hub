@@ -17,3 +17,113 @@ PART-67891ABCDE,A,Mild Steel,1.0,1000,500,5,255.0,[],[('Coating', 1000.0, 'Paint
 PART-67890ABCDE,A,Mild Steel,1.0,1000,500,10,520.0,[],[('Welding', 100.0, 'MIG')]
 PART-55555,h77,Stainless Steel,1.2,100,500,10,287.5,[('PEM', 10)],[('Cutting', 100.0, 'None'), ('Bending', 2.0, 'None'), ('Welding', 500.0, 'MIG')]
 PART-55555,h77,Stainless Steel,1.2,100,500,10,287.5,[('PEM', 10)],[('Cutting', 100.0, 'None'), ('Bending', 2.0, 'None'), ('Welding', 500.0, 'MIG')]
+ASSY-99999,D9,N/A,0.0,0,0,5,211.25,[],[('Cutting', 1000.0, 'None'), ('Bending', 2.0, 'None'), ('Welding', 500.0, 'MIG'), ('Assembly', 2.0, 'None'), ('Finishing', 5000.0, 'None'), ('Drilling', 5.0, 'None'), ('Punching', 5.0, 'None'), ('Grinding', 1000.0, 'None'), ('Coating', 5000.0, 'Painting'), ('Inspection', 2.0, 'None')]
+PART-555599,D9,Mild Steel,1.0,1000,500,10,955.5,[('FAS', 10)],[('Cutting', 1000.0, 'None'), ('Bending', 2.0, 'None'), ('Welding', 500.0, 'MIG'), ('Assembly', 2.0, 'None'), ('Finishing', 5000.0, 'None'), ('Drilling', 5.0, 'None'), ('Punching', 5.0, 'None'), ('Grinding', 1000.0, 'None'), ('Coating', 5000.0, 'Painting'), ('Inspection', 2.0, 'None')]
+PART-555599,D9,Mild Steel,1.0,1000,500,10,955.5,[('FAS', 10)],[('Cutting', 1000.0, 'None'), ('Bending', 2.0, 'None'), ('Welding', 500.0, 'MIG'), ('Assembly', 2.0, 'None'), ('Finishing', 5000.0, 'None'), ('Drilling', 5.0, 'None'), ('Punching', 5.0, 'None'), ('Grinding', 1000.0, 'None'), ('Coating', 5000.0, 'Painting'), ('Inspection', 2.0, 'None')]
+PART-22222k,s3,Aluminium,1.2,1000,500,50,5192.5,[('PEM', 4)],[('Cutting', 100.0, 'None'), ('Bending', 1.0, 'None'), ('Welding', 500.0, 'MIG')]
+PART-22222k,s3,Aluminium,1.2,1000,500,50,5192.5,[('PEM', 4)],[('Cutting', 100.0, 'None'), ('Bending', 1.0, 'None'), ('Welding', 500.0, 'MIG')]
+PART-55554,f4,Stainless Steel,1.5,2000,1000,10,6103.000000000001,[('FAS', 5)],[('Cutting', 100.0, 'None'), ('Bending', 5.0, 'None'), ('Coating', 5000.0, 'Painting')]
+PART-55554,f4,Stainless Steel,1.5,2000,1000,10,6103.000000000001,[('FAS', 5)],[('Cutting', 100.0, 'None'), ('Bending', 5.0, 'None'), ('Coating', 5000.0, 'Painting')]
+ASSY-66666,w3,N/A,0.0,0,0,5,8.0,[],[('Assembly', 2.0, 'None')]
+PART-34343,h6,Mild Steel,1.0,1000,500,1,54.5,[],[('Cutting', 100.0, 'None'), ('Welding', 100.0, 'MIG')]
+ASSY-87698,g6,N/A,0.0,0,0,10,16.0,[],[('Assembly', 2.0, 'None')]
+PART-999890,l8,Aluminium,1.5,1000,500,10,1235.0,[],[('Cutting', 100.0, 'None'), ('Bending', 2.0, 'None')]
+PART-567845,d5,Mild Steel,1.0,1000,500,20,1170.0,[],[('Cutting', 100.0, 'None'), ('Bending', 5.0, 'None')]
+PART-4545678,h23,Aluminium,1.5,1000,500,20,2650.0,[],[('Cutting', 500.0, 'None'), ('Bending', 2.0, 'None')]
+PART-345623,Q2,Aluminium,2.5,1000,1000,20,8803.0,[],Cutting:1000.0:None;Bending:2.0:None;Welding:500.0:MIG
+PART-478569,l90,Stainless Steel,2.0,1000,1000,20,40014665.3,[],Cutting:100.0:None;Bending:5.0:None;Welding:500.0:MIG;Assembly:2.0:None;Finishing:10000.0:None;Drilling:10.0:None;Punching:10.0:None;Grinding:5000.0:None;Coating:5000.0:Painting;Inspection:2.0:None
+PART-43526,d66,Stainless Steel,3.0,1000,500,5,7681.625,[],Cutting:500.0:None;Bending:5.0:None
+PART-98765,A3,Aluminium,1.5,500,500,10,57.0,[],Cutting:500.0:None
+PART-56789,A44,Aluminium,1.2,100,500,20,18.3,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST001,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST002,A,Mild Steel,2.0,1000,500,1,10.015,[],Cutting:100.0:None
+PART-COST003,A,Aluminium,1.0,1000,500,1,7.515,[],Cutting:100.0:None
+PART-COST004,A,Mild Steel,1.0,1000,500,1,11.265,[],Cutting:100.0:None;Bending:5.0:None
+PART-FIO002,A,Mild Steel,1.0,1000,500,1,21.25,[],Assembly:1.0:None;Bending:5.0:None
+PART-FIO004,A,Mild Steel,1.0,1000,500,1,21.25,[],Assembly:1.0:None;Bending:5.0:None
+PART-FIO005,A,Mild Steel,1.0,1000,500,1,21.25,[],Assembly:1.0:None;Bending:5.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST001,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST002,A,Mild Steel,2.0,1000,500,1,10.015,[],Cutting:100.0:None
+PART-COST003,A,Aluminium,1.0,1000,500,1,7.515,[],Cutting:100.0:None
+PART-COST004,A,Mild Steel,1.0,1000,500,1,11.265,[],Cutting:100.0:None;Bending:5.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST001,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST002,A,Mild Steel,2.0,1000,500,1,10.015,[],Cutting:100.0:None
+PART-COST003,A,Aluminium,1.0,1000,500,1,7.515,[],Cutting:100.0:None
+PART-COST004,A,Mild Steel,1.0,1000,500,1,11.265,[],Cutting:100.0:None;Bending:5.0:None
+PART-FIO002,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO004,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO005,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST001,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST002,A,Mild Steel,2.0,1000,500,1,10.015,[],Cutting:100.0:None
+PART-COST003,A,Aluminium,1.0,1000,500,1,7.515,[],Cutting:100.0:None
+PART-COST004,A,Mild Steel,1.0,1000,500,1,11.265,[],Cutting:100.0:None;Bending:5.0:None
+PART-FIO002,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO004,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO005,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST001,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST002,A,Mild Steel,2.0,1000,500,1,10.015,[],Cutting:100.0:None
+PART-COST003,A,Aluminium,1.0,1000,500,1,7.515,[],Cutting:100.0:None
+PART-COST004,A,Mild Steel,1.0,1000,500,1,11.265,[],Cutting:100.0:None;Bending:5.0:None
+PART-FIO002,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO004,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO005,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST001,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST002,A,Mild Steel,2.0,1000,500,1,10.015,[],Cutting:100.0:None
+PART-COST003,A,Aluminium,1.0,1000,500,1,7.515,[],Cutting:100.0:None
+PART-COST004,A,Mild Steel,1.0,1000,500,1,11.265,[],Cutting:100.0:None;Bending:5.0:None
+PART-FIO002,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO004,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO005,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST001,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST002,A,Mild Steel,2.0,1000,500,1,10.015,[],Cutting:100.0:None
+PART-COST003,A,Aluminium,1.0,1000,500,1,7.515,[],Cutting:100.0:None
+PART-COST004,A,Mild Steel,1.0,1000,500,1,11.265,[],Cutting:100.0:None;Bending:5.0:None
+PART-FIO002,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO004,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO005,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST001,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST002,A,Mild Steel,2.0,1000,500,1,10.015,[],Cutting:100.0:None
+PART-COST003,A,Aluminium,1.0,1000,500,1,7.515,[],Cutting:100.0:None
+PART-COST004,A,Mild Steel,1.0,1000,500,1,11.265,[],Cutting:100.0:None;Bending:5.0:None
+PART-FIO002,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO004,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO005,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST001,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST002,A,Mild Steel,2.0,1000,500,1,10.015,[],Cutting:100.0:None
+PART-COST003,A,Aluminium,1.0,1000,500,1,7.515,[],Cutting:100.0:None
+PART-COST004,A,Mild Steel,1.0,1000,500,1,11.265,[],Cutting:100.0:None;Bending:5.0:None
+PART-FIO002,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO004,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO005,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST001,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST002,A,Mild Steel,2.0,1000,500,1,10.015,[],Cutting:100.0:None
+PART-COST003,A,Aluminium,1.0,1000,500,1,7.515,[],Cutting:100.0:None
+PART-COST004,A,Mild Steel,1.0,1000,500,1,11.265,[],Cutting:100.0:None;Bending:5.0:None
+PART-FIO002,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO004,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO005,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-12345,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST001,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-COST002,A,Mild Steel,2.0,1000,500,1,10.015,[],Cutting:100.0:None
+PART-COST003,A,Aluminium,1.0,1000,500,1,7.515,[],Cutting:100.0:None
+PART-COST004,A,Mild Steel,1.0,1000,500,1,11.265,[],Cutting:100.0:None;Bending:5.0:None
+PART-FIO002,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO004,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None
+PART-FIO005,A,Mild Steel,1.0,1000,500,1,5.015,[],Cutting:100.0:None

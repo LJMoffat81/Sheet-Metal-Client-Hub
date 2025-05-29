@@ -4599,3 +4599,1527 @@ Saved to data/output.txt
 2025-05-25 21:51:41,328 - INFO - Creating login screen
 2025-05-25 21:51:41,328 - DEBUG - Clearing screen
 2025-05-25 21:51:41,332 - DEBUG - Creating footer
+2025-05-27 18:44:55,963 - INFO - GUI logging initialized
+2025-05-27 18:44:55,964 - DEBUG - TESTING_MODE set to: False
+2025-05-27 18:44:56,021 - INFO - Initializing SheetMetalClientHub
+2025-05-27 18:44:56,056 - INFO - Creating login screen
+2025-05-27 18:44:56,056 - DEBUG - Clearing screen
+2025-05-27 18:44:56,061 - DEBUG - Creating footer
+2025-05-27 18:45:03,754 - INFO - Attempting login
+2025-05-27 18:45:03,755 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 18:45:03,755 - DEBUG - Validating credentials for username: admin
+2025-05-27 18:45:03,755 - INFO - Credentials validated for username: admin
+2025-05-27 18:45:03,755 - INFO - Credentials validated for username: admin
+2025-05-27 18:45:03,755 - INFO - Creating admin settings screen
+2025-05-27 18:45:03,756 - DEBUG - Clearing screen
+2025-05-27 18:45:03,763 - DEBUG - Creating footer
+2025-05-27 18:45:03,764 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 18:45:11,750 - INFO - Success: Login successful as Admin
+2025-05-27 18:45:11,750 - INFO - Test Case: FR1: Login, Input: Username: admin, Password: [hidden], Output: Login successful as Admin, Pass/Fail: Pass
+2025-05-27 18:45:14,984 - INFO - Creating part input screen
+2025-05-27 18:45:14,984 - DEBUG - Clearing screen
+2025-05-27 18:45:15,004 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-27 18:45:15,004 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-27 18:45:15,004 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-27 18:45:15,038 - DEBUG - Creating footer
+2025-05-27 18:45:15,039 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-27 18:45:15,039 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 18:45:15,040 - DEBUG - Updating sub-parts dropdown for tab 1
+2025-05-27 18:45:15,040 - DEBUG - Loaded 4 items from parts_catalogue.txt
+2025-05-27 18:45:15,040 - DEBUG - Tab changed
+2025-05-27 18:45:15,041 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-27 18:45:15,041 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 18:45:15,042 - DEBUG - Updating selected items for tab 0
+2025-05-27 18:45:25,987 - DEBUG - Tab changed
+2025-05-27 18:45:25,988 - DEBUG - Updating sub-parts dropdown for tab 1
+2025-05-27 18:45:25,988 - DEBUG - Loaded 4 items from parts_catalogue.txt
+2025-05-27 18:45:25,988 - DEBUG - Updating selected items for tab 1
+2025-05-27 18:45:29,099 - DEBUG - Tab changed
+2025-05-27 18:45:29,100 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-27 18:45:29,101 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 18:45:29,101 - DEBUG - Updating selected items for tab 0
+2025-05-27 18:45:31,032 - DEBUG - Tab changed
+2025-05-27 18:45:31,032 - DEBUG - Updating sub-parts dropdown for tab 1
+2025-05-27 18:45:31,033 - DEBUG - Loaded 4 items from parts_catalogue.txt
+2025-05-27 18:45:31,033 - DEBUG - Updating selected items for tab 1
+2025-05-27 18:45:31,732 - DEBUG - Tab changed
+2025-05-27 18:45:31,732 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-27 18:45:31,733 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 18:45:31,734 - DEBUG - Updating selected items for tab 0
+2025-05-27 18:45:32,561 - DEBUG - Tab changed
+2025-05-27 18:45:32,561 - DEBUG - Updating sub-parts dropdown for tab 1
+2025-05-27 18:45:32,562 - DEBUG - Loaded 4 items from parts_catalogue.txt
+2025-05-27 18:45:32,562 - DEBUG - Updating selected items for tab 1
+2025-05-27 18:45:35,250 - DEBUG - Tab changed
+2025-05-27 18:45:35,250 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-27 18:45:35,251 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 18:45:35,251 - DEBUG - Updating selected items for tab 0
+2025-05-27 18:58:56,935 - INFO - GUI logging initialized
+2025-05-27 18:58:56,935 - DEBUG - TESTING_MODE set to: False
+2025-05-27 18:58:56,993 - INFO - Initializing SheetMetalClientHub
+2025-05-27 18:58:57,030 - INFO - Creating login screen
+2025-05-27 18:58:57,031 - DEBUG - Clearing screen
+2025-05-27 18:58:57,036 - DEBUG - Creating footer
+2025-05-27 18:59:05,908 - INFO - Attempting login
+2025-05-27 18:59:05,908 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 18:59:05,908 - DEBUG - Validating credentials for username: laurie
+2025-05-27 18:59:05,909 - INFO - Credentials validated for username: laurie
+2025-05-27 18:59:05,910 - INFO - Credentials validated for username: laurie
+2025-05-27 18:59:05,910 - INFO - Creating part input screen
+2025-05-27 18:59:05,910 - DEBUG - Clearing screen
+2025-05-27 18:59:05,953 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-27 18:59:05,953 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-27 18:59:05,953 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-27 18:59:06,010 - DEBUG - Creating footer
+2025-05-27 18:59:06,010 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-27 18:59:06,017 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 18:59:06,017 - DEBUG - Updating sub-parts dropdown for tab 1
+2025-05-27 18:59:06,018 - DEBUG - Loaded 4 items from parts_catalogue.txt
+2025-05-27 18:59:06,019 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 18:59:06,025 - DEBUG - Tab changed
+2025-05-27 18:59:06,026 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-27 18:59:06,026 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 18:59:06,027 - DEBUG - Updating selected items for tab 0
+2025-05-27 18:59:07,360 - INFO - Success: Login successful as User
+2025-05-27 18:59:07,361 - INFO - Test Case: FR1: Login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Pass/Fail: Pass
+2025-05-27 18:59:32,578 - INFO - Opening part search pop-up
+2025-05-27 18:59:32,590 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 18:59:36,599 - INFO - Adding part PART-67891ABCDE with quantity 3 to parts list
+2025-05-27 18:59:36,599 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-67891ABCDE, Quantity: 3, Output: Part PART-67891ABCDE added, Pass/Fail: Pass
+2025-05-27 18:59:36,599 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 18:59:37,785 - INFO - Success: Added PART-67891ABCDE (Qty: 3) to parts list
+2025-05-27 18:59:38,398 - INFO - Opening part search pop-up
+2025-05-27 18:59:38,401 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 18:59:41,908 - INFO - Adding part ASSY-99999 with quantity 7 to parts list
+2025-05-27 18:59:41,908 - INFO - Test Case: Add Part to Parts List, Input: Part ID: ASSY-99999, Quantity: 7, Output: Part ASSY-99999 added, Pass/Fail: Pass
+2025-05-27 18:59:41,909 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 18:59:43,109 - INFO - Success: Added ASSY-99999 (Qty: 7) to parts list
+2025-05-27 18:59:44,698 - INFO - Opening part search pop-up
+2025-05-27 18:59:44,702 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 18:59:46,994 - INFO - Adding part ASSY-44458 with quantity 1 to parts list
+2025-05-27 18:59:46,994 - INFO - Test Case: Add Part to Parts List, Input: Part ID: ASSY-44458, Quantity: 1, Output: Part ASSY-44458 added, Pass/Fail: Pass
+2025-05-27 18:59:46,994 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 18:59:48,173 - INFO - Success: Added ASSY-44458 (Qty: 1) to parts list
+2025-05-27 18:59:51,875 - INFO - Creating quote screen
+2025-05-27 18:59:51,876 - DEBUG - Clearing screen
+2025-05-27 18:59:52,005 - DEBUG - Creating footer
+2025-05-27 19:00:16,483 - INFO - Generating quote for all added parts
+2025-05-27 19:00:16,484 - INFO - Saved quote for parts: PART-67891ABCDE:3;ASSY-99999:7;ASSY-44458:1
+2025-05-27 19:00:16,484 - INFO - Clearing parts list
+2025-05-27 19:00:16,484 - INFO - Clearing parts list
+2025-05-27 19:00:16,484 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 19:04:50,197 - ERROR - Error: Unexpected error: invalid command name ".!frame4.!frame2.!frame.!frame2.!listbox"
+2025-05-27 19:04:50,197 - INFO - Test Case: FR7: Generate quote, Input: Customer Name: FatMan, Profit Margin: 25%, Output: Unexpected error: invalid command name ".!frame4.!frame2.!frame.!frame2.!listbox", Pass/Fail: Fail
+2025-05-27 19:09:45,190 - INFO - GUI logging initialized
+2025-05-27 19:09:45,190 - DEBUG - TESTING_MODE set to: False
+2025-05-27 19:09:45,492 - INFO - Initializing SheetMetalClientHub
+2025-05-27 19:09:45,542 - INFO - Creating login screen
+2025-05-27 19:09:45,542 - DEBUG - Clearing screen
+2025-05-27 19:09:45,549 - DEBUG - Creating footer
+2025-05-27 19:09:52,912 - INFO - Attempting login
+2025-05-27 19:09:52,912 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 19:09:52,913 - DEBUG - Validating credentials for username: laurie
+2025-05-27 19:09:52,920 - INFO - Credentials validated for username: laurie
+2025-05-27 19:09:52,920 - INFO - Credentials validated for username: laurie
+2025-05-27 19:09:52,920 - INFO - Creating part input screen
+2025-05-27 19:09:52,920 - DEBUG - Clearing screen
+2025-05-27 19:09:52,962 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-27 19:09:52,963 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-27 19:09:52,963 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-27 19:09:53,018 - ERROR - Error validating credentials for username: laurie: unknown option "-ordient"
+2025-05-27 19:09:53,018 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 19:09:53,025 - DEBUG - Tab changed
+2025-05-27 19:09:53,025 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-27 19:09:53,026 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 19:09:53,026 - DEBUG - Updating selected items for tab 0
+2025-05-27 19:09:57,672 - ERROR - Error: Invalid input: Authentication error: unknown option "-ordient"
+2025-05-27 19:09:57,672 - INFO - Test Case: FR1: Login, Input: Username: laurie, Password: [hidden], Output: Invalid input: Authentication error: unknown option "-ordient", Pass/Fail: Fail
+2025-05-27 19:10:05,242 - INFO - GUI logging initialized
+2025-05-27 19:10:05,242 - DEBUG - TESTING_MODE set to: False
+2025-05-27 19:10:05,300 - INFO - Initializing SheetMetalClientHub
+2025-05-27 19:10:05,334 - INFO - Creating login screen
+2025-05-27 19:10:05,335 - DEBUG - Clearing screen
+2025-05-27 19:10:05,339 - DEBUG - Creating footer
+2025-05-27 19:10:11,417 - INFO - Attempting login
+2025-05-27 19:10:11,417 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 19:10:11,417 - DEBUG - Validating credentials for username: laurie
+2025-05-27 19:10:11,418 - INFO - Credentials validated for username: laurie
+2025-05-27 19:10:11,418 - INFO - Credentials validated for username: laurie
+2025-05-27 19:10:11,418 - INFO - Creating part input screen
+2025-05-27 19:10:11,418 - DEBUG - Clearing screen
+2025-05-27 19:10:11,436 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-27 19:10:11,436 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-27 19:10:11,437 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-27 19:10:11,470 - ERROR - Error validating credentials for username: laurie: unknown option "-ordient"
+2025-05-27 19:10:11,470 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 19:10:11,477 - DEBUG - Tab changed
+2025-05-27 19:10:11,477 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-27 19:10:11,477 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 19:10:11,478 - DEBUG - Updating selected items for tab 0
+2025-05-27 19:10:21,793 - ERROR - Error: Invalid input: Authentication error: unknown option "-ordient"
+2025-05-27 19:10:21,793 - INFO - Test Case: FR1: Login, Input: Username: laurie, Password: [hidden], Output: Invalid input: Authentication error: unknown option "-ordient", Pass/Fail: Fail
+2025-05-27 19:32:56,168 - INFO - GUI logging initialized
+2025-05-27 19:32:56,168 - DEBUG - TESTING_MODE set to: False
+2025-05-27 19:32:56,236 - INFO - Initializing SheetMetalClientHub
+2025-05-27 19:32:56,274 - INFO - Creating login screen
+2025-05-27 19:32:56,274 - DEBUG - Clearing screen
+2025-05-27 19:32:56,280 - DEBUG - Creating footer
+2025-05-27 19:33:11,039 - INFO - Attempting login
+2025-05-27 19:33:11,040 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 19:33:11,040 - DEBUG - Validating credentials for username: laurie
+2025-05-27 19:33:11,040 - INFO - Credentials validated for username: laurie
+2025-05-27 19:33:11,040 - INFO - Credentials validated for username: laurie
+2025-05-27 19:33:11,041 - INFO - Creating part input screen
+2025-05-27 19:33:11,041 - DEBUG - Clearing screen
+2025-05-27 19:33:11,060 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-27 19:33:11,060 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-27 19:33:11,060 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-27 19:33:11,081 - DEBUG - Loaded laser_gear.png
+2025-05-27 19:33:11,091 - DEBUG - Created assembly sub-parts listbox
+2025-05-27 19:33:11,093 - DEBUG - Created single sub-parts listbox
+2025-05-27 19:33:11,098 - DEBUG - Created parts list listbox
+2025-05-27 19:33:11,098 - DEBUG - Creating footer
+2025-05-27 19:33:11,099 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-27 19:33:11,099 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 19:33:11,100 - DEBUG - Updating sub-parts dropdown for tab 1
+2025-05-27 19:33:11,107 - DEBUG - Loaded 4 items from parts_catalogue.txt
+2025-05-27 19:33:11,107 - DEBUG - Updated parts_list_listbox display
+2025-05-27 19:33:11,107 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 19:33:11,114 - DEBUG - Tab changed
+2025-05-27 19:33:11,114 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-27 19:33:11,115 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 19:33:11,115 - DEBUG - Updating selected items for tab 0
+2025-05-27 19:33:13,121 - INFO - Success: Login successful as User
+2025-05-27 19:33:13,122 - INFO - Test Case: FR1: Login, Input: Username: laurie, Password: [hidden], Output: Login successful as User, Pass/Fail: Pass
+2025-05-27 19:33:14,061 - INFO - Opening part search pop-up
+2025-05-27 19:33:14,065 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 19:33:18,644 - INFO - Adding part PART-67890ABCDE with quantity 6 to parts list
+2025-05-27 19:33:18,644 - DEBUG - Updated parts_list_listbox with PART-67890ABCDE
+2025-05-27 19:33:18,644 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-67890ABCDE, Quantity: 6, Output: Part PART-67890ABCDE added, Pass/Fail: Pass
+2025-05-27 19:33:18,645 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 19:33:19,553 - INFO - Success: Added PART-67890ABCDE (Qty: 6) to parts list
+2025-05-27 19:33:20,879 - INFO - Opening part search pop-up
+2025-05-27 19:33:20,882 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 19:33:22,986 - INFO - Adding part PART-67891ABCDE with quantity 1 to parts list
+2025-05-27 19:33:22,987 - DEBUG - Updated parts_list_listbox with PART-67891ABCDE
+2025-05-27 19:33:22,987 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-67891ABCDE, Quantity: 1, Output: Part PART-67891ABCDE added, Pass/Fail: Pass
+2025-05-27 19:33:22,987 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 19:33:25,269 - INFO - Success: Added PART-67891ABCDE (Qty: 1) to parts list
+2025-05-27 19:33:27,224 - INFO - Opening part search pop-up
+2025-05-27 19:33:27,227 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 19:33:31,281 - INFO - Adding part PART-55555 with quantity 6 to parts list
+2025-05-27 19:33:31,282 - DEBUG - Updated parts_list_listbox with PART-55555
+2025-05-27 19:33:31,282 - INFO - Test Case: Add Part to Parts List, Input: Part ID: PART-55555, Quantity: 6, Output: Part PART-55555 added, Pass/Fail: Pass
+2025-05-27 19:33:31,282 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 19:33:34,508 - INFO - Success: Added PART-55555 (Qty: 6) to parts list
+2025-05-27 19:33:42,329 - INFO - Creating quote screen
+2025-05-27 19:33:42,329 - DEBUG - Clearing screen
+2025-05-27 19:33:42,458 - DEBUG - Creating footer
+2025-05-27 19:33:59,721 - INFO - Generating quote for all added parts
+2025-05-27 19:33:59,722 - INFO - Saved quote for parts: PART-67890ABCDE:6;PART-67891ABCDE:1;PART-55555:6
+2025-05-27 19:33:59,723 - INFO - Creating part input screen
+2025-05-27 19:33:59,723 - DEBUG - Clearing screen
+2025-05-27 19:33:59,731 - DEBUG - STREAM b'IHDR' 16 13
+2025-05-27 19:33:59,731 - DEBUG - STREAM b'sRGB' 41 1
+2025-05-27 19:33:59,731 - DEBUG - STREAM b'IDAT' 54 8192
+2025-05-27 19:33:59,750 - DEBUG - Loaded laser_gear.png
+2025-05-27 19:33:59,755 - DEBUG - Created assembly sub-parts listbox
+2025-05-27 19:33:59,757 - DEBUG - Created single sub-parts listbox
+2025-05-27 19:33:59,762 - DEBUG - Created parts list listbox
+2025-05-27 19:33:59,762 - DEBUG - Creating footer
+2025-05-27 19:33:59,762 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-27 19:33:59,762 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 19:33:59,763 - DEBUG - Updating sub-parts dropdown for tab 1
+2025-05-27 19:33:59,763 - DEBUG - Loaded 4 items from parts_catalogue.txt
+2025-05-27 19:33:59,763 - DEBUG - Updated parts_list_listbox display
+2025-05-27 19:33:59,763 - INFO - Clearing parts list
+2025-05-27 19:33:59,763 - INFO - Clearing parts list
+2025-05-27 19:33:59,763 - INFO - Test Case: Clear Parts List, Input: None, Output: Clearing parts list cleared, Pass/Fail: Pass
+2025-05-27 19:33:59,763 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 19:33:59,764 - DEBUG - Tab changed
+2025-05-27 19:33:59,764 - DEBUG - Updating sub-parts dropdown for tab 0
+2025-05-27 19:33:59,765 - DEBUG - Loaded 22 parts from output.txt
+2025-05-27 19:33:59,765 - DEBUG - Updating selected items for tab 0
+2025-05-27 19:34:06,754 - INFO - Success: Quote generated for 3 parts, total £6375.00, saved to data/quotes.txt
+2025-05-27 19:34:06,754 - INFO - Test Case: FR7: Generate quote, Input: Customer Name: FatMan, Profit Margin: 25%, Output: Quote generated for 3 parts, total £6375.00, saved to data/quotes.txt, Pass/Fail: Pass
+2025-05-27 19:34:08,654 - INFO - Navigating to settings
+2025-05-27 19:34:08,654 - INFO - Prompting for admin credentials
+2025-05-27 19:34:16,069 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 19:34:16,069 - DEBUG - Validating admin credentials for username: admin
+2025-05-27 19:34:16,070 - INFO - Credentials validated for username: admin
+2025-05-27 19:34:16,070 - INFO - Admin credentials validated for username: admin
+2025-05-27 19:34:16,078 - DEBUG - Admin credential prompt result: True
+2025-05-27 19:34:16,078 - INFO - Creating admin settings screen
+2025-05-27 19:34:16,078 - DEBUG - Clearing screen
+2025-05-27 19:34:16,201 - DEBUG - Creating footer
+2025-05-27 20:17:44,332 - INFO - GUI logging initialized
+2025-05-27 20:17:44,333 - DEBUG - TESTING_MODE set to: False
+2025-05-27 20:17:44,539 - INFO - Initializing SheetMetalClientHub
+2025-05-27 20:17:44,588 - INFO - Creating login screen
+2025-05-27 20:17:44,588 - DEBUG - Clearing screen
+2025-05-27 20:17:44,595 - DEBUG - Creating footer
+2025-05-27 20:17:53,188 - INFO - Attempting login
+2025-05-27 20:17:53,188 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 20:17:53,189 - DEBUG - Validating credentials for username: laurie
+2025-05-27 20:17:53,190 - ERROR - Error validating credentials for laurie: string indices must be integers, not 'str'
+2025-05-27 20:17:53,190 - ERROR - Invalid credentials for username: laurie. Check data/users.json and file_handler.py.
+2025-05-27 20:17:53,190 - ERROR - Error validating credentials for username: laurie: Invalid username or password
+2025-05-27 20:17:53,190 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 20:17:54,942 - ERROR - Error: Invalid input: Authentication error: Invalid username or password
+2025-05-27 20:17:54,942 - INFO - Test Case: FR1: Login, Input: Username: laurie, Password: [hidden], Output: Invalid input: Authentication error: Invalid username or password, Pass/Fail: Fail
+2025-05-27 20:17:58,800 - INFO - Attempting login
+2025-05-27 20:17:58,800 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 20:17:58,801 - DEBUG - Validating credentials for username: laurie
+2025-05-27 20:17:58,801 - ERROR - Error validating credentials for laurie: string indices must be integers, not 'str'
+2025-05-27 20:17:58,801 - ERROR - Invalid credentials for username: laurie. Check data/users.json and file_handler.py.
+2025-05-27 20:17:58,801 - ERROR - Error validating credentials for username: laurie: Invalid username or password
+2025-05-27 20:17:58,801 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 20:18:01,039 - ERROR - Error: Invalid input: Authentication error: Invalid username or password
+2025-05-27 20:18:01,039 - INFO - Test Case: FR1: Login, Input: Username: laurie, Password: [hidden], Output: Invalid input: Authentication error: Invalid username or password, Pass/Fail: Fail
+2025-05-27 20:18:13,288 - INFO - Attempting login
+2025-05-27 20:18:13,288 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 20:18:13,288 - DEBUG - Validating credentials for username: laurie
+2025-05-27 20:18:13,288 - ERROR - Error validating credentials for laurie: string indices must be integers, not 'str'
+2025-05-27 20:18:13,288 - ERROR - Invalid credentials for username: laurie. Check data/users.json and file_handler.py.
+2025-05-27 20:18:13,288 - ERROR - Error validating credentials for username: laurie: Invalid username or password
+2025-05-27 20:18:13,288 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 20:18:17,164 - ERROR - Error: Invalid input: Authentication error: Invalid username or password
+2025-05-27 20:18:17,164 - INFO - Test Case: FR1: Login, Input: Username: laurie, Password: [hidden], Output: Invalid input: Authentication error: Invalid username or password, Pass/Fail: Fail
+2025-05-27 20:24:52,711 - INFO - GUI logging initialized
+2025-05-27 20:24:52,711 - DEBUG - TESTING_MODE set to: False
+2025-05-27 20:24:52,768 - INFO - Initializing SheetMetalClientHub
+2025-05-27 20:24:52,808 - INFO - Creating login screen
+2025-05-27 20:24:52,808 - DEBUG - Clearing screen
+2025-05-27 20:24:52,813 - DEBUG - Creating footer
+2025-05-27 20:25:07,167 - INFO - Attempting login
+2025-05-27 20:25:07,167 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 20:25:07,167 - DEBUG - Validating credentials for username: laurie
+2025-05-27 20:25:07,168 - DEBUG - Invalid credentials for username: laurie
+2025-05-27 20:25:07,168 - ERROR - Invalid credentials for username: laurie. Check data/users.json and file_handler.py.
+2025-05-27 20:25:07,168 - ERROR - Error validating credentials for username: laurie: Invalid username or password
+2025-05-27 20:25:07,168 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 20:25:10,828 - ERROR - Error: Invalid input: Authentication error: Invalid username or password
+2025-05-27 20:25:10,828 - INFO - Test Case: FR1: Login, Input: Username: laurie, Password: [hidden], Output: Invalid input: Authentication error: Invalid username or password, Pass/Fail: Fail
+2025-05-27 20:25:17,880 - INFO - Attempting login
+2025-05-27 20:25:17,881 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 20:25:17,881 - DEBUG - Validating credentials for username: laurie
+2025-05-27 20:25:17,881 - DEBUG - Invalid credentials for username: laurie
+2025-05-27 20:25:17,881 - ERROR - Invalid credentials for username: laurie. Check data/users.json and file_handler.py.
+2025-05-27 20:25:17,881 - ERROR - Error validating credentials for username: laurie: Invalid username or password
+2025-05-27 20:25:17,881 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 20:25:18,778 - ERROR - Error: Invalid input: Authentication error: Invalid username or password
+2025-05-27 20:25:18,778 - INFO - Test Case: FR1: Login, Input: Username: laurie, Password: [hidden], Output: Invalid input: Authentication error: Invalid username or password, Pass/Fail: Fail
+2025-05-27 20:50:09,812 - INFO - GUI logging initialized
+2025-05-27 20:50:09,813 - DEBUG - TESTING_MODE set to: False
+2025-05-27 20:50:09,871 - INFO - Initializing SheetMetalClientHub
+2025-05-27 20:50:09,906 - INFO - Creating login screen
+2025-05-27 20:50:09,906 - DEBUG - Clearing screen
+2025-05-27 20:50:09,910 - DEBUG - Creating footer
+2025-05-27 20:50:18,362 - INFO - Attempting login
+2025-05-27 20:50:18,363 - DEBUG - Login attempt: username='laurie', password_length=9
+2025-05-27 20:50:18,363 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 20:50:18,363 - DEBUG - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0
+2025-05-27 20:50:18,363 - DEBUG - Validating credentials for username: laurie
+2025-05-27 20:50:18,363 - DEBUG - Checking users file: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.json
+2025-05-27 20:50:18,364 - DEBUG - Loaded users: ['laurie', 'admin']
+2025-05-27 20:50:18,364 - DEBUG - Attempting to validate credentials for username: laurie
+2025-05-27 20:50:18,364 - DEBUG - Invalid credentials for username: laurie
+2025-05-27 20:50:18,364 - ERROR - Invalid credentials for username: laurie
+2025-05-27 20:50:18,364 - DEBUG - Hash mismatch for laurie: expected 6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b, got 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0
+2025-05-27 20:50:18,364 - ERROR - Error validating credentials for username: laurie: Invalid username or password
+2025-05-27 20:50:18,365 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 20:51:26,684 - ERROR - Error: Invalid input: Authentication error: Invalid username or password
+2025-05-27 20:51:26,685 - INFO - Test Case: FR1: Login, Input: Username: laurie, Password: [hidden], Output: Invalid input: Authentication error: Invalid username or password, Pass/Fail: Fail
+2025-05-27 20:55:54,636 - INFO - GUI logging initialized
+2025-05-27 20:55:54,636 - DEBUG - TESTING_MODE set to: False
+2025-05-27 20:55:54,693 - INFO - Initializing SheetMetalClientHub
+2025-05-27 20:55:54,729 - ERROR - Error starting GUI: 'SheetMetalClientHub' object has no attribute 'create_login_screen'
+2025-05-27 20:55:54,729 - INFO - Test Case: GUI Initialization, Input: None, Output: Error starting GUI: 'SheetMetalClientHub' object has no attribute 'create_login_screen', Pass/Fail: Fail
+2025-05-27 20:55:58,839 - INFO - GUI logging initialized
+2025-05-27 20:55:58,839 - DEBUG - TESTING_MODE set to: False
+2025-05-27 20:55:58,896 - INFO - Initializing SheetMetalClientHub
+2025-05-27 20:55:58,930 - ERROR - Error starting GUI: 'SheetMetalClientHub' object has no attribute 'create_login_screen'
+2025-05-27 20:55:58,930 - INFO - Test Case: GUI Initialization, Input: None, Output: Error starting GUI: 'SheetMetalClientHub' object has no attribute 'create_login_screen', Pass/Fail: Fail
+2025-05-27 22:19:48,362 - INFO - GUI logging initialized
+2025-05-27 22:19:48,362 - DEBUG - TESTING_MODE set to: False
+2025-05-27 22:19:48,419 - INFO - Initializing SheetMetalClientHub
+2025-05-27 22:19:48,452 - INFO - Creating login screen
+2025-05-27 22:19:48,452 - DEBUG - Clearing screen
+2025-05-27 22:19:48,456 - DEBUG - Creating footer
+2025-05-27 22:19:54,700 - INFO - Attempting login
+2025-05-27 22:19:54,700 - INFO - Login attempt: username='laurie', password_length=9
+2025-05-27 22:19:54,700 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 22:19:54,700 - INFO - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0
+2025-05-27 22:19:54,701 - INFO - DEBUG: Raw password input: 'moffat123'
+2025-05-27 22:19:54,701 - INFO - Validating credentials for username: laurie
+2025-05-27 22:19:54,701 - INFO - Checking users file: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.json
+2025-05-27 22:19:54,701 - INFO - Loaded users: ['laurie', 'admin']
+2025-05-27 22:19:54,701 - DEBUG - Users content: {'laurie': {'password': '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'role': 'User'}, 'admin': {'password': 'c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd4', 'role': 'Admin'}}
+2025-05-27 22:19:54,701 - DEBUG - Attempting to validate credentials for username: laurie
+2025-05-27 22:19:54,701 - DEBUG - Invalid credentials for username: laurie
+2025-05-27 22:19:54,701 - ERROR - Invalid credentials for username: laurie
+2025-05-27 22:19:54,701 - INFO - Hash mismatch for laurie: expected 6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b, got 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0
+2025-05-27 22:19:54,701 - ERROR - Error validating credentials for username: laurie: Invalid username or password
+2025-05-27 22:19:54,701 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 22:19:57,009 - ERROR - Error: Invalid input: Authentication error: Invalid username or password
+2025-05-27 22:19:57,009 - INFO - Test Case: FR1: Login, Input: Username: laurie, Password: [hidden], Output: Invalid input: Authentication error: Invalid username or password, Pass/Fail: Fail
+2025-05-27 22:24:09,611 - INFO - GUI logging initialized
+2025-05-27 22:24:09,612 - DEBUG - TESTING_MODE set to: False
+2025-05-27 22:24:09,669 - INFO - Initializing SheetMetalClientHub
+2025-05-27 22:24:09,706 - INFO - Creating login screen
+2025-05-27 22:24:09,706 - DEBUG - Clearing screen
+2025-05-27 22:24:09,710 - DEBUG - Creating footer
+2025-05-27 22:24:15,992 - INFO - Attempting login
+2025-05-27 22:24:15,992 - INFO - Login attempt: username='laurie', password_length=9
+2025-05-27 22:24:15,992 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 22:24:15,992 - INFO - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0
+2025-05-27 22:24:15,992 - INFO - DEBUG: Raw password input: 'moffat123'
+2025-05-27 22:24:15,992 - INFO - Validating credentials for username: laurie
+2025-05-27 22:24:15,993 - INFO - Checking users file: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.json
+2025-05-27 22:24:15,993 - INFO - Loaded users: ['laurie', 'admin']
+2025-05-27 22:24:15,993 - DEBUG - Users content: {'laurie': {'password': '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'role': 'User'}, 'admin': {'password': 'c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd4', 'role': 'Admin'}}
+2025-05-27 22:24:15,993 - DEBUG - Attempting to validate credentials for username: laurie
+2025-05-27 22:24:15,993 - DEBUG - Invalid credentials for username: laurie
+2025-05-27 22:24:15,994 - ERROR - Invalid credentials for username: laurie
+2025-05-27 22:24:15,994 - INFO - Hash mismatch for laurie: expected 6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b, got 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0
+2025-05-27 22:24:15,994 - ERROR - Error validating credentials for username: laurie: Invalid username or password
+2025-05-27 22:24:15,994 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 22:24:18,459 - ERROR - Error: Invalid input: Authentication error: Invalid username or password
+2025-05-27 22:24:18,459 - INFO - Test Case: FR1: Login, Input: Username: laurie, Password: [hidden], Output: Invalid input: Authentication error: Invalid username or password, Pass/Fail: Fail
+2025-05-27 22:24:22,350 - INFO - Attempting login
+2025-05-27 22:24:22,350 - INFO - Login attempt: username='laurie', password_length=9
+2025-05-27 22:24:22,350 - DEBUG - Generated SHA-256 hash for password (length: 64)
+2025-05-27 22:24:22,350 - INFO - Generated hash: 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0
+2025-05-27 22:24:22,350 - INFO - DEBUG: Raw password input: 'moffat123'
+2025-05-27 22:24:22,350 - INFO - Validating credentials for username: laurie
+2025-05-27 22:24:22,350 - INFO - Checking users file: C:\Users\Laurie\Proton Drive\tartant\My files\GitHub\Sheet-Metal-Client-Hub\data\users.json
+2025-05-27 22:24:22,351 - INFO - Loaded users: ['laurie', 'admin']
+2025-05-27 22:24:22,351 - DEBUG - Users content: {'laurie': {'password': '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'role': 'User'}, 'admin': {'password': 'c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd4', 'role': 'Admin'}}
+2025-05-27 22:24:22,351 - DEBUG - Attempting to validate credentials for username: laurie
+2025-05-27 22:24:22,351 - DEBUG - Invalid credentials for username: laurie
+2025-05-27 22:24:22,351 - ERROR - Invalid credentials for username: laurie
+2025-05-27 22:24:22,351 - INFO - Hash mismatch for laurie: expected 6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b, got 4b5a1911ddfde19a819157e85312b4aae8915e4968cb983e570da2e1098457e0
+2025-05-27 22:24:22,351 - ERROR - Error validating credentials for username: laurie: Invalid username or password
+2025-05-27 22:24:22,351 - DEBUG - Show message called, TESTING_MODE: False
+2025-05-27 22:24:24,658 - ERROR - Error: Invalid input: Authentication error: Invalid username or password
+2025-05-27 22:24:24,659 - INFO - Test Case: FR1: Login, Input: Username: laurie, Password: [hidden], Output: Invalid input: Authentication error: Invalid username or password, Pass/Fail: Fail
+2025-05-27 23:55:36,699 - INFO - file_handler logging initialized
+2025-05-27 23:55:36,858 - INFO - FileHandler initialized
+2025-05-27 23:57:45,689 - INFO - file_handler logging initialized
+2025-05-27 23:57:45,830 - INFO - FileHandler initialized
+2025-05-28 00:23:34,407 - INFO - file_handler logging initialized
+2025-05-28 00:23:34,561 - INFO - FileHandler initialized
+2025-05-28 00:24:45,831 - INFO - file_handler logging initialized
+2025-05-28 00:24:45,968 - INFO - FileHandler initialized
+2025-05-28 00:24:56,183 - INFO - Validating credentials for username: laurie
+2025-05-28 00:24:56,183 - INFO - Credentials validated for laurie
+2025-05-28 00:24:56,183 - INFO - Retrieving role for username: laurie
+2025-05-28 00:24:56,184 - DEBUG - Role for laurie: User
+2025-05-28 00:25:44,446 - INFO - Validating credentials for username: admin
+2025-05-28 00:25:44,446 - INFO - Credentials validated for admin
+2025-05-28 00:25:44,447 - INFO - Retrieving role for username: admin
+2025-05-28 00:25:44,447 - DEBUG - Role for admin: Admin
+2025-05-28 00:25:44,580 - INFO - Loading rates
+2025-05-28 00:25:44,581 - DEBUG - Loaded 13 rates
+2025-05-28 00:25:44,583 - INFO - Retrieving all usernames
+2025-05-28 00:25:44,583 - DEBUG - Retrieved 2 usernames
+2025-05-28 00:25:44,584 - INFO - Retrieving all usernames
+2025-05-28 00:25:44,585 - DEBUG - Retrieved 2 usernames
+2025-05-28 00:36:41,359 - INFO - file_handler logging initialized
+2025-05-28 00:36:41,807 - INFO - FileHandler initialized
+2025-05-28 00:36:53,358 - INFO - Validating credentials for username: laurie
+2025-05-28 00:36:53,358 - INFO - Credentials validated for laurie
+2025-05-28 00:36:53,359 - INFO - Retrieving role for username: laurie
+2025-05-28 00:36:53,359 - DEBUG - Role for laurie: User
+2025-05-28 00:37:45,384 - INFO - Validating credentials for username: admin
+2025-05-28 00:37:45,385 - INFO - Credentials validated for admin
+2025-05-28 00:37:45,385 - INFO - Retrieving role for username: admin
+2025-05-28 00:37:45,385 - DEBUG - Role for admin: Admin
+2025-05-28 00:37:45,516 - INFO - Loading rates
+2025-05-28 00:37:45,518 - DEBUG - Loaded 13 rates
+2025-05-28 00:37:45,520 - INFO - Retrieving all usernames
+2025-05-28 00:37:45,520 - DEBUG - Retrieved 2 usernames
+2025-05-28 00:37:45,521 - INFO - Retrieving all usernames
+2025-05-28 00:37:45,522 - DEBUG - Retrieved 2 usernames
+2025-05-28 00:43:17,646 - INFO - file_handler logging initialized
+2025-05-28 00:43:17,913 - INFO - FileHandler initialized
+2025-05-28 00:43:30,454 - INFO - Validating credentials for username: laurie
+2025-05-28 00:43:30,455 - INFO - Credentials validated for laurie
+2025-05-28 00:43:30,455 - INFO - Retrieving role for username: laurie
+2025-05-28 00:43:30,455 - DEBUG - Role for laurie: User
+2025-05-28 00:43:47,286 - INFO - Validating credentials for username: admin
+2025-05-28 00:43:47,286 - INFO - Credentials validated for admin
+2025-05-28 00:43:47,286 - INFO - Retrieving role for username: admin
+2025-05-28 00:43:47,286 - DEBUG - Role for admin: Admin
+2025-05-28 00:43:47,414 - INFO - Loading rates
+2025-05-28 00:43:47,415 - DEBUG - Loaded 13 rates
+2025-05-28 00:43:47,417 - INFO - Retrieving all usernames
+2025-05-28 00:43:47,417 - DEBUG - Retrieved 2 usernames
+2025-05-28 00:43:47,418 - INFO - Retrieving all usernames
+2025-05-28 00:43:47,418 - DEBUG - Retrieved 2 usernames
+2025-05-28 00:53:50,500 - INFO - file_handler logging initialized
+2025-05-28 00:53:50,711 - INFO - FileHandler initialized
+2025-05-28 00:54:03,450 - INFO - file_handler logging initialized
+2025-05-28 00:54:03,682 - INFO - FileHandler initialized
+2025-05-28 01:01:41,562 - INFO - file_handler logging initialized
+2025-05-28 01:01:41,805 - INFO - FileHandler initialized
+2025-05-28 01:01:55,465 - INFO - Validating credentials for username: laurie
+2025-05-28 01:01:55,466 - INFO - Credentials validated for laurie
+2025-05-28 01:01:55,466 - INFO - Retrieving role for username: laurie
+2025-05-28 01:01:55,466 - DEBUG - Role for laurie: User
+2025-05-28 01:02:09,557 - INFO - Validating credentials for username: admin
+2025-05-28 01:02:09,557 - INFO - Credentials validated for admin
+2025-05-28 01:02:09,557 - INFO - Retrieving role for username: admin
+2025-05-28 01:02:09,558 - DEBUG - Role for admin: Admin
+2025-05-28 01:02:09,707 - INFO - Loading rates
+2025-05-28 01:02:09,707 - DEBUG - Loaded 13 rates
+2025-05-28 01:02:09,709 - INFO - Retrieving all usernames
+2025-05-28 01:02:09,709 - DEBUG - Retrieved 2 usernames
+2025-05-28 01:02:09,710 - INFO - Retrieving all usernames
+2025-05-28 01:02:09,710 - DEBUG - Retrieved 2 usernames
+2025-05-28 01:04:36,526 - INFO - Loading rates
+2025-05-28 01:04:36,526 - DEBUG - Loaded 13 rates
+2025-05-28 01:04:36,528 - INFO - Retrieving all usernames
+2025-05-28 01:04:36,528 - DEBUG - Retrieved 2 usernames
+2025-05-28 01:04:36,529 - INFO - Retrieving all usernames
+2025-05-28 01:04:36,529 - DEBUG - Retrieved 2 usernames
+2025-05-28 01:05:02,139 - INFO - Validating credentials for username: admin
+2025-05-28 01:05:02,140 - INFO - Credentials validated for admin
+2025-05-28 01:05:02,140 - INFO - Retrieving role for username: admin
+2025-05-28 01:05:02,140 - DEBUG - Role for admin: Admin
+2025-05-28 01:05:02,167 - INFO - Loading rates
+2025-05-28 01:05:02,167 - DEBUG - Loaded 13 rates
+2025-05-28 01:05:02,169 - INFO - Retrieving all usernames
+2025-05-28 01:05:02,170 - DEBUG - Retrieved 2 usernames
+2025-05-28 01:05:02,170 - INFO - Retrieving all usernames
+2025-05-28 01:05:02,171 - DEBUG - Retrieved 2 usernames
+2025-05-28 01:07:33,067 - INFO - Loading rates
+2025-05-28 01:07:33,068 - DEBUG - Loaded 13 rates
+2025-05-28 01:07:33,070 - INFO - Retrieving all usernames
+2025-05-28 01:07:33,070 - DEBUG - Retrieved 2 usernames
+2025-05-28 01:07:33,071 - INFO - Retrieving all usernames
+2025-05-28 01:07:33,071 - DEBUG - Retrieved 2 usernames
+2025-05-28 01:21:30,372 - INFO - file_handler logging initialized
+2025-05-28 01:21:30,572 - INFO - FileHandler initialized
+2025-05-28 01:21:43,382 - INFO - Validating credentials for username: laurie
+2025-05-28 01:21:43,383 - INFO - Credentials validated for laurie
+2025-05-28 01:21:43,383 - INFO - Retrieving role for username: laurie
+2025-05-28 01:21:43,383 - DEBUG - Role for laurie: User
+2025-05-28 01:21:55,914 - INFO - Validating credentials for username: admin
+2025-05-28 01:21:55,914 - INFO - Credentials validated for admin
+2025-05-28 01:21:55,914 - INFO - Retrieving role for username: admin
+2025-05-28 01:21:55,915 - DEBUG - Role for admin: Admin
+2025-05-28 01:21:56,066 - INFO - Loading rates
+2025-05-28 01:21:56,067 - DEBUG - Loaded 13 rates
+2025-05-28 01:21:56,069 - INFO - Retrieving all usernames
+2025-05-28 01:21:56,069 - DEBUG - Retrieved 2 usernames
+2025-05-28 01:21:56,069 - INFO - Retrieving all usernames
+2025-05-28 01:21:56,070 - DEBUG - Retrieved 2 usernames
+2025-05-28 01:58:07,993 - INFO - file_handler logging initialized
+2025-05-28 01:58:08,207 - INFO - FileHandler initialized
+2025-05-28 01:58:24,394 - INFO - Validating credentials for username: laurie
+2025-05-28 01:58:24,394 - INFO - Credentials validated for laurie
+2025-05-28 01:58:24,394 - INFO - Retrieving role for username: laurie
+2025-05-28 01:58:24,395 - DEBUG - Role for laurie: User
+2025-05-28 01:58:42,703 - INFO - Validating credentials for username: admin
+2025-05-28 01:58:42,703 - INFO - Credentials validated for admin
+2025-05-28 01:58:42,704 - INFO - Retrieving role for username: admin
+2025-05-28 01:58:42,704 - DEBUG - Role for admin: Admin
+2025-05-28 01:58:42,864 - INFO - Loading rates
+2025-05-28 01:58:42,865 - DEBUG - Loaded 13 rates
+2025-05-28 01:58:42,867 - INFO - Retrieving all usernames
+2025-05-28 01:58:42,868 - DEBUG - Retrieved 2 usernames
+2025-05-28 01:58:42,869 - INFO - Retrieving all usernames
+2025-05-28 01:58:42,869 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:00:09,904 - INFO - Loading rates
+2025-05-28 02:00:09,905 - DEBUG - Loaded 13 rates
+2025-05-28 02:00:09,907 - INFO - Retrieving all usernames
+2025-05-28 02:00:09,907 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:00:09,908 - INFO - Retrieving all usernames
+2025-05-28 02:00:09,909 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:00:22,355 - INFO - Loading rates
+2025-05-28 02:00:22,355 - DEBUG - Loaded 13 rates
+2025-05-28 02:00:22,357 - INFO - Retrieving all usernames
+2025-05-28 02:00:22,358 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:00:22,359 - INFO - Retrieving all usernames
+2025-05-28 02:00:22,359 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:00:28,804 - INFO - Loading rates
+2025-05-28 02:00:28,805 - DEBUG - Loaded 13 rates
+2025-05-28 02:00:28,807 - INFO - Retrieving all usernames
+2025-05-28 02:00:28,807 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:00:28,808 - INFO - Retrieving all usernames
+2025-05-28 02:00:28,809 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:07:20,446 - INFO - file_handler logging initialized
+2025-05-28 02:07:20,708 - INFO - FileHandler initialized
+2025-05-28 02:07:46,601 - INFO - Validating credentials for username: laurie
+2025-05-28 02:07:46,601 - INFO - Credentials validated for laurie
+2025-05-28 02:07:46,601 - INFO - Retrieving role for username: laurie
+2025-05-28 02:07:46,602 - DEBUG - Role for laurie: User
+2025-05-28 02:09:04,771 - INFO - Validating credentials for username: admin
+2025-05-28 02:09:04,771 - INFO - Credentials validated for admin
+2025-05-28 02:09:04,771 - INFO - Retrieving role for username: admin
+2025-05-28 02:09:04,772 - DEBUG - Role for admin: Admin
+2025-05-28 02:09:04,931 - INFO - Loading rates
+2025-05-28 02:09:04,931 - DEBUG - Loaded 13 rates
+2025-05-28 02:09:04,933 - INFO - Retrieving all usernames
+2025-05-28 02:09:04,934 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:09:04,935 - INFO - Retrieving all usernames
+2025-05-28 02:09:04,935 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:12:03,673 - INFO - Validating credentials for username: admin
+2025-05-28 02:12:03,674 - INFO - Credentials validated for admin
+2025-05-28 02:12:03,674 - INFO - Retrieving role for username: admin
+2025-05-28 02:12:03,674 - DEBUG - Role for admin: Admin
+2025-05-28 02:12:03,705 - INFO - Loading rates
+2025-05-28 02:12:03,705 - DEBUG - Loaded 13 rates
+2025-05-28 02:12:03,708 - INFO - Retrieving all usernames
+2025-05-28 02:12:03,708 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:12:03,709 - INFO - Retrieving all usernames
+2025-05-28 02:12:03,709 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:13:37,969 - INFO - Loading rates
+2025-05-28 02:13:37,969 - DEBUG - Loaded 13 rates
+2025-05-28 02:13:37,970 - INFO - Updating rate bending_rate
+2025-05-28 02:13:37,970 - DEBUG - Rate bending_rate updated to 75.0, sub_value=60.0
+2025-05-28 02:16:13,892 - INFO - Loading rates
+2025-05-28 02:16:13,892 - DEBUG - Loaded 13 rates
+2025-05-28 02:16:13,894 - INFO - Retrieving all usernames
+2025-05-28 02:16:13,894 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:16:13,895 - INFO - Retrieving all usernames
+2025-05-28 02:16:13,895 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:16:29,728 - INFO - Loading rates
+2025-05-28 02:16:29,728 - DEBUG - Loaded 13 rates
+2025-05-28 02:16:29,728 - INFO - Updating rate inspection_rate
+2025-05-28 02:16:29,729 - DEBUG - Rate inspection_rate updated to 50.0
+2025-05-28 02:17:22,941 - INFO - Loading rates
+2025-05-28 02:17:22,942 - DEBUG - Loaded 13 rates
+2025-05-28 02:17:22,942 - INFO - Updating rate cutting_rate
+2025-05-28 02:17:22,942 - DEBUG - Rate cutting_rate updated to 150.0, sub_value=1000000.0
+2025-05-28 02:17:41,631 - INFO - Loading rates
+2025-05-28 02:17:41,631 - DEBUG - Loaded 13 rates
+2025-05-28 02:17:41,632 - INFO - Updating rate welding_rate
+2025-05-28 02:17:41,632 - DEBUG - Rate welding_rate updated to 80.0, sub_value=100.0
+2025-05-28 02:18:05,639 - INFO - Loading rates
+2025-05-28 02:18:05,650 - DEBUG - Loaded 13 rates
+2025-05-28 02:18:05,650 - INFO - Updating rate assembly_rate
+2025-05-28 02:18:05,651 - DEBUG - Rate assembly_rate updated to 10.0
+2025-05-28 02:18:25,529 - INFO - Loading rates
+2025-05-28 02:18:25,529 - DEBUG - Loaded 13 rates
+2025-05-28 02:18:25,529 - INFO - Updating rate finishing_rate
+2025-05-28 02:18:25,530 - DEBUG - Rate finishing_rate updated to 100.0
+2025-05-28 02:18:42,112 - INFO - Loading rates
+2025-05-28 02:18:42,121 - DEBUG - Loaded 13 rates
+2025-05-28 02:18:42,121 - INFO - Updating rate drilling_rate
+2025-05-28 02:18:42,122 - DEBUG - Rate drilling_rate updated to 0.5
+2025-05-28 02:18:58,116 - INFO - Loading rates
+2025-05-28 02:18:58,125 - DEBUG - Loaded 13 rates
+2025-05-28 02:18:58,125 - INFO - Updating rate punching_rate
+2025-05-28 02:18:58,126 - DEBUG - Rate punching_rate updated to 0.2
+2025-05-28 02:19:13,154 - INFO - Loading rates
+2025-05-28 02:19:13,163 - DEBUG - Loaded 13 rates
+2025-05-28 02:19:13,163 - INFO - Updating rate grinding_rate
+2025-05-28 02:19:13,164 - DEBUG - Rate grinding_rate updated to 100.0
+2025-05-28 02:19:22,950 - INFO - Loading rates
+2025-05-28 02:19:22,964 - DEBUG - Loaded 13 rates
+2025-05-28 02:19:22,964 - INFO - Updating rate coating_rate
+2025-05-28 02:19:22,965 - DEBUG - Rate coating_rate updated to 100.0
+2025-05-28 02:38:44,220 - INFO - file_handler logging initialized
+2025-05-28 02:44:35,387 - INFO - file_handler logging initialized
+2025-05-28 02:44:35,663 - INFO - FileHandler initialized
+2025-05-28 02:44:45,257 - INFO - Validating credentials for username: admin
+2025-05-28 02:44:45,257 - INFO - Credentials validated for admin
+2025-05-28 02:44:45,258 - INFO - Retrieving role for username: admin
+2025-05-28 02:44:45,258 - DEBUG - Role for admin: Admin
+2025-05-28 02:44:45,286 - INFO - Loading rates
+2025-05-28 02:44:45,286 - DEBUG - Loaded 13 rates
+2025-05-28 02:44:45,293 - INFO - Retrieving all usernames
+2025-05-28 02:44:45,293 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:46:46,055 - INFO - Saving quote for customer Barny
+2025-05-28 02:46:46,056 - DEBUG - Quote saved for Barny
+2025-05-28 02:47:25,790 - INFO - Loading rates
+2025-05-28 02:47:25,790 - DEBUG - Loaded 13 rates
+2025-05-28 02:47:35,699 - INFO - Loading rates
+2025-05-28 02:47:35,699 - DEBUG - Loaded 13 rates
+2025-05-28 02:47:35,701 - INFO - Retrieving all usernames
+2025-05-28 02:47:35,702 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:48:08,364 - INFO - Loading rates
+2025-05-28 02:48:08,364 - DEBUG - Loaded 13 rates
+2025-05-28 02:48:08,366 - INFO - Retrieving all usernames
+2025-05-28 02:48:08,367 - DEBUG - Retrieved 2 usernames
+2025-05-28 02:48:19,844 - INFO - file_handler logging initialized
+2025-05-28 02:48:20,114 - INFO - FileHandler initialized
+2025-05-28 02:48:32,184 - INFO - Validating credentials for username: laurie
+2025-05-28 02:48:32,184 - INFO - Credentials validated for laurie
+2025-05-28 02:48:32,184 - INFO - Retrieving role for username: laurie
+2025-05-28 02:48:32,185 - DEBUG - Role for laurie: User
+2025-05-28 02:55:51,603 - INFO - file_handler logging initialized
+2025-05-28 02:55:51,850 - INFO - FileHandler initialized
+2025-05-28 02:55:59,951 - INFO - Validating credentials for username: laurie
+2025-05-28 02:55:59,952 - INFO - Credentials validated for laurie
+2025-05-28 02:55:59,952 - INFO - Retrieving role for username: laurie
+2025-05-28 02:55:59,952 - DEBUG - Role for laurie: User
+2025-05-28 02:57:03,321 - INFO - Saving quote for customer Barny
+2025-05-28 02:57:03,322 - DEBUG - Quote saved for Barny
+2025-05-28 02:58:22,565 - INFO - Loading rates
+2025-05-28 02:58:22,566 - DEBUG - Loaded 13 rates
+2025-05-28 03:03:25,999 - INFO - file_handler logging initialized
+2025-05-28 03:03:26,241 - INFO - FileHandler initialized
+2025-05-28 03:03:33,215 - INFO - Validating credentials for username: laurie
+2025-05-28 03:03:33,215 - INFO - Credentials validated for laurie
+2025-05-28 03:03:33,216 - INFO - Retrieving role for username: laurie
+2025-05-28 03:03:33,216 - DEBUG - Role for laurie: User
+2025-05-28 03:04:26,661 - INFO - Loading rates
+2025-05-28 03:04:26,661 - DEBUG - Loaded 13 rates
+2025-05-28 03:04:26,663 - INFO - Saving output for part PART-345623
+2025-05-28 03:04:26,663 - DEBUG - Output saved for PART-345623
+2025-05-28 03:04:53,106 - INFO - Saving quote for customer barny
+2025-05-28 03:04:53,107 - DEBUG - Quote saved for barny
+2025-05-28 03:12:07,442 - INFO - file_handler logging initialized
+2025-05-28 03:12:07,683 - INFO - FileHandler initialized
+2025-05-28 03:12:19,038 - INFO - Validating credentials for username: laurie
+2025-05-28 03:12:19,039 - INFO - Credentials validated for laurie
+2025-05-28 03:12:19,039 - INFO - Retrieving role for username: laurie
+2025-05-28 03:12:19,039 - DEBUG - Role for laurie: User
+2025-05-28 03:13:42,793 - INFO - Loading rates
+2025-05-28 03:13:42,794 - DEBUG - Loaded 13 rates
+2025-05-28 03:13:42,796 - INFO - Saving output for part PART-478569
+2025-05-28 03:13:42,796 - DEBUG - Output saved for PART-478569
+2025-05-28 03:14:29,355 - INFO - Saving quote for customer FatMan
+2025-05-28 03:14:29,355 - DEBUG - Quote saved for FatMan
+2025-05-28 03:18:43,717 - INFO - file_handler logging initialized
+2025-05-28 03:18:43,984 - INFO - FileHandler initialized
+2025-05-28 03:18:56,329 - INFO - Validating credentials for username: laurie
+2025-05-28 03:18:56,329 - INFO - Credentials validated for laurie
+2025-05-28 03:18:56,329 - INFO - Retrieving role for username: laurie
+2025-05-28 03:18:56,329 - DEBUG - Role for laurie: User
+2025-05-28 03:19:37,439 - INFO - Loading rates
+2025-05-28 03:19:37,439 - DEBUG - Loaded 13 rates
+2025-05-28 03:19:37,441 - INFO - Saving output for part PART-43526
+2025-05-28 03:19:37,442 - DEBUG - Output saved for PART-43526
+2025-05-28 03:27:07,702 - INFO - Loading rates
+2025-05-28 03:27:07,703 - DEBUG - Loaded 13 rates
+2025-05-28 03:27:14,212 - INFO - Loading rates
+2025-05-28 03:27:14,212 - DEBUG - Loaded 13 rates
+2025-05-28 03:28:17,597 - INFO - Validating credentials for username: laurie
+2025-05-28 03:28:17,597 - INFO - Credentials validated for laurie
+2025-05-28 03:28:17,598 - INFO - Retrieving role for username: laurie
+2025-05-28 03:28:17,598 - DEBUG - Role for laurie: User
+2025-05-28 03:35:41,944 - INFO - file_handler logging initialized
+2025-05-28 03:36:32,926 - INFO - file_handler logging initialized
+2025-05-28 03:36:42,677 - INFO - file_handler logging initialized
+2025-05-28 03:40:29,621 - INFO - file_handler logging initialized
+2025-05-28 03:41:12,478 - INFO - file_handler logging initialized
+2025-05-28 03:41:12,746 - INFO - FileHandler initialized
+2025-05-28 03:41:20,598 - INFO - Validating credentials for username: laurie
+2025-05-28 03:41:20,598 - INFO - Credentials validated for laurie
+2025-05-28 03:41:20,598 - INFO - Retrieving role for username: laurie
+2025-05-28 03:41:20,599 - DEBUG - Role for laurie: User
+2025-05-28 03:44:01,175 - INFO - Validating credentials for username: admin
+2025-05-28 03:44:01,176 - INFO - Credentials validated for admin
+2025-05-28 03:44:01,176 - INFO - Retrieving role for username: admin
+2025-05-28 03:44:01,176 - DEBUG - Role for admin: Admin
+2025-05-28 03:44:01,370 - INFO - Loading rates
+2025-05-28 03:44:01,371 - DEBUG - Loaded 13 rates
+2025-05-28 03:44:01,373 - INFO - Retrieving all usernames
+2025-05-28 03:44:01,373 - DEBUG - Retrieved 2 usernames
+2025-05-28 03:44:13,028 - INFO - Retrieving all usernames
+2025-05-28 03:44:13,029 - DEBUG - Retrieved 2 usernames
+2025-05-28 03:44:13,986 - INFO - Retrieving all usernames
+2025-05-28 03:44:13,987 - DEBUG - Retrieved 2 usernames
+2025-05-28 03:44:14,193 - INFO - Retrieving all usernames
+2025-05-28 03:44:14,194 - DEBUG - Retrieved 2 usernames
+2025-05-28 03:44:14,436 - INFO - Retrieving all usernames
+2025-05-28 03:44:14,437 - DEBUG - Retrieved 2 usernames
+2025-05-28 03:44:18,175 - INFO - Retrieving all usernames
+2025-05-28 03:44:18,176 - DEBUG - Retrieved 2 usernames
+2025-05-28 03:44:35,993 - INFO - Creating user Testy
+2025-05-28 03:44:35,994 - DEBUG - User Testy created with role User
+2025-05-28 03:44:38,241 - INFO - Retrieving all usernames
+2025-05-28 03:44:38,249 - DEBUG - Retrieved 3 usernames
+2025-05-28 03:48:56,799 - INFO - Saving quote for customer Barmy
+2025-05-28 03:48:56,800 - DEBUG - Quote saved for Barmy
+2025-05-28 20:53:39,134 - INFO - file_handler logging initialized
+2025-05-28 21:04:54,099 - INFO - file_handler logging initialized
+2025-05-28 21:09:31,462 - INFO - file_handler logging initialized
+2025-05-28 21:14:38,325 - INFO - file_handler logging initialized
+2025-05-28 21:19:05,399 - INFO - file_handler logging initialized
+2025-05-28 21:24:39,558 - INFO - file_handler logging initialized
+2025-05-28 21:28:42,726 - INFO - file_handler logging initialized
+2025-05-28 21:38:30,570 - INFO - file_handler logging initialized
+2025-05-28 21:39:40,811 - INFO - file_handler logging initialized
+2025-05-28 21:39:41,061 - INFO - FileHandler initialized
+2025-05-28 21:40:38,368 - INFO - file_handler logging initialized
+2025-05-28 21:47:20,728 - INFO - file_handler logging initialized
+2025-05-28 21:56:49,390 - INFO - file_handler logging initialized
+2025-05-28 21:59:03,064 - INFO - file_handler logging initialized
+2025-05-28 22:09:21,304 - INFO - file_handler logging initialized
+2025-05-28 22:09:21,630 - INFO - FileHandler initialized
+2025-05-28 22:10:44,966 - INFO - Validating credentials for username: laurie
+2025-05-28 22:10:44,966 - INFO - Credentials validated for laurie
+2025-05-28 22:10:44,966 - INFO - Retrieving role for username: laurie
+2025-05-28 22:10:44,967 - DEBUG - Role for laurie: User
+2025-05-28 22:11:27,578 - INFO - Saving quote for customer Bobby
+2025-05-28 22:11:27,579 - DEBUG - Quote saved for Bobby
+2025-05-28 22:11:48,271 - INFO - Validating credentials for username: admin
+2025-05-28 22:11:48,272 - INFO - Credentials validated for admin
+2025-05-28 22:11:48,272 - INFO - Retrieving role for username: admin
+2025-05-28 22:11:48,272 - DEBUG - Role for admin: Admin
+2025-05-28 22:11:48,469 - INFO - Loading rates
+2025-05-28 22:11:48,478 - DEBUG - Loaded 13 rates
+2025-05-28 22:11:48,480 - INFO - Retrieving all usernames
+2025-05-28 22:11:48,480 - DEBUG - Retrieved 3 usernames
+2025-05-28 22:15:25,537 - INFO - file_handler logging initialized
+2025-05-28 22:20:04,301 - INFO - file_handler logging initialized
+2025-05-28 22:24:19,091 - INFO - file_handler logging initialized
+2025-05-28 22:35:58,652 - INFO - file_handler logging initialized
+2025-05-28 22:41:11,341 - INFO - file_handler logging initialized
+2025-05-28 22:48:33,719 - INFO - file_handler logging initialized
+2025-05-28 23:07:10,710 - INFO - file_handler logging initialized
+2025-05-28 23:07:10,996 - INFO - FileHandler initialized
+2025-05-28 23:09:27,414 - INFO - file_handler logging initialized
+2025-05-28 23:09:27,626 - INFO - FileHandler initialized
+2025-05-28 23:11:21,255 - INFO - file_handler logging initialized
+2025-05-28 23:11:21,498 - INFO - FileHandler initialized
+2025-05-28 23:13:30,207 - INFO - file_handler logging initialized
+2025-05-28 23:13:30,489 - INFO - FileHandler initialized
+2025-05-28 23:17:01,626 - INFO - file_handler logging initialized
+2025-05-28 23:17:01,839 - INFO - FileHandler initialized
+2025-05-28 23:19:14,880 - INFO - Validating credentials for username: laurie
+2025-05-28 23:19:14,880 - INFO - Credentials validated for laurie
+2025-05-28 23:19:14,880 - INFO - Retrieving role for username: laurie
+2025-05-28 23:19:14,880 - DEBUG - Role for laurie: User
+2025-05-28 23:21:41,767 - INFO - file_handler logging initialized
+2025-05-28 23:21:42,013 - INFO - FileHandler initialized
+2025-05-28 23:23:03,454 - INFO - file_handler logging initialized
+2025-05-28 23:23:03,671 - INFO - FileHandler initialized
+2025-05-28 23:23:54,831 - INFO - Validating credentials for username: laurie
+2025-05-28 23:23:54,831 - INFO - Credentials validated for laurie
+2025-05-28 23:23:54,831 - INFO - Retrieving role for username: laurie
+2025-05-28 23:23:54,832 - DEBUG - Role for laurie: User
+2025-05-28 23:25:10,075 - INFO - file_handler logging initialized
+2025-05-28 23:25:10,320 - INFO - FileHandler initialized
+2025-05-28 23:28:03,857 - INFO - file_handler logging initialized
+2025-05-28 23:28:04,068 - INFO - FileHandler initialized
+2025-05-28 23:28:55,036 - INFO - Validating credentials for username: laurie
+2025-05-28 23:28:55,037 - INFO - Credentials validated for laurie
+2025-05-28 23:28:55,037 - INFO - Retrieving role for username: laurie
+2025-05-28 23:28:55,037 - DEBUG - Role for laurie: User
+2025-05-28 23:31:06,850 - INFO - file_handler logging initialized
+2025-05-28 23:31:07,095 - INFO - FileHandler initialized
+2025-05-28 23:31:45,970 - INFO - Saving quote for customer FatMan22
+2025-05-28 23:31:45,971 - DEBUG - Quote saved for FatMan22
+2025-05-28 23:34:20,781 - INFO - file_handler logging initialized
+2025-05-28 23:34:21,030 - INFO - FileHandler initialized
+2025-05-28 23:35:50,021 - INFO - Validating credentials for username: laurie
+2025-05-28 23:35:50,021 - INFO - Credentials validated for laurie
+2025-05-28 23:35:50,021 - INFO - Retrieving role for username: laurie
+2025-05-28 23:35:50,022 - DEBUG - Role for laurie: User
+2025-05-28 23:37:28,661 - INFO - Loading rates
+2025-05-28 23:37:28,661 - DEBUG - Loaded 13 rates
+2025-05-28 23:37:28,663 - INFO - Saving output for part PART-98765
+2025-05-28 23:37:28,664 - DEBUG - Output saved for PART-98765
+2025-05-28 23:37:48,270 - INFO - file_handler logging initialized
+2025-05-28 23:37:48,513 - INFO - FileHandler initialized
+2025-05-28 23:38:42,830 - INFO - file_handler logging initialized
+2025-05-28 23:38:43,063 - INFO - FileHandler initialized
+2025-05-28 23:39:34,137 - INFO - Validating credentials for username: laurie
+2025-05-28 23:39:34,137 - INFO - Credentials validated for laurie
+2025-05-28 23:39:34,137 - INFO - Retrieving role for username: laurie
+2025-05-28 23:39:34,138 - DEBUG - Role for laurie: User
+2025-05-28 23:40:52,197 - INFO - Loading rates
+2025-05-28 23:40:52,198 - DEBUG - Loaded 13 rates
+2025-05-28 23:41:08,165 - INFO - Loading rates
+2025-05-28 23:41:08,165 - DEBUG - Loaded 13 rates
+2025-05-28 23:41:08,166 - INFO - Saving output for part PART-56789
+2025-05-28 23:41:08,167 - DEBUG - Output saved for PART-56789
+2025-05-28 23:41:21,889 - INFO - file_handler logging initialized
+2025-05-28 23:41:22,130 - INFO - FileHandler initialized
+2025-05-28 23:44:18,376 - INFO - file_handler logging initialized
+2025-05-28 23:44:18,647 - INFO - FileHandler initialized
+2025-05-28 23:45:26,278 - INFO - Validating credentials for username: laurie
+2025-05-28 23:45:26,278 - INFO - Credentials validated for laurie
+2025-05-28 23:45:26,278 - INFO - Retrieving role for username: laurie
+2025-05-28 23:45:26,278 - DEBUG - Role for laurie: User
+2025-05-28 23:47:50,903 - INFO - Loading rates
+2025-05-28 23:47:50,904 - DEBUG - Loaded 13 rates
+2025-05-28 23:48:03,623 - INFO - Loading rates
+2025-05-28 23:48:03,623 - DEBUG - Loaded 13 rates
+2025-05-28 23:48:03,624 - INFO - Saving output for part PART-12345
+2025-05-28 23:48:03,624 - DEBUG - Output saved for PART-12345
+2025-05-28 23:48:16,731 - INFO - file_handler logging initialized
+2025-05-28 23:48:16,978 - INFO - FileHandler initialized
+2025-05-28 23:52:17,366 - INFO - file_handler logging initialized
+2025-05-28 23:52:17,638 - INFO - FileHandler initialized
+2025-05-28 23:53:27,461 - INFO - Validating credentials for username: laurie
+2025-05-28 23:53:27,461 - INFO - Credentials validated for laurie
+2025-05-28 23:53:27,462 - INFO - Retrieving role for username: laurie
+2025-05-28 23:53:27,462 - DEBUG - Role for laurie: User
+2025-05-28 23:54:31,356 - INFO - file_handler logging initialized
+2025-05-28 23:54:31,568 - INFO - FileHandler initialized
+2025-05-29 00:07:13,418 - INFO - file_handler logging initialized
+2025-05-29 00:07:13,623 - INFO - FileHandler initialized
+2025-05-29 00:09:04,512 - INFO - file_handler logging initialized
+2025-05-29 00:13:36,563 - INFO - file_handler logging initialized
+2025-05-29 00:16:42,833 - INFO - file_handler logging initialized
+2025-05-29 00:16:43,075 - INFO - FileHandler initialized
+2025-05-29 00:16:43,116 - INFO - Validating credentials for username: laurie
+2025-05-29 00:16:43,116 - INFO - Credentials validated for laurie
+2025-05-29 00:16:43,116 - INFO - Retrieving role for username: laurie
+2025-05-29 00:16:43,117 - DEBUG - Role for laurie: User
+2025-05-29 00:17:32,786 - INFO - file_handler logging initialized
+2025-05-29 00:21:46,839 - INFO - file_handler logging initialized
+2025-05-29 00:21:47,084 - INFO - FileHandler initialized
+2025-05-29 00:21:47,126 - INFO - Validating credentials for username: laurie
+2025-05-29 00:21:47,126 - INFO - Credentials validated for laurie
+2025-05-29 00:21:47,126 - INFO - Retrieving role for username: laurie
+2025-05-29 00:21:47,127 - DEBUG - Role for laurie: User
+2025-05-29 00:25:39,592 - INFO - file_handler logging initialized
+2025-05-29 00:25:39,832 - INFO - FileHandler initialized
+2025-05-29 00:25:39,875 - INFO - Validating credentials for username: laurie
+2025-05-29 00:25:39,875 - INFO - Credentials validated for laurie
+2025-05-29 00:25:39,875 - INFO - Retrieving role for username: laurie
+2025-05-29 00:25:39,876 - DEBUG - Role for laurie: User
+2025-05-29 00:26:40,374 - INFO - file_handler logging initialized
+2025-05-29 00:30:04,730 - INFO - file_handler logging initialized
+2025-05-29 00:30:04,938 - INFO - FileHandler initialized
+2025-05-29 00:31:06,948 - INFO - file_handler logging initialized
+2025-05-29 00:31:46,583 - INFO - file_handler logging initialized
+2025-05-29 00:31:46,824 - INFO - FileHandler initialized
+2025-05-29 00:31:46,866 - INFO - Validating credentials for username: laurie
+2025-05-29 00:31:46,866 - INFO - Credentials validated for laurie
+2025-05-29 00:31:46,867 - INFO - Retrieving role for username: laurie
+2025-05-29 00:31:46,867 - DEBUG - Role for laurie: User
+2025-05-29 00:39:24,666 - INFO - file_handler logging initialized
+2025-05-29 00:39:24,912 - INFO - FileHandler initialized
+2025-05-29 00:39:24,956 - INFO - Validating credentials for username: laurie
+2025-05-29 00:39:24,956 - INFO - Credentials validated for laurie
+2025-05-29 00:39:24,957 - INFO - Retrieving role for username: laurie
+2025-05-29 00:39:24,957 - DEBUG - Role for laurie: User
+2025-05-29 00:39:26,668 - INFO - Loading rates
+2025-05-29 00:39:26,668 - DEBUG - Loaded 13 rates
+2025-05-29 00:39:52,581 - INFO - file_handler logging initialized
+2025-05-29 00:42:10,087 - INFO - file_handler logging initialized
+2025-05-29 00:42:10,342 - INFO - FileHandler initialized
+2025-05-29 00:42:10,386 - INFO - Validating credentials for username: laurie
+2025-05-29 00:42:10,387 - INFO - Credentials validated for laurie
+2025-05-29 00:42:10,387 - INFO - Retrieving role for username: laurie
+2025-05-29 00:42:10,387 - DEBUG - Role for laurie: User
+2025-05-29 00:42:12,172 - INFO - Loading rates
+2025-05-29 00:42:12,172 - DEBUG - Loaded 13 rates
+2025-05-29 00:44:59,401 - INFO - file_handler logging initialized
+2025-05-29 00:44:59,647 - INFO - FileHandler initialized
+2025-05-29 00:44:59,687 - INFO - Validating credentials for username: laurie
+2025-05-29 00:44:59,688 - INFO - Credentials validated for laurie
+2025-05-29 00:44:59,688 - INFO - Retrieving role for username: laurie
+2025-05-29 00:44:59,689 - DEBUG - Role for laurie: User
+2025-05-29 00:45:01,207 - INFO - Loading rates
+2025-05-29 00:45:01,208 - DEBUG - Loaded 13 rates
+2025-05-29 00:47:51,853 - INFO - file_handler logging initialized
+2025-05-29 00:47:52,097 - INFO - FileHandler initialized
+2025-05-29 00:47:52,137 - INFO - Validating credentials for username: laurie
+2025-05-29 00:47:52,137 - INFO - Credentials validated for laurie
+2025-05-29 00:47:52,138 - INFO - Retrieving role for username: laurie
+2025-05-29 00:47:52,138 - DEBUG - Role for laurie: User
+2025-05-29 00:47:54,040 - INFO - Loading rates
+2025-05-29 00:47:54,040 - DEBUG - Loaded 13 rates
+2025-05-29 00:47:54,042 - INFO - Saving output for part PART-12345
+2025-05-29 00:47:54,043 - DEBUG - Output saved for PART-12345
+2025-05-29 00:50:23,781 - INFO - file_handler logging initialized
+2025-05-29 00:53:48,216 - INFO - file_handler logging initialized
+2025-05-29 01:02:13,848 - INFO - file_handler logging initialized
+2025-05-29 01:02:14,100 - INFO - FileHandler initialized
+2025-05-29 01:02:14,146 - INFO - Validating credentials for username: laurie
+2025-05-29 01:02:14,147 - INFO - Credentials validated for laurie
+2025-05-29 01:02:14,147 - INFO - Retrieving role for username: laurie
+2025-05-29 01:02:14,147 - DEBUG - Role for laurie: User
+2025-05-29 01:02:15,931 - INFO - Loading rates
+2025-05-29 01:02:15,932 - DEBUG - Loaded 13 rates
+2025-05-29 01:02:15,934 - INFO - Saving output for part PART-12345
+2025-05-29 01:02:15,934 - DEBUG - Output saved for PART-12345
+2025-05-29 01:12:50,686 - INFO - file_handler logging initialized
+2025-05-29 01:12:50,946 - INFO - FileHandler initialized
+2025-05-29 01:12:50,993 - INFO - Validating credentials for username: laurie
+2025-05-29 01:12:50,993 - INFO - Credentials validated for laurie
+2025-05-29 01:12:50,993 - INFO - Retrieving role for username: laurie
+2025-05-29 01:12:50,994 - DEBUG - Role for laurie: User
+2025-05-29 01:12:52,996 - INFO - Loading rates
+2025-05-29 01:12:52,996 - DEBUG - Loaded 13 rates
+2025-05-29 01:12:52,998 - INFO - Saving output for part PART-12345
+2025-05-29 01:12:52,999 - DEBUG - Output saved for PART-12345
+2025-05-29 01:12:55,217 - INFO - Loading rates
+2025-05-29 01:12:55,217 - DEBUG - Loaded 13 rates
+2025-05-29 01:12:59,632 - INFO - Loading rates
+2025-05-29 01:12:59,633 - DEBUG - Loaded 13 rates
+2025-05-29 01:13:01,814 - INFO - Loading rates
+2025-05-29 01:13:01,815 - DEBUG - Loaded 13 rates
+2025-05-29 01:13:02,736 - INFO - Loading rates
+2025-05-29 01:13:02,737 - DEBUG - Loaded 13 rates
+2025-05-29 01:13:03,300 - INFO - Loading rates
+2025-05-29 01:13:03,301 - DEBUG - Loaded 13 rates
+2025-05-29 01:13:03,855 - INFO - Loading rates
+2025-05-29 01:13:03,856 - DEBUG - Loaded 13 rates
+2025-05-29 01:13:04,599 - INFO - Validating credentials for username: laurie
+2025-05-29 01:13:04,600 - INFO - Credentials validated for laurie
+2025-05-29 01:13:04,600 - INFO - Retrieving role for username: laurie
+2025-05-29 01:13:04,600 - DEBUG - Role for laurie: User
+2025-05-29 01:13:06,219 - INFO - Loading rates
+2025-05-29 01:13:06,219 - DEBUG - Loaded 13 rates
+2025-05-29 01:13:06,811 - INFO - Loading rates
+2025-05-29 01:13:06,811 - DEBUG - Loaded 13 rates
+2025-05-29 01:19:20,231 - INFO - file_handler logging initialized
+2025-05-29 01:19:20,511 - INFO - FileHandler initialized
+2025-05-29 01:19:20,560 - INFO - Validating credentials for username: laurie
+2025-05-29 01:19:20,560 - INFO - Credentials validated for laurie
+2025-05-29 01:19:20,560 - INFO - Retrieving role for username: laurie
+2025-05-29 01:19:20,561 - DEBUG - Role for laurie: User
+2025-05-29 01:19:22,070 - INFO - Loading rates
+2025-05-29 01:19:22,071 - DEBUG - Loaded 13 rates
+2025-05-29 01:19:22,073 - INFO - Saving output for part PART-12345
+2025-05-29 01:19:22,073 - DEBUG - Output saved for PART-12345
+2025-05-29 01:19:24,090 - INFO - Loading rates
+2025-05-29 01:19:24,090 - DEBUG - Loaded 13 rates
+2025-05-29 01:19:25,270 - INFO - Loading rates
+2025-05-29 01:19:25,270 - DEBUG - Loaded 13 rates
+2025-05-29 01:19:25,743 - INFO - Loading rates
+2025-05-29 01:19:25,744 - DEBUG - Loaded 13 rates
+2025-05-29 01:19:26,125 - INFO - Loading rates
+2025-05-29 01:19:26,126 - DEBUG - Loaded 13 rates
+2025-05-29 01:19:26,562 - INFO - Loading rates
+2025-05-29 01:19:26,563 - DEBUG - Loaded 13 rates
+2025-05-29 01:19:27,018 - INFO - Loading rates
+2025-05-29 01:19:27,018 - DEBUG - Loaded 13 rates
+2025-05-29 01:19:27,598 - INFO - Validating credentials for username: laurie
+2025-05-29 01:19:27,599 - INFO - Credentials validated for laurie
+2025-05-29 01:19:27,599 - INFO - Retrieving role for username: laurie
+2025-05-29 01:19:27,599 - DEBUG - Role for laurie: User
+2025-05-29 01:19:28,773 - INFO - Loading rates
+2025-05-29 01:19:28,773 - DEBUG - Loaded 13 rates
+2025-05-29 01:19:29,314 - INFO - Loading rates
+2025-05-29 01:19:29,314 - DEBUG - Loaded 13 rates
+2025-05-29 01:20:34,434 - INFO - file_handler logging initialized
+2025-05-29 01:20:34,676 - INFO - FileHandler initialized
+2025-05-29 01:20:34,718 - INFO - Validating credentials for username: laurie
+2025-05-29 01:20:34,718 - INFO - Credentials validated for laurie
+2025-05-29 01:20:34,718 - INFO - Retrieving role for username: laurie
+2025-05-29 01:20:34,719 - DEBUG - Role for laurie: User
+2025-05-29 01:20:36,079 - INFO - Loading rates
+2025-05-29 01:20:36,079 - DEBUG - Loaded 13 rates
+2025-05-29 01:20:36,081 - INFO - Saving output for part PART-12345
+2025-05-29 01:20:36,082 - DEBUG - Output saved for PART-12345
+2025-05-29 01:20:37,669 - INFO - Loading rates
+2025-05-29 01:20:37,669 - DEBUG - Loaded 13 rates
+2025-05-29 01:20:38,328 - INFO - Loading rates
+2025-05-29 01:20:38,329 - DEBUG - Loaded 13 rates
+2025-05-29 01:20:38,786 - INFO - Loading rates
+2025-05-29 01:20:38,786 - DEBUG - Loaded 13 rates
+2025-05-29 01:20:38,978 - INFO - Loading rates
+2025-05-29 01:20:38,978 - DEBUG - Loaded 13 rates
+2025-05-29 01:20:39,184 - INFO - Loading rates
+2025-05-29 01:20:39,185 - DEBUG - Loaded 13 rates
+2025-05-29 01:20:39,379 - INFO - Loading rates
+2025-05-29 01:20:39,379 - DEBUG - Loaded 13 rates
+2025-05-29 01:20:39,752 - INFO - Validating credentials for username: laurie
+2025-05-29 01:20:39,753 - INFO - Credentials validated for laurie
+2025-05-29 01:20:39,753 - INFO - Retrieving role for username: laurie
+2025-05-29 01:20:39,753 - DEBUG - Role for laurie: User
+2025-05-29 01:20:40,703 - INFO - Loading rates
+2025-05-29 01:20:40,703 - DEBUG - Loaded 13 rates
+2025-05-29 01:20:41,178 - INFO - Loading rates
+2025-05-29 01:20:41,179 - DEBUG - Loaded 13 rates
+2025-05-29 01:23:46,710 - INFO - file_handler logging initialized
+2025-05-29 01:23:46,954 - INFO - FileHandler initialized
+2025-05-29 01:23:46,995 - INFO - Validating credentials for username: laurie
+2025-05-29 01:23:46,996 - INFO - Credentials validated for laurie
+2025-05-29 01:23:46,996 - INFO - Retrieving role for username: laurie
+2025-05-29 01:23:46,996 - DEBUG - Role for laurie: User
+2025-05-29 01:23:48,758 - INFO - Loading rates
+2025-05-29 01:23:48,758 - DEBUG - Loaded 13 rates
+2025-05-29 01:23:48,760 - INFO - Saving output for part PART-12345
+2025-05-29 01:23:48,761 - DEBUG - Output saved for PART-12345
+2025-05-29 01:23:50,644 - INFO - Loading rates
+2025-05-29 01:23:50,644 - DEBUG - Loaded 13 rates
+2025-05-29 01:23:50,646 - INFO - Saving output for part PART-COST001
+2025-05-29 01:23:50,646 - DEBUG - Output saved for PART-COST001
+2025-05-29 01:23:53,556 - INFO - Loading rates
+2025-05-29 01:23:53,556 - DEBUG - Loaded 13 rates
+2025-05-29 01:23:53,557 - INFO - Saving output for part PART-COST002
+2025-05-29 01:23:53,558 - DEBUG - Output saved for PART-COST002
+2025-05-29 01:23:55,364 - INFO - Loading rates
+2025-05-29 01:23:55,364 - DEBUG - Loaded 13 rates
+2025-05-29 01:23:55,366 - INFO - Saving output for part PART-COST003
+2025-05-29 01:23:55,366 - DEBUG - Output saved for PART-COST003
+2025-05-29 01:23:56,752 - INFO - Loading rates
+2025-05-29 01:23:56,752 - DEBUG - Loaded 13 rates
+2025-05-29 01:23:56,754 - INFO - Saving output for part PART-COST004
+2025-05-29 01:23:56,755 - DEBUG - Output saved for PART-COST004
+2025-05-29 01:23:58,426 - INFO - Loading rates
+2025-05-29 01:23:58,426 - DEBUG - Loaded 13 rates
+2025-05-29 01:24:01,072 - INFO - Loading rates
+2025-05-29 01:24:01,072 - DEBUG - Loaded 13 rates
+2025-05-29 01:24:01,074 - INFO - Saving output for part PART-FIO002
+2025-05-29 01:24:01,074 - DEBUG - Output saved for PART-FIO002
+2025-05-29 01:24:02,946 - INFO - Validating credentials for username: laurie
+2025-05-29 01:24:02,947 - INFO - Credentials validated for laurie
+2025-05-29 01:24:02,947 - INFO - Retrieving role for username: laurie
+2025-05-29 01:24:02,947 - DEBUG - Role for laurie: User
+2025-05-29 01:24:03,842 - INFO - Loading rates
+2025-05-29 01:24:03,842 - DEBUG - Loaded 13 rates
+2025-05-29 01:24:03,843 - INFO - Saving output for part PART-FIO004
+2025-05-29 01:24:03,844 - DEBUG - Output saved for PART-FIO004
+2025-05-29 01:24:05,676 - INFO - Loading rates
+2025-05-29 01:24:05,677 - DEBUG - Loaded 13 rates
+2025-05-29 01:24:05,678 - INFO - Saving output for part PART-FIO005
+2025-05-29 01:24:05,678 - DEBUG - Output saved for PART-FIO005
+2025-05-29 01:24:08,357 - INFO - Saving quote for customer Test Customer
+2025-05-29 01:24:08,358 - DEBUG - Quote saved for Test Customer
+2025-05-29 01:28:47,290 - INFO - file_handler logging initialized
+2025-05-29 01:28:47,536 - INFO - FileHandler initialized
+2025-05-29 01:28:47,578 - INFO - Validating credentials for username: laurie
+2025-05-29 01:28:47,578 - INFO - Credentials validated for laurie
+2025-05-29 01:28:47,579 - INFO - Retrieving role for username: laurie
+2025-05-29 01:28:47,579 - DEBUG - Role for laurie: User
+2025-05-29 01:28:49,419 - INFO - Loading rates
+2025-05-29 01:28:49,420 - DEBUG - Loaded 13 rates
+2025-05-29 01:28:49,422 - INFO - Saving output for part PART-12345
+2025-05-29 01:28:49,423 - DEBUG - Output saved for PART-12345
+2025-05-29 01:28:51,483 - INFO - Loading rates
+2025-05-29 01:28:51,483 - DEBUG - Loaded 13 rates
+2025-05-29 01:28:51,485 - INFO - Saving output for part PART-COST001
+2025-05-29 01:28:51,485 - DEBUG - Output saved for PART-COST001
+2025-05-29 01:28:53,048 - INFO - Loading rates
+2025-05-29 01:28:53,049 - DEBUG - Loaded 13 rates
+2025-05-29 01:28:53,050 - INFO - Saving output for part PART-COST002
+2025-05-29 01:28:53,051 - DEBUG - Output saved for PART-COST002
+2025-05-29 01:28:54,330 - INFO - Loading rates
+2025-05-29 01:28:54,331 - DEBUG - Loaded 13 rates
+2025-05-29 01:28:54,332 - INFO - Saving output for part PART-COST003
+2025-05-29 01:28:54,333 - DEBUG - Output saved for PART-COST003
+2025-05-29 01:28:55,522 - INFO - Loading rates
+2025-05-29 01:28:55,523 - DEBUG - Loaded 13 rates
+2025-05-29 01:28:55,524 - INFO - Saving output for part PART-COST004
+2025-05-29 01:28:55,525 - DEBUG - Output saved for PART-COST004
+2025-05-29 01:28:56,581 - INFO - Loading rates
+2025-05-29 01:28:56,581 - DEBUG - Loaded 13 rates
+2025-05-29 01:29:04,627 - INFO - Loading rates
+2025-05-29 01:29:04,627 - DEBUG - Loaded 13 rates
+2025-05-29 01:29:09,041 - INFO - Validating credentials for username: laurie
+2025-05-29 01:29:09,042 - INFO - Credentials validated for laurie
+2025-05-29 01:29:09,042 - INFO - Retrieving role for username: laurie
+2025-05-29 01:29:09,042 - DEBUG - Role for laurie: User
+2025-05-29 01:29:09,886 - INFO - Loading rates
+2025-05-29 01:29:09,886 - DEBUG - Loaded 13 rates
+2025-05-29 01:29:10,809 - INFO - Loading rates
+2025-05-29 01:29:10,809 - DEBUG - Loaded 13 rates
+2025-05-29 01:32:20,370 - INFO - file_handler logging initialized
+2025-05-29 01:32:20,623 - INFO - FileHandler initialized
+2025-05-29 01:32:20,666 - INFO - Validating credentials for username: laurie
+2025-05-29 01:32:20,667 - INFO - Credentials validated for laurie
+2025-05-29 01:32:20,667 - INFO - Retrieving role for username: laurie
+2025-05-29 01:32:20,668 - DEBUG - Role for laurie: User
+2025-05-29 01:32:22,464 - INFO - Loading rates
+2025-05-29 01:32:22,465 - DEBUG - Loaded 13 rates
+2025-05-29 01:32:22,466 - INFO - Saving output for part PART-12345
+2025-05-29 01:32:22,467 - DEBUG - Output saved for PART-12345
+2025-05-29 01:32:24,220 - INFO - Loading rates
+2025-05-29 01:32:24,221 - DEBUG - Loaded 13 rates
+2025-05-29 01:32:24,222 - INFO - Saving output for part PART-COST001
+2025-05-29 01:32:24,223 - DEBUG - Output saved for PART-COST001
+2025-05-29 01:32:25,772 - INFO - Loading rates
+2025-05-29 01:32:25,772 - DEBUG - Loaded 13 rates
+2025-05-29 01:32:25,774 - INFO - Saving output for part PART-COST002
+2025-05-29 01:32:25,774 - DEBUG - Output saved for PART-COST002
+2025-05-29 01:32:27,167 - INFO - Loading rates
+2025-05-29 01:32:27,167 - DEBUG - Loaded 13 rates
+2025-05-29 01:32:27,168 - INFO - Saving output for part PART-COST003
+2025-05-29 01:32:27,169 - DEBUG - Output saved for PART-COST003
+2025-05-29 01:32:28,127 - INFO - Loading rates
+2025-05-29 01:32:28,127 - DEBUG - Loaded 13 rates
+2025-05-29 01:32:28,128 - INFO - Saving output for part PART-COST004
+2025-05-29 01:32:28,129 - DEBUG - Output saved for PART-COST004
+2025-05-29 01:32:29,088 - INFO - Loading rates
+2025-05-29 01:32:29,088 - DEBUG - Loaded 13 rates
+2025-05-29 01:32:32,395 - INFO - Loading rates
+2025-05-29 01:32:32,395 - DEBUG - Loaded 13 rates
+2025-05-29 01:32:32,396 - INFO - Saving output for part PART-FIO002
+2025-05-29 01:32:32,397 - DEBUG - Output saved for PART-FIO002
+2025-05-29 01:32:34,064 - INFO - Validating credentials for username: laurie
+2025-05-29 01:32:34,065 - INFO - Credentials validated for laurie
+2025-05-29 01:32:34,065 - INFO - Retrieving role for username: laurie
+2025-05-29 01:32:34,065 - DEBUG - Role for laurie: User
+2025-05-29 01:32:34,896 - INFO - Loading rates
+2025-05-29 01:32:34,896 - DEBUG - Loaded 13 rates
+2025-05-29 01:32:34,897 - INFO - Saving output for part PART-FIO004
+2025-05-29 01:32:34,898 - DEBUG - Output saved for PART-FIO004
+2025-05-29 01:32:37,578 - INFO - Loading rates
+2025-05-29 01:32:37,578 - DEBUG - Loaded 13 rates
+2025-05-29 01:32:37,579 - INFO - Saving output for part PART-FIO005
+2025-05-29 01:32:37,580 - DEBUG - Output saved for PART-FIO005
+2025-05-29 01:32:38,990 - INFO - Saving quote for customer Test Customer
+2025-05-29 01:32:38,990 - DEBUG - Quote saved for Test Customer
+2025-05-29 01:37:25,073 - INFO - file_handler logging initialized
+2025-05-29 01:37:25,315 - INFO - FileHandler initialized
+2025-05-29 01:37:25,357 - INFO - Validating credentials for username: laurie
+2025-05-29 01:37:25,357 - INFO - Credentials validated for laurie
+2025-05-29 01:37:25,357 - INFO - Retrieving role for username: laurie
+2025-05-29 01:37:25,358 - DEBUG - Role for laurie: User
+2025-05-29 01:37:27,132 - INFO - Loading rates
+2025-05-29 01:37:27,133 - DEBUG - Loaded 13 rates
+2025-05-29 01:37:27,134 - INFO - Saving output for part PART-12345
+2025-05-29 01:37:27,135 - DEBUG - Output saved for PART-12345
+2025-05-29 01:37:29,105 - INFO - Loading rates
+2025-05-29 01:37:29,106 - DEBUG - Loaded 13 rates
+2025-05-29 01:37:29,107 - INFO - Saving output for part PART-COST001
+2025-05-29 01:37:29,108 - DEBUG - Output saved for PART-COST001
+2025-05-29 01:37:30,621 - INFO - Loading rates
+2025-05-29 01:37:30,622 - DEBUG - Loaded 13 rates
+2025-05-29 01:37:30,623 - INFO - Saving output for part PART-COST002
+2025-05-29 01:37:30,624 - DEBUG - Output saved for PART-COST002
+2025-05-29 01:37:31,879 - INFO - Loading rates
+2025-05-29 01:37:31,879 - DEBUG - Loaded 13 rates
+2025-05-29 01:37:31,881 - INFO - Saving output for part PART-COST003
+2025-05-29 01:37:31,882 - DEBUG - Output saved for PART-COST003
+2025-05-29 01:37:33,109 - INFO - Loading rates
+2025-05-29 01:37:33,110 - DEBUG - Loaded 13 rates
+2025-05-29 01:37:33,112 - INFO - Saving output for part PART-COST004
+2025-05-29 01:37:33,112 - DEBUG - Output saved for PART-COST004
+2025-05-29 01:37:34,191 - INFO - Loading rates
+2025-05-29 01:37:34,191 - DEBUG - Loaded 13 rates
+2025-05-29 01:37:36,597 - INFO - Loading rates
+2025-05-29 01:37:36,597 - DEBUG - Loaded 13 rates
+2025-05-29 01:37:36,598 - INFO - Saving output for part PART-FIO002
+2025-05-29 01:37:36,599 - DEBUG - Output saved for PART-FIO002
+2025-05-29 01:37:38,427 - INFO - Validating credentials for username: laurie
+2025-05-29 01:37:38,427 - INFO - Credentials validated for laurie
+2025-05-29 01:37:38,427 - INFO - Retrieving role for username: laurie
+2025-05-29 01:37:38,428 - DEBUG - Role for laurie: User
+2025-05-29 01:37:39,629 - INFO - Loading rates
+2025-05-29 01:37:39,630 - DEBUG - Loaded 13 rates
+2025-05-29 01:37:39,631 - INFO - Saving output for part PART-FIO004
+2025-05-29 01:37:39,631 - DEBUG - Output saved for PART-FIO004
+2025-05-29 01:37:40,867 - INFO - Loading rates
+2025-05-29 01:37:40,867 - DEBUG - Loaded 13 rates
+2025-05-29 01:37:40,868 - INFO - Saving output for part PART-FIO005
+2025-05-29 01:37:40,869 - DEBUG - Output saved for PART-FIO005
+2025-05-29 01:37:42,156 - INFO - Saving quote for customer Test Customer
+2025-05-29 01:37:42,156 - DEBUG - Quote saved for Test Customer
+2025-05-29 01:41:19,428 - INFO - file_handler logging initialized
+2025-05-29 01:41:19,674 - INFO - FileHandler initialized
+2025-05-29 01:41:19,717 - INFO - Validating credentials for username: laurie
+2025-05-29 01:41:19,718 - INFO - Credentials validated for laurie
+2025-05-29 01:41:19,718 - INFO - Retrieving role for username: laurie
+2025-05-29 01:41:19,718 - DEBUG - Role for laurie: User
+2025-05-29 01:41:21,969 - INFO - Loading rates
+2025-05-29 01:41:21,970 - DEBUG - Loaded 13 rates
+2025-05-29 01:41:21,971 - INFO - Saving output for part PART-12345
+2025-05-29 01:41:21,972 - DEBUG - Output saved for PART-12345
+2025-05-29 01:41:23,998 - INFO - Loading rates
+2025-05-29 01:41:23,998 - DEBUG - Loaded 13 rates
+2025-05-29 01:41:23,999 - INFO - Saving output for part PART-COST001
+2025-05-29 01:41:24,000 - DEBUG - Output saved for PART-COST001
+2025-05-29 01:41:27,548 - INFO - Loading rates
+2025-05-29 01:41:27,548 - DEBUG - Loaded 13 rates
+2025-05-29 01:41:27,549 - INFO - Saving output for part PART-COST002
+2025-05-29 01:41:27,550 - DEBUG - Output saved for PART-COST002
+2025-05-29 01:41:28,905 - INFO - Loading rates
+2025-05-29 01:41:28,905 - DEBUG - Loaded 13 rates
+2025-05-29 01:41:28,906 - INFO - Saving output for part PART-COST003
+2025-05-29 01:41:28,906 - DEBUG - Output saved for PART-COST003
+2025-05-29 01:41:30,022 - INFO - Loading rates
+2025-05-29 01:41:30,022 - DEBUG - Loaded 13 rates
+2025-05-29 01:41:30,023 - INFO - Saving output for part PART-COST004
+2025-05-29 01:41:30,023 - DEBUG - Output saved for PART-COST004
+2025-05-29 01:41:31,171 - INFO - Loading rates
+2025-05-29 01:41:31,171 - DEBUG - Loaded 13 rates
+2025-05-29 01:41:32,596 - INFO - Loading rates
+2025-05-29 01:41:32,596 - DEBUG - Loaded 13 rates
+2025-05-29 01:41:32,597 - INFO - Saving output for part PART-FIO002
+2025-05-29 01:41:32,598 - DEBUG - Output saved for PART-FIO002
+2025-05-29 01:41:34,363 - INFO - Validating credentials for username: laurie
+2025-05-29 01:41:34,364 - INFO - Credentials validated for laurie
+2025-05-29 01:41:34,364 - INFO - Retrieving role for username: laurie
+2025-05-29 01:41:34,364 - DEBUG - Role for laurie: User
+2025-05-29 01:41:35,193 - INFO - Loading rates
+2025-05-29 01:41:35,193 - DEBUG - Loaded 13 rates
+2025-05-29 01:41:35,194 - INFO - Saving output for part PART-FIO004
+2025-05-29 01:41:35,195 - DEBUG - Output saved for PART-FIO004
+2025-05-29 01:41:36,128 - INFO - Loading rates
+2025-05-29 01:41:36,128 - DEBUG - Loaded 13 rates
+2025-05-29 01:41:36,129 - INFO - Saving output for part PART-FIO005
+2025-05-29 01:41:36,130 - DEBUG - Output saved for PART-FIO005
+2025-05-29 01:41:37,120 - INFO - Saving quote for customer Test Customer
+2025-05-29 01:41:37,120 - DEBUG - Quote saved for Test Customer
+2025-05-29 01:47:19,622 - INFO - file_handler logging initialized
+2025-05-29 01:47:19,926 - INFO - FileHandler initialized
+2025-05-29 01:47:19,971 - INFO - Validating credentials for username: laurie
+2025-05-29 01:47:19,972 - INFO - Credentials validated for laurie
+2025-05-29 01:47:19,972 - INFO - Retrieving role for username: laurie
+2025-05-29 01:47:19,972 - DEBUG - Role for laurie: User
+2025-05-29 01:47:21,583 - INFO - Loading rates
+2025-05-29 01:47:21,583 - DEBUG - Loaded 13 rates
+2025-05-29 01:47:21,586 - INFO - Saving output for part PART-12345
+2025-05-29 01:47:21,586 - DEBUG - Output saved for PART-12345
+2025-05-29 01:47:23,106 - INFO - Loading rates
+2025-05-29 01:47:23,106 - DEBUG - Loaded 13 rates
+2025-05-29 01:47:23,108 - INFO - Saving output for part PART-COST001
+2025-05-29 01:47:23,108 - DEBUG - Output saved for PART-COST001
+2025-05-29 01:47:24,557 - INFO - Loading rates
+2025-05-29 01:47:24,557 - DEBUG - Loaded 13 rates
+2025-05-29 01:47:24,559 - INFO - Saving output for part PART-COST002
+2025-05-29 01:47:24,559 - DEBUG - Output saved for PART-COST002
+2025-05-29 01:47:25,742 - INFO - Loading rates
+2025-05-29 01:47:25,742 - DEBUG - Loaded 13 rates
+2025-05-29 01:47:25,744 - INFO - Saving output for part PART-COST003
+2025-05-29 01:47:25,744 - DEBUG - Output saved for PART-COST003
+2025-05-29 01:47:26,905 - INFO - Loading rates
+2025-05-29 01:47:26,905 - DEBUG - Loaded 13 rates
+2025-05-29 01:47:26,907 - INFO - Saving output for part PART-COST004
+2025-05-29 01:47:26,908 - DEBUG - Output saved for PART-COST004
+2025-05-29 01:47:27,926 - INFO - Loading rates
+2025-05-29 01:47:27,926 - DEBUG - Loaded 13 rates
+2025-05-29 01:47:29,684 - INFO - Loading rates
+2025-05-29 01:47:29,685 - DEBUG - Loaded 13 rates
+2025-05-29 01:47:29,689 - INFO - Saving output for part PART-FIO002
+2025-05-29 01:47:29,690 - DEBUG - Output saved for PART-FIO002
+2025-05-29 01:47:31,327 - INFO - Validating credentials for username: laurie
+2025-05-29 01:47:31,328 - INFO - Credentials validated for laurie
+2025-05-29 01:47:31,328 - INFO - Retrieving role for username: laurie
+2025-05-29 01:47:31,328 - DEBUG - Role for laurie: User
+2025-05-29 01:47:32,126 - INFO - Loading rates
+2025-05-29 01:47:32,127 - DEBUG - Loaded 13 rates
+2025-05-29 01:47:32,128 - INFO - Saving output for part PART-FIO004
+2025-05-29 01:47:32,128 - DEBUG - Output saved for PART-FIO004
+2025-05-29 01:47:33,739 - INFO - Loading rates
+2025-05-29 01:47:33,739 - DEBUG - Loaded 13 rates
+2025-05-29 01:47:33,741 - INFO - Saving output for part PART-FIO005
+2025-05-29 01:47:33,741 - DEBUG - Output saved for PART-FIO005
+2025-05-29 01:47:34,850 - INFO - Saving quote for customer Test Customer
+2025-05-29 01:47:34,851 - DEBUG - Quote saved for Test Customer
+2025-05-29 01:51:40,433 - INFO - file_handler logging initialized
+2025-05-29 01:51:40,677 - INFO - FileHandler initialized
+2025-05-29 01:51:40,718 - INFO - Validating credentials for username: laurie
+2025-05-29 01:51:40,718 - INFO - Credentials validated for laurie
+2025-05-29 01:51:40,718 - INFO - Retrieving role for username: laurie
+2025-05-29 01:51:40,719 - DEBUG - Role for laurie: User
+2025-05-29 01:51:42,501 - INFO - Loading rates
+2025-05-29 01:51:42,501 - DEBUG - Loaded 13 rates
+2025-05-29 01:51:42,503 - INFO - Saving output for part PART-12345
+2025-05-29 01:51:42,503 - DEBUG - Output saved for PART-12345
+2025-05-29 01:51:44,018 - INFO - Loading rates
+2025-05-29 01:51:44,018 - DEBUG - Loaded 13 rates
+2025-05-29 01:51:44,020 - INFO - Saving output for part PART-COST001
+2025-05-29 01:51:44,020 - DEBUG - Output saved for PART-COST001
+2025-05-29 01:51:45,359 - INFO - Loading rates
+2025-05-29 01:51:45,360 - DEBUG - Loaded 13 rates
+2025-05-29 01:51:45,361 - INFO - Saving output for part PART-COST002
+2025-05-29 01:51:45,361 - DEBUG - Output saved for PART-COST002
+2025-05-29 01:51:45,927 - INFO - Loading rates
+2025-05-29 01:51:45,928 - DEBUG - Loaded 13 rates
+2025-05-29 01:51:45,929 - INFO - Saving output for part PART-COST003
+2025-05-29 01:51:45,929 - DEBUG - Output saved for PART-COST003
+2025-05-29 01:51:46,392 - INFO - Loading rates
+2025-05-29 01:51:46,392 - DEBUG - Loaded 13 rates
+2025-05-29 01:51:46,394 - INFO - Saving output for part PART-COST004
+2025-05-29 01:51:46,394 - DEBUG - Output saved for PART-COST004
+2025-05-29 01:51:46,866 - INFO - Loading rates
+2025-05-29 01:51:46,866 - DEBUG - Loaded 13 rates
+2025-05-29 01:51:47,803 - INFO - Loading rates
+2025-05-29 01:51:47,803 - DEBUG - Loaded 13 rates
+2025-05-29 01:51:47,804 - INFO - Saving output for part PART-FIO002
+2025-05-29 01:51:47,804 - DEBUG - Output saved for PART-FIO002
+2025-05-29 01:51:49,554 - INFO - Validating credentials for username: laurie
+2025-05-29 01:51:49,555 - INFO - Credentials validated for laurie
+2025-05-29 01:51:49,555 - INFO - Retrieving role for username: laurie
+2025-05-29 01:51:49,555 - DEBUG - Role for laurie: User
+2025-05-29 01:51:50,393 - INFO - Loading rates
+2025-05-29 01:51:50,393 - DEBUG - Loaded 13 rates
+2025-05-29 01:51:50,394 - INFO - Saving output for part PART-FIO004
+2025-05-29 01:51:50,395 - DEBUG - Output saved for PART-FIO004
+2025-05-29 01:51:51,425 - INFO - Loading rates
+2025-05-29 01:51:51,425 - DEBUG - Loaded 13 rates
+2025-05-29 01:51:51,426 - INFO - Saving output for part PART-FIO005
+2025-05-29 01:51:51,427 - DEBUG - Output saved for PART-FIO005
+2025-05-29 01:51:52,496 - INFO - Saving quote for customer Test Customer
+2025-05-29 01:51:52,497 - DEBUG - Quote saved for Test Customer
+2025-05-29 01:55:34,865 - INFO - file_handler logging initialized
+2025-05-29 01:55:35,110 - INFO - FileHandler initialized
+2025-05-29 01:55:35,150 - INFO - Validating credentials for username: laurie
+2025-05-29 01:55:35,150 - INFO - Credentials validated for laurie
+2025-05-29 01:55:35,150 - INFO - Retrieving role for username: laurie
+2025-05-29 01:55:35,150 - DEBUG - Role for laurie: User
+2025-05-29 01:55:36,667 - INFO - Loading rates
+2025-05-29 01:55:36,667 - DEBUG - Loaded 13 rates
+2025-05-29 01:55:36,668 - INFO - Saving output for part PART-12345
+2025-05-29 01:55:36,669 - DEBUG - Output saved for PART-12345
+2025-05-29 01:55:38,539 - INFO - Loading rates
+2025-05-29 01:55:38,539 - DEBUG - Loaded 13 rates
+2025-05-29 01:55:38,541 - INFO - Saving output for part PART-COST001
+2025-05-29 01:55:38,541 - DEBUG - Output saved for PART-COST001
+2025-05-29 01:55:39,569 - INFO - Loading rates
+2025-05-29 01:55:39,569 - DEBUG - Loaded 13 rates
+2025-05-29 01:55:39,570 - INFO - Saving output for part PART-COST002
+2025-05-29 01:55:39,571 - DEBUG - Output saved for PART-COST002
+2025-05-29 01:55:40,319 - INFO - Loading rates
+2025-05-29 01:55:40,319 - DEBUG - Loaded 13 rates
+2025-05-29 01:55:40,320 - INFO - Saving output for part PART-COST003
+2025-05-29 01:55:40,321 - DEBUG - Output saved for PART-COST003
+2025-05-29 01:55:41,024 - INFO - Loading rates
+2025-05-29 01:55:41,024 - DEBUG - Loaded 13 rates
+2025-05-29 01:55:41,026 - INFO - Saving output for part PART-COST004
+2025-05-29 01:55:41,026 - DEBUG - Output saved for PART-COST004
+2025-05-29 01:55:41,948 - INFO - Loading rates
+2025-05-29 01:55:41,949 - DEBUG - Loaded 13 rates
+2025-05-29 01:55:43,575 - INFO - Loading rates
+2025-05-29 01:55:43,575 - DEBUG - Loaded 13 rates
+2025-05-29 01:55:43,576 - INFO - Saving output for part PART-FIO002
+2025-05-29 01:55:43,577 - DEBUG - Output saved for PART-FIO002
+2025-05-29 01:55:45,514 - INFO - Validating credentials for username: laurie
+2025-05-29 01:55:45,514 - INFO - Credentials validated for laurie
+2025-05-29 01:55:45,514 - INFO - Retrieving role for username: laurie
+2025-05-29 01:55:45,514 - DEBUG - Role for laurie: User
+2025-05-29 01:55:46,406 - INFO - Loading rates
+2025-05-29 01:55:46,406 - DEBUG - Loaded 13 rates
+2025-05-29 01:55:46,407 - INFO - Saving output for part PART-FIO004
+2025-05-29 01:55:46,408 - DEBUG - Output saved for PART-FIO004
+2025-05-29 01:55:47,917 - INFO - Loading rates
+2025-05-29 01:55:47,917 - DEBUG - Loaded 13 rates
+2025-05-29 01:55:47,918 - INFO - Saving output for part PART-FIO005
+2025-05-29 01:55:47,919 - DEBUG - Output saved for PART-FIO005
+2025-05-29 01:55:49,256 - INFO - Saving quote for customer Test Customer
+2025-05-29 01:55:49,256 - DEBUG - Quote saved for Test Customer
+2025-05-29 01:59:30,575 - INFO - file_handler logging initialized
+2025-05-29 01:59:39,088 - INFO - file_handler logging initialized
+2025-05-29 01:59:39,329 - INFO - FileHandler initialized
+2025-05-29 01:59:40,439 - INFO - Loading rates
+2025-05-29 01:59:40,439 - DEBUG - Loaded 13 rates
+2025-05-29 01:59:40,441 - INFO - Saving output for part PART-12345
+2025-05-29 01:59:40,441 - DEBUG - Output saved for PART-12345
+2025-05-29 01:59:43,570 - INFO - Loading rates
+2025-05-29 01:59:43,571 - DEBUG - Loaded 13 rates
+2025-05-29 01:59:43,573 - INFO - Saving output for part PART-COST001
+2025-05-29 01:59:43,573 - DEBUG - Output saved for PART-COST001
+2025-05-29 01:59:45,122 - INFO - Loading rates
+2025-05-29 01:59:45,122 - DEBUG - Loaded 13 rates
+2025-05-29 01:59:45,124 - INFO - Saving output for part PART-COST002
+2025-05-29 01:59:45,124 - DEBUG - Output saved for PART-COST002
+2025-05-29 01:59:46,419 - INFO - Loading rates
+2025-05-29 01:59:46,419 - DEBUG - Loaded 13 rates
+2025-05-29 01:59:46,420 - INFO - Saving output for part PART-COST003
+2025-05-29 01:59:46,420 - DEBUG - Output saved for PART-COST003
+2025-05-29 01:59:47,642 - INFO - Loading rates
+2025-05-29 01:59:47,642 - DEBUG - Loaded 13 rates
+2025-05-29 01:59:47,643 - INFO - Saving output for part PART-COST004
+2025-05-29 01:59:47,644 - DEBUG - Output saved for PART-COST004
+2025-05-29 01:59:49,073 - INFO - Loading rates
+2025-05-29 01:59:49,074 - DEBUG - Loaded 13 rates
+2025-05-29 01:59:49,075 - INFO - Saving output for part PART-FIO002
+2025-05-29 01:59:49,075 - DEBUG - Output saved for PART-FIO002
+2025-05-29 01:59:50,848 - INFO - Loading rates
+2025-05-29 01:59:50,849 - DEBUG - Loaded 13 rates
+2025-05-29 01:59:50,850 - INFO - Saving output for part PART-FIO004
+2025-05-29 01:59:50,850 - DEBUG - Output saved for PART-FIO004
+2025-05-29 01:59:52,122 - INFO - Loading rates
+2025-05-29 01:59:52,122 - DEBUG - Loaded 13 rates
+2025-05-29 01:59:52,123 - INFO - Saving output for part PART-FIO005
+2025-05-29 01:59:52,124 - DEBUG - Output saved for PART-FIO005
+2025-05-29 01:59:53,350 - INFO - Saving quote for customer Test Customer
+2025-05-29 01:59:53,350 - DEBUG - Quote saved for Test Customer
+2025-05-29 02:10:50,459 - INFO - file_handler logging initialized
+2025-05-29 02:10:50,718 - INFO - FileHandler initialized
+2025-05-29 02:10:50,797 - INFO - Validating credentials for username: laurie
+2025-05-29 02:10:50,798 - INFO - Credentials validated for laurie
+2025-05-29 02:10:50,798 - INFO - Retrieving role for username: laurie
+2025-05-29 02:10:50,798 - DEBUG - Role for laurie: User
+2025-05-29 02:10:52,175 - INFO - Loading rates
+2025-05-29 02:10:52,175 - DEBUG - Loaded 13 rates
+2025-05-29 02:10:52,177 - INFO - Saving output for part PART-12345
+2025-05-29 02:10:52,178 - DEBUG - Output saved for PART-12345
+2025-05-29 02:10:53,817 - INFO - Loading rates
+2025-05-29 02:10:53,818 - DEBUG - Loaded 13 rates
+2025-05-29 02:10:53,819 - INFO - Saving output for part PART-COST001
+2025-05-29 02:10:53,820 - DEBUG - Output saved for PART-COST001
+2025-05-29 02:10:55,234 - INFO - Loading rates
+2025-05-29 02:10:55,234 - DEBUG - Loaded 13 rates
+2025-05-29 02:10:55,236 - INFO - Saving output for part PART-COST002
+2025-05-29 02:10:55,237 - DEBUG - Output saved for PART-COST002
+2025-05-29 02:10:56,336 - INFO - Loading rates
+2025-05-29 02:10:56,337 - DEBUG - Loaded 13 rates
+2025-05-29 02:10:56,338 - INFO - Saving output for part PART-COST003
+2025-05-29 02:10:56,339 - DEBUG - Output saved for PART-COST003
+2025-05-29 02:10:57,439 - INFO - Loading rates
+2025-05-29 02:10:57,439 - DEBUG - Loaded 13 rates
+2025-05-29 02:10:57,441 - INFO - Saving output for part PART-COST004
+2025-05-29 02:10:57,442 - DEBUG - Output saved for PART-COST004
+2025-05-29 02:10:58,545 - INFO - Loading rates
+2025-05-29 02:10:58,545 - DEBUG - Loaded 13 rates
+2025-05-29 02:10:58,547 - INFO - Saving output for part PART-FIO002
+2025-05-29 02:10:58,547 - DEBUG - Output saved for PART-FIO002
+2025-05-29 02:10:59,783 - INFO - Validating credentials for username: laurie
+2025-05-29 02:10:59,783 - INFO - Credentials validated for laurie
+2025-05-29 02:10:59,783 - INFO - Retrieving role for username: laurie
+2025-05-29 02:10:59,784 - DEBUG - Role for laurie: User
+2025-05-29 02:11:00,690 - INFO - Loading rates
+2025-05-29 02:11:00,690 - DEBUG - Loaded 13 rates
+2025-05-29 02:11:00,691 - INFO - Saving output for part PART-FIO004
+2025-05-29 02:11:00,691 - DEBUG - Output saved for PART-FIO004
+2025-05-29 02:11:02,337 - INFO - Loading rates
+2025-05-29 02:11:02,337 - DEBUG - Loaded 13 rates
+2025-05-29 02:11:02,338 - INFO - Saving output for part PART-FIO005
+2025-05-29 02:11:02,339 - DEBUG - Output saved for PART-FIO005
+2025-05-29 02:11:03,614 - INFO - Saving quote for customer Test Customer
+2025-05-29 02:11:03,614 - DEBUG - Quote saved for Test Customer
+2025-05-29 02:14:39,600 - INFO - file_handler logging initialized
+2025-05-29 02:14:39,855 - INFO - FileHandler initialized
+2025-05-29 02:14:39,926 - INFO - Validating credentials for username: laurie
+2025-05-29 02:14:39,926 - INFO - Credentials validated for laurie
+2025-05-29 02:14:39,926 - INFO - Retrieving role for username: laurie
+2025-05-29 02:14:39,926 - DEBUG - Role for laurie: User
+2025-05-29 02:17:17,332 - INFO - Loading rates
+2025-05-29 02:17:17,332 - DEBUG - Loaded 13 rates
+2025-05-29 02:17:17,333 - INFO - Saving output for part PART-12345
+2025-05-29 02:17:17,334 - DEBUG - Output saved for PART-12345
+2025-05-29 02:18:17,033 - INFO - Loading rates
+2025-05-29 02:18:17,034 - DEBUG - Loaded 13 rates
+2025-05-29 02:18:17,035 - INFO - Saving output for part PART-COST001
+2025-05-29 02:18:17,036 - DEBUG - Output saved for PART-COST001
+2025-05-29 02:18:54,649 - INFO - Loading rates
+2025-05-29 02:18:54,650 - DEBUG - Loaded 13 rates
+2025-05-29 02:18:54,651 - INFO - Saving output for part PART-COST002
+2025-05-29 02:18:54,652 - DEBUG - Output saved for PART-COST002
+2025-05-29 02:19:47,359 - INFO - Loading rates
+2025-05-29 02:19:47,360 - DEBUG - Loaded 13 rates
+2025-05-29 02:19:47,362 - INFO - Saving output for part PART-COST003
+2025-05-29 02:19:47,362 - DEBUG - Output saved for PART-COST003
+2025-05-29 02:20:28,692 - INFO - Loading rates
+2025-05-29 02:20:28,692 - DEBUG - Loaded 13 rates
+2025-05-29 02:20:28,694 - INFO - Saving output for part PART-COST004
+2025-05-29 02:20:28,695 - DEBUG - Output saved for PART-COST004
+2025-05-29 02:21:07,118 - INFO - Loading rates
+2025-05-29 02:21:07,119 - DEBUG - Loaded 13 rates
+2025-05-29 02:21:07,120 - INFO - Saving output for part PART-FIO002
+2025-05-29 02:21:07,121 - DEBUG - Output saved for PART-FIO002
+2025-05-29 02:21:39,299 - INFO - Validating credentials for username: laurie
+2025-05-29 02:21:39,299 - INFO - Credentials validated for laurie
+2025-05-29 02:21:39,300 - INFO - Retrieving role for username: laurie
+2025-05-29 02:21:39,300 - DEBUG - Role for laurie: User
+2025-05-29 02:22:05,352 - INFO - Loading rates
+2025-05-29 02:22:05,352 - DEBUG - Loaded 13 rates
+2025-05-29 02:22:05,354 - INFO - Saving output for part PART-FIO004
+2025-05-29 02:22:05,355 - DEBUG - Output saved for PART-FIO004
+2025-05-29 02:22:11,975 - INFO - Loading rates
+2025-05-29 02:22:11,975 - DEBUG - Loaded 13 rates
+2025-05-29 02:22:11,977 - INFO - Saving output for part PART-FIO005
+2025-05-29 02:22:11,977 - DEBUG - Output saved for PART-FIO005
+2025-05-29 02:22:14,120 - INFO - Saving quote for customer Test Customer
+2025-05-29 02:22:14,121 - DEBUG - Quote saved for Test Customer
+2025-05-29 02:25:58,215 - INFO - file_handler logging initialized
+2025-05-29 02:25:58,493 - INFO - FileHandler initialized
+2025-05-29 02:26:40,393 - INFO - Validating credentials for username: laurie
+2025-05-29 02:26:40,394 - INFO - Credentials validated for laurie
+2025-05-29 02:26:40,394 - INFO - Retrieving role for username: laurie
+2025-05-29 02:26:40,394 - DEBUG - Role for laurie: User
+2025-05-29 02:28:28,536 - INFO - Validating credentials for username: admin
+2025-05-29 02:28:28,536 - INFO - Credentials validated for admin
+2025-05-29 02:28:28,536 - INFO - Retrieving role for username: admin
+2025-05-29 02:28:28,537 - DEBUG - Role for admin: Admin
+2025-05-29 02:28:28,696 - INFO - Loading rates
+2025-05-29 02:28:28,696 - DEBUG - Loaded 13 rates
+2025-05-29 02:28:28,698 - INFO - Retrieving all usernames
+2025-05-29 02:28:28,698 - DEBUG - Retrieved 3 usernames

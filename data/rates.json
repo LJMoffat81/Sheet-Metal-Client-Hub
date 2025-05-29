@@ -1,0 +1,73 @@
+{
+    "mild_steel_rate": {
+        "type": "simple",
+        "unit": "\u00a3/kg",
+        "value": 10.0
+    },
+    "aluminium_rate": {
+        "type": "simple",
+        "unit": "\u00a3/kg",
+        "value": 15.0
+    },
+    "stainless_steel_rate": {
+        "type": "simple",
+        "unit": "\u00a3/kg",
+        "value": 20.0
+    },
+    "bending_rate": {
+        "type": "hourly",
+        "unit": "\u00a3/hour",
+        "sub_field": "bends/hour",
+        "value": 75.0,
+        "sub_value": 60.0
+    },
+    "cutting_rate": {
+        "type": "hourly",
+        "unit": "\u00a3/hour",
+        "sub_field": "mm/hour",
+        "value": 150.0,
+        "sub_value": 1000000.0
+    },
+    "welding_rate": {
+        "type": "hourly",
+        "unit": "\u00a3/hour",
+        "sub_field": "mm/hour",
+        "value": 80.0,
+        "sub_value": 100.0
+    },
+    "assembly_rate": {
+        "type": "simple",
+        "unit": "\u00a3/unit",
+        "value": 10.0
+    },
+    "finishing_rate": {
+        "type": "simple",
+        "unit": "\u00a3/m\u00b2",
+        "value": 100.0
+    },
+    "drilling_rate": {
+        "type": "simple",
+        "unit": "\u00a3/hole",
+        "value": 0.5
+    },
+    "punching_rate": {
+        "type": "simple",
+        "unit": "\u00a3/punch",
+        "value": 0.2
+    },
+    "grinding_rate": {
+        "type": "simple",
+        "unit": "\u00a3/m\u00b2",
+        "value": 100.0
+    },
+    "coating_rate": {
+        "type": "simple",
+        "unit": "\u00a3/m\u00b2",
+        "value": 100.0
+    },
+    "inspection_rate": {
+        "type": "simple",
+        "unit": "\u00a3/inspection",
+        "value": 50.0
+    }
+}
